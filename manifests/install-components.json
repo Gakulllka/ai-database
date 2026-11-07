@@ -781,6 +781,14 @@
       "modules": [
         "delta-workflows"
       ]
+    },
+    {
+      "id": "capability:database-evolution",
+      "family": "capability",
+      "description": "Bounded owner-authorized Database improvement through local Codex, without a separate model API.",
+      "modules": [
+        "database-evolution"
+      ]
     }
   ]
 }

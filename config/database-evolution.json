@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "database.evolution.config.v1",
+  "repository": "Gakulllka/ai-database",
+  "branch": "database",
+  "mode": "checked-auto-with-pr-fallback",
+  "execution": {
+    "runtime": "local-codex",
+    "separateModelApiRequired": false,
+    "schedule": "daily at 10:00 Europe/Moscow",
+    "maxMinutesPerRun": 30,
+    "maxDeepReviews": 3
+  },
+  "radar": {
+    "queries": [
+      "topic:ai-agents archived:false fork:false",
+      "topic:llm created:>={{since}} stars:>=20 archived:false fork:false",
+      "topic:mcp-server created:>={{since}} stars:>=10 archived:false fork:false",
+      "\"agent harness\" in:name,description created:>={{since}} archived:false fork:false"
+    ],
+    "windowDays": 90,
+    "minTrendHours": 6,
+    "maxCandidates": 20,
+    "perQuery": 10,
+    "timeoutMs": 15000,
+    "maxInventoryFiles": 2500,
+    "statePath": "docs/evolution/github-observations.json"
+  },
+  "policy": {
+    "maxSkillChanges": 3,
+    "maxChangedFiles": 12,
+    "maxChangedLines": 500,
+    "automaticScope": "Existing canonical/native skill text pairs and structured observation/decision records only.",
+    "requireIndependentReview": true,
+    "requireMeaningfulEvidence": true,
+    "newSkillsRequirePullRequest": true,
+    "executableChangesRequirePullRequest": true,
+    "permissionChangesRequirePullRequest": true,
+    "allowForcePush": false,
+    "allowUntrustedCodeExecution": false
+  },
+  "learning": {
+    "store": "ECC Memory Vault team lessons",
+    "scope": "team",
+    "kind": "lesson",
+    "rawTranscriptsAllowed": false,
+    "projectSpecificRulesRemainLocal": true,
+    "proposalPublication": "separate branch and pull request",
+    "deduplication": "source revision, capability and evidence; cross-PC paths are not identity"
+  }
+}

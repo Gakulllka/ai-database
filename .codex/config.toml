@@ -55,3 +55,7 @@ config_file = "agents/godot-reviewer.toml"
 [agents.godot_build_resolver]
 description = "Read-only diagnosis of Godot imports, GDScript/.NET and export failures."
 config_file = "agents/godot-build-resolver.toml"
+
+[agents.database_curator]
+description = "Read-only novelty, evidence and publication-scope review of shared Database improvements."
+config_file = "agents/database-curator.toml"

@@ -109,7 +109,8 @@
         "documentation-test-regression",
         "1c-development",
         "godot-development",
-        "delta-workflows"
+        "delta-workflows",
+        "database-evolution"
       ]
     }
   }

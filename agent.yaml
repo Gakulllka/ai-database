@@ -9,6 +9,7 @@ model:
   fallback:
     - claude-sonnet-4-6
 skills:
+  - database-evolution
   - ecosystem-design-consistency
   - local-first-sync
   - tabular-import-reconciliation

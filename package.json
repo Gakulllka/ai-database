@@ -543,7 +543,12 @@
     "skills/ai-artifact-contracts/",
     "docs/delta/",
     "scripts/delta/",
-    "docs/database-sync.md"
+    "docs/database-sync.md",
+    "skills/database-evolution/",
+    "scripts/evolution/",
+    "config/database-evolution.json",
+    "docs/design/database-evolution.md",
+    "docs/evolution/"
   ],
   "bin": {
     "ecc": "scripts/ecc.js",
@@ -591,7 +596,9 @@
     "build:opencode": "node scripts/build-opencode.js",
     "prepack": "npm run build:opencode",
     "dashboard": "python3 ./ecc_dashboard.py",
-    "dashboard:web": "node scripts/dashboard-web.js"
+    "dashboard:web": "node scripts/dashboard-web.js",
+    "database:radar": "node scripts/evolution/github-radar.js",
+    "database:gate": "node scripts/evolution/check-change.js"
   },
   "dependencies": {
     "@iarna/toml": "2.2.5",

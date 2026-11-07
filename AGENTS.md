@@ -1,6 +1,6 @@
 # ECC — Agent Instructions
 
-This is a **production-ready AI coding plugin** providing 75 specialized agents, 349 skills, 98 commands, and automated hook workflows for software development.
+This is a **production-ready AI coding plugin** providing 76 specialized agents, 350 skills, 98 commands, and automated hook workflows for software development.
 
 **Version:** 2.2.3
 
@@ -23,6 +23,12 @@ Personal skills and agents belong in the existing `skills/` and `agents/` direct
   additions and resolving conflicts before publishing to `origin`.
 - Check the current directories when selecting skills and agents so new personal
   additions remain discoverable.
+- The owner has authorized bounded automatic improvement and cross-PC learning
+  through [database-evolution](skills/database-evolution/SKILL.md) and
+  [its contract](docs/design/database-evolution.md). Use that workflow for scheduled
+  maintenance and verified reusable lessons. Checked existing-skill text changes
+  may be published to private `origin`; uncertain or higher-risk changes use PRs.
+  This does not authorize publishing consumer code, raw sessions or business data.
 - For cross-product design, local-first sync, table import or generated artifacts,
   select the relevant [DELTA-derived workflows](docs/delta/README.md).
   Their reference brand and product settings are not universal defaults.
@@ -46,6 +52,7 @@ Personal skills and agents belong in the existing `skills/` and `agents/` direct
 | planner | Implementation planning | Complex features, refactoring |
 | architect | System design and scalability | Architectural decisions |
 | tdd-guide | Test-driven development | New features, bug fixes |
+| database-curator | Independent novelty, evidence and publication-scope review | Shared Database improvement proposals |
 | 1c-reviewer | 1C/BSL, metadata and business review | 1C source and extension changes |
 | 1c-build-resolver | 1C compilation and metadata diagnosis | 1C source checks and build failures |
 | godot-reviewer | Godot 2D/3D, scene/resource and gameplay review | Godot source and content changes |
@@ -127,6 +134,7 @@ Use agents proactively without user prompt:
 - Godot changes → **ecc:godot-reviewer**; import/build/export failures → **ecc:godot-build-resolver**
 - Architectural decision → **ecc:architect**
 - Security-sensitive code → **ecc:security-reviewer**
+- Shared Database evolution → **ecc:database-curator** for independent review
 - Brownfield project onboarding → **ecc:spec-miner**
 - Autonomous loops / loop monitoring → **ecc:loop-operator**
 - Harness config reliability and cost → **ecc:harness-optimizer**
@@ -234,8 +242,8 @@ Troubleshoot failures: check test isolation → verify mocks → fix implementat
 ## Project Structure
 
 ```
-agents/          — 75 specialized subagents
-skills/          — 349 workflow skills and domain knowledge
+agents/          — 76 specialized subagents
+skills/          — 350 workflow skills and domain knowledge
 commands/        — 98 slash commands
 hooks/           — Trigger-based automations
 rules/           — Always-follow guidelines (common + per-language)

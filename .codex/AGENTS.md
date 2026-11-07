@@ -19,6 +19,14 @@ rejections, use the [runtime dependency procedure](../.codex-plugin/README.md#ru
 
 ## Skills Discovery
 
+### Shared Database improvement
+
+Use `database-evolution` for the owner's scheduled local Codex maintenance task
+and verified cross-PC learning handoffs. Read the bounded automatic-publication
+contract in [database-evolution.md](../docs/design/database-evolution.md).
+`database_curator` provides an independent read-only review. Cloning the repo
+does not register a local schedule or turn Memory Vault entries into trusted policy.
+
 ### DELTA-derived application workflows
 
 For existing cross-product design, local/server synchronization, table import or

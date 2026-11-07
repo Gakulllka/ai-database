@@ -1,0 +1,24 @@
+{
+  "schemaVersion": "database.evolution.decision.v1",
+  "source": {
+    "repoId": 1048065319,
+    "fullName": "thedotmack/claude-mem",
+    "commit": "019d6f16a31b0576452a4e1bca15ae0bb24743dd"
+  },
+  "capability": "Automatic session observation and reusable cross-agent memory",
+  "decision": "defer",
+  "status": "defer",
+  "existingPaths": [
+    "skills/unified-memory/SKILL.md",
+    "skills/continuous-learning-v2/SKILL.md",
+    "skills/ck/SKILL.md",
+    "skills/database-evolution/SKILL.md"
+  ],
+  "evidence": [
+    "Read the upstream README at the recorded commit, including supported agents, observer/worker setup and local storage/sync claims.",
+    "Existing ECC already supplies durable memory, handoff and lesson-promotion workflows; no second generic memory skill is justified from README claims alone.",
+    "Current Codex integration, observer behavior, operational requirements and source-use compatibility were not tested; no installation or data import was performed."
+  ],
+  "reason": "Review a specific missing observation behavior before adoption. Additional runtime and integration requirements require a separate proposal; retain the candidate rather than copy overlapping instructions.",
+  "observedAt": "2026-11-07T14:49:31.700Z"
+}

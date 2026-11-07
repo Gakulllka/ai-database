@@ -1,0 +1,4 @@
+interface:
+  display_name: "Database Evolution"
+  short_description: "Curate verified improvements and portable lessons"
+  default_prompt: "Use $database-evolution to review new AI repositories and shared lessons, avoid duplicates, and publish only verified eligible improvements."

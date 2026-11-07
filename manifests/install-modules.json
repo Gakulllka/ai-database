@@ -1611,6 +1611,40 @@
       "defaultInstall": false,
       "cost": "light",
       "stability": "beta"
+    },
+    {
+      "id": "database-evolution",
+      "kind": "skills",
+      "description": "Local Codex GitHub scouting, capability deduplication, checked improvements and cross-PC lesson handoffs.",
+      "paths": [
+        "skills/database-evolution",
+        "scripts/evolution",
+        "config/database-evolution.json",
+        "docs/design/database-evolution.md"
+      ],
+      "targets": [
+        "claude",
+        "claude-project",
+        "cursor",
+        "antigravity",
+        "codex",
+        "copilot",
+        "opencode",
+        "codebuddy",
+        "joycode",
+        "qwen",
+        "zed"
+      ],
+      "dependencies": [
+        "platform-configs",
+        "agents-core"
+      ],
+      "optionalDependencies": [
+        "agents-core"
+      ],
+      "defaultInstall": false,
+      "cost": "light",
+      "stability": "beta"
     }
   ]
 }

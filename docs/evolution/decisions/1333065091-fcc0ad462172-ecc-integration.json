@@ -1,0 +1,22 @@
+{
+  "schemaVersion": "database.evolution.decision.v1",
+  "source": {
+    "repoId": 1333065091,
+    "fullName": "deepseek-ai/deepseek-harness",
+    "commit": "fcc0ad462172522aaf5c93a7b2e01f6b9f0b0159"
+  },
+  "capability": "Using ECC skills and hooks with DeepSeek Harness",
+  "decision": "covered",
+  "status": "skip",
+  "existingPaths": [
+    "skills/deepseek-harness-setup/SKILL.md",
+    "docs/DEEPSEEK-HARNESS-GUIDE.md"
+  ],
+  "evidence": [
+    "Read the upstream README at the recorded commit; it describes the DSH harness, plugin architecture and developer-preview status.",
+    "Read the canonical local workflow: skill roots, hook bridge, generator, composition verification and supported-event limits already have a dedicated owner.",
+    "No external commands or source code were executed; this is a scoped documentation/capability comparison, not runtime acceptance."
+  ],
+  "reason": "A differently named or popular harness is not a missing ECC integration workflow. Keep the existing skill; re-evaluate a concrete new behavior or compatibility change separately.",
+  "observedAt": "2026-11-07T14:49:31.700Z"
+}

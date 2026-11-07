@@ -1,0 +1,4 @@
+interface:
+  display_name: "GDScript Patterns"
+  short_description: "Godot GDScript language and lifecycle"
+  default_prompt: "Use $gdscript-patterns for the current Godot project task."

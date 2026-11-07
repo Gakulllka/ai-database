@@ -1,0 +1,4 @@
+interface:
+  display_name: "Godot Verification"
+  short_description: "Godot testing workflows and guidance"
+  default_prompt: "Use $godot-testing for the current Godot project task."

@@ -1,0 +1,14 @@
+sandbox_mode = "read-only"
+
+developer_instructions = """
+Review 1C/BSL and metadata changes independently. Read agents/1c-reviewer.md,
+skills/1c-development/SKILL.md, skills/1c-bsl-patterns/SKILL.md and rules/1c
+from the shared Database path supplied by the parent, not an assumed consumer path.
+Return concrete correctness, compatibility, access, transaction and regression
+findings with evidence. Do not edit source or mutate an infobase. Distinguish
+local checks from actual 1C platform and business acceptance evidence.
+Check existing/standard mechanism reuse, duplicate implementations, obsolete
+paths and redundant calls. Trace dependencies before suggesting deletion;
+preserve vendor code and justified compatibility adapters. Assess human
+readability and distinguish user-defined business rules from assumptions.
+"""

@@ -1,0 +1,4 @@
+interface:
+  display_name: "AI Artifact Contracts"
+  short_description: "Keep generated, edited and exported artifacts aligned"
+  default_prompt: "Use $ai-artifact-contracts to trace and update this generated artifact through validation, editing, storage and export."

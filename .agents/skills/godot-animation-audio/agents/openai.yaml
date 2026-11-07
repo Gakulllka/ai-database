@@ -1,0 +1,4 @@
+interface:
+  display_name: "Godot Animation and Audio"
+  short_description: "Godot animation audio workflows and guidance"
+  default_prompt: "Use $godot-animation-audio for the current Godot project task."

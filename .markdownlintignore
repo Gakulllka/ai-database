@@ -1,0 +1,3 @@
+# Imported operation references retain their source examples and formatting.
+skills/1c-platform-tools/operations/**
+.agents/skills/1c-platform-tools/operations/**

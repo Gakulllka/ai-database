@@ -1,0 +1,4 @@
+interface:
+  display_name: "1C Spreadsheet Templates"
+  short_description: "1C mxl templates workflows and guidance"
+  default_prompt: "Use $1c-mxl-templates for the relevant 1C project task."

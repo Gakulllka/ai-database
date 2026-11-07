@@ -1,0 +1,4 @@
+interface:
+  display_name: "Godot Performance"
+  short_description: "Godot performance workflows and guidance"
+  default_prompt: "Use $godot-performance for the current Godot project task."

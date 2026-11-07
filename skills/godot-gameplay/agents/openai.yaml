@@ -1,0 +1,4 @@
+interface:
+  display_name: "Godot Gameplay Systems"
+  short_description: "Godot gameplay workflows and guidance"
+  default_prompt: "Use $godot-gameplay for the current Godot project task."

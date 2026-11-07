@@ -1,0 +1,4 @@
+interface:
+  display_name: "1C Testing and Evidence"
+  short_description: "1C testing workflows and guidance"
+  default_prompt: "Use $1c-testing for the relevant 1C project task."

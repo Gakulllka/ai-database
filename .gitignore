@@ -5,6 +5,9 @@
 .env.development
 .env.test
 .env.production
+.env.*
+!.env.example
+!.env.*.example
 
 # API keys and secrets
 *.key
@@ -89,6 +92,12 @@ temp/
 *.tmp
 *.bak
 *.backup
+
+# Consumer tooling state and local 1C connections
+.scratch/
+.v8-project.json
+.browser-session.json
+**/web-test/error-shot.png
 
 # Observer temp files (continuous-learning-v2)
 .observer-tmp/

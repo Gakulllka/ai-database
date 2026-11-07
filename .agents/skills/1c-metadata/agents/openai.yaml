@@ -1,0 +1,4 @@
+interface:
+  display_name: "1C Configuration and Metadata"
+  short_description: "1C metadata workflows and guidance"
+  default_prompt: "Use $1c-metadata for the relevant 1C project task."

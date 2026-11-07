@@ -3,7 +3,9 @@ const globals = require('globals');
 
 module.exports = [
     {
-        ignores: ['.opencode/dist/**', '.cursor/**', 'node_modules/**', '.venv/**', 'venv/**', 'coverage/**', 'workflows/**/*.workflow.*', '.claude/workflows/**']
+        ignores: ['.opencode/dist/**', '.cursor/**', 'node_modules/**', '.venv/**', 'venv/**', 'coverage/**', 'workflows/**/*.workflow.*', '.claude/workflows/**',
+            // Imported 1C helpers have their own syntax and behavioral checks.
+            'skills/1c-platform-tools/operations/**', '.agents/skills/1c-platform-tools/operations/**']
     },
     js.configs.recommended,
     {

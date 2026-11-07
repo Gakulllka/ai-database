@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://smoke.gd" id="1_script"]
+
+[sub_resource type="BoxShape3D" id="Shape_actor"]
+
+[node name="Fixture" type="Node3D"]
+script = ExtResource("1_script")
+
+[node name="Actor" type="CharacterBody3D" parent="."]
+
+[node name="Collision" type="CollisionShape3D" parent="Actor"]
+shape = SubResource("Shape_actor")

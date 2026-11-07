@@ -1,0 +1,4 @@
+interface:
+  display_name: "1C Web Client"
+  short_description: "1C web client workflows and guidance"
+  default_prompt: "Use $1c-web-client for the relevant 1C project task."

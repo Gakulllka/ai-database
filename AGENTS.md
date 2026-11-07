@@ -1,8 +1,35 @@
 # ECC — Agent Instructions
 
-This is a **production-ready AI coding plugin** providing 71 specialized agents, 314 skills, 98 commands, and automated hook workflows for software development.
+This is a **production-ready AI coding plugin** providing 75 specialized agents, 349 skills, 98 commands, and automated hook workflows for software development.
 
 **Version:** 2.2.3
+
+## Shared Database — local integration
+
+This checkout at `C:/AI/Database` is the owner's shared ECC foundation for all projects.
+Personal skills and agents belong in the existing `skills/` and `agents/` directories.
+
+- For onboarding another project, read [START-HERE.md](START-HERE.md) and use
+  [the project AGENTS.md baseline](examples/database-project-AGENTS.md).
+- Consumer projects read this file and the applicable rules, skills, and role
+  instructions from Database; their own `AGENTS.md` records project-specific facts.
+- Database maintenance commands and ECC repository paths apply to this checkout.
+  Consumer projects derive their own commands and paths from their actual files.
+- `origin` is the private distribution at `https://github.com/Gakulllka/ai-database.git`
+  (branch `database`); official ECC updates come from `upstream`.
+  At onboarding and session start, check both sources using
+  [the sync procedure](docs/database-sync.md). Fetch does not merge working files.
+  Integrate official updates in a Database maintenance task, preserving personal
+  additions and resolving conflicts before publishing to `origin`.
+- Check the current directories when selecting skills and agents so new personal
+  additions remain discoverable.
+- For cross-product design, local-first sync, table import or generated artifacts,
+  select the relevant [DELTA-derived workflows](docs/delta/README.md).
+  Their reference brand and product settings are not universal defaults.
+- For 1C/BSL projects, start with [1c-development](skills/1c-development/SKILL.md),
+  [rules/1c](rules/1c/) and the [1C pack guide](docs/1c/README.md).
+- For Godot games/tools, start with [godot-development](skills/godot-development/SKILL.md),
+  [rules/godot](rules/godot/) and the [Godot pack guide](docs/godot/README.md).
 
 ## Core Principles
 
@@ -19,6 +46,10 @@ This is a **production-ready AI coding plugin** providing 71 specialized agents,
 | planner | Implementation planning | Complex features, refactoring |
 | architect | System design and scalability | Architectural decisions |
 | tdd-guide | Test-driven development | New features, bug fixes |
+| 1c-reviewer | 1C/BSL, metadata and business review | 1C source and extension changes |
+| 1c-build-resolver | 1C compilation and metadata diagnosis | 1C source checks and build failures |
+| godot-reviewer | Godot 2D/3D, scene/resource and gameplay review | Godot source and content changes |
+| godot-build-resolver | Godot import, script, .NET and export diagnosis | Godot checks and build failures |
 | code-reviewer | Code quality and maintainability | After writing/modifying code |
 | bengali-reviewer | Bengali text review | Unicode, normalization, grapheme, search, and locale correctness |
 | security-reviewer | Vulnerability detection | Before commits, sensitive code |
@@ -92,6 +123,8 @@ Use agents proactively without user prompt:
 - Complex feature requests → **ecc:planner**
 - Code just written/modified → **ecc:code-reviewer**
 - Bug fix or new feature → **ecc:tdd-guide**
+- 1C/BSL changes → **ecc:1c-reviewer**; platform/build failures → **ecc:1c-build-resolver**
+- Godot changes → **ecc:godot-reviewer**; import/build/export failures → **ecc:godot-build-resolver**
 - Architectural decision → **ecc:architect**
 - Security-sensitive code → **ecc:security-reviewer**
 - Brownfield project onboarding → **ecc:spec-miner**
@@ -201,8 +234,8 @@ Troubleshoot failures: check test isolation → verify mocks → fix implementat
 ## Project Structure
 
 ```
-agents/          — 71 specialized subagents
-skills/          — 314 workflow skills and domain knowledge
+agents/          — 75 specialized subagents
+skills/          — 349 workflow skills and domain knowledge
 commands/        — 98 slash commands
 hooks/           — Trigger-based automations
 rules/           — Always-follow guidelines (common + per-language)

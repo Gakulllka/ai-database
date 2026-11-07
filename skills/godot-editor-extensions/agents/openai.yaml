@@ -1,0 +1,4 @@
+interface:
+  display_name: "Godot Editor and Native Extensions"
+  short_description: "Godot editor extensions workflows and guidance"
+  default_prompt: "Use $godot-editor-extensions for the current Godot project task."

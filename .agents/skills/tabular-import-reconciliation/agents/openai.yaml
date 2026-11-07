@@ -1,0 +1,4 @@
+interface:
+  display_name: "Tabular Import Reconciliation"
+  short_description: "Preview and apply imports while preserving identity"
+  default_prompt: "Use $tabular-import-reconciliation to add a reviewed import flow that preserves existing records and concurrent edits."

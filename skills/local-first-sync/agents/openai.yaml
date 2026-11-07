@@ -1,0 +1,4 @@
+interface:
+  display_name: "Local-First Sync"
+  short_description: "Preserve edits across sync races and reconnects"
+  default_prompt: "Use $local-first-sync to trace and improve this project's synchronization without losing pending edits."

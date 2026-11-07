@@ -19,6 +19,32 @@ rejections, use the [runtime dependency procedure](../.codex-plugin/README.md#ru
 
 ## Skills Discovery
 
+### DELTA-derived application workflows
+
+For existing cross-product design, local/server synchronization, table import or
+editable AI artifacts, select `ecosystem-design-consistency`, `local-first-sync`,
+`tabular-import-reconciliation` or `ai-artifact-contracts` as applicable.
+See [the source and scope guide](../docs/delta/README.md). These workflows do not
+apply DELTA branding, its Git rules or its product-specific data policies.
+
+### Local Godot extension
+
+For Godot work, read `godot-development`, `rules/godot/` and
+[the Godot pack guide](../docs/godot/README.md). Select 2D/3D, GDScript/C#,
+renderer and platform branches from actual project evidence. `godot-*` and
+`gdscript-patterns` have canonical skills and Codex projections. Project roles
+`godot_reviewer` and `godot_build_resolver` support bounded review/diagnosis.
+The GameDev reference project does not define universal game or environment defaults.
+
+### Local 1C extension
+
+For 1C/BSL work, start with `1c-development`, `rules/1c/` and
+[the 1C pack guide](../docs/1c/README.md). The canonical `skills/1c-*` workflows
+have Codex projections in `.agents/skills/`; shared operation resources live in
+`1c-platform-tools`. Use `1c_reviewer` and `1c_build_resolver` project roles when
+delegating a corresponding 1C task. A consumer project must supply the actual
+Database location and its own target/version; do not assume its CWD is ECC.
+
 Skills are auto-loaded from `.agents/skills/`. Each skill contains:
 - `SKILL.md` — Detailed instructions and workflow
 - `agents/openai.yaml` — Codex interface metadata

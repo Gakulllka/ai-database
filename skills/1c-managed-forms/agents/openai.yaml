@@ -1,0 +1,4 @@
+interface:
+  display_name: "1C Managed Forms"
+  short_description: "1C managed forms workflows and guidance"
+  default_prompt: "Use $1c-managed-forms for the relevant 1C project task."

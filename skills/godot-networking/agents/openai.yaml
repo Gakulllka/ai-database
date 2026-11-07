@@ -1,0 +1,4 @@
+interface:
+  display_name: "Godot Networking"
+  short_description: "Godot networking workflows and guidance"
+  default_prompt: "Use $godot-networking for the current Godot project task."

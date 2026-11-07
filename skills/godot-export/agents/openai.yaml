@@ -1,0 +1,4 @@
+interface:
+  display_name: "Godot Export and Release"
+  short_description: "Godot export workflows and guidance"
+  default_prompt: "Use $godot-export for the current Godot project task."

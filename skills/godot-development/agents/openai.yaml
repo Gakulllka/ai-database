@@ -1,0 +1,4 @@
+interface:
+  display_name: "Godot Development"
+  short_description: "Godot development workflows and guidance"
+  default_prompt: "Use $godot-development for the current Godot project task."

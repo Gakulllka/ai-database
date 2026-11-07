@@ -1,0 +1,4 @@
+interface:
+  display_name: "Godot C# and .NET"
+  short_description: "Godot csharp workflows and guidance"
+  default_prompt: "Use $godot-csharp for the current Godot project task."

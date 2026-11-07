@@ -1,0 +1,4 @@
+interface:
+  display_name: "1C Data Composition Schemas"
+  short_description: "1C data composition workflows and guidance"
+  default_prompt: "Use $1c-data-composition for the relevant 1C project task."

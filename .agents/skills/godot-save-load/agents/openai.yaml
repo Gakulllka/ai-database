@@ -1,0 +1,4 @@
+interface:
+  display_name: "Godot Saves and Persistence"
+  short_description: "Godot save load workflows and guidance"
+  default_prompt: "Use $godot-save-load for the current Godot project task."

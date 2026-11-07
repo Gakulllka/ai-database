@@ -761,7 +761,7 @@
     {
       "id": "ito-compute",
       "kind": "skills",
-      "description": "Authenticated It\u00f4 GPU inventory, RFQ, status, device revocation, and explicitly gated node-qualification workflows through the separately installed canonical CLI.",
+      "description": "Authenticated Itô GPU inventory, RFQ, status, device revocation, and explicitly gated node-qualification workflows through the separately installed canonical CLI.",
       "paths": [
         "skills/ito-compute",
         "skills/ito-inference",
@@ -1482,6 +1482,135 @@
       "defaultInstall": false,
       "cost": "light",
       "stability": "stable"
+    },
+    {
+      "id": "1c-development",
+      "kind": "skills",
+      "description": "Optional 1C/BSL workflows, shared XML/platform helpers, and source-to-infobase evidence boundaries.",
+      "paths": [
+        "skills/1c-bsl-patterns",
+        "skills/1c-data-composition",
+        "skills/1c-development",
+        "skills/1c-extensions",
+        "skills/1c-external-files",
+        "skills/1c-infobase",
+        "skills/1c-managed-forms",
+        "skills/1c-metadata",
+        "skills/1c-mxl-templates",
+        "skills/1c-platform-tools",
+        "skills/1c-testing",
+        "skills/1c-web-client",
+        "skills/1c-xdto"
+      ],
+      "targets": [
+        "claude",
+        "claude-project",
+        "cursor",
+        "antigravity",
+        "codex",
+        "copilot",
+        "opencode",
+        "codebuddy",
+        "joycode",
+        "qwen",
+        "zed",
+        "hermes",
+        "openclaw",
+        "kimi",
+        "adal"
+      ],
+      "dependencies": [
+        "rules-core",
+        "agents-core",
+        "platform-configs"
+      ],
+      "optionalDependencies": [
+        "rules-core",
+        "agents-core"
+      ],
+      "defaultInstall": false,
+      "cost": "heavy",
+      "stability": "beta"
+    },
+    {
+      "id": "godot-development",
+      "kind": "skills",
+      "description": "Version-aware Godot 2D/3D, GDScript/C#, gameplay, resources, verification and export workflows.",
+      "paths": [
+        "skills/gdscript-patterns",
+        "skills/godot-2d",
+        "skills/godot-3d",
+        "skills/godot-animation-audio",
+        "skills/godot-assets-pipeline",
+        "skills/godot-csharp",
+        "skills/godot-development",
+        "skills/godot-editor-extensions",
+        "skills/godot-export",
+        "skills/godot-gameplay",
+        "skills/godot-navigation",
+        "skills/godot-networking",
+        "skills/godot-performance",
+        "skills/godot-save-load",
+        "skills/godot-scenes-resources",
+        "skills/godot-shaders-rendering",
+        "skills/godot-testing",
+        "skills/godot-ui-input"
+      ],
+      "targets": [
+        "claude",
+        "claude-project",
+        "cursor",
+        "antigravity",
+        "codex",
+        "copilot",
+        "opencode",
+        "codebuddy",
+        "joycode",
+        "qwen",
+        "zed"
+      ],
+      "dependencies": [
+        "rules-core",
+        "agents-core",
+        "platform-configs"
+      ],
+      "optionalDependencies": [
+        "rules-core",
+        "agents-core"
+      ],
+      "defaultInstall": false,
+      "cost": "medium",
+      "stability": "beta"
+    },
+    {
+      "id": "delta-workflows",
+      "kind": "skills",
+      "description": "DELTA-derived workflows for established cross-product design, local-first sync, table imports and editable AI artifacts.",
+      "paths": [
+        "skills/ecosystem-design-consistency",
+        "skills/local-first-sync",
+        "skills/tabular-import-reconciliation",
+        "skills/ai-artifact-contracts"
+      ],
+      "targets": [
+        "claude",
+        "claude-project",
+        "cursor",
+        "antigravity",
+        "codex",
+        "copilot",
+        "opencode",
+        "codebuddy",
+        "joycode",
+        "qwen",
+        "zed"
+      ],
+      "dependencies": [
+        "platform-configs"
+      ],
+      "defaultInstall": false,
+      "cost": "light",
+      "stability": "beta"
     }
   ]
 }

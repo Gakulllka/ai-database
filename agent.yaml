@@ -9,6 +9,41 @@ model:
   fallback:
     - claude-sonnet-4-6
 skills:
+  - ecosystem-design-consistency
+  - local-first-sync
+  - tabular-import-reconciliation
+  - ai-artifact-contracts
+  - gdscript-patterns
+  - godot-2d
+  - godot-3d
+  - godot-animation-audio
+  - godot-assets-pipeline
+  - godot-csharp
+  - godot-development
+  - godot-editor-extensions
+  - godot-export
+  - godot-gameplay
+  - godot-navigation
+  - godot-networking
+  - godot-performance
+  - godot-save-load
+  - godot-scenes-resources
+  - godot-shaders-rendering
+  - godot-testing
+  - godot-ui-input
+  - 1c-bsl-patterns
+  - 1c-data-composition
+  - 1c-development
+  - 1c-extensions
+  - 1c-external-files
+  - 1c-infobase
+  - 1c-managed-forms
+  - 1c-metadata
+  - 1c-mxl-templates
+  - 1c-platform-tools
+  - 1c-testing
+  - 1c-web-client
+  - 1c-xdto
   - agent-architecture-audit
   - agent-eval
   - agent-harness-construction

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Godot 3D Worlds and Physics"
+  short_description: "Godot 3d workflows and guidance"
+  default_prompt: "Use $godot-3d for the current Godot project task."

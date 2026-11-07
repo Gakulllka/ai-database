@@ -1,0 +1,4 @@
+interface:
+  display_name: "1C Infobase Operations"
+  short_description: "1C infobase workflows and guidance"
+  default_prompt: "Use $1c-infobase for the relevant 1C project task."

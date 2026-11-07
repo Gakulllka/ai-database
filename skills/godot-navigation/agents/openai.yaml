@@ -1,0 +1,4 @@
+interface:
+  display_name: "Godot Navigation"
+  short_description: "Godot navigation workflows and guidance"
+  default_prompt: "Use $godot-navigation for the current Godot project task."

@@ -32,6 +32,21 @@ rules/
 - **common/** contains universal principles — no language-specific code examples.
 - **Language directories** extend the common rules with framework-specific patterns, tools, and code examples. Each file references its common counterpart.
 
+### Local Godot rules
+
+`rules/godot/` extends the common layer for mutable scene/resource ownership,
+engine/language/renderer profiles, 2D/3D, assets, verification and target acceptance.
+Start with [the Godot pack guide](../docs/godot/README.md) and
+[godot-development](../skills/godot-development/SKILL.md).
+
+### Local 1C / BSL rules
+
+`rules/1c/` extends the common layer for 1C:Enterprise contexts, mutable platform
+objects, queries, transactions, permissions, compatibility and verification.
+Start with [the 1C pack guide](../docs/1c/README.md) and
+[1c-development](../skills/1c-development/SKILL.md). The source archive's naming,
+task-marker and approval conventions remain project-specific.
+
 ## Installation
 
 ### Option 1: Install Script (Recommended)

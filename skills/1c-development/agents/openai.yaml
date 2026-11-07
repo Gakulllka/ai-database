@@ -1,0 +1,4 @@
+interface:
+  display_name: "1C Development"
+  short_description: "1C development workflows and guidance"
+  default_prompt: "Use $1c-development for the relevant 1C project task."

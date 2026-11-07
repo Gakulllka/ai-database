@@ -1,0 +1,4 @@
+interface:
+  display_name: "Godot Shaders and Rendering"
+  short_description: "Godot shaders rendering workflows and guidance"
+  default_prompt: "Use $godot-shaders-rendering for the current Godot project task."

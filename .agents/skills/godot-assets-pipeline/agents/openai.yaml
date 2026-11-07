@@ -1,0 +1,4 @@
+interface:
+  display_name: "Godot Asset Pipeline"
+  short_description: "Godot assets pipeline workflows and guidance"
+  default_prompt: "Use $godot-assets-pipeline for the current Godot project task."

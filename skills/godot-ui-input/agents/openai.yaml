@@ -1,0 +1,4 @@
+interface:
+  display_name: "Godot UI and Input"
+  short_description: "Godot ui input workflows and guidance"
+  default_prompt: "Use $godot-ui-input for the current Godot project task."

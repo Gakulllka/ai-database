@@ -1,0 +1,4 @@
+interface:
+  display_name: "1C External Processors and Reports"
+  short_description: "1C external files workflows and guidance"
+  default_prompt: "Use $1c-external-files for the relevant 1C project task."

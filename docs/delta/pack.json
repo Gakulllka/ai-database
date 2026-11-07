@@ -1,0 +1,190 @@
+{
+  "version": 1,
+  "name": "DELTA-derived ECC workflows",
+  "date": "2026-11-07",
+  "skills": [
+    "ecosystem-design-consistency",
+    "local-first-sync",
+    "tabular-import-reconciliation",
+    "ai-artifact-contracts"
+  ],
+  "module": "delta-workflows",
+  "sourceReference": {
+    "root": "C:/AI/Delta",
+    "usage": "Read-only reference analysis; no application, tests, databases or external providers were executed.",
+    "sources": [
+      {
+        "file": "AGENTS.md",
+        "line": 23,
+        "sha256": "14bb54de831d36050870313c2c12e8df39d3cf21b8468eaf97f37d1e65c5a461"
+      },
+      {
+        "file": "DataBase/01-Дизайн/Delta_Design_DNA.md",
+        "line": 800,
+        "sha256": "60e82813045fc8066a1056ae772ae381d9bb6264f3594610a978a964a82a885a"
+      },
+      {
+        "file": "DataBase/03-ИИ/Ошибки.md",
+        "line": 621,
+        "sha256": "47227b2167f5807f9cf031450936090609cd381b31b3e0580a5a0f6748acc7fe"
+      },
+      {
+        "file": "DataBase/03-ИИ/Промпты-агентов.md",
+        "line": 13,
+        "sha256": "24e6978e4a126cdb19643c73ae75e83afa37753cfd4284b1ebfa0baf4966bd2a"
+      },
+      {
+        "file": "DataBase/00-Вход/Главная.md",
+        "line": 88,
+        "sha256": "1479e6d8c867443db7459ca3fa293855953e7463419861e25555dc8b52a6b1d5"
+      },
+      {
+        "file": "Delta-hub/AGENTS.md",
+        "line": 1,
+        "sha256": "a32060500574834e39058de19aa477e4b045d52267e21fde6ba47cad4b33d182"
+      },
+      {
+        "file": "Delta-finance/AGENTS.md",
+        "line": 1,
+        "sha256": "a20b4696ae117e00a2a65de353eba6210eeaa13c6af63862f55692c73b7e6c34"
+      },
+      {
+        "file": "Delta-tasker/AGENTS.md",
+        "line": 75,
+        "sha256": "9581cebbc87807af9b9e69404912869eab195f1f8a8a21e57c00810561f0db6a"
+      },
+      {
+        "file": "Delta-BA/AGENTS.md",
+        "line": 461,
+        "sha256": "1ea1513286486778b94b0b43571677dc650c29b9c40f61d1f8fdbcd965f632f3"
+      },
+      {
+        "file": "Delta-tasker/src/lib/sync-merge.ts",
+        "line": 40,
+        "sha256": "7b53e03459fd512a66d3f9f77990be74d9ee135e3b21623ac38fdd450e0b485b"
+      },
+      {
+        "file": "Delta-tasker/src/hooks/useServerSync.ts",
+        "line": 84,
+        "sha256": "96b8422332e002a7e54a472f9c445ff63c6c824f9d360af21812daed4a18666e"
+      },
+      {
+        "file": "Delta-tasker/src/app/api/sync/route.ts",
+        "line": 244,
+        "sha256": "6e388b053cb7bfa9c5759cb16379995320e7101f8582637f725890f60ff0f590"
+      },
+      {
+        "file": "Delta-tasker/tests/unit/sync-transfer.test.ts",
+        "line": 49,
+        "sha256": "9c65bdabc2a7243d229a706fd9cad8d9830ed71b2bf68d780da81a20fedcbcad"
+      },
+      {
+        "file": "Delta-tasker/src/lib/excel-import.ts",
+        "line": 270,
+        "sha256": "5c93298e451588393b28477d949ee9a70aeb69b60e377877adb1b2df929e4031"
+      },
+      {
+        "file": "Delta-tasker/src/lib/task-import.ts",
+        "line": 44,
+        "sha256": "0d4f31ab3bfdbdbabe991a32363f721d4b9d6fc46d020d7775001da06e4947e4"
+      },
+      {
+        "file": "Delta-tasker/tests/unit/task-import.test.ts",
+        "line": 103,
+        "sha256": "f086ab78e1c7e7dbad1ae40b9b25845662a9c115ada4695f32d0611db4011ae8"
+      },
+      {
+        "file": "Delta-BA/src/lib/artifact-store.ts",
+        "line": 50,
+        "sha256": "fccebcfc0c783c0daecf579ec417a149f8e04bb17be5ee227a244618cc4a77e0"
+      },
+      {
+        "file": "Delta-BA/src/lib/artifact-open.ts",
+        "line": 14,
+        "sha256": "1d83f96bee251ff86c576d5df2f7845819c9f594876609e92399f7a21c3af7d9"
+      },
+      {
+        "file": "Delta-BA/src/lib/storage/adapter.ts",
+        "line": 28,
+        "sha256": "466f270d7ca4ec0957846b5553d693058f808f6638239a25be5605aaaf9eaf9a"
+      },
+      {
+        "file": "Delta-BA/src/hooks/useAI.ts",
+        "line": 40,
+        "sha256": "cdf81c983dafcd91c69bace5e03af88ddad2e93ce6eaf9a3b9f2241d2231e8a5"
+      },
+      {
+        "file": "Delta-tasker/src/lib/presentation-export.tsx",
+        "line": 50,
+        "sha256": "9f7b9b5f1c715e022738dac1e936a57b34e5caf89e8f1125215cee75645eca59"
+      },
+      {
+        "file": "Delta-hub/package.json",
+        "line": 1,
+        "sha256": "97dc2a49132a013720f48b245fa1e97856cd6e048c2fd80567eb86803e604b38"
+      },
+      {
+        "file": "Delta-BA/package.json",
+        "line": 1,
+        "sha256": "6dec7501810e0f6bedf15b63b0e415ae70b2d7e66daacbf8b2fc01beb05d83bf"
+      },
+      {
+        "file": "Delta-tasker/package.json",
+        "line": 1,
+        "sha256": "fee3679c21f715533a16e3e05e5bcb8ddc25796df59a444cc5337afc265beb34"
+      },
+      {
+        "file": "Delta-finance/package.json",
+        "line": 1,
+        "sha256": "e8d5ebee467bcd15c2788662e1deaa5b33a757e323bcfe17169e7a965e3a6394"
+      }
+    ]
+  },
+  "excludedDefaults": [
+    "DELTA brand palette, fonts, layout and motion",
+    "Local Git permissions and commit behavior",
+    "Product roles, business formulas, identity/restore rules and sync retention periods",
+    "Ports, dependency/model versions and historical validation claims",
+    "Prototype authentication, unchecked deserialization and unreported storage failures"
+  ],
+  "verification": {
+    "status": "passed-with-scoped-evidence",
+    "date": "2026-11-07",
+    "scope": "Skill guidance and ECC integration only; no DELTA runtime acceptance.",
+    "library": {
+      "skillCreatorValidated": 4,
+      "nativeProjectionSkills": 4,
+      "nativeProjectionFiles": 8,
+      "localLinksChecked": 33,
+      "brokenLocalLinks": 0,
+      "sourceFingerprintsUnchanged": 25,
+      "checks": [
+        "ECC skills and host compatibility",
+        "Install manifests and Codex selective-install plan for all four skills",
+        "Codex skill surface and agent.yaml surface tests",
+        "UI metadata and catalog counts",
+        "Canonical/native DELTA-derived projections",
+        "Existing 1C and Godot projection consistency",
+        "ESLint, authored Markdown lint and git diff whitespace"
+      ],
+      "notes": "Existing upstream host-checklist warnings remain; no warnings were reported for these four skills."
+    },
+    "forwardTest": {
+      "status": "passed",
+      "method": "Independent skill-guided planning over synthetic inputs; no application implementation or runtime test.",
+      "cases": [
+        "Theme overrides, portal DOM scope and staged token migration",
+        "An earlier mutation acknowledgement, pending edits, scope switch, denied access and expired cursor",
+        "Duplicate import keys, stale preview, absent columns, soft deletion, formula-like text and ambiguous timeout",
+        "Invalid generated schema, newer user edits, storage failure and stale export"
+      ],
+      "outcome": "Concrete decisions preserved current edits and identity, distinguished accepted work from unknown outcomes, and surfaced unresolved product choices; no actionable skill defect was found."
+    },
+    "notValidated": [
+      "DELTA application tests, builds, running UI or databases",
+      "Live AI providers, rendered exports and multi-client network behavior",
+      "Historical claims of production status or test success",
+      "Completeness of the four workflows for every product or protocol"
+    ]
+  }
+}

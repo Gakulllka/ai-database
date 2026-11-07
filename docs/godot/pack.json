@@ -1,0 +1,183 @@
+{
+  "version": 1,
+  "name": "Godot ECC extension",
+  "date": "2026-11-07",
+  "skills": [
+    "gdscript-patterns",
+    "godot-2d",
+    "godot-3d",
+    "godot-animation-audio",
+    "godot-assets-pipeline",
+    "godot-csharp",
+    "godot-development",
+    "godot-editor-extensions",
+    "godot-export",
+    "godot-gameplay",
+    "godot-navigation",
+    "godot-networking",
+    "godot-performance",
+    "godot-save-load",
+    "godot-scenes-resources",
+    "godot-shaders-rendering",
+    "godot-testing",
+    "godot-ui-input"
+  ],
+  "rules": [
+    "agents.md",
+    "assets.md",
+    "coding-style.md",
+    "patterns.md",
+    "performance.md",
+    "security.md",
+    "testing.md"
+  ],
+  "agents": [
+    "godot-reviewer",
+    "godot-build-resolver"
+  ],
+  "sourceReference": {
+    "project": "C:/AI/GameDev/Godot/3r/project.godot",
+    "projectSha256": "626d75a39cce077c0b372b6f295805cc64d059c040a0d1657f837185300f9a59",
+    "usage": "Read-only analysis; no game source/assets copied or modified.",
+    "observedProfile": {
+      "declaredEngineHint": "4.7",
+      "bundledBinaryMetadata": "4.7.2.stable.official",
+      "language": "GDScript",
+      "dimension": "2D"
+    },
+    "transferredLessons": [
+      "simulation/presentation separation",
+      "save validation and compatibility",
+      "resource/scene ownership",
+      "audio and shutdown lifecycle",
+      "source vs exported artifact acceptance"
+    ],
+    "excludedDefaults": [
+      "story, economy and balance",
+      "specific UI/art style",
+      "viewport",
+      "Windows/D3D12/Forward Plus",
+      "game paths and custom CLI/QA flags",
+      "historical test totals and release status"
+    ]
+  },
+  "primarySources": [
+    "https://docs.godotengine.org/en/stable/classes/class_audiostreamplayer.html",
+    "https://docs.godotengine.org/en/stable/classes/class_characterbody2d.html",
+    "https://docs.godotengine.org/en/stable/classes/class_characterbody3d.html",
+    "https://docs.godotengine.org/en/stable/classes/class_editorundoredomanager.html",
+    "https://docs.godotengine.org/en/stable/classes/class_fileaccess.html",
+    "https://docs.godotengine.org/en/stable/classes/class_multiplayerapi.html",
+    "https://docs.godotengine.org/en/stable/classes/class_navigationagent2d.html",
+    "https://docs.godotengine.org/en/stable/classes/class_navigationagent3d.html",
+    "https://docs.godotengine.org/en/stable/classes/class_node.html",
+    "https://docs.godotengine.org/en/stable/classes/class_packedscene.html",
+    "https://docs.godotengine.org/en/stable/classes/class_projectsettings.html",
+    "https://docs.godotengine.org/en/stable/classes/class_resource.html",
+    "https://docs.godotengine.org/en/stable/classes/class_shadermaterial.html",
+    "https://docs.godotengine.org/en/stable/engine_details/engine_api/gdextension/gdextension_file.html",
+    "https://docs.godotengine.org/en/stable/tutorials/3d/using_transforms.html",
+    "https://docs.godotengine.org/en/stable/tutorials/animation/animation_tree.html",
+    "https://docs.godotengine.org/en/stable/tutorials/assets_pipeline/import_process.html",
+    "https://docs.godotengine.org/en/stable/tutorials/assets_pipeline/importing_3d_scenes/index.html",
+    "https://docs.godotengine.org/en/stable/tutorials/audio/audio_buses.html",
+    "https://docs.godotengine.org/en/stable/tutorials/best_practices/scene_organization.html",
+    "https://docs.godotengine.org/en/stable/tutorials/best_practices/version_control_systems.html",
+    "https://docs.godotengine.org/en/stable/tutorials/editor/command_line_tutorial.html",
+    "https://docs.godotengine.org/en/stable/tutorials/export/exporting_for_web.html",
+    "https://docs.godotengine.org/en/stable/tutorials/export/exporting_projects.html",
+    "https://docs.godotengine.org/en/stable/tutorials/i18n/internationalizing_games.html",
+    "https://docs.godotengine.org/en/stable/tutorials/inputs/inputevent.html",
+    "https://docs.godotengine.org/en/stable/tutorials/io/data_paths.html",
+    "https://docs.godotengine.org/en/stable/tutorials/io/saving_games.html",
+    "https://docs.godotengine.org/en/stable/tutorials/math/random_number_generation.html",
+    "https://docs.godotengine.org/en/stable/tutorials/migrating/upgrading_to_godot_4.html",
+    "https://docs.godotengine.org/en/stable/tutorials/navigation/navigation_using_navigationagents.html",
+    "https://docs.godotengine.org/en/stable/tutorials/navigation/navigation_using_navigationservers.html",
+    "https://docs.godotengine.org/en/stable/tutorials/networking/high_level_multiplayer.html",
+    "https://docs.godotengine.org/en/stable/tutorials/networking/webrtc.html",
+    "https://docs.godotengine.org/en/stable/tutorials/networking/websocket.html",
+    "https://docs.godotengine.org/en/stable/tutorials/performance/general_optimization.html",
+    "https://docs.godotengine.org/en/stable/tutorials/performance/thread_safe_apis.html",
+    "https://docs.godotengine.org/en/stable/tutorials/physics/physics_introduction.html",
+    "https://docs.godotengine.org/en/stable/tutorials/plugins/editor/making_plugins.html",
+    "https://docs.godotengine.org/en/stable/tutorials/plugins/running_code_in_the_editor.html",
+    "https://docs.godotengine.org/en/stable/tutorials/rendering/multiple_resolutions.html",
+    "https://docs.godotengine.org/en/stable/tutorials/rendering/renderers.html",
+    "https://docs.godotengine.org/en/stable/tutorials/scripting/c_sharp/c_sharp_basics.html",
+    "https://docs.godotengine.org/en/stable/tutorials/scripting/c_sharp/c_sharp_differences.html",
+    "https://docs.godotengine.org/en/stable/tutorials/scripting/c_sharp/c_sharp_exports.html",
+    "https://docs.godotengine.org/en/stable/tutorials/scripting/c_sharp/c_sharp_signals.html",
+    "https://docs.godotengine.org/en/stable/tutorials/scripting/c_sharp/index.html",
+    "https://docs.godotengine.org/en/stable/tutorials/scripting/cpp/about_godot_cpp.html",
+    "https://docs.godotengine.org/en/stable/tutorials/scripting/debug/debugger_panel.html",
+    "https://docs.godotengine.org/en/stable/tutorials/scripting/debug/overview_of_debugging_tools.html",
+    "https://docs.godotengine.org/en/stable/tutorials/scripting/debug/the_profiler.html",
+    "https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_styleguide.html",
+    "https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/static_typing.html",
+    "https://docs.godotengine.org/en/stable/tutorials/scripting/idle_and_physics_processing.html",
+    "https://docs.godotengine.org/en/stable/tutorials/scripting/pausing_games.html",
+    "https://docs.godotengine.org/en/stable/tutorials/shaders/shader_reference/canvas_item_shader.html",
+    "https://docs.godotengine.org/en/stable/tutorials/shaders/shader_reference/shading_language.html",
+    "https://docs.godotengine.org/en/stable/tutorials/shaders/shader_reference/spatial_shader.html",
+    "https://docs.godotengine.org/en/stable/tutorials/ui/size_and_anchors.html",
+    "https://docs.godotengine.org/en/stable/tutorials/xr/index.html",
+    "https://godotengine.org/consoles/"
+  ],
+  "coverage": {
+    "dimensions": [
+      "2D",
+      "3D",
+      "mixed"
+    ],
+    "languages": [
+      "GDScript",
+      "C#"
+    ],
+    "versionPolicy": "Verify actual engine/build and matching docs; included executable fixtures target Godot4 only.",
+    "targets": "Version/language/renderer/SDK-aware routes; actual exports/devices must be tested."
+  },
+  "verification": {
+    "status": "passed-with-scoped-evidence",
+    "date": "2026-11-07",
+    "scope": "Library structure, bounded static inspector, synthetic fixtures; no whole-game acceptance claimed.",
+    "library": {
+      "skillCreatorValidated": 18,
+      "godotUnitTestsPassed": 10,
+      "oneCProjectionRegressionTestsPassed": 10,
+      "localLinksChecked": 239,
+      "brokenLocalLinks": 0,
+      "checks": [
+        "ECC skills, host compatibility, agents, rules and install manifests",
+        "Codex skill and agent.yaml surfaces",
+        "Canonical/native Godot projections",
+        "Catalog counts and Godot selective-install plan",
+        "Codex TOML registration and read-only diagnostic roles",
+        "ESLint, authored Markdown lint and git diff whitespace",
+        "Independent review of helper code and bounded directory traversal"
+      ],
+      "notes": "Existing upstream host-checklist warnings remain; no Godot/GDScript warnings were reported."
+    },
+    "headless": {
+      "status": "passed",
+      "engineVersion": "4.7.2.stable.official.ed1daf0bf",
+      "fixtures": [
+        { "dimension": "2D", "checksPassed": 4, "physicsTicks": 4, "exitCode": 0 },
+        { "dimension": "3D", "checksPassed": 4, "physicsTicks": 4, "exitCode": 0 }
+      ],
+      "checks": [
+        "Independent duplicated shape resources",
+        "PackedScene ownership",
+        "Signal connection and disconnection",
+        "Movement over physics frames"
+      ],
+      "isolation": "Only original synthetic projects were launched; the GameDev project was not loaded and its project.godot SHA256 was unchanged."
+    },
+    "notValidated": [
+      "Whole-game behavior and historical GameDev reports",
+      "C# compilation and other engine versions",
+      "GPU rendering, audio and input devices",
+      "Network sessions, platform exports, mobile, consoles and XR"
+    ]
+  }
+}

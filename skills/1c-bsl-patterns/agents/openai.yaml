@@ -1,0 +1,4 @@
+interface:
+  display_name: "1C / BSL Development Patterns"
+  short_description: "1C bsl patterns workflows and guidance"
+  default_prompt: "Use $1c-bsl-patterns for the relevant 1C project task."

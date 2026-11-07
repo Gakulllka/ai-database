@@ -106,7 +106,10 @@
         "hermes-hooks",
         "documentation-change-impact",
         "documentation-module-governance",
-        "documentation-test-regression"
+        "documentation-test-regression",
+        "1c-development",
+        "godot-development",
+        "delta-workflows"
       ]
     }
   }

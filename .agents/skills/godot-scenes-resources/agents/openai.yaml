@@ -1,0 +1,4 @@
+interface:
+  display_name: "Godot Scenes and Resources"
+  short_description: "Godot scenes resources workflows and guidance"
+  default_prompt: "Use $godot-scenes-resources for the current Godot project task."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Ecosystem Design Consistency"
+  short_description: "Keep shared design rules consistent across products"
+  default_prompt: "Use $ecosystem-design-consistency to apply our established design system across the affected products and verify their themes and component states."

@@ -1,0 +1,882 @@
+{
+  "version": 1,
+  "sourceArchive": "Codex_1C_Workspace_v3.zip",
+  "sha256": "59b264312f36afcc2ca62550c66b2e314cc4d2e9eb3aa4a8f27b7d1f4e0c707d",
+  "sourceEntries": 421,
+  "sourceSkills": 89,
+  "operationCount": 81,
+  "skills": [
+    "1c-bsl-patterns",
+    "1c-data-composition",
+    "1c-development",
+    "1c-extensions",
+    "1c-external-files",
+    "1c-infobase",
+    "1c-managed-forms",
+    "1c-metadata",
+    "1c-mxl-templates",
+    "1c-platform-tools",
+    "1c-testing",
+    "1c-web-client",
+    "1c-xdto"
+  ],
+  "disposition": [
+    {
+      "source": ".agents/skills/cf-edit",
+      "target": "skills/1c-platform-tools/operations/cf-edit",
+      "skill": "1c-metadata",
+      "mode": "helper-or-instructions"
+    },
+    {
+      "source": ".agents/skills/cf-info",
+      "target": "skills/1c-platform-tools/operations/cf-info",
+      "skill": "1c-metadata",
+      "mode": "helper-or-instructions"
+    },
+    {
+      "source": ".agents/skills/cf-init",
+      "target": "skills/1c-platform-tools/operations/cf-init",
+      "skill": "1c-metadata",
+      "mode": "helper-or-instructions"
+    },
+    {
+      "source": ".agents/skills/cf-validate",
+      "target": "skills/1c-platform-tools/operations/cf-validate",
+      "skill": "1c-metadata",
+      "mode": "helper-or-instructions"
+    },
+    {
+      "source": ".agents/skills/cfe-borrow",
+      "target": "skills/1c-platform-tools/operations/cfe-borrow",
+      "skill": "1c-extensions",
+      "mode": "helper-or-instructions"
+    },
+    {
+      "source": ".agents/skills/cfe-diff",
+      "target": "skills/1c-platform-tools/operations/cfe-diff",
+      "skill": "1c-extensions",
+      "mode": "helper-or-instructions"
+    },
+    {
+      "source": ".agents/skills/cfe-init",
+      "target": "skills/1c-platform-tools/operations/cfe-init",
+      "skill": "1c-extensions",
+      "mode": "helper-or-instructions"
+    },
+    {
+      "source": ".agents/skills/cfe-patch-method",
+      "target": "skills/1c-platform-tools/operations/cfe-patch-method",
+      "skill": "1c-extensions",
+      "mode": "helper-or-instructions"
+    },
+    {
+      "source": ".agents/skills/cfe-validate",
+      "target": "skills/1c-platform-tools/operations/cfe-validate",
+      "skill": "1c-extensions",
+      "mode": "helper-or-instructions"
+    },
+    {
+      "source": ".agents/skills/db-cfe-admin",
+      "target": "skills/1c-platform-tools/operations/db-cfe-admin",
+      "skill": "1c-infobase",
+      "mode": "helper-or-instructions"
+    },
+    {
+      "source": ".agents/skills/db-create",
+      "target": "skills/1c-platform-tools/operations/db-create",
+      "skill": "1c-infobase",
+      "mode": "helper-or-instructions"
+    },
+    {
+      "source": ".agents/skills/db-dump-cf",
+      "target": "skills/1c-platform-tools/operations/db-dump-cf",
+      "skill": "1c-infobase",
+      "mode": "helper-or-instructions"
+    },
+    {
+      "source": ".agents/skills/db-dump-dt",
+      "target": "skills/1c-platform-tools/operations/db-dump-dt",
+      "skill": "1c-infobase",
+      "mode": "helper-or-instructions"
+    },
+    {
+      "source": ".agents/skills/db-dump-xml",
+      "target": "skills/1c-platform-tools/operations/db-dump-xml",
+      "skill": "1c-infobase",
+      "mode": "helper-or-instructions"
+    },
+    {
+      "source": ".agents/skills/db-list",
+      "target": "skills/1c-platform-tools/operations/db-list",
+      "skill": "1c-infobase",
+      "mode": "helper-or-instructions"
+    },
+    {
+      "source": ".agents/skills/db-load-cf",
+      "target": "skills/1c-platform-tools/operations/db-load-cf",
+      "skill": "1c-infobase",
+      "mode": "helper-or-instructions"
+    },
+    {
+      "source": ".agents/skills/db-load-dt",
+      "target": "skills/1c-platform-tools/operations/db-load-dt",
+      "skill": "1c-infobase",
+      "mode": "helper-or-instructions"
+    },
+    {
+      "source": ".agents/skills/db-load-git",
+      "target": "skills/1c-platform-tools/operations/db-load-git",
+      "skill": "1c-infobase",
+      "mode": "helper-or-instructions"
+    },
+    {
+      "source": ".agents/skills/db-load-xml",
+      "target": "skills/1c-platform-tools/operations/db-load-xml",
+      "skill": "1c-infobase",
+      "mode": "helper-or-instructions"
+    },
+    {
+      "source": ".agents/skills/db-repo",
+      "target": "skills/1c-platform-tools/operations/db-repo",
+      "skill": "1c-infobase",
+      "mode": "helper-or-instructions"
+    },
+    {
+      "source": ".agents/skills/db-run",
+      "target": "skills/1c-platform-tools/operations/db-run",
+      "skill": "1c-infobase",
+      "mode": "helper-or-instructions"
+    },
+    {
+      "source": ".agents/skills/db-update",
+      "target": "skills/1c-platform-tools/operations/db-update",
+      "skill": "1c-infobase",
+      "mode": "helper-or-instructions"
+    },
+    {
+      "source": ".agents/skills/epf-bsp-add-command",
+      "target": "skills/1c-platform-tools/operations/epf-bsp-add-command",
+      "skill": "1c-external-files",
+      "mode": "helper-or-instructions"
+    },
+    {
+      "source": ".agents/skills/epf-bsp-init",
+      "target": "skills/1c-platform-tools/operations/epf-bsp-init",
+      "skill": "1c-external-files",
+      "mode": "helper-or-instructions"
+    },
+    {
+      "source": ".agents/skills/epf-build",
+      "target": "skills/1c-platform-tools/operations/epf-build",
+      "skill": "1c-external-files",
+      "mode": "helper-or-instructions"
+    },
+    {
+      "source": ".agents/skills/epf-dump",
+      "target": "skills/1c-platform-tools/operations/epf-dump",
+      "skill": "1c-external-files",
+      "mode": "helper-or-instructions"
+    },
+    {
+      "source": ".agents/skills/epf-init",
+      "target": "skills/1c-platform-tools/operations/epf-init",
+      "skill": "1c-external-files",
+      "mode": "helper-or-instructions"
+    },
+    {
+      "source": ".agents/skills/epf-validate",
+      "target": "skills/1c-platform-tools/operations/epf-validate",
+      "skill": "1c-external-files",
+      "mode": "helper-or-instructions"
+    },
+    {
+      "source": ".agents/skills/erf-build",
+      "target": "skills/1c-platform-tools/operations/erf-build",
+      "skill": "1c-external-files",
+      "mode": "helper-or-instructions"
+    },
+    {
+      "source": ".agents/skills/erf-dump",
+      "target": "skills/1c-platform-tools/operations/erf-dump",
+      "skill": "1c-external-files",
+      "mode": "helper-or-instructions"
+    },
+    {
+      "source": ".agents/skills/erf-init",
+      "target": "skills/1c-platform-tools/operations/erf-init",
+      "skill": "1c-external-files",
+      "mode": "helper-or-instructions"
+    },
+    {
+      "source": ".agents/skills/erf-validate",
+      "target": "skills/1c-platform-tools/operations/erf-validate",
+      "skill": "1c-external-files",
+      "mode": "helper-or-instructions"
+    },
+    {
+      "source": ".agents/skills/form-add",
+      "target": "skills/1c-platform-tools/operations/form-add",
+      "skill": "1c-managed-forms",
+      "mode": "helper-or-instructions"
+    },
+    {
+      "source": ".agents/skills/form-compile",
+      "target": "skills/1c-platform-tools/operations/form-compile",
+      "skill": "1c-managed-forms",
+      "mode": "helper-or-instructions"
+    },
+    {
+      "source": ".agents/skills/form-decompile",
+      "target": "skills/1c-platform-tools/operations/form-decompile",
+      "skill": "1c-managed-forms",
+      "mode": "helper-or-instructions"
+    },
+    {
+      "source": ".agents/skills/form-edit",
+      "target": "skills/1c-platform-tools/operations/form-edit",
+      "skill": "1c-managed-forms",
+      "mode": "helper-or-instructions"
+    },
+    {
+      "source": ".agents/skills/form-info",
+      "target": "skills/1c-platform-tools/operations/form-info",
+      "skill": "1c-managed-forms",
+      "mode": "helper-or-instructions"
+    },
+    {
+      "source": ".agents/skills/form-patterns",
+      "target": "skills/1c-platform-tools/operations/form-patterns",
+      "skill": "1c-managed-forms",
+      "mode": "helper-or-instructions"
+    },
+    {
+      "source": ".agents/skills/form-remove",
+      "target": "skills/1c-platform-tools/operations/form-remove",
+      "skill": "1c-managed-forms",
+      "mode": "helper-or-instructions"
+    },
+    {
+      "source": ".agents/skills/form-validate",
+      "target": "skills/1c-platform-tools/operations/form-validate",
+      "skill": "1c-managed-forms",
+      "mode": "helper-or-instructions"
+    },
+    {
+      "source": ".agents/skills/help-add",
+      "target": "skills/1c-platform-tools/operations/help-add",
+      "skill": "1c-managed-forms",
+      "mode": "helper-or-instructions"
+    },
+    {
+      "source": ".agents/skills/img-grid",
+      "target": "skills/1c-platform-tools/operations/img-grid",
+      "skill": "1c-managed-forms",
+      "mode": "helper-or-instructions"
+    },
+    {
+      "source": ".agents/skills/interface-edit",
+      "target": "skills/1c-platform-tools/operations/interface-edit",
+      "skill": "1c-metadata",
+      "mode": "helper-or-instructions"
+    },
+    {
+      "source": ".agents/skills/interface-validate",
+      "target": "skills/1c-platform-tools/operations/interface-validate",
+      "skill": "1c-metadata",
+      "mode": "helper-or-instructions"
+    },
+    {
+      "source": ".agents/skills/meta-compile",
+      "target": "skills/1c-platform-tools/operations/meta-compile",
+      "skill": "1c-metadata",
+      "mode": "helper-or-instructions"
+    },
+    {
+      "source": ".agents/skills/meta-decompile",
+      "target": "skills/1c-platform-tools/operations/meta-decompile",
+      "skill": "1c-metadata",
+      "mode": "helper-or-instructions"
+    },
+    {
+      "source": ".agents/skills/meta-edit",
+      "target": "skills/1c-platform-tools/operations/meta-edit",
+      "skill": "1c-metadata",
+      "mode": "helper-or-instructions"
+    },
+    {
+      "source": ".agents/skills/meta-info",
+      "target": "skills/1c-platform-tools/operations/meta-info",
+      "skill": "1c-metadata",
+      "mode": "helper-or-instructions"
+    },
+    {
+      "source": ".agents/skills/meta-remove",
+      "target": "skills/1c-platform-tools/operations/meta-remove",
+      "skill": "1c-metadata",
+      "mode": "helper-or-instructions"
+    },
+    {
+      "source": ".agents/skills/meta-validate",
+      "target": "skills/1c-platform-tools/operations/meta-validate",
+      "skill": "1c-metadata",
+      "mode": "helper-or-instructions"
+    },
+    {
+      "source": ".agents/skills/mxl-compile",
+      "target": "skills/1c-platform-tools/operations/mxl-compile",
+      "skill": "1c-mxl-templates",
+      "mode": "helper-or-instructions"
+    },
+    {
+      "source": ".agents/skills/mxl-decompile",
+      "target": "skills/1c-platform-tools/operations/mxl-decompile",
+      "skill": "1c-mxl-templates",
+      "mode": "helper-or-instructions"
+    },
+    {
+      "source": ".agents/skills/mxl-info",
+      "target": "skills/1c-platform-tools/operations/mxl-info",
+      "skill": "1c-mxl-templates",
+      "mode": "helper-or-instructions"
+    },
+    {
+      "source": ".agents/skills/mxl-validate",
+      "target": "skills/1c-platform-tools/operations/mxl-validate",
+      "skill": "1c-mxl-templates",
+      "mode": "helper-or-instructions"
+    },
+    {
+      "source": ".agents/skills/role-compile",
+      "target": "skills/1c-platform-tools/operations/role-compile",
+      "skill": "1c-metadata",
+      "mode": "helper-or-instructions"
+    },
+    {
+      "source": ".agents/skills/role-edit",
+      "target": "skills/1c-platform-tools/operations/role-edit",
+      "skill": "1c-metadata",
+      "mode": "helper-or-instructions"
+    },
+    {
+      "source": ".agents/skills/role-info",
+      "target": "skills/1c-platform-tools/operations/role-info",
+      "skill": "1c-metadata",
+      "mode": "helper-or-instructions"
+    },
+    {
+      "source": ".agents/skills/role-validate",
+      "target": "skills/1c-platform-tools/operations/role-validate",
+      "skill": "1c-metadata",
+      "mode": "helper-or-instructions"
+    },
+    {
+      "source": ".agents/skills/skd-compile",
+      "target": "skills/1c-platform-tools/operations/skd-compile",
+      "skill": "1c-data-composition",
+      "mode": "helper-or-instructions"
+    },
+    {
+      "source": ".agents/skills/skd-decompile",
+      "target": "skills/1c-platform-tools/operations/skd-decompile",
+      "skill": "1c-data-composition",
+      "mode": "helper-or-instructions"
+    },
+    {
+      "source": ".agents/skills/skd-edit",
+      "target": "skills/1c-platform-tools/operations/skd-edit",
+      "skill": "1c-data-composition",
+      "mode": "helper-or-instructions"
+    },
+    {
+      "source": ".agents/skills/skd-info",
+      "target": "skills/1c-platform-tools/operations/skd-info",
+      "skill": "1c-data-composition",
+      "mode": "helper-or-instructions"
+    },
+    {
+      "source": ".agents/skills/skd-validate",
+      "target": "skills/1c-platform-tools/operations/skd-validate",
+      "skill": "1c-data-composition",
+      "mode": "helper-or-instructions"
+    },
+    {
+      "source": ".agents/skills/subsystem-compile",
+      "target": "skills/1c-platform-tools/operations/subsystem-compile",
+      "skill": "1c-metadata",
+      "mode": "helper-or-instructions"
+    },
+    {
+      "source": ".agents/skills/subsystem-edit",
+      "target": "skills/1c-platform-tools/operations/subsystem-edit",
+      "skill": "1c-metadata",
+      "mode": "helper-or-instructions"
+    },
+    {
+      "source": ".agents/skills/subsystem-info",
+      "target": "skills/1c-platform-tools/operations/subsystem-info",
+      "skill": "1c-metadata",
+      "mode": "helper-or-instructions"
+    },
+    {
+      "source": ".agents/skills/subsystem-validate",
+      "target": "skills/1c-platform-tools/operations/subsystem-validate",
+      "skill": "1c-metadata",
+      "mode": "helper-or-instructions"
+    },
+    {
+      "source": ".agents/skills/support-edit",
+      "target": "skills/1c-platform-tools/operations/support-edit",
+      "skill": "1c-metadata",
+      "mode": "helper-or-instructions"
+    },
+    {
+      "source": ".agents/skills/template-add",
+      "target": "skills/1c-platform-tools/operations/template-add",
+      "skill": "1c-mxl-templates",
+      "mode": "helper-or-instructions"
+    },
+    {
+      "source": ".agents/skills/template-remove",
+      "target": "skills/1c-platform-tools/operations/template-remove",
+      "skill": "1c-mxl-templates",
+      "mode": "helper-or-instructions"
+    },
+    {
+      "source": ".agents/skills/v8-xsd-fetch",
+      "target": "skills/1c-platform-tools/operations/v8-xsd-fetch",
+      "skill": "1c-metadata",
+      "mode": "helper-or-instructions"
+    },
+    {
+      "source": ".agents/skills/web-info",
+      "target": "skills/1c-platform-tools/operations/web-info",
+      "skill": "1c-web-client",
+      "mode": "helper-or-instructions"
+    },
+    {
+      "source": ".agents/skills/web-publish",
+      "target": "skills/1c-platform-tools/operations/web-publish",
+      "skill": "1c-web-client",
+      "mode": "manual"
+    },
+    {
+      "source": ".agents/skills/web-stop",
+      "target": "skills/1c-platform-tools/operations/web-stop",
+      "skill": "1c-web-client",
+      "mode": "manual"
+    },
+    {
+      "source": ".agents/skills/web-test",
+      "target": "skills/1c-platform-tools/operations/web-test",
+      "skill": "1c-web-client",
+      "mode": "helper-or-instructions"
+    },
+    {
+      "source": ".agents/skills/web-unpublish",
+      "target": "skills/1c-platform-tools/operations/web-unpublish",
+      "skill": "1c-web-client",
+      "mode": "manual"
+    },
+    {
+      "source": ".agents/skills/xdto-compile",
+      "target": "skills/1c-platform-tools/operations/xdto-compile",
+      "skill": "1c-xdto",
+      "mode": "helper-or-instructions"
+    },
+    {
+      "source": ".agents/skills/xdto-decompile",
+      "target": "skills/1c-platform-tools/operations/xdto-decompile",
+      "skill": "1c-xdto",
+      "mode": "helper-or-instructions"
+    },
+    {
+      "source": ".agents/skills/xdto-edit",
+      "target": "skills/1c-platform-tools/operations/xdto-edit",
+      "skill": "1c-xdto",
+      "mode": "helper-or-instructions"
+    },
+    {
+      "source": ".agents/skills/xdto-info",
+      "target": "skills/1c-platform-tools/operations/xdto-info",
+      "skill": "1c-xdto",
+      "mode": "helper-or-instructions"
+    },
+    {
+      "source": ".agents/skills/xdto-validate",
+      "target": "skills/1c-platform-tools/operations/xdto-validate",
+      "skill": "1c-xdto",
+      "mode": "helper-or-instructions"
+    },
+    {
+      "source": ".agents/skills/1c-debug-root-cause",
+      "mode": "adapted-to-ecc",
+      "targets": [
+        "skills/1c-development/references/root-cause.md",
+        "skills/1c-bsl-patterns"
+      ]
+    },
+    {
+      "source": ".agents/skills/1c-git-history",
+      "mode": "adapted-to-ecc",
+      "targets": [
+        "rules/common/git-workflow.md",
+        "skills/1c-development/references/project-profile.md"
+      ]
+    },
+    {
+      "source": ".agents/skills/1c-regression-test",
+      "mode": "adapted-to-ecc",
+      "targets": [
+        "skills/1c-testing",
+        "rules/1c/testing.md"
+      ]
+    },
+    {
+      "source": ".agents/skills/1c-requirements-check",
+      "mode": "adapted-to-ecc",
+      "targets": [
+        "skills/1c-development",
+        "skills/product-capability"
+      ]
+    },
+    {
+      "source": ".agents/skills/1c-smoke-test",
+      "mode": "adapted-to-ecc",
+      "targets": [
+        "skills/1c-testing",
+        "skills/1c-web-client"
+      ]
+    },
+    {
+      "source": ".agents/skills/1c-workspace-hygiene",
+      "mode": "adapted-to-ecc",
+      "targets": [
+        "skills/1c-development/references/project-profile.md",
+        "rules/1c/security.md"
+      ]
+    },
+    {
+      "source": ".agents/skills/planfix-tracker",
+      "mode": "not-imported",
+      "reason": "Project-specific external tracker; not a 1C development prerequisite."
+    },
+    {
+      "source": ".agents/skills/mcp-setup",
+      "mode": "not-imported",
+      "reason": "Project-specific connection/credential examples; actual integrations remain optional."
+    }
+  ],
+  "adaptation": {
+    "source": "Codex_1C_Workspace_v3.zip",
+    "sourceRoot": "C:\\AI\\Database\\tmp\\one-c-source-v3\\Codex_1C_Workspace_v3\\.agents\\skills",
+    "operations": [
+      "cf-edit",
+      "cf-info",
+      "cf-init",
+      "cf-validate",
+      "cfe-borrow",
+      "cfe-diff",
+      "cfe-init",
+      "cfe-patch-method",
+      "cfe-validate",
+      "db-cfe-admin",
+      "db-create",
+      "db-dump-cf",
+      "db-dump-dt",
+      "db-dump-xml",
+      "db-list",
+      "db-load-cf",
+      "db-load-dt",
+      "db-load-git",
+      "db-load-xml",
+      "db-repo",
+      "db-run",
+      "db-update",
+      "epf-bsp-add-command",
+      "epf-bsp-init",
+      "epf-build",
+      "epf-dump",
+      "epf-init",
+      "epf-validate",
+      "erf-build",
+      "erf-dump",
+      "erf-init",
+      "erf-validate",
+      "form-add",
+      "form-compile",
+      "form-decompile",
+      "form-edit",
+      "form-info",
+      "form-patterns",
+      "form-remove",
+      "form-validate",
+      "help-add",
+      "img-grid",
+      "interface-edit",
+      "interface-validate",
+      "meta-compile",
+      "meta-decompile",
+      "meta-edit",
+      "meta-info",
+      "meta-remove",
+      "meta-validate",
+      "mxl-compile",
+      "mxl-decompile",
+      "mxl-info",
+      "mxl-validate",
+      "role-compile",
+      "role-edit",
+      "role-info",
+      "role-validate",
+      "skd-compile",
+      "skd-decompile",
+      "skd-edit",
+      "skd-info",
+      "skd-validate",
+      "subsystem-compile",
+      "subsystem-edit",
+      "subsystem-info",
+      "subsystem-validate",
+      "support-edit",
+      "template-add",
+      "template-remove",
+      "v8-xsd-fetch",
+      "web-info",
+      "web-publish",
+      "web-stop",
+      "web-test",
+      "web-unpublish",
+      "xdto-compile",
+      "xdto-decompile",
+      "xdto-edit",
+      "xdto-info",
+      "xdto-validate"
+    ],
+    "omittedFiles": [
+      "web-publish/scripts/web-publish.ps1",
+      "web-publish/scripts/web-publish.py",
+      "web-stop/scripts/web-stop.ps1",
+      "web-stop/scripts/web-stop.py",
+      "web-unpublish/scripts/web-unpublish.ps1",
+      "web-unpublish/scripts/web-unpublish.py",
+      "1c-debug-root-cause/agents/openai.yaml",
+      "1c-debug-root-cause/SKILL.md",
+      "1c-git-history/agents/openai.yaml",
+      "1c-git-history/SKILL.md",
+      "1c-regression-test/agents/openai.yaml",
+      "1c-regression-test/SKILL.md",
+      "1c-requirements-check/agents/openai.yaml",
+      "1c-requirements-check/SKILL.md",
+      "1c-smoke-test/agents/openai.yaml",
+      "1c-smoke-test/SKILL.md",
+      "1c-workspace-hygiene/agents/openai.yaml",
+      "1c-workspace-hygiene/SKILL.md",
+      "planfix-tracker/references/api-workflow.md",
+      "planfix-tracker/references/emk-schema.md",
+      "planfix-tracker/SKILL.md",
+      "mcp-setup/SKILL.md"
+    ],
+    "excludedOperations": [
+      "1c-debug-root-cause",
+      "1c-git-history",
+      "1c-regression-test",
+      "1c-requirements-check",
+      "1c-smoke-test",
+      "1c-workspace-hygiene",
+      "planfix-tracker",
+      "mcp-setup"
+    ],
+    "changes": [
+      {
+        "file": "web-info/scripts/web-info.py",
+        "change": "Resolve Apache default from explicit consumer root or CWD, not source location"
+      },
+      {
+        "file": "web-info/scripts/web-info.ps1",
+        "change": "Resolve Apache default from explicit consumer root or CWD"
+      },
+      {
+        "file": "web-test/scripts/engine/core/state.mjs",
+        "change": "Consumer project root and per-project web-client state"
+      },
+      {
+        "file": "web-test/scripts/cli/session.mjs",
+        "change": "Store session state inside consumer project scratch"
+      },
+      {
+        "file": "web-test/scripts/cli/exec-context.mjs",
+        "change": "Store error screenshots in consumer scratch and create parent directory"
+      },
+      {
+        "file": "web-test/scripts/cli/credentials.mjs",
+        "change": "New explicit environment credentials provider; no saved-config scraping"
+      },
+      {
+        "file": "web-test/scripts/cli/commands/start.mjs",
+        "change": "Remove MCP credential scraping; accept explicit web credentials and create consumer state directory"
+      },
+      {
+        "file": "web-test/operation.md",
+        "change": "Document explicit credentials and project-scoped state"
+      },
+      {
+        "file": "cf-edit/scripts/cf-edit.py",
+        "change": "Propagate sibling validator failure exit code"
+      },
+      {
+        "file": "cf-edit/scripts/cf-edit.ps1",
+        "change": "Propagate PowerShell sibling validator exit code"
+      },
+      {
+        "file": "interface-edit/scripts/interface-edit.py",
+        "change": "Propagate sibling validator failure exit code"
+      },
+      {
+        "file": "interface-edit/scripts/interface-edit.ps1",
+        "change": "Propagate PowerShell sibling validator exit code"
+      },
+      {
+        "file": "meta-edit/scripts/meta-edit.py",
+        "change": "Propagate sibling validator failure exit code"
+      },
+      {
+        "file": "meta-edit/scripts/meta-edit.ps1",
+        "change": "Propagate PowerShell sibling validator exit code"
+      },
+      {
+        "file": "role-edit/scripts/role-edit.py",
+        "change": "Propagate sibling validator failure exit code"
+      },
+      {
+        "file": "role-edit/scripts/role-edit.ps1",
+        "change": "Propagate PowerShell sibling validator exit code"
+      },
+      {
+        "file": "subsystem-compile/scripts/subsystem-compile.py",
+        "change": "Propagate sibling validator failure exit code"
+      },
+      {
+        "file": "subsystem-compile/scripts/subsystem-compile.ps1",
+        "change": "Propagate PowerShell sibling validator exit code"
+      },
+      {
+        "file": "subsystem-edit/scripts/subsystem-edit.py",
+        "change": "Propagate sibling validator failure exit code"
+      },
+      {
+        "file": "subsystem-edit/scripts/subsystem-edit.ps1",
+        "change": "Propagate PowerShell sibling validator exit code"
+      },
+      {
+        "file": "web-publish/operation.md",
+        "change": "Replaced server-admin automation with scoped manual guidance"
+      },
+      {
+        "file": "web-stop/operation.md",
+        "change": "Replaced server-admin automation with scoped manual guidance"
+      },
+      {
+        "file": "web-unpublish/operation.md",
+        "change": "Replaced server-admin automation with scoped manual guidance"
+      },
+      {
+        "file": "db-repo/references/admin.md",
+        "change": "Resolve nested reference commands against the reference directory"
+      },
+      {
+        "file": "db-repo/references/connect.md",
+        "change": "Resolve nested reference commands against the reference directory"
+      },
+      {
+        "file": "db-repo/references/history.md",
+        "change": "Resolve nested reference commands against the reference directory"
+      },
+      {
+        "file": "db-repo/references/service.md",
+        "change": "Resolve nested reference commands against the reference directory"
+      },
+      {
+        "file": "meta-edit/reference/json-dsl.md",
+        "change": "Resolve nested reference commands against the reference directory"
+      },
+      {
+        "file": "role-compile/dsl-reference.md",
+        "change": "Update links to renamed operation.md"
+      },
+      {
+        "file": "web-test/regress.md",
+        "change": "Update links to renamed operation.md"
+      },
+      {
+        "file": "web-test/scripts/cli/error-shots.mjs",
+        "change": "Create consumer screenshot directories and publish a path only after successful write; preserve execution-context file APIs."
+      }
+    ],
+    "dependencies": {
+      "python": [
+        "lxml (XML tools)",
+        "Pillow (img-grid)",
+        "psutil (web-info)"
+      ],
+      "node": [
+        "playwright (web-test; package lock preserved)"
+      ],
+      "optional": [
+        "1C platform / ibcmd for infobase and EPF/ERF operations",
+        "FFmpeg/ffprobe for recording",
+        "node-edge-tts or configured TTS provider for narration"
+      ],
+      "powershell": "Windows PowerShell for .ps1 ports"
+    },
+    "limitations": [
+      "No live 1C, infobase, browser, Apache, package installation, network, recording or TTS execution performed.",
+      "Original XML generators and validators are retained with source attribution; local structural validation does not prove 1C runtime acceptance.",
+      "Infobase operations can mutate data or configuration and remain opt-in; registry selection, credentials and target classification must be provided by the consumer workflow.",
+      "Web-test localhost HTTP runner executes caller-supplied automation code; it must remain local and be stopped after explicitly authorized use.",
+      "Legacy relative script paths in operation guides are resource-relative, not executable CWD-relative paths; resolve them absolutely before invoking.",
+      "Source .v8-project.json schema permits plaintext credentials; keep local credential-bearing registry out of version control.",
+      "No redistribution license was supplied in the archive; retain source headers and do not label imported scripts MIT."
+    ],
+    "count": 81,
+    "validation": {
+      "pythonAstFiles": 71,
+      "powershellParsedFiles": 70,
+      "nodeSyntaxFiles": 65,
+      "execution": "Static parse only; no source script, 1C, network or browser actions executed",
+      "pureModuleChecks": "Explicit credentials and separate consumer project runtime paths passed; no browser or filesystem writes."
+    },
+    "excludedOperationFiles": [
+      "web-test/.browser-session.json",
+      "web-test/error-shot.png",
+      "1c-debug-root-cause/agents/openai.yaml",
+      "1c-debug-root-cause/SKILL.md",
+      "1c-git-history/agents/openai.yaml",
+      "1c-git-history/SKILL.md",
+      "1c-regression-test/agents/openai.yaml",
+      "1c-regression-test/SKILL.md",
+      "1c-requirements-check/agents/openai.yaml",
+      "1c-requirements-check/SKILL.md",
+      "1c-smoke-test/agents/openai.yaml",
+      "1c-smoke-test/SKILL.md",
+      "1c-workspace-hygiene/agents/openai.yaml",
+      "1c-workspace-hygiene/SKILL.md",
+      "planfix-tracker/references/api-workflow.md",
+      "planfix-tracker/references/emk-schema.md",
+      "planfix-tracker/SKILL.md",
+      "mcp-setup/SKILL.md"
+    ],
+    "pathContract": {
+      "operationsRoot": "skills/1c-platform-tools/operations",
+      "resourcePaths": "Resolve command resource paths relative to operation.md/reference location, invoke absolute path with consumer CWD",
+      "consumerRoot": "ECC_1C_PROJECT_ROOT or process CWD",
+      "webRuntime": "<consumerRoot>/.scratch/1c-web-client",
+      "credentials": "Explicit ECC_1C_WEB_USER/ECC_1C_WEB_PASSWORD; no saved-config inference"
+    }
+  },
+  "localVerification": {
+    "syntheticScenarios": 10,
+    "external1cRuntime": "not performed",
+    "forwardTest": "PowerShell configuration and subsystem generation/inspection/validation succeeded on isolated synthetic files",
+    "projectionFiles": 398
+  }
+}

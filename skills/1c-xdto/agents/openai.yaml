@@ -1,0 +1,4 @@
+interface:
+  display_name: "1C XDTO and XML Contracts"
+  short_description: "1C xdto workflows and guidance"
+  default_prompt: "Use $1c-xdto for the relevant 1C project task."

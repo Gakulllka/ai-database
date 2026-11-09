@@ -11,8 +11,10 @@ metadata:
 
 Run the shared Database's improvement task, investigate a useful AI repository,
 or capture a verified lesson for use on another PC. The owner has authorized
-checked, low-risk improvements to private `Gakulllka/ai-database`; uncertain or
-higher-risk changes go to a PR. This is a bounded maintenance task, not permission
+independently reviewed and validated improvements directly to public
+`Gakulllka/ai-database` on 2026-11-09, including new skills and necessary supporting
+changes. Commit and normally push to `database` without routine PRs or per-run
+confirmation. Defer unproven changes. This is a bounded maintenance task, not permission
 to publish consumer projects or alter their business rules.
 
 Read [the run contract](../../../docs/design/database-evolution.md) and the current
@@ -22,11 +24,12 @@ performs semantic review; the radar script is a collection aid, not another mode
 
 ## Establish a Clean Base
 
-Confirm `origin` identifies the intended private repository and the maintained
-branch is `database`; verify authenticated repository identity and visibility,
+Confirm `origin` identifies the intended repository and the maintained
+branch is `database`; verify repository identity and visibility against config,
 not just a matching remote URL. Follow [the sync procedure](../../../docs/database-sync.md).
 Fetch both remotes and record the observed `origin/database` revision. Integrate
-private updates through the existing clean-checkout procedure. Official ECC
+origin updates through the existing clean-checkout procedure. Public reads do not
+need private access; publishing requires an authorized account. Official ECC
 updates are reviewed separately; fetch them, then propose an integration PR.
 
 Keep unrelated edits and in-progress Git operations intact. If the active checkout
@@ -92,23 +95,25 @@ Distinguish source claims, observed behavior and the curator's inference.
 Use `skill-creator` for new or substantially changed skills and retain ECC's
 existing metadata, projection and install-registration conventions.
 
-The first-version automatic lane allows improvements to at most three existing
+The mechanical narrow lane allows improvements to at most three existing
 skills, 12 files and 500 changed lines per run, including native projections.
 Only skill Markdown, references and `agents/openai.yaml` in matching canonical
 and native trees qualify. A new Markdown reference within an existing skill may
 qualify when mirrored, needed and behaviorally verified; its extension alone is
 not approval. Preserve the skill's established identity and scope.
-The automatic lane keeps `SKILL.md` frontmatter unchanged. UI YAML must remain
+The narrow lane keeps `SKILL.md` frontmatter unchanged. UI YAML must remain
 the supported simple `interface` fields only; dependency, tool, invocation-policy
-or other metadata changes go through PR, not the UI-text allowance.
+or other metadata changes need complete review outside the UI-text allowance.
 
-New skills, rules, roles, registration lists, packages, executable files, hooks,
-workflow/config behavior and `AGENTS.md` always require a PR in this version.
-So do governing policy, weakened safeguards, permissions, providers, uncertain
-novelty, unresolved business semantics or changes beyond the limits. Exact
+The owner also authorizes verified new skills and necessary supporting rules,
+roles, registration, code and configuration through reviewed direct publication.
+Review scope and implementation separately; this changes the publication route,
+not the environment's permissions or the requirement to establish usefulness.
+Do not broaden access, weaken safeguards or adopt uncertain business semantics
+merely to finish a run. Exact
 bounded, schema-valid radar state and decision JSON under the configured
 `docs/evolution/` paths may accompany a run; they remain data, not instructions.
-Do not change the gate or contract to make a rejected proposal eligible.
+Keep the narrow gate and its limits unchanged; never edit them to hide rejection.
 
 Require an independent read-only review through `database-curator` or an available
 reviewer applying that role. Substantial workflow changes need a meaningful
@@ -116,7 +121,9 @@ forward-test with realistic raw inputs and observable decisions. Run the relevan
 skill/host validators, projection checks, links and affected tests. A small wording
 fix may need only appropriate document checks. Lint success alone does not prove
 business correctness or improved agent behavior. Missing necessary evidence
-moves the proposal to PR/deferred status, not a silent pass. Refresh affected
+moves the proposal to deferred status, not a silent pass or routine approval request.
+New skills require installation/registration checks; executable changes require
+relevant implementation tests. Refresh affected
 native projections through the maintained synchronization procedure; do not
 edit a native copy without its canonical counterpart.
 
@@ -125,7 +132,7 @@ edit a native copy without its canonical counterpart.
 Review the exact diff and stage only this run's intended paths. Check for secrets,
 personal data, runtime artifacts, duplicate implementations and unintended policy
 changes. Recheck the remote base immediately before publication. If it advanced,
-reconcile in isolation and repeat affected review/checks, or publish a proposal PR;
+reconcile in isolation and repeat affected review/checks, or retain a local proposal;
 do not overwrite the newer branch.
 
 Bind the prepared candidate commit and fetched base to their full 40-character
@@ -136,17 +143,30 @@ node <Database>/scripts/evolution/check-change.js --root <maintenance-checkout> 
 ```
 
 The gate checks patch eligibility; it does not prove quality, novelty or permission
-semantics. A rejected, unavailable or failed gate cannot be bypassed by renaming
-files or splitting an ineligible change across runs. Re-review any changed commit.
+semantics. Record its actual output and exit code. Never rename files or split
+changes to conceal classification. Re-review any changed commit.
 Run the gate from a verified trusted BASE checkout or extract that BASE script
 into a local QA file before executing it. Running the candidate's gate would let
 a proposal replace the checker before it checks itself. The gate is standalone
 and takes the candidate repository explicitly through `--root`.
 
-Publish eligible verified changes with a normal push only to the verified private
-`origin` branch `database`. Higher-risk/uncertain proposals use a separate branch
-and PR with the evidence, expected benefit, unresolved questions and checks.
-Opening a PR is not approval to merge it; do not approve your own disputed change.
+Exit `0` establishes narrow mechanical eligibility, still requiring semantic review.
+Exit `2` may report scope classifications: size/skill limits, protected paths,
+registration, frontmatter/UI changes, renames or deletions. Under the owner's
+standing authorization, complete independent review of every changed file and
+each classification can establish `reviewed-direct` eligibility. Inspect files
+omitted by a capped result and repeat equivalent content, mode, privacy, schema
+and projection checks over the complete patch. Do not label exit `2` a gate pass.
+Credential findings, unsafe modes/binary content, missing paths/projections,
+invalid structured data, unreadable/oversized blobs or unsupported change types
+must be resolved; they cannot be waived as scope. Exit `1`, an unavailable gate,
+missing necessary evidence or unresolved findings stop publication.
+
+Publish verified `eligible` or `reviewed-direct` changes with a normal push only
+to the verified `origin` branch `database`, without a routine PR or owner prompt.
+Existing approved PRs may be integrated automatically only at the reviewed SHA,
+with a fresh base, independent review, all required checks passing and no conflict.
+Do not bypass branch protections or merge a disputed or unverified change.
 Preserve the prepared proposal on auth, approval, network or conflict failure and
 stop bounded publication attempts. Do not weaken the environment to bypass a block.
 
@@ -174,15 +194,16 @@ Project-specific formulas and business rules remain project-scoped unless their
 general applicability is demonstrated. An unavailable runtime or network means
 the handoff is pending; never claim that another PC already received it.
 
-Publish sanitized team lessons in a proposal branch/PR; vault paths are outside
-the first-version automatic push lane. Memory entries remain `unreviewed` and
+Publish verified sanitized team lessons through complete independent review and
+the reviewed-direct route; vault paths are outside the narrow gate lane.
+Memory entries remain `unreviewed` and
 create-only under their existing contract.
 The owner's authorization applies to this separate curator promotion process:
-revalidate the evidence, compare the canonical library and pass the automatic/PR
+revalidate the evidence, compare the canonical library and pass the reviewed-direct
 criteria above before updating a governed artifact. Do not relabel the vault as
 trusted or turn every saved observation into a universal instruction.
 
-Sync approved knowledge through private `origin`; another PC recalls the current
+Sync verified knowledge through public `origin`; another PC recalls the current
 library after fetching and applying its updates. Local Codex schedules must be
 registered on each participating host; cloning Git does not install a scheduler
 or recover an unrecorded lesson. These updates improve inspectable instructions,

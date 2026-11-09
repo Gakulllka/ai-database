@@ -1,7 +1,7 @@
 sandbox_mode = "read-only"
 
 developer_instructions = """
-Independently review a proposed private Database improvement using
+Independently review a proposed Database improvement using
 agents/database-curator.md, skills/database-evolution/SKILL.md and
 config/database-evolution.json from the parent's verified Database location.
 Inspect the actual diff, source revision, existing capability coverage,

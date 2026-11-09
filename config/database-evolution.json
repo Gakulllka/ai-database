@@ -2,11 +2,12 @@
   "schemaVersion": "database.evolution.config.v1",
   "repository": "Gakulllka/ai-database",
   "branch": "database",
-  "mode": "checked-auto-with-pr-fallback",
+  "repositoryVisibility": "public",
+  "mode": "reviewed-direct",
   "execution": {
     "runtime": "local-codex",
     "separateModelApiRequired": false,
-    "schedule": "daily at 10:00 Europe/Moscow",
+    "schedule": "daily at 04:00 Europe/Moscow",
     "maxMinutesPerRun": 30,
     "maxDeepReviews": 3
   },
@@ -29,12 +30,13 @@
     "maxSkillChanges": 3,
     "maxChangedFiles": 12,
     "maxChangedLines": 500,
-    "automaticScope": "Existing canonical/native skill text pairs and structured observation/decision records only.",
+    "automaticScope": "Verified reusable Database improvements, including existing/new skills and necessary supporting code, rules, roles, registration and configuration; direct normal push after independent review and affected checks. Consumer data and environment permission bypasses remain excluded.",
     "requireIndependentReview": true,
     "requireMeaningfulEvidence": true,
-    "newSkillsRequirePullRequest": true,
-    "executableChangesRequirePullRequest": true,
-    "permissionChangesRequirePullRequest": true,
+    "newSkillsRequirePullRequest": false,
+    "executableChangesRequirePullRequest": false,
+    "permissionChangesRequirePullRequest": false,
+    "scopeClassificationsRequireCompleteReview": true,
     "allowForcePush": false,
     "allowUntrustedCodeExecution": false
   },
@@ -44,7 +46,7 @@
     "kind": "lesson",
     "rawTranscriptsAllowed": false,
     "projectSpecificRulesRemainLocal": true,
-    "proposalPublication": "separate branch and pull request",
+    "proposalPublication": "reviewed direct push of verified sanitized lessons; defer unproven lessons locally",
     "deduplication": "source revision, capability and evidence; cross-PC paths are not identity"
   }
 }

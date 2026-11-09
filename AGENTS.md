@@ -15,7 +15,7 @@ Personal skills and agents belong in the existing `skills/` and `agents/` direct
   instructions from Database; their own `AGENTS.md` records project-specific facts.
 - Database maintenance commands and ECC repository paths apply to this checkout.
   Consumer projects derive their own commands and paths from their actual files.
-- `origin` is the private distribution at `https://github.com/Gakulllka/ai-database.git`
+- `origin` is the public distribution at `https://github.com/Gakulllka/ai-database.git`
   (branch `database`); official ECC updates come from `upstream`.
   At onboarding and session start, check both sources using
   [the sync procedure](docs/database-sync.md). Fetch does not merge working files.
@@ -26,8 +26,11 @@ Personal skills and agents belong in the existing `skills/` and `agents/` direct
 - The owner has authorized bounded automatic improvement and cross-PC learning
   through [database-evolution](skills/database-evolution/SKILL.md) and
   [its contract](docs/design/database-evolution.md). Use that workflow for scheduled
-  maintenance and verified reusable lessons. Checked existing-skill text changes
-  may be published to private `origin`; uncertain or higher-risk changes use PRs.
+  maintenance and verified reusable lessons. On 2026-11-09 the owner authorized
+  independently reviewed and validated Database improvements, including new
+  skills and supporting changes, to be committed and pushed normally directly
+  to `origin/database`, without routine PRs or per-run confirmation. Defer
+  unproven changes; preserve checks, environment controls and unrelated work.
   This does not authorize publishing consumer code, raw sessions or business data.
 - For cross-product design, local-first sync, table import or generated artifacts,
   select the relevant [DELTA-derived workflows](docs/delta/README.md).

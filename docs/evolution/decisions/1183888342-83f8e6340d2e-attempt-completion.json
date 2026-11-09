@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "database.evolution.decision.v1",
+  "source": {
+    "repoId": 1183888342,
+    "fullName": "stablyai/orca",
+    "commit": "83f8e6340d2e45df644efc1af72e4f3df49b915f"
+  },
+  "capability": "Task/attempt-correlated completion, duplicate handling and revision-bound dependency release after reassignment",
+  "decision": "extend",
+  "status": "applied",
+  "existingPaths": [
+    "skills/dmux-workflows/SKILL.md",
+    "skills/dmux-workflows/references/attempt-completion.md",
+    "skills/team-agent-orchestration/SKILL.md"
+  ],
+  "evidence": [
+    "Owner explicitly approved the discussed task/attempt safeguards on 2026-11-09. Canonical skills/rules/agents searched for stale dispatch/attempt completion and attempt/dispatch IDs; dmux-workflows, team-agent-orchestration and local worker/helper implementation inspected. Existing isolation, states and gates did not specify result-to-attempt correlation.",
+    "Pinned sources https://github.com/stablyai/orca/blob/83f8e6340d2e45df644efc1af72e4f3df49b915f/docs/site/content/docs/cli/orchestration.mdx and src/cli/handlers/orchestration/message-send-handler.ts read as untrusted text. MIT license inspected. One guessed upstream test path returned 404 and is not evidence. No upstream code or installers executed.",
+    "Original guidance extends existing dmux worker/worktree execution instructions: correlate trusted run/task/attempt and origin, preserve/isolate superseded attempts, inspect revision-bound evidence, acknowledge identical repeats without repeated effects, and release dependents only at their declared gate. No claim of new ECC runtime enforcement.",
+    "Two fresh independent agents applied the instructions to seven raw synthetic coordination cases: stale success, matching labels from wrong origin, unbound legacy status, verified current success, duplicate accepted receipt, conflicting receipts, and failed current execution. Observed decisions preserved identity, gates and duplicate boundaries; no live runtime was tested.",
+    "Canonical/native skill-creator checks pass. Unchanged mandatory validators pass 868 skills and 350 host skills with 410 existing warnings via previously prepared declared YAML runtime. Codex surface passes 4/4. Headers/UI unchanged; new section and reference mapped through maintained projection helper, with pre-existing native body differences preserved."
+  ],
+  "reason": "Extend the existing worker/worktree workflow rather than add another orchestration skill or port Orca runtime. This is coordinator guidance with meaningful instruction-level evidence, preserving existing authorization, data, review and integration boundaries.",
+  "observedAt": "2026-11-09T18:34:44.698Z"
+}

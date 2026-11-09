@@ -109,6 +109,16 @@ Pane 3: "Review src/api/ for test coverage gaps"
 4. **Use git worktrees.** For file-conflict-prone work, use separate worktrees per pane.
 5. **Resource awareness.** Each pane uses API tokens — keep total panes under 5-6.
 
+## Completion Across Retries
+
+For reassignment, retries, or dependent tasks, track the task separately from
+each attempt to execute it. Use [the completion protocol](references/attempt-completion.md)
+to correlate a worker's result with the active assignment before changing task
+state or releasing dependent work. A launcher exit or `completed` status is
+execution evidence; the coordinator still checks artifacts and the declared gate.
+This protocol guides coordinator decisions; it does not add automatic attempt
+identity or acceptance checks to the selected launcher.
+
 ## Git Worktree Integration
 
 For tasks that touch overlapping files:

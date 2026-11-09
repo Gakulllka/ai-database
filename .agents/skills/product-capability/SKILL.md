@@ -90,7 +90,21 @@ Produce an SRS-style capability plan with:
 - observability and operator requirements
 - open questions blocking implementation
 
-### 4. Translate into execution
+### 4. Check understanding before a consequential handoff
+
+For a contract with consequential ambiguity, multiple system boundaries, or a new
+implementer, use a fresh read-only reviewer to check whether the artifact carries
+the needed context. Skip this pass for a small, explicit change with no material
+handoff risk. Follow [the comprehension review](references/comprehension-review.md).
+
+Give the reviewer the current artifact and necessary cited sources without the
+drafting conversation or the author's intended answer. Ask for a paraphrase
+before findings. Compare that reading with approved intent; repair the document
+where it loses that intent, and keep unresolved product decisions explicit.
+Record the review result or its unavailability in the existing handoff. A review
+checks understanding; it does not approve product policy or replace tests.
+
+### 5. Translate into execution
 
 End with the exact handoff:
 

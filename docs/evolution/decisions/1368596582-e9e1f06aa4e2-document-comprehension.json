@@ -1,0 +1,26 @@
+{
+  "schemaVersion": "database.evolution.decision.v1",
+  "source": {
+    "repoId": 1368596582,
+    "fullName": "google/elephant-goldfish-model",
+    "commit": "e9e1f06aa4e26e95cd4ed37210a0632202c429e9"
+  },
+  "capability": "Fresh-context specification comprehension before implementation handoff",
+  "decision": "extend",
+  "status": "applied",
+  "existingPaths": [
+    "skills/product-capability/SKILL.md",
+    "skills/product-capability/references/comprehension-review.md",
+    "skills/council/SKILL.md",
+    "skills/santa-method/SKILL.md"
+  ],
+  "evidence": [
+    "Owner explicitly approved adding the previously deferred EGM comprehension idea to existing skills on 2026-11-09. Existing product-capability owns the specification-to-implementation handoff; council excludes architecture/planning and Santa excludes internal drafts.",
+    "Pinned sources: https://github.com/google/elephant-goldfish-model/blob/e9e1f06aa4e26e95cd4ed37210a0632202c429e9/agents/comprehension.md and skills/egm-review-loop/SKILL.md. Apache-2.0 license inspected. Original ECC wording adapts ideas without copying personas, templates, installation commands or approval flow.",
+    "New conditional product-capability step and paired reference require a genuinely fresh read-only reader, paraphrase before findings, explicit source/assumption boundaries, bounded re-review and honest not-run status. Existing artifact, output format and handoff lanes remain.",
+    "Two independent fresh agents used raw synthetic artifacts without drafting history or expected answers. Draft v1 review exposed conflicting restoration rights, metadata destruction versus restoration, undefined recovery timing and ambiguous confirmation. Clarified v2 review reconstructed explicit behavior with no findings and retained runtime-evidence limits.",
+    "Both canonical/native skill-creator validators passed. Unchanged mandatory ECC skill validator and host validator passed using the existing declared js-yaml 4.3.2 in an ignored QA runtime with lifecycle scripts disabled; no project dependency/configuration files changed. Native Codex surface passed 4/4. Frontmatter, native UI and mapped projection bodies checked separately."
+  ],
+  "reason": "Extend product-capability rather than add another review skill. The conditional document-comprehension pass addresses a demonstrated specification handoff gap while preserving product authority and ordinary implementation checks. Synthetic evaluation supports instruction behavior, not runtime correctness.",
+  "observedAt": "2026-11-09T18:18:15.219Z"
+}

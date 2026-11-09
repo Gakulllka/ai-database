@@ -7,7 +7,7 @@
   "execution": {
     "runtime": "local-codex",
     "separateModelApiRequired": false,
-    "schedule": "daily at 04:00 Europe/Moscow",
+    "schedule": "daily at 21:00 Europe/Moscow",
     "maxMinutesPerRun": 30,
     "maxDeepReviews": 3
   },

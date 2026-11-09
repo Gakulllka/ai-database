@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "database.evolution.decision.v1",
+  "source": {
+    "repoId": 881458615,
+    "fullName": "browser-use/browser-use",
+    "commit": "b49a68e4060acb226da8f784194fef301c53a6d7"
+  },
+  "capability": "Browser retries after uncertain mutations, replay binding validation and complete artifact sanitization",
+  "decision": "extend",
+  "status": "applied",
+  "existingPaths": [
+    "skills/e2e-testing/SKILL.md",
+    "skills/browser-qa/SKILL.md",
+    "skills/windows-desktop-e2e/SKILL.md",
+    "agents/e2e-runner.md"
+  ],
+  "evidence": [
+    "Pinned source https://github.com/browser-use/browser-use/tree/b49a68e4060acb226da8f784194fef301c53a6d7; MIT license inspected. The change is original guidance, not copied implementation.",
+    "Read README.md replay caveats and browser_use/agent/service.py plus browser_use/agent/views.py at the recorded commit as text only. Earlier actions are not rolled back on later replay failure; unknown substitution names retain original recorded values; input redaction does not cover the complete history.",
+    "Compared canonical skills/rules/agents using retry, replay, idempotency and partial-failure terms; read e2e-testing, browser-qa, windows-desktop-e2e, test-collaboration, safety-guard and e2e-runner. Existing retry/artifact guidance did not cover these specific replay preconditions.",
+    "Owner approved completing all discussed EGM, Orca and Browser Use skill improvements and publishing the complete set on 2026-11-09. Reused the earlier narrow E2E change instead of creating duplicate instructions.",
+    "The same instructions were independently evaluated against four synthetic raw situations: uncertain submission, confirmed absence in a test-owned fixture, unknown replay field/account binding, and sensitive snapshot/result upload. Observed decisions stop unsafe repetition and broad sharing while permitting a bounded verified retry. No browser/provider runtime or automated retry-interruption behavior is claimed.",
+    "Canonical and native frontmatter/UI are preserved; paired projection bodies checked. Earlier missing-js-yaml limitation was resolved using only the already-declared 4.3.2 runtime in an ignored QA directory with lifecycle scripts disabled. Required validators are rerun on the final publication candidate."
+  ],
+  "reason": "Apply the owner-approved existing e2e-testing extension: check durable state before repeating a mutation, validate replay bindings/account and inspect complete artifacts before sharing. Instruction-level evidence and final independent review support the text; this does not install Browser Use or add runtime enforcement.",
+  "observedAt": "2026-11-09T18:51:53.009Z"
+}

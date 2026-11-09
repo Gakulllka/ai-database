@@ -159,6 +159,28 @@ npx playwright test tests/search.spec.ts --repeat-each=10
 npx playwright test tests/search.spec.ts --retries=3
 ```
 
+### Retry and Replay Preconditions
+
+A timeout after submitting a form does not establish that the operation failed.
+Before repeating a mutating journey, check durable application state such as a
+test record or receipt. Restore only test-owned fixtures when needed, or use the
+application's documented idempotency mechanism before a fresh run. If the result remains
+unknown, stop and report INCONCLUSIVE instead of submitting again. Retries retain
+the original staging, test-account, and authorization boundaries.
+
+For recorded browser workflows, validate substitution names against the recorded
+fields and inspect the resolved destination, account, and values before submission.
+An unrecognized substitution can leave the original recorded value in place.
+
+Review traces, saved histories, page snapshots, and extracted results before
+sharing them. Masking typed secrets alone does not sanitize the entire artifact;
+redact sensitive content throughout or keep the artifact private.
+
+Evidence: [Browser Use replay caveats](https://github.com/browser-use/browser-use/blob/b49a68e4060acb226da8f784194fef301c53a6d7/README.md#L350)
+and the pinned `browser_use/agent/service.py` and `browser_use/agent/views.py`
+implementations. These precautions also apply when using another browser tool;
+they do not require installing Browser Use.
+
 ### Common Causes & Fixes
 
 **Race conditions:**

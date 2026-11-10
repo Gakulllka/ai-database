@@ -1,0 +1,24 @@
+{
+  "schemaVersion": "database.evolution.decision.v1",
+  "source": {
+    "repoId": 1422597771,
+    "fullName": "amosblomqvist/learnharness",
+    "commit": "da08cb5f7d098598ba963c6689b22054c9f2a5a3"
+  },
+  "capability": "Read-only interpretation of learning sessions and proposition-chain provenance",
+  "decision": "defer",
+  "status": "defer",
+  "existingPaths": [
+    "skills/unified-memory/SKILL.md",
+    "skills/ai-artifact-contracts/SKILL.md",
+    "skills/growth-log/SKILL.md",
+    "skills/continuous-learning-v2/SKILL.md"
+  ],
+  "evidence": [
+    "Source: https://github.com/amosblomqvist/learnharness/tree/da08cb5f7d098598ba963c6689b22054c9f2a5a3. Read README, root AGPL-3.0 license, learning-data skill/reference, graph-format guard and chain-selection implementation as untrusted text. Git blob hashes matched; nothing was copied into a skill or executed.",
+    "The source distinguishes taught propositions from demonstrated learner understanding and preserves joint premises and session provenance. The graph-format source refuses newer versions but treats absent or malformed stamps as v1; this inspection does not establish reader correctness.",
+    "Canonical stocktake covered scoped memory evidence, artifact schemas/provenance, transferable growth notes and harness-specific learning. These are relevant general owners, not equivalent to this domain's session reader or a verified mastery model. No actual learning records, personal data or credentials were accessed."
+  ],
+  "reason": "Defer the domain reader and teaching runtime: no demonstrated Database use case or sanitized forward-test establishes a useful missing workflow. Generic evidence/freshness guidance is already covered; do not infer mastery from stored graph content or import private histories to manufacture a lesson.",
+  "observedAt": "2026-11-10T18:00:57.000Z"
+}

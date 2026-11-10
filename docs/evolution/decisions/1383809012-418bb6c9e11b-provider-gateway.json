@@ -1,0 +1,24 @@
+{
+  "schemaVersion": "database.evolution.decision.v1",
+  "source": {
+    "repoId": 1383809012,
+    "fullName": "yetone/magpie",
+    "commit": "418bb6c9e11b5e1e4d93495b38b63c3d12265cb7"
+  },
+  "capability": "Cross-harness provider gateway with account failover and latency-aware routing",
+  "decision": "defer",
+  "status": "defer",
+  "existingPaths": [
+    "skills/cost-aware-llm-pipeline/SKILL.md",
+    "skills/deepseek-harness-setup/SKILL.md",
+    "skills/security-review/SKILL.md",
+    "skills/mcp-dependency-review/SKILL.md"
+  ],
+  "evidence": [
+    "Source: https://github.com/yetone/magpie/tree/418bb6c9e11b5e1e4d93495b38b63c3d12265cb7. Read README, root MIT license, route-strategy interface, fastest-route implementation and drain-test source as untrusted text. File bytes matched Git blob hashes; no gateway, installer, tests or provider calls were executed.",
+    "README claims protocol translation, account discovery, agent-config rewriting and optional prompt masking. The inspected routing slice estimates response latency and probes unmeasured routes; it does not demonstrate end-to-end stream, tool-call, cancellation, privacy or failover compatibility.",
+    "Canonical cost-aware-llm-pipeline already covers task/cost routing, budget tracking and narrow retries. deepseek-harness-setup owns one harness's skill/hook integration. Security and dependency review cover relevant trust checks, not an equivalent complete multi-account gateway. A recursive tree exceeded the local response bound; bounded root/subtree and pinned file reads supplied only the stated slice."
+  ],
+  "reason": "Defer runtime adoption or a new integration skill until a concrete supported-harness need and isolated compatibility evidence exist. Routing popularity does not justify changing agent providers, discovering accounts or processing prompts through another service. This run uses the current Codex without a separate model API.",
+  "observedAt": "2026-11-10T18:00:57.000Z"
+}

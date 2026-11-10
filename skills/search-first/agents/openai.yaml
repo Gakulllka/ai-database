@@ -1,0 +1,4 @@
+interface:
+  display_name: "Research Before Coding"
+  short_description: "Compare existing tools before adding dependencies"
+  default_prompt: "Use $search-first to compare repository, platform, and installed tools before choosing a new dependency."

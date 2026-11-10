@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "database.evolution.decision.v1",
+  "source": {
+    "repoId": 1266797999,
+    "fullName": "DietrichGebert/ponytail",
+    "commit": "96608e078b2d5ea607c5c3b8b5a54d1c1fba6846"
+  },
+  "capability": "Compare repository, platform and installed solutions before adding a dependency",
+  "decision": "extend",
+  "status": "applied",
+  "existingPaths": [
+    "skills/search-first/SKILL.md",
+    "skills/coding-standards/SKILL.md",
+    "skills/change-impact/SKILL.md",
+    "agents/code-simplifier.md",
+    "skills/typescript-patterns/SKILL.md",
+    "skills/bun-runtime/SKILL.md"
+  ],
+  "evidence": [
+    "Source: https://github.com/DietrichGebert/ponytail/tree/96608e078b2d5ea607c5c3b8b5a54d1c1fba6846. Read README, root MIT license, primary/review skills and behavior-test source as untrusted text; fetched file bytes matched Git blob hashes. No source code, installers, hooks or model API were run.",
+    "Searched canonical skills, rules and agents. Simplicity, caller tracing and behavior-preserving cleanup are already owned by coding-standards, change-impact and code-simplifier. TypeScript and Bun have language-specific built-in preferences; native copies are not separate capabilities.",
+    "The generic search-first Quick Mode went from repository search directly to package search. Its decision matrix lacked a comparison with compatible platform features and installed dependencies. Added that checkpoint, preserving project conventions, runtime/semantic requirements and required checks; refreshed its Codex projection through the maintained helper.",
+    "An independent raw-fixture forward-test chose the existing request-ID helper, configured nested-query parser and audited HTTP client; chose the standard JSON reader for a compatible simple CLI; deferred a signature library pending provenance, trust-policy and adversarial checks. Five instruction-level decisions, not application runtime tests or measured dependency savings."
+  ],
+  "reason": "Extend the existing dependency-selection owner rather than introducing a broad simplicity skill or adopting a persona. The change supplies a concrete missing choice point without equating fewer dependencies with correctness or authorizing installation.",
+  "observedAt": "2026-11-10T18:00:57.000Z"
+}

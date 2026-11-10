@@ -548,7 +548,12 @@
     "scripts/evolution/",
     "config/database-evolution.json",
     "docs/design/database-evolution.md",
-    "docs/evolution/"
+    "docs/evolution/",
+    "skills/design-workflow/",
+    "skills/character-art-direction/",
+    "scripts/design/",
+    "docs/design/design-workflows.md",
+    "tests/scripts/design-workflows.test.js"
   ],
   "bin": {
     "ecc": "scripts/ecc.js",

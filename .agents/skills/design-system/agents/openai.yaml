@@ -1,0 +1,4 @@
+interface:
+  display_name: "Design System"
+  short_description: "Extract visual tokens and audit design consistency"
+  default_prompt: "Use $design-system to capture or audit this project's visual system with inspectable examples."

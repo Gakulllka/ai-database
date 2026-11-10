@@ -789,6 +789,14 @@
       "modules": [
         "database-evolution"
       ]
+    },
+    {
+      "id": "capability:design-workflows",
+      "family": "capability",
+      "description": "Select art or functional UI workflows, design characters and reuse the shared tool/1C UX process.",
+      "modules": [
+        "design-workflows"
+      ]
     }
   ]
 }

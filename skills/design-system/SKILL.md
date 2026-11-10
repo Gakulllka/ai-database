@@ -7,6 +7,12 @@ metadata:
 
 # Design System — Generate & Audit Visual Systems
 
+The extraction and output mechanics below target web codebases. For native 1C
+or engine interfaces, use the platform's existing theme/control artifacts and
+validation; do not impose CSS, competitor-site research or an HTML preview.
+Shared semantic roles may be useful, but native implementation remains with
+the corresponding platform skill.
+
 ## When to Use
 
 - Starting a new project that needs a design system

@@ -203,7 +203,6 @@
         "skills/django-verification",
         "skills/dotnet-patterns",
         "skills/fastapi-patterns",
-        "skills/frontend-design-direction",
         "skills/frontend-patterns",
         "skills/i18n-sync",
         "skills/frontend-slides",
@@ -243,7 +242,6 @@
         "skills/vue-patterns",
         "skills/accessibility",
         "skills/bun-runtime",
-        "skills/design-system",
         "skills/django-celery",
         "skills/flutter-dart-code-review",
         "skills/frontend-a11y",
@@ -275,7 +273,8 @@
         "rules-core",
         "agents-core",
         "commands-core",
-        "platform-configs"
+        "platform-configs",
+        "design-workflows"
       ],
       "optionalDependencies": [
         "rules-core",
@@ -1522,7 +1521,8 @@
       "dependencies": [
         "rules-core",
         "agents-core",
-        "platform-configs"
+        "platform-configs",
+        "design-workflows"
       ],
       "optionalDependencies": [
         "rules-core",
@@ -1572,7 +1572,8 @@
       "dependencies": [
         "rules-core",
         "agents-core",
-        "platform-configs"
+        "platform-configs",
+        "design-workflows"
       ],
       "optionalDependencies": [
         "rules-core",
@@ -1641,6 +1642,40 @@
       ],
       "optionalDependencies": [
         "agents-core"
+      ],
+      "defaultInstall": false,
+      "cost": "light",
+      "stability": "beta"
+    },
+    {
+      "id": "design-workflows",
+      "kind": "skills",
+      "description": "Task-based design routing, character art direction and shared functional UX; existing platform skills own implementation.",
+      "paths": [
+        "skills/design-workflow",
+        "skills/character-art-direction",
+        "skills/frontend-design-direction",
+        "skills/design-system"
+      ],
+      "targets": [
+        "claude",
+        "claude-project",
+        "cursor",
+        "antigravity",
+        "codex",
+        "copilot",
+        "opencode",
+        "codebuddy",
+        "joycode",
+        "qwen",
+        "zed",
+        "hermes",
+        "openclaw",
+        "kimi",
+        "adal"
+      ],
+      "dependencies": [
+        "platform-configs"
       ],
       "defaultInstall": false,
       "cost": "light",

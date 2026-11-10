@@ -19,6 +19,16 @@ rejections, use the [runtime dependency procedure](../.codex-plugin/README.md#ru
 
 ## Skills Discovery
 
+### Design workflows
+
+For an ambiguous or mixed design request, read `design-workflow`. Use
+`character-art-direction` for character concepts and scoped art refinement;
+use the functional UX reference in `frontend-design-direction` for tools and
+1C forms, with the appropriate platform implementation skill. Game HUD/menu
+tasks need both functional interaction and the established art language.
+`design-system` and `ecosystem-design-consistency` retain visual-system ownership.
+See [the design workflow guide](../docs/design/design-workflows.md).
+
 ### Shared Database improvement
 
 Use `database-evolution` for the owner's scheduled local Codex maintenance task

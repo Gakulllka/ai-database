@@ -9,6 +9,9 @@ model:
   fallback:
     - claude-sonnet-4-6
 skills:
+  - design-workflow
+  - character-art-direction
+  - frontend-design-direction
   - database-evolution
   - ecosystem-design-consistency
   - local-first-sync

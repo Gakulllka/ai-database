@@ -110,7 +110,8 @@
         "1c-development",
         "godot-development",
         "delta-workflows",
-        "database-evolution"
+        "database-evolution",
+        "design-workflows"
       ]
     }
   }

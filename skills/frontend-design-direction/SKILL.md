@@ -1,6 +1,6 @@
 ---
 name: frontend-design-direction
-description: Set an ECC-specific frontend design direction for production UI work. Use when building or improving websites, dashboards, applications, components, landing pages, visual tools, or any web UI that needs stronger product-specific design judgment.
+description: "Set product-specific visual direction for web UI and functional UX for operational tools and 1C forms. Use for interface hierarchy, content, states and interaction design; native implementation stays with its platform skill."
 metadata:
   origin: community
 ---
@@ -28,6 +28,19 @@ of the useful local guidance from #1659.
   the audience.
 
 ## Design Direction
+
+For an operational tool, form, editor, dashboard or game UI, first read
+[functional-ux.md](references/functional-ux.md). It owns the shared task and
+interaction contract, including the native 1C branch. Use it directly with the
+platform skill for native UI; the web implementation rules and web JSON evidence
+checker below apply only to web surfaces. A targeted edit reuses established
+decisions rather than restarting design discovery.
+
+For character art, use [character-art-direction](../character-art-direction/SKILL.md).
+For an ambiguous or mixed design task, use [design-workflow](../design-workflow/SKILL.md).
+For web tokens and visual canon use [design-system](../design-system/SKILL.md).
+For native UI keep theme/control artifacts and validation with the platform
+owner; do not require CSS extraction, competitor sites or HTML previews.
 
 Before coding, choose a specific direction:
 

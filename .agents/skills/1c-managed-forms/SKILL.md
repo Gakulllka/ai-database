@@ -14,6 +14,11 @@ Inspect, construct and edit 1C managed forms and handlers. Use for form XML, bin
 ## Workflow
 
 1. Inspect the existing form, main attribute, element IDs, data paths, commands and module handlers before changing layout.
+   For creating or improving the user workflow/layout, read the shared
+   [functional UX process](../frontend-design-direction/references/functional-ux.md)
+   and its native 1C branch. Reuse an existing task contract. A handler-only fix
+   does not require a redesign; native runtime evidence cannot be replaced by
+   the web evidence checker or an HTML mockup.
 2. Read form-patterns only for the layout pattern being built. Preserve bindings, event names and IDs required by existing logic.
 3. Use a targeted edit for an existing form; compile/decompile is for a deliberately new or restructured form and may not preserve every feature.
 4. Check handler execution context and the cost of server calls with 1c-bsl-patterns. Form state and infobase objects are different representations.

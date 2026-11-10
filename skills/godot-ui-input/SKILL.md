@@ -14,6 +14,10 @@ Change a HUD, menu, in-world interface, rebinding, focus navigation or input rou
 ## Workflow
 
 1. Identify viewport/stretch/scaling, theme/font, supported languages, devices and authored layout. Preserve an existing illustrated UI or conventional control layout as chosen by the project.
+   For layout/interaction design, use the shared
+   [functional UX process](../frontend-design-direction/references/functional-ux.md).
+   Combine task readability and navigation with the game's existing art direction;
+   do not apply a marketing-page layout to a HUD or reopen design for an input-only fix.
 2. Use anchors/containers/minimum sizes according to ownership; do not fight a Container with permanent manual child positioning. Keep world, screen, canvas and local coordinates distinct.
 3. Route actions through the existing InputMap. Distinguish continuous state from events and Control GUI handling from unhandled gameplay input; prevent one event from activating both unintentionally.
 4. Handle focus, modal capture, gamepad navigation, touch targets and remapping. Do not assume mouse hover or one keyboard layout is sufficient.

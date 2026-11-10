@@ -1,16 +1,16 @@
 {
   "coverage": {
-    "skills": 314,
-    "withTriggers": 34
+    "skills": 352,
+    "withTriggers": 37
   },
-  "generatedAt": "2026-10-30T00:01:34.569Z",
+  "generatedAt": "2026-11-10T12:58:25.354Z",
   "id": "skill-triggers@1",
   "model": {
     "effort": null,
     "id": "hand-seeded",
     "source": "manual-curation-pending-regeneration"
   },
-  "registryDigest": "6f213dc845937b4093bc018d041b25b538d88d78451b9d799ad614989b360ee4",
+  "registryDigest": "0bd2c266bbf498e594d942eb47fab27219ef93633699e09590ea8395621d6e73",
   "schemaVersion": 1,
   "triggers": {
     "skill:agent-runtime-gateway-smoke-test": [
@@ -64,6 +64,13 @@
       "sse stream check",
       "after deploy verification"
     ],
+    "skill:character-art-direction": [
+      "character concept design",
+      "refine character appearance",
+      "character reference sheet",
+      "consistent character views",
+      "character silhouette and expression"
+    ],
     "skill:code-tour": [
       "onboarding walkthrough",
       "explain subsystem",
@@ -111,6 +118,12 @@
       "css custom properties",
       "ui audit",
       "design system bootstrap"
+    ],
+    "skill:design-workflow": [
+      "choose design workflow",
+      "design pipeline selection",
+      "art versus functional interface",
+      "mixed game art and ui design"
     ],
     "skill:django-patterns": [
       "django orm",
@@ -163,6 +176,13 @@
       "form labeling",
       "keyboard navigation react",
       "a11y lint errors"
+    ],
+    "skill:frontend-design-direction": [
+      "functional tool design",
+      "1c form usability",
+      "operational dashboard layout",
+      "interface states and hierarchy",
+      "web visual direction"
     ],
     "skill:git-workflow": [
       "merge vs rebase",
@@ -305,5 +325,5 @@
       "before creating a pr"
     ]
   },
-  "triggersDigest": "953728cb51ef7726f8a4969efecaec294d37772fcddf8544cd9ee45bff4945ee"
+  "triggersDigest": "164c4f3b3b0a1529539b7bbd1bb2e6b69105cc53e7034a8b543b6f0d164c14fa"
 }

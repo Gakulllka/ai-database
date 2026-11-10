@@ -1,6 +1,6 @@
 # ECC — Agent Instructions
 
-This is a **production-ready AI coding plugin** providing 76 specialized agents, 350 skills, 98 commands, and automated hook workflows for software development.
+This is a **production-ready AI coding plugin** providing 76 specialized agents, 352 skills, 98 commands, and automated hook workflows for software development.
 
 **Version:** 2.2.3
 
@@ -23,6 +23,11 @@ Personal skills and agents belong in the existing `skills/` and `agents/` direct
   additions and resolving conflicts before publishing to `origin`.
 - Check the current directories when selecting skills and agents so new personal
   additions remain discoverable.
+- For ambiguous or mixed visual work, read
+  [design-workflow](skills/design-workflow/SKILL.md) to select the pipeline.
+  Functional tools and 1C forms reuse `frontend-design-direction`'s functional UX
+  process; character art uses `character-art-direction`. Existing platform skills
+  own implementation, and `design-system` owns tokens and the visual canon.
 - The owner has authorized bounded automatic improvement and cross-PC learning
   through [database-evolution](skills/database-evolution/SKILL.md) and
   [its contract](docs/design/database-evolution.md). Use that workflow for scheduled
@@ -246,7 +251,7 @@ Troubleshoot failures: check test isolation → verify mocks → fix implementat
 
 ```
 agents/          — 76 specialized subagents
-skills/          — 350 workflow skills and domain knowledge
+skills/          — 352 workflow skills and domain knowledge
 commands/        — 98 slash commands
 hooks/           — Trigger-based automations
 rules/           — Always-follow guidelines (common + per-language)

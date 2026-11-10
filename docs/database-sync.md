@@ -101,6 +101,7 @@ git -C C:/AI/Database merge upstream/main
 node scripts/1c/sync-skills.js --write
 node scripts/godot/sync-skills.js --write
 node scripts/delta/sync-skills.js --write
+node scripts/design/sync-skills.js --write
 ```
 
 Выполняй только команды нужных наборов. Проверь соответствие проекций, метаданные,

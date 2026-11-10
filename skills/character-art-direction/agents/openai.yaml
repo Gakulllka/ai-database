@@ -1,0 +1,4 @@
+interface:
+  display_name: "Character Art Direction"
+  short_description: "Shape character appeal, identity and production briefs"
+  default_prompt: "Use $character-art-direction to design or refine this character for the intended audience and deliverable."

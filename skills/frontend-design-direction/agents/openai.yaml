@@ -1,0 +1,4 @@
+interface:
+  display_name: "Frontend Design Direction"
+  short_description: "Design purposeful web UI and functional tool workflows"
+  default_prompt: "Use $frontend-design-direction to design this interface around its user's task and verify the rendered result."

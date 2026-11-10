@@ -1,0 +1,4 @@
+interface:
+  display_name: "Design Workflow"
+  short_description: "Route art and functional UI to the right process"
+  default_prompt: "Use $design-workflow to choose the right design pipeline and acceptance criteria for this task."

@@ -96,6 +96,26 @@ crawling_exa(url: "<url>", tokensNum: 5000)
 
 Read 3-5 key sources in full for depth. Do not rely only on search snippets.
 
+Before synthesis, reconcile what was actually collected:
+
+- Keep a bounded source ledger: requested URL, returned/canonical URL when
+  available, retrieval time, outcome, and whether the relevant content was read.
+  Distinguish discovered links, snippets, fetched documents and analyzed sources.
+- For asynchronous crawls or batches, a job ID or accepted request is not a
+  result. Check the terminal status, page errors and pagination using the actual
+  configured tool's contract. A completed job or absent cursor alone does not
+  prove every document was retrieved: SDK limits or pagination errors can return
+  a partial list. Reconcile returned data with available counts and diagnostics;
+  if completeness cannot be established, label the collection partial or unknown.
+- Deduplicate repeated URLs and verified redirects before counting sources.
+  Syndicated copies of one underlying account are not independent corroboration.
+  Count distinct source documents separately from independent underlying accounts.
+  A fetched page counts as analyzed only after its relevant content is read.
+- Bound retries and polling by the research budget and allowed scope. Preserve
+  usable evidence, list blocked/failed/truncated sources and unanswered questions,
+  and qualify affected conclusions. An unavailable source is not evidence that
+  the claim is false or that no information exists. Do not bypass access controls.
+
 ### Step 5: Synthesize and Write Report
 
 Structure the report:
@@ -128,7 +148,9 @@ Structure the report:
 2. ...
 
 ## Methodology
-Searched [N] queries across web and news. Analyzed [M] sources.
+Searched [N] queries; discovered [D] unique links, fetched [F] documents,
+and analyzed [M] distinct source documents. Collection: [complete within stated scope / partial / unknown].
+Limits and failures: [blocked/failed sources, pagination or budget limits, unresolved questions].
 Sub-questions investigated: [list]
 ```
 

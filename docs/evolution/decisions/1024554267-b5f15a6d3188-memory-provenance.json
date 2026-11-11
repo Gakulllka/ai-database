@@ -1,0 +1,26 @@
+{
+  "schemaVersion": "database.evolution.decision.v1",
+  "source": {
+    "repoId": 1024554267,
+    "fullName": "NousResearch/hermes-agent",
+    "commit": "b5f15a6d3188e94f815d504d5ebbeb926e1bd08a"
+  },
+  "capability": "Runtime provenance and guarded autonomous mutation of learned memories and skills",
+  "decision": "defer",
+  "status": "defer",
+  "existingPaths": [
+    "skills/unified-memory/SKILL.md",
+    "skills/database-evolution/SKILL.md",
+    "skills/hermes-imports/SKILL.md",
+    "skills/continuous-learning-v2/SKILL.md",
+    "skills/skill-stocktake/SKILL.md"
+  ],
+  "evidence": [
+    "Source: https://github.com/NousResearch/hermes-agent/tree/b5f15a6d3188e94f815d504d5ebbeb926e1bd08a. Read README, MIT license, tools/memory_tool.py, tools/skill_manager_guards.py and tools/skill_provenance.py as untrusted text; verified Git blob hashes independently. No candidate code, installer, background observer or model API was run.",
+    "Source inspection found foreground/background provenance, read-before-patch checks, protected external/pinned skills and guarded unattended memory replacement/removal. These are runtime implementation choices, not evidence that ECC needs a second generic memory skill.",
+    "Independent read-only comparison searched canonical owners plus autonomous-loop and enterprise-agent guidance. Unified-memory already provides scoped untrusted recall, current-state verification and create-only unreviewed entries. Database-evolution independently reviews canonical promotion; hermes-imports sanitizes imports; continuous-learning-v2 owns project-scoped learning. Native projections were not counted as separate capabilities.",
+    "Mutable memory and automatic skill provenance mechanisms remain unverified for this Windows/current-Codex workflow: no runtime integration, guard-failure, concurrency or observer tests were performed. Team lesson search completed empty and vault doctor reported zero records without errors."
+  ],
+  "reason": "Basic memory hygiene and reviewed learning are covered. Defer runtime adoption until a concrete ECC integration need and relevant implementation evidence exist; do not weaken create-only/unreviewed vault semantics or import raw sessions to imitate another agent.",
+  "observedAt": "2026-11-11T18:07:56.000Z"
+}

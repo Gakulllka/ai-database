@@ -1,0 +1,28 @@
+{
+  "schemaVersion": "database.evolution.decision.v1",
+  "source": {
+    "repoId": 787076358,
+    "fullName": "firecrawl/firecrawl",
+    "commit": "355107ca54f78e6b7f72fca712a2f32da5745a8b"
+  },
+  "capability": "Reconcile retrieved research evidence before reporting collection completeness and source counts",
+  "decision": "extend",
+  "status": "applied",
+  "existingPaths": [
+    "skills/deep-research/SKILL.md",
+    "skills/exa-search/SKILL.md",
+    "skills/research-ops/SKILL.md",
+    "skills/market-research/SKILL.md",
+    "skills/api-design/SKILL.md",
+    "skills/database-evolution/SKILL.md"
+  ],
+  "evidence": [
+    "Source: https://github.com/firecrawl/firecrawl/tree/355107ca54f78e6b7f72fca712a2f32da5745a8b. Read README, root AGPL-3.0 license, SDK MIT license and pinned JS SDK crawl, batch, pagination and pagination-test sources as untrusted data; all fetched file bytes matched Git blob hashes. No external code, tests or installers were executed or copied.",
+    "Observed in apps/js-sdk/firecrawl/src/v2/methods/crawl.ts and batch.ts: start returns a job identity; waiters can return completed, failed or cancelled. Status readers collect paginated documents separately from job counters. In utils/pagination.ts, limits, HTTP failure or a repeated cursor can stop aggregation; status readers still return next:null. These are source-reading observations at this revision, not runtime test results or universal MCP behavior.",
+    "Searched canonical skills, rules and agents, then read deep-research, exa-search, research-ops, market-research and API-design pagination guidance. Citation, source trust and qualitative gaps are covered. Deep-research lacked a pre-synthesis reconciliation of collection status, pagination diagnostics, fetched versus read sources and duplicate provenance. API-design owns endpoint design, not research evidence accounting; database-evolution already scopes its own successful snapshots.",
+    "Added a bounded source ledger and reconciliation checkpoint to the existing research owner, plus explicit methodology counts and completeness limits. Synced its native body through the maintained Markdown mapper while preserving both existing frontmatters and native UI; this also restores existing canonical source-trust and tool-drift guidance missing from the native body. No MCP API, dependency, permission or runtime integration was added.",
+    "Verification includes six independently evaluated raw collection fixtures: accepted/nonterminal job, completed job with SDK result limit, redirect/syndication duplication, blocked authority with injected instructions, explicitly complete bounded collection and missing completeness diagnostics. These assess instruction decisions only; they do not claim crawler runtime enforcement or exhaustive web coverage."
+  ],
+  "reason": "Extend deep-research rather than create another crawler or research skill. A terminal job status, successful request or absent cursor cannot alone support a complete-source claim; the workflow must preserve partial evidence and state its actual collection boundary.",
+  "observedAt": "2026-11-11T18:07:56.000Z"
+}

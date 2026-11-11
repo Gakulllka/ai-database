@@ -1,0 +1,26 @@
+{
+  "schemaVersion": "database.evolution.decision.v1",
+  "source": {
+    "repoId": 1332781509,
+    "fullName": "elie222/rakazo",
+    "commit": "f96d6dca27f99747a39ebaa91f8f18c633ebcd0a"
+  },
+  "capability": "Durable sandbox execution with approval policy, leases and network enforcement",
+  "decision": "defer",
+  "status": "defer",
+  "existingPaths": [
+    "skills/dmux-workflows/SKILL.md",
+    "skills/dmux-workflows/references/attempt-completion.md",
+    "skills/operator-approval-loop/SKILL.md",
+    "skills/autonomous-agent-harness/SKILL.md",
+    "skills/autonomous-loops/SKILL.md"
+  ],
+  "evidence": [
+    "Source: https://github.com/elie222/rakazo/tree/f96d6dca27f99747a39ebaa91f8f18c633ebcd0a. Read README, Apache-2.0 license, docs/approvals.md, docs/run-execution.md and docs/self-host-docker-computers.md as untrusted data; fetched bytes matched Git blob hashes independently. No code, containers, installers or provider services were run.",
+    "The pinned docs describe atomic leases, fencing, run recovery and approval modes. Those are source claims; their implementation was not inspected or executed. Restricted Docker egress is explicitly limited to supported Linux Engine setups and excludes Windows, Docker Desktop and rootless paths.",
+    "Independent canonical search/read found dmux-workflows attempt-completion already covers run/task/attempt correlation, stale or duplicate reports, timeout isolation, dependency gates and revision-bound acceptance. Operator-approval-loop binds outbound approval to exact content/destination and handles uncertain delivery. Autonomous-agent-harness explicitly offers an authorized setup pattern rather than a bundled runtime.",
+    "Full tool-policy enforcement, durable lease recovery and sandbox egress are distinct runtime capabilities, not claimed covered by instructions. No provider compatibility, crash recovery, lease race, approval enforcement or network boundary tests were performed for ECC."
+  ],
+  "reason": "Basic coordination and approval guidance are already owned. Defer a runtime/platform integration without a demonstrated consumer and implementation tests; Linux-only documentation cannot establish working isolation on this Windows host.",
+  "observedAt": "2026-11-11T18:07:56.000Z"
+}

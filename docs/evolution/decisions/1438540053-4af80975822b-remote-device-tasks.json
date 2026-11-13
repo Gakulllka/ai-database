@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "database.evolution.decision.v1",
+  "source": {
+    "repoId": 1438540053,
+    "fullName": "wangzan101/Mika",
+    "commit": "4af80975822bb0fe71e58d490ad7354202030094"
+  },
+  "capability": "Remote on-device task lifecycle, steering receipts and uncertain-delivery handling",
+  "decision": "defer",
+  "status": "defer",
+  "existingPaths": [
+    "skills/dmux-workflows/SKILL.md",
+    "skills/dmux-workflows/references/attempt-completion.md",
+    "skills/e2e-testing/SKILL.md",
+    "skills/operator-approval-loop/SKILL.md",
+    "skills/mcp-server-patterns/SKILL.md",
+    "skills/agent-security-hardening/SKILL.md"
+  ],
+  "evidence": [
+    "Source: https://github.com/wangzan101/Mika/tree/4af80975822bb0fe71e58d490ad7354202030094. Read README, Apache-2.0 license, docs/mcp.en.md, docs/dev/remote-mcp.md, docs/modes.en.md and pinned McpTaskTools.kt/RemoteTasks.kt. File bytes matched Git blob hashes; no APK, relay, setup command or foreign test was run.",
+    "Observed in task tool definitions and state mapping: start returns a task identity; wait/status distinguish queued, paused, user-only waiting and terminal states. Steering acceptance is not execution. Documentation distinguishes delivery_unknown/outcome_unknown from a safe retry and states that cancellation cannot undo an executed action. Request-id persistence, gateway controls and phone-only confirmations are documented contracts, not verified end-to-end behavior in this run.",
+    "Existing dmux attempt-completion already binds task/attempt results and treats timeout as uncertain; E2E retry guidance reconciles durable state before replay; operator-approval-loop separates authorization, delivery claims and unknown outcomes. MCP/server and security skills own protocol and access boundaries. These transferable foundations do not justify another orchestration skill.",
+    "The Android background-device/relay adapter and remote credential/confirmation policies need a concrete authorized integration, compatible device and live permission/reconnect/cancellation tests. Mika local Ask/Autonomous defaults are product policy and are not adopted as owner authorization."
+  ],
+  "reason": "Basic lifecycle and replay-safety lessons are already covered. Defer the specialized remote Android runtime: source reading does not establish compatibility, enforcement or a current Database integration need.",
+  "observedAt": "2026-11-13T06:27:54.482Z"
+}

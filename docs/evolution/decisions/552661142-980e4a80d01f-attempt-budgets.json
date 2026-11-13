@@ -1,0 +1,28 @@
+{
+  "schemaVersion": "database.evolution.decision.v1",
+  "source": {
+    "repoId": 552661142,
+    "fullName": "langchain-ai/langchain",
+    "commit": "980e4a80d01f699ba359db139cd7c8bfc348c110"
+  },
+  "capability": "Per-attempt budget admission and reconciliation in the general LLM pipeline workflow",
+  "decision": "extend",
+  "status": "applied",
+  "existingPaths": [
+    "skills/cost-aware-llm-pipeline/SKILL.md",
+    "skills/cost-tracking/SKILL.md",
+    "skills/enterprise-agent-ops/SKILL.md",
+    "skills/ecc-tools-cost-audit/SKILL.md",
+    "skills/agent-payment-x402/SKILL.md",
+    "skills/dmux-workflows/references/attempt-completion.md"
+  ],
+  "evidence": [
+    "Source: https://github.com/langchain-ai/langchain/tree/980e4a80d01f699ba359db139cd7c8bfc348c110. Read README, MIT license, and pinned model_call_limit.py, tool_call_limit.py and model_retry.py under libs/langchain_v1/langchain/agents/middleware. All fetched bytes matched Git blob hashes; no external code, tests or installers were executed or copied.",
+    "Observed statically: ModelCallLimitMiddleware checks run/thread counters in before_model and increments in after_model; the run field uses UntrackedValue. ModelRetryMiddleware separately calls its handler up to max_retries+1 times. Tool limits distinguish per-tool/global counts and blocked calls. These files alone do not prove middleware ordering, dispatcher persistence, a provider-attempt cap, or a shared monetary ceiling.",
+    "Searched canonical skills, rules and agents for budget, reservation, admission, retry, shared and in-flight controls. Read the general cost-aware owner plus cost-tracking, enterprise-agent-ops, autonomous-loops and the paths listed here. ECC-Tools audit already identifies pre-enqueue quota races; agent-payment-x402 already reserves worst-case payment exposure before await and retains it after uncertain dispatch. The gap is in the general cost-aware composition, not an absence of reservation patterns throughout ECC.",
+    "The previous composition checked only recorded spend before the whole retry wrapper and added only its final successful response. Replaced that example with per-attempt integration requirements: scoped units, conservative bounds, shared atomic admission, once-only settlement before parsing, retained uncertain exposure, and retry/fallback re-admission. These are portable design inferences informed by source inspection and existing local patterns, not claims that LangChain or the sample tracker enforces them.",
+    "Seven independently evaluated raw synthetic cases matched held-out decisions: exact budget boundary, parallel workers, unknown timeout, persistent cap with fallback/auth failure, duplicate settlement with parse failure and uncertain form replay, unavailable hard bound, and hidden SDK retries. Evidence concerns instruction decisions only; no provider billing, concurrency service or side-effecting runtime was tested. Generated the missing native projection and simple matching UI with maintained helpers; existing canonical package/install registration remains unchanged."
+  ],
+  "reason": "Extend the existing owner rather than add a duplicate budget skill. Past-spend tracking and logical-call counts cannot establish a hard per-attempt/shared ceiling; the workflow must make admission, uncertain charges and actual adapter verification explicit.",
+  "observedAt": "2026-11-13T06:27:54.482Z"
+}

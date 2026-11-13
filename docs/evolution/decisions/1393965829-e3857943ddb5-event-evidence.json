@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "database.evolution.decision.v1",
+  "source": {
+    "repoId": 1393965829,
+    "fullName": "KKKKhazix/AIHOT",
+    "commit": "e3857943ddb53b1d2ea13d346be2e06709b2be19"
+  },
+  "capability": "Recurring event digests with independent-participant evidence and calibrated grouping",
+  "decision": "defer",
+  "status": "defer",
+  "existingPaths": [
+    "skills/deep-research/SKILL.md",
+    "skills/research-ops/SKILL.md",
+    "skills/database-evolution/SKILL.md",
+    "skills/eval-harness/SKILL.md",
+    "skills/mle-workflow/SKILL.md",
+    "skills/benchmark-methodology/SKILL.md"
+  ],
+  "evidence": [
+    "Source: https://github.com/KKKKhazix/AIHOT/tree/e3857943ddb53b1d2ea13d346be2e06709b2be19. Read README, MIT license, docs/grouping.md, docs/selection.md and packages/backend/src/events/hot.ts and relate.ts as untrusted data; fetched bytes matched Git blob hashes. No source code, model call, site, database or installer was executed or copied; branding and operational data are excluded.",
+    "Observed statically: hot.ts aggregates by participant_key, excludes withdrawn/isolated evidence, and distinguishes incomplete or newly added source coverage when comparing time windows. relate.ts distinguishes same occurrence, later development, unrelated and roundup. Docs specify labeled relation samples, holdout selection and coverage/error accounting. Ranking quality and runtime correctness were not tested here.",
+    "Deep-research already reconciles fetched/analyzed documents and independent underlying accounts, flags source failures and preserves partial evidence. Research-ops separates sourced facts and inference. Database-evolution already compares stable dated observations and treats first measurements as baseline. MLE/eval skills own error-cost metrics, baseline comparisons and system failures; generic scoring or a second model is not a new capability.",
+    "An automatic event graph, participant ownership model, editorial thresholds and time-decay ranking require a specific product/data contract and labeled regression evidence. The source choices and constants are product settings, not universal defaults. No new runtime or duplicated research checkpoint is proposed."
+  ],
+  "reason": "Existing evidence and evaluation workflows cover the reusable research foundations. Defer the specialized event/heat engine until a concrete use case and representative held-out data demonstrate a gap and improvement.",
+  "observedAt": "2026-11-13T06:27:54.482Z"
+}

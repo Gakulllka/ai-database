@@ -77,6 +77,10 @@ class CostTracker:
         return self.total_cost > self.budget_limit
 ```
 
+This tracker reports recorded spend; it is not admission control. A call can
+exceed the remaining budget even when `over_budget` is false, and independent
+immutable copies do not coordinate concurrent workers.
+
 ### 3. Narrow Retry Logic
 
 Retry only on transient errors. Fail fast on authentication or bad request errors.
@@ -128,31 +132,46 @@ messages = [
 
 ## Composition
 
-Combine all four techniques in a single pipeline function:
+Place budget admission and accounting around **each provider attempt**, inside
+the retry callback. Checking once before `call_with_retry` and recording only
+its final response misses intermediate attempts and their possible charges.
 
-```python
-def process(text: str, config: Config, tracker: CostTracker) -> tuple[Result, CostTracker]:
-    # 1. Route model
-    model = select_model(len(text), estimated_items, config.force_model)
+For pipelines that require a hard ceiling:
 
-    # 2. Check budget
-    if tracker.over_budget:
-        raise BudgetExceededError(tracker.total_cost, tracker.budget_limit)
+1. Define the unit and scope of each limit: logical model turns, provider
+   attempts, tool executions, tokens or money; per invocation, persistent thread
+   or shared account. Restarting a run must not reset a persistent allowance.
+   A logical-call counter may wrap several retries; verify middleware ordering
+   and SDK-internal retries before claiming an attempt limit is enforced.
+2. Route the model, then obtain a conservative bound for the next attempt from
+   current pricing and enforced input/output limits, including supported reasoning,
+   cache and tool charges. An average estimate is not a hard upper bound. If a
+   bound is unavailable, stop before dispatch when a hard ceiling is required;
+   continue with a clearly labeled soft budget only if that tradeoff is authorized.
+3. Before dispatch, atomically admit the attempt only when recorded spend plus
+   outstanding reservations plus its bound fits every applicable allowance.
+   Use a shared admission authority for concurrent workers; do not let each copy
+   of `CostTracker` independently spend the same remaining balance.
+4. Settle each admitted attempt once using its identity and authoritative usage,
+   including a billable failure. Retain a conservative pending reservation when
+   delivery or usage is unknown; a timeout or cancellation does not prove zero
+   charge. Release unused capacity only after reconciliation. Record usage before
+   parsing the application result so a parse failure cannot erase incurred cost.
+5. Recheck admission for every retry or model fallback. Preserve transient-only
+   retry rules; budget denial and permanent authentication/validation failures
+   are terminal. Do not retry a side-effecting tool merely because budget remains:
+   reconcile its outcome or use a verified idempotency contract first.
 
-    # 3. Call with retry + caching
-    response = call_with_retry(lambda: client.messages.create(
-        model=model,
-        messages=build_cached_messages(system_prompt, text),
-    ))
-
-    # 4. Track cost (immutable)
-    record = CostRecord(model=model, input_tokens=..., output_tokens=..., cost_usd=...)
-    tracker = tracker.add(record)
-
-    return parse_result(response), tracker
-```
+When a limit stops execution, preserve verified partial results and identify
+what was blocked, completed or still uncertain. This workflow describes required
+integration behavior; the snippets above do not implement a shared budget service.
+Verify the actual adapter with exact-boundary, retry/fallback, concurrent admission,
+unknown-usage and duplicate-settlement cases before claiming a hard ceiling.
 
 ## Pricing Reference (2026)
+
+Treat this table as illustrative; verify current provider pricing before using
+prices for admission or billing reconciliation.
 
 | Model | Input ($/1M tokens) | Output ($/1M tokens) | Relative Cost |
 |-------|---------------------|----------------------|---------------|

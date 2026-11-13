@@ -1,0 +1,26 @@
+{
+  "schemaVersion": "database.evolution.decision.v1",
+  "source": {
+    "repoId": 1382503730,
+    "fullName": "Parcha-ai/agentrun",
+    "commit": "51c4e27a4f6de54fd8eaaa55b4f160f56e57c3e4"
+  },
+  "capability": "Durable learned agent workflows and evidence of quality/cost improvement",
+  "decision": "defer",
+  "status": "defer",
+  "existingPaths": [
+    "skills/dmux-workflows/SKILL.md",
+    "skills/dmux-workflows/references/attempt-completion.md",
+    "skills/team-agent-orchestration/SKILL.md",
+    "skills/agent-eval/SKILL.md",
+    "skills/mle-workflow/SKILL.md",
+    "skills/cost-aware-llm-pipeline/SKILL.md"
+  ],
+  "evidence": [
+    "Pinned source: https://github.com/Parcha-ai/agentrun/tree/51c4e27a4f6de54fd8eaaa55b4f160f56e57c3e4. Read README, Apache-2.0 license, packages/dsl/README.md, learn-then-hand-off tutorial and recovery transport-facts.ts/call-key.ts. Six source blobs matched Git hashes. Third-party packages retain their own conditions. Nothing was installed, executed or copied.",
+    "Observed statically: recovery classifies transient failures from typed fields, not message strings; provider call keys have deterministic bounded storage keys. The tutorial distinguishes invented dashboard data from sealed held-out evaluation; synthetic dry-run mechanics do not establish judgment quality. These files do not prove complete durable execution or exactly-once external effects.",
+    "Canonical skills/rules/agents searched for durable, checkpoint, replay, retry, evaluation and learning. Existing dmux attempt completion separates logical work and attempts, fences late results and reconciles uncertain effects. Agent-eval supplies pinned reproducible comparisons; MLE supplies held-out splits/leakage checks. Cost-aware guidance was already improved earlier today. A persistent recovery interpreter and learned DSL are richer runtime capabilities, not fully supplied by these instructions."
+  ],
+  "reason": "General attempt/evaluation lessons are already covered. Defer the specialized durable interpreter and automatic workflow-learning runtime until a concrete integration need, state/side-effect adapter contract and live recovery/held-out tests exist. Do not generalize illustrative cost reductions.",
+  "observedAt": "2026-11-13T18:11:18.424Z"
+}

@@ -1,247 +1,253 @@
 {
   "schemaVersion": "database.evolution.radar.snapshot.v1",
   "complete": true,
-  "generatedAt": "2026-11-13T06:19:36.724Z",
+  "generatedAt": "2026-11-13T18:03:27.940Z",
   "untrusted": true,
   "candidates": [
     {
       "repoId": 552661142,
       "fullName": "langchain-ai/langchain",
-      "stars": 149429,
-      "observedAt": "2026-11-13T06:19:36.724Z"
+      "stars": 149456,
+      "observedAt": "2026-11-13T18:03:27.940Z"
     },
     {
       "repoId": 787076358,
       "fullName": "firecrawl/firecrawl",
-      "stars": 201344,
-      "observedAt": "2026-11-13T06:19:36.724Z"
+      "stars": 201502,
+      "observedAt": "2026-11-13T18:03:27.940Z"
     },
     {
       "repoId": 881458615,
       "fullName": "browser-use/browser-use",
-      "stars": 120873,
-      "observedAt": "2026-11-13T06:19:36.724Z"
+      "stars": 120934,
+      "observedAt": "2026-11-13T18:03:27.940Z"
     },
     {
       "repoId": 1024554267,
       "fullName": "NousResearch/hermes-agent",
-      "stars": 263032,
-      "observedAt": "2026-11-13T06:19:36.724Z"
+      "stars": 263172,
+      "observedAt": "2026-11-13T18:03:27.940Z"
     },
     {
       "repoId": 1048065319,
       "fullName": "thedotmack/claude-mem",
-      "stars": 116636,
-      "observedAt": "2026-11-13T06:19:36.724Z"
+      "stars": 116781,
+      "observedAt": "2026-11-13T18:03:27.940Z"
     },
     {
       "repoId": 1136590548,
       "fullName": "affaan-m/ECC",
-      "stars": 302113,
-      "observedAt": "2026-11-13T06:19:36.724Z"
+      "stars": 302352,
+      "observedAt": "2026-11-13T18:03:27.940Z"
     },
     {
       "repoId": 1183888342,
       "fullName": "stablyai/orca",
-      "stars": 123721,
-      "observedAt": "2026-11-13T06:19:36.724Z"
+      "stars": 124241,
+      "observedAt": "2026-11-13T18:03:27.940Z"
     },
     {
       "repoId": 1200597263,
       "fullName": "Graphify-Labs/graphify",
-      "stars": 146858,
-      "observedAt": "2026-11-13T06:19:36.724Z"
+      "stars": 147158,
+      "observedAt": "2026-11-13T18:03:27.940Z"
     },
     {
       "repoId": 1266797999,
       "fullName": "DietrichGebert/ponytail",
-      "stars": 189901,
-      "observedAt": "2026-11-13T06:19:36.724Z"
+      "stars": 190234,
+      "observedAt": "2026-11-13T18:03:27.940Z"
     },
     {
       "repoId": 1333065091,
       "fullName": "deepseek-ai/deepseek-harness",
-      "stars": 280009,
-      "observedAt": "2026-11-13T06:19:36.724Z"
+      "stars": 280405,
+      "observedAt": "2026-11-13T18:03:27.940Z"
     },
     {
       "repoId": 1341206732,
       "fullName": "context-labs/whip",
       "stars": 958,
-      "observedAt": "2026-11-13T06:19:36.724Z"
+      "observedAt": "2026-11-13T18:03:27.940Z"
     },
     {
       "repoId": 1342886503,
       "fullName": "duty1g/x64dbg-mcp-server",
       "stars": 2824,
-      "observedAt": "2026-11-13T06:19:36.724Z"
+      "observedAt": "2026-11-13T18:03:27.940Z"
     },
     {
       "repoId": 1342935078,
       "fullName": "bojieli/ai-infra-book",
-      "stars": 7523,
-      "observedAt": "2026-11-13T06:19:36.724Z"
+      "stars": 7542,
+      "observedAt": "2026-11-13T18:03:27.940Z"
     },
     {
       "repoId": 1350978527,
       "fullName": "Ryze-AI-Adgent/open-seo-mcp-skills",
-      "stars": 9434,
-      "observedAt": "2026-11-13T06:19:36.724Z"
+      "stars": 9482,
+      "observedAt": "2026-11-13T18:03:27.940Z"
     },
     {
       "repoId": 1351879111,
       "fullName": "Human-Agent-Society/reef",
-      "stars": 7810,
-      "observedAt": "2026-11-13T06:19:36.724Z"
+      "stars": 7816,
+      "observedAt": "2026-11-13T18:03:27.940Z"
     },
     {
       "repoId": 1354887280,
       "fullName": "NVlabs/SoL-Pi",
-      "stars": 3669,
-      "observedAt": "2026-11-13T06:19:36.724Z"
+      "stars": 3672,
+      "observedAt": "2026-11-13T18:03:27.940Z"
     },
     {
       "repoId": 1356077516,
       "fullName": "kajisho5/ffmpeg-skill",
-      "stars": 5330,
-      "observedAt": "2026-11-13T06:19:36.724Z"
+      "stars": 5412,
+      "observedAt": "2026-11-13T18:03:27.940Z"
     },
     {
       "repoId": 1365776373,
       "fullName": "qiz029/dscode",
-      "stars": 999,
-      "observedAt": "2026-11-13T06:19:36.724Z"
+      "stars": 1000,
+      "observedAt": "2026-11-13T18:03:27.940Z"
     },
     {
       "repoId": 1368596582,
       "fullName": "google/elephant-goldfish-model",
-      "stars": 18280,
-      "observedAt": "2026-11-13T06:19:36.724Z"
+      "stars": 18501,
+      "observedAt": "2026-11-13T18:03:27.940Z"
     },
     {
       "repoId": 1370839144,
       "fullName": "agentvivekkumar/dontbemichael",
       "stars": 591,
-      "observedAt": "2026-11-13T06:19:36.724Z"
+      "observedAt": "2026-11-13T18:03:27.940Z"
     },
     {
       "repoId": 1378288598,
       "fullName": "zai-org/ZCode",
-      "stars": 8650,
-      "observedAt": "2026-11-13T06:19:36.724Z"
+      "stars": 8666,
+      "observedAt": "2026-11-13T18:03:27.940Z"
     },
     {
       "repoId": 1379574728,
       "fullName": "jev-chat/jev-chat-jarvis",
-      "stars": 8360,
-      "observedAt": "2026-11-13T06:19:36.724Z"
+      "stars": 8368,
+      "observedAt": "2026-11-13T18:03:27.940Z"
     },
     {
       "repoId": 1380635125,
       "fullName": "unreallabsai/unreal-agent",
       "stars": 2229,
-      "observedAt": "2026-11-13T06:19:36.724Z"
+      "observedAt": "2026-11-13T18:03:27.940Z"
     },
     {
       "repoId": 1382019778,
       "fullName": "AgnesAI-Labs/agnes-harness",
-      "stars": 2079,
-      "observedAt": "2026-11-13T06:19:36.724Z"
+      "stars": 2080,
+      "observedAt": "2026-11-13T18:03:27.940Z"
     },
     {
       "repoId": 1382460607,
       "fullName": "nealbridges/VulnHunter",
-      "stars": 810,
-      "observedAt": "2026-11-13T06:19:36.724Z"
+      "stars": 811,
+      "observedAt": "2026-11-13T18:03:27.940Z"
     },
     {
       "repoId": 1382503730,
       "fullName": "Parcha-ai/agentrun",
-      "stars": 671,
-      "observedAt": "2026-11-13T06:19:36.724Z"
+      "stars": 816,
+      "observedAt": "2026-11-13T18:03:27.940Z"
     },
     {
       "repoId": 1383809012,
       "fullName": "yetone/magpie",
-      "stars": 35640,
-      "observedAt": "2026-11-13T06:19:36.724Z"
-    },
-    {
-      "repoId": 1384260430,
-      "fullName": "ollaya-dev/ollaya",
-      "stars": 1462,
-      "observedAt": "2026-11-13T06:19:36.724Z"
+      "stars": 36054,
+      "observedAt": "2026-11-13T18:03:27.940Z"
     },
     {
       "repoId": 1385896447,
       "fullName": "Ebony-Vinyl/dsh-our-free-model",
-      "stars": 71708,
-      "observedAt": "2026-11-13T06:19:36.724Z"
+      "stars": 72658,
+      "observedAt": "2026-11-13T18:03:27.940Z"
     },
     {
       "repoId": 1393965829,
       "fullName": "KKKKhazix/AIHOT",
-      "stars": 10552,
-      "observedAt": "2026-11-13T06:19:36.724Z"
+      "stars": 10619,
+      "observedAt": "2026-11-13T18:03:27.940Z"
     },
     {
       "repoId": 1399841077,
       "fullName": "wuyoscar/AISafetyHot",
       "stars": 2124,
-      "observedAt": "2026-11-13T06:19:36.724Z"
+      "observedAt": "2026-11-13T18:03:27.940Z"
     },
     {
       "repoId": 1401476500,
       "fullName": "QingYunA/answer-me-with-html",
-      "stars": 6289,
-      "observedAt": "2026-11-13T06:19:36.724Z"
+      "stars": 6304,
+      "observedAt": "2026-11-13T18:03:27.940Z"
     },
     {
       "repoId": 1412573009,
       "fullName": "shaongitbd/doory",
-      "stars": 2712,
-      "observedAt": "2026-11-13T06:19:36.724Z"
+      "stars": 2718,
+      "observedAt": "2026-11-13T18:03:27.940Z"
     },
     {
       "repoId": 1413187188,
       "fullName": "marclou/mailcheap",
-      "stars": 1683,
-      "observedAt": "2026-11-13T06:19:36.724Z"
+      "stars": 1686,
+      "observedAt": "2026-11-13T18:03:27.940Z"
     },
     {
       "repoId": 1415214046,
       "fullName": "zhuyansen/new-term-radar",
-      "stars": 2168,
-      "observedAt": "2026-11-13T06:19:36.724Z"
+      "stars": 2169,
+      "observedAt": "2026-11-13T18:03:27.940Z"
     },
     {
       "repoId": 1422344223,
       "fullName": "reason-machines/reason-network",
       "stars": 1738,
-      "observedAt": "2026-11-13T06:19:36.724Z"
+      "observedAt": "2026-11-13T18:03:27.940Z"
     },
     {
       "repoId": 1422597771,
       "fullName": "amosblomqvist/learnharness",
-      "stars": 9085,
-      "observedAt": "2026-11-13T06:19:36.724Z"
+      "stars": 9216,
+      "observedAt": "2026-11-13T18:03:27.940Z"
     },
     {
       "repoId": 1432859403,
       "fullName": "qybaihe/bla",
-      "stars": 5483,
-      "observedAt": "2026-11-13T06:19:36.724Z"
+      "stars": 5541,
+      "observedAt": "2026-11-13T18:03:27.940Z"
     },
     {
       "repoId": 1432967563,
       "fullName": "ccch1mneyyy/dsh-Go",
-      "stars": 21090,
-      "observedAt": "2026-11-13T06:19:36.724Z"
+      "stars": 21723,
+      "observedAt": "2026-11-13T18:03:27.940Z"
     },
     {
       "repoId": 1438540053,
       "fullName": "wangzan101/Mika",
-      "stars": 8439,
+      "stars": 8510,
+      "observedAt": "2026-11-13T18:03:27.940Z"
+    },
+    {
+      "repoId": 1448515937,
+      "fullName": "DIYgod/pinky",
+      "stars": 2075,
+      "observedAt": "2026-11-13T18:03:27.940Z"
+    },
+    {
+      "repoId": 1384260430,
+      "fullName": "ollaya-dev/ollaya",
+      "stars": 1462,
       "observedAt": "2026-11-13T06:19:36.724Z"
     },
     {

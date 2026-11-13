@@ -89,6 +89,51 @@ Use this skill when:
 4. map one primary keyword/theme to one URL
 5. detect and avoid cannibalization
 
+### Measure search outcomes when data is available
+
+Use authorized Search Console (GSC), Analytics (GA4), ads exports or existing
+connections for an audit that includes traffic or ranking claims. Confirm the
+property/account and available tools; a connector's marketing page is not its
+live schema. If data or access is missing, complete the technical audit and name
+the unmeasured questions without inventing results or adding a service.
+
+1. Record source, retrieval time, date windows, timezone, data freshness,
+   dimensions, filters and aggregation. Compare equal, complete periods with
+   matching search type, country/device and brand segmentation where relevant;
+   explain seasonality or tracking changes before attributing an algorithm effect.
+2. Match rows at the same grain. Query-only and page-only totals do not establish
+   a query-to-page relationship; request that joint breakdown when needed. Retain
+   source URLs and reconcile canonical/landing-page differences before joining.
+   Keep GSC clicks, GA4 sessions and ad conversions distinct. Compute aggregate
+   CTR from total clicks / total impressions, not an average of row percentages.
+3. Inspect pagination, row caps, omitted/anonymized queries, partial dates and
+   analytics quality diagnostics. GSC can return only top rows even after paging.
+   A missing row means unobserved in this export, not proven zero, deindexed or
+   newly ranked. Label new/lost rows relative to the observed sample and verify
+   important page/indexing claims separately. Report the collection limits.
+4. Interpret GSC average position as an aggregate of topmost appearances for the
+   selected scope, not a fixed rank for every user. Prioritize material changes
+   using clicks, impressions, conversions and actual page inspection; position
+   movement or a low-volume CTR change alone does not establish a cause.
+5. Label GA4 AI-source visits as attributed traffic. Referrers/UTMs can be absent
+   or misclassified; landing-page sessions establish neither a citation in an AI
+   answer nor total AI visibility. For citation claims, inspect answer evidence
+   with its source, prompt/context and observation time. Zero referrals do not
+   prove zero mentions. Treat a pattern on high-traffic pages as a hypothesis to
+   test, not a proven citation recipe.
+6. Paid/organic query overlap identifies an investigation candidate. Organic
+   position plus ad spend does not establish wasted spend or recoverable savings.
+   Assess conversion value and a suitable incremental/holdout experiment before
+   recommending a budget cut; label assumptions and uncertainty. A reporting
+   request alone does not authorize changing ads, negatives or site content.
+
+Return page/query-specific findings with before/after values, denominator,
+coverage limits, proposed action and verification measure. Separate observed
+facts from hypotheses and unmeasured outcomes. Recheck provider semantics when
+implementing an integration: [GSC query limits](https://developers.google.com/webmaster-tools/v1/searchanalytics/query),
+[GSC metric definitions](https://support.google.com/webmasters/answer/7042828?hl=en)
+and [GA4 missing attribution](https://support.google.com/analytics/answer/15258820?hl=en).
+
 ### Internal linking
 
 - link from strong pages to pages you want to rank

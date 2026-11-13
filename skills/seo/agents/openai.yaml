@@ -1,0 +1,4 @@
+interface:
+  display_name: "SEO"
+  short_description: "Audit technical SEO and measured search outcomes"
+  default_prompt: "Use $seo to audit the site and assess available search data with clear evidence and limitations."

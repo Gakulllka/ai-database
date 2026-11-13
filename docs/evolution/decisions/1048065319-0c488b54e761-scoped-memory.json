@@ -1,0 +1,24 @@
+{
+  "schemaVersion": "database.evolution.decision.v1",
+  "source": {
+    "repoId": 1048065319,
+    "fullName": "thedotmack/claude-mem",
+    "commit": "0c488b54e761d7f6f4091b3a6e1958712f13b19d"
+  },
+  "capability": "Compact scoped cross-session memory retrieval and automatic observation",
+  "decision": "defer",
+  "status": "defer",
+  "existingPaths": [
+    "skills/unified-memory/SKILL.md",
+    "skills/iterative-retrieval/SKILL.md",
+    "skills/continuous-learning-v2/SKILL.md",
+    "skills/database-evolution/SKILL.md"
+  ],
+  "evidence": [
+    "Pinned source: https://github.com/thedotmack/claude-mem/tree/0c488b54e761d7f6f4091b3a6e1958712f13b19d. Read README, LICENSE, docs/license.md, docs/ip-boundary.md, mem-search skill and search scope-row-ids.ts/project-where-filter.ts. Seven source blobs matched Git hashes. At this revision the public core/docs are Apache-2.0; reserved private areas are excluded. Do not infer licensing from older revisions. No source, installer or observer was run or copied.",
+    "Observed statically: mem-search selects index rows, nearby timeline and only relevant details, with source/project parameters. Helper code caches scope row IDs and constructs project-key filters including merged project keys. README qualifies token-size ratios as not measured end-to-end recall/savings. This inspection does not establish authorization, raw-capture privacy, installed Codex hooks or search quality.",
+    "Revisited the older README-only defer card because the pinned revision adds inspectable retrieval/scope and license evidence. Searched canonical skills/rules/agents for memory, progressive/index/detail retrieval, scope and learning. Read unified-memory and iterative-retrieval, with continuous-learning-v2 as the optional observer owner. Existing scoped untrusted recall/current-state validation and iterative context refinement cover general guidance; they do not implement Claude-Mem index/timeline or automatic observation."
+  ],
+  "reason": "Defer a second memory runtime/observer and index-timeline migration without a concrete retrieval need, vault adapter, privacy review and measured recall/latency/total-token evidence. Existing Memory Vault team lesson search is complete and empty; no sanitized reusable lesson requires separate promotion in this run.",
+  "observedAt": "2026-11-13T18:11:18.425Z"
+}

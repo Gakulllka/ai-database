@@ -1,0 +1,26 @@
+{
+  "schemaVersion": "database.evolution.decision.v1",
+  "source": {
+    "repoId": 1350978527,
+    "fullName": "Ryze-AI-Adgent/open-seo-mcp-skills",
+    "commit": "f587b0a69dc1ed92b65cdb241e4f14985b1031fd"
+  },
+  "capability": "Evidence-bounded interpretation of first-party SEO and AI-source traffic",
+  "decision": "extend",
+  "status": "applied",
+  "existingPaths": [
+    "skills/seo/SKILL.md",
+    "agents/seo-specialist.md",
+    "skills/deep-research/SKILL.md",
+    "skills/market-research/SKILL.md"
+  ],
+  "evidence": [
+    "Pinned source: https://github.com/Ryze-AI-Adgent/open-seo-mcp-skills/tree/f587b0a69dc1ed92b65cdb241e4f14985b1031fd. Read README, MIT license and seo-audit, rank-tracking, ai-visibility and seo-vs-ads SKILL.md files; all six blobs matched Git hashes. No foreign installer, connector or code was executed; no source text was copied.",
+    "Observed instructions use first-party GSC/GA4/ads data, before/after joins and page inspection. They also infer lost rankings from absent export rows, AI citations from GA4 sessions, and recoverable savings from paid/organic overlap. Those stronger claims are not established by the supplied metrics; the adaptation deliberately retains the collection idea without these inferences or a vendor requirement.",
+    "Searched canonical skills, rules and agents for SEO, GA4, referral, Search Console, AI visibility, organic/paid and cannibalization. Read the existing SEO skill and specialist, plus adjacent general evidence/research workflows. Technical SEO, keyword mapping and page-specific fixes already exist. The owner lacked an operational measurement contract for matching periods/grain, sampled rows, metric semantics, attribution and causal limits.",
+    "Official semantics checked on 2026-11-13: https://developers.google.com/webmaster-tools/v1/searchanalytics/query says returned rows are bounded/top rows; https://support.google.com/webmasters/answer/7042828?hl=en defines CTR, topmost aggregate position and canonical attribution; https://support.google.com/analytics/answer/15258820?hl=en explains missing traffic attribution. These references support the metric boundaries, not a claim of tested provider integration.",
+    "Extended only the existing SEO workflow; preserved canonical metadata and technical guidance. Used the maintained projection helper for its missing Codex projection. Existing package/install registration is unchanged; generated simple matching canonical/native UI required by the existing Codex surface test. Seven independent artifact-only cases matched held-out decisions for unequal windows, capped/absent rows, AI referrals, ads overlap, a valid aggregate comparison, missing access and query/page grain. These are instruction decisions, not live SEO impact, connector, ad experiment or attribution tests."
+  ],
+  "reason": "Extend the existing SEO owner with a small measurement workflow. Use authorized exports/tools, report observed scope and limitations, and separate clicks/sessions/citations/causal savings. No additional SEO skill, vendor dependency or external mutation is justified.",
+  "observedAt": "2026-11-13T18:11:18.422Z"
+}

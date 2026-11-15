@@ -85,47 +85,104 @@ This layer is about structure, not final creative taste.
 
 FFmpeg handles the boring but critical work: splitting, trimming, concatenating, and preprocessing.
 
-### Extract segment by timestamp
+### Plan from the media and the requested precision
+
+Probe each input used in the edit before choosing commands:
 
 ```bash
-ffmpeg -i raw.mp4 -ss 00:12:30 -to 00:15:45 -c copy segment_01.mp4
+ffprobe -v error -show_format -show_streams -of json raw.mp4
 ```
 
-### Batch cut from edit decision list
+Record the selected streams, duration/start time, codec, dimensions, pixel format,
+colour/HDR or alpha requirements, frame timing and audio layout/sample rate.
+Nominal fps alone does not prove constant frame rate; inspect frame timestamps
+when timing matters. Define the requested interval and acceptable boundary error.
+Keep originals and use a new output path; examples use `-n` to refuse overwrites.
+
+### Extract a segment with precise decoded boundaries
+
+For ordinary SDR video with H.264/AAC delivery, this re-encodes a 195-second
+interval starting at 12:30, selecting the first video and optional first audio
+stream. Choose explicit mappings for other required tracks. Other colour, alpha
+or codec requirements need a matching encode path; this is not a preservation preset.
 
 ```bash
-#!/bin/bash
-# cuts.txt: start,end,label
-while IFS=, read -r start end label; do
-  ffmpeg -i raw.mp4 -ss "$start" -to "$end" -c copy "segments/${label}.mp4"
-done < cuts.txt
+ffmpeg -n -ss 00:12:30 -i raw.mp4 -t 195 -map 0:v:0 -map 0:a:0? -c:v libx264 -crf 18 -c:a aac segment_01.mp4
 ```
 
-### Concatenate segments
+Use stream copy when lossless packet/keyframe boundaries meet the request.
+`-c copy` does not promise frame-exact cuts: seeking, GOP dependencies and
+container edit lists can retain pre-roll or shift visible boundaries. For an
+exact edit, decode/re-encode the affected video and verify its actual first/last
+frames and audio timing. A frame or sample grid still limits representable times.
+If lossless and exact requirements conflict, report the measured tradeoff rather
+than silently choosing one. See [FFmpeg seeking](https://ffmpeg.org/ffmpeg.html#Main-options).
+
+### Batch cut from an edit decision list
+
+Keep the EDL's explicit segment order, source, start/end and expected duration.
+Check that intervals are valid for each source. Use controlled output names and
+apply the chosen precision/encoding policy to every segment. Stop on a failed
+cut; a stale file left by an earlier run is not that cut's output.
+
+### Concatenate compatible segments in edit order
+
+Before using the concat demuxer with stream copy, compare stream count/order,
+codecs/configuration, time bases, dimensions/pixel formats and audio layout/rate.
+Matching filename extensions do not establish compatibility. Check timestamps,
+hidden pre-roll and A/V start/end alignment as well; a copied join can expose
+frames hidden by an input's edit list. If incompatible, normalize the inputs or
+use an appropriate decoded concat-filter workflow before encoding.
+See [concat demuxer requirements](https://ffmpeg.org/ffmpeg-formats.html#concat).
+
+Write `segments/concat.txt` from the intended EDL order, using reviewed local
+paths relative to that manifest and FFmpeg concat escaping. A directory glob can
+include stale files or put segment_10 before segment_2. For these controlled names:
+
+```text
+file 'segment_01.mp4'
+file 'segment_02.mp4'
+```
 
 ```bash
-# Create file list
-for f in segments/*.mp4; do echo "file '$f'"; done > concat.txt
-ffmpeg -f concat -safe 0 -i concat.txt -c copy assembled.mp4
+ffmpeg -n -f concat -safe 1 -i segments/concat.txt -c copy assembled.mp4
 ```
 
 ### Create proxy for faster editing
 
 ```bash
-ffmpeg -i raw.mp4 -vf "scale=960:-2" -c:v libx264 -preset ultrafast -crf 28 proxy.mp4
+ffmpeg -n -i raw.mp4 -vf "scale=960:-2" -c:v libx264 -preset ultrafast -crf 28 proxy.mp4
 ```
 
 ### Extract audio for transcription
 
 ```bash
-ffmpeg -i raw.mp4 -vn -acodec pcm_s16le -ar 16000 audio.wav
+ffmpeg -n -i raw.mp4 -vn -acodec pcm_s16le -ar 16000 audio.wav
 ```
 
 ### Normalize audio levels
 
 ```bash
-ffmpeg -i segment.mp4 -af loudnorm=I=-16:TP=-1.5:LRA=11 -c:v copy normalized.mp4
+ffmpeg -n -i segment.mp4 -af loudnorm=I=-16:TP=-1.5:LRA=11 -c:v copy normalized.mp4
 ```
+
+### Verify the file produced by this run
+
+Bind checks to the successful writer's output path and run record (and a digest
+when files may be replaced). A previous file at the same path does not prove a
+failed run succeeded. Probe the actual output and compare selected streams,
+duration and boundary tolerances with the edit plan. Decode it to detect errors:
+
+```bash
+ffprobe -v error -show_format -show_streams -of json assembled.mp4
+ffmpeg -v error -xerror -i assembled.mp4 -map 0:v:0? -map 0:a:0? -f null -
+```
+
+A probe or decode success does not establish correct content. Inspect boundary
+frames and join points, view the final crop/captions/colour, and audition audio
+for sync, missing tracks and unintended silence where relevant. Report measured
+facts separately from creative approval and name any unavailable visual/audio
+check. Preserve partial outputs as partial; do not describe planned edits as done.
 
 ## Layer 4: Programmable Composition (Remotion)
 

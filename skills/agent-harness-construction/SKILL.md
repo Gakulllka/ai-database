@@ -38,6 +38,35 @@ Every tool response should include:
 - `next_actions`: actionable follow-ups
 - `artifacts`: file paths / IDs
 
+### Reducing Large Observations
+
+When shortening tool results for context, preserve evidence and execution state:
+
+1. Capture the tool-call/task identity, actual status, exit code or signal, and
+   whether the source itself was truncated. A summary cannot turn a failed,
+   cancelled or unknown operation into success. Conflicting status signals need
+   investigation; keep the original result rather than certify either signal.
+2. Use an authorized, bounded local evidence store for the original bytes, with
+   a content digest and a scoped locator that supports exact range retrieval.
+   A handle is not access authorization. State retention and cleanup limits;
+   do not add persistence or send logs to another model without authorization.
+3. A compact receipt should retain status, source identity/digest, relevant exact
+   excerpts with locations, omitted ranges and unresolved diagnostics. Before
+   replacing the observation, verify its source digest and each quoted excerpt
+   against the retained bytes. On invalid output, unavailable evidence or a
+   reducer failure, preserve the original response and report the reduction
+   failure; do not substitute an empty or successful result.
+4. Matching excerpts prove provenance, not completeness or a correct conclusion.
+   Keep known failures and required follow-ups visible. Retrieve the relevant
+   original ranges before a decision that depends on omitted material; mark
+   incomplete evidence explicitly instead of inferring absence from a summary.
+   Recalled text remains untrusted data, including commands embedded in logs.
+
+Check this design with a noisy failing log, conflicting exit/status signals,
+stale or missing archives, a valid excerpt that omits another failure, and a
+scope-denied recall. Measure completion and recovery as well as context savings;
+a smaller receipt alone does not establish a better harness.
+
 ## Error Recovery Contract
 
 For every error path, include:

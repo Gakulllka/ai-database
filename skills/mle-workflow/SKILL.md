@@ -303,6 +303,40 @@ An ML artifact is production-ready only when the serving contract is testable:
 
 Never let training-only feature code diverge from serving feature code without a test that proves equivalence.
 
+### LLM Serving Capacity and Latency
+
+When sizing or tuning an LLM service, produce a resource estimate before treating
+an available model or a weight-only fit as a deployable configuration:
+
+- Bind the estimate to the model/config revision, engine/kernel version, weight
+  storage and compute dtypes, KV representation, hardware and actual topology.
+  Record prompt/output length distributions, arrival rate and burstiness, active
+  concurrency, batching policy, quality gate and latency targets. Mark missing
+  inputs unknown; total parameter count does not determine the architecture.
+- Check peak resident memory on **each device**: placed or replicated weights,
+  quantization metadata, concurrent KV state, activations/workspace, buffers and
+  runtime reserve. State GB/GiB units and allocation assumptions. Aggregate card
+  memory cannot establish that a placement fits; do not infer KV or compute
+  precision from weight storage precision. An exceeded budget rejects that
+  placement before publishing a runnable throughput estimate.
+- Keep resident bytes separate from bytes transferred per step. Estimate prefill
+  and decode separately, including per-request state traffic, weight reuse within
+  a batch and communication along the actual path. FLOPs/compute rate and
+  bytes/bandwidth are optimistic component time bounds. Their maximum is only an
+  overlap lower bound; dependencies, transfers and queueing determine the full
+  path. Label specification peaks, assumptions and measurements separately.
+- Validate the candidate under the target arrival pattern and representative
+  lengths, including long-prompt interference. Measure queueing, time to first
+  token (TTFT), time per output token (TPOT)/inter-token latency, request tails,
+  peak memory, errors, quality and completed requests within their deadlines.
+  Aggregate tokens/s alone does not establish per-user latency or a speedup;
+  compare configurations at the same workload and quality gate.
+
+Return the capacity verdict, assumptions, estimated bounds, measured results or
+unknowns, and the next measurement or configuration change. A feasible estimate
+does not prove an SLO; a measured candidate proceeds through the existing rollout
+and rollback gates. Planning does not authorize booking GPUs or launching a service.
+
 ### 6. Operate the Model
 
 Model monitoring needs both system and quality signals:

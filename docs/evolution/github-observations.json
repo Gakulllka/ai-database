@@ -1,188 +1,248 @@
 {
   "schemaVersion": "database.evolution.radar.snapshot.v1",
   "complete": true,
-  "generatedAt": "2026-11-15T18:05:38.602Z",
+  "generatedAt": "2026-11-16T17:57:00.917Z",
   "untrusted": true,
   "candidates": [
     {
       "repoId": 552661142,
       "fullName": "langchain-ai/langchain",
-      "stars": 149564,
-      "observedAt": "2026-11-15T18:05:38.602Z"
+      "stars": 149668,
+      "observedAt": "2026-11-16T17:57:00.917Z"
     },
     {
       "repoId": 787076358,
       "fullName": "firecrawl/firecrawl",
-      "stars": 202003,
-      "observedAt": "2026-11-15T18:05:38.602Z"
+      "stars": 202290,
+      "observedAt": "2026-11-16T17:57:00.917Z"
     },
     {
       "repoId": 881458615,
       "fullName": "browser-use/browser-use",
-      "stars": 121098,
-      "observedAt": "2026-11-15T18:05:38.602Z"
+      "stars": 121208,
+      "observedAt": "2026-11-16T17:57:00.917Z"
     },
     {
       "repoId": 1024554267,
       "fullName": "NousResearch/hermes-agent",
-      "stars": 263596,
-      "observedAt": "2026-11-15T18:05:38.602Z"
+      "stars": 263850,
+      "observedAt": "2026-11-16T17:57:00.917Z"
     },
     {
       "repoId": 1048065319,
       "fullName": "thedotmack/claude-mem",
-      "stars": 117310,
-      "observedAt": "2026-11-15T18:05:38.602Z"
+      "stars": 117613,
+      "observedAt": "2026-11-16T17:57:00.917Z"
     },
     {
       "repoId": 1136590548,
       "fullName": "affaan-m/ECC",
-      "stars": 303693,
-      "observedAt": "2026-11-15T18:05:38.602Z"
+      "stars": 304414,
+      "observedAt": "2026-11-16T17:57:00.917Z"
     },
     {
       "repoId": 1183888342,
       "fullName": "stablyai/orca",
-      "stars": 125597,
-      "observedAt": "2026-11-15T18:05:38.602Z"
+      "stars": 126591,
+      "observedAt": "2026-11-16T17:57:00.917Z"
     },
     {
       "repoId": 1200597263,
       "fullName": "Graphify-Labs/graphify",
-      "stars": 148252,
-      "observedAt": "2026-11-15T18:05:38.602Z"
+      "stars": 148883,
+      "observedAt": "2026-11-16T17:57:00.917Z"
     },
     {
       "repoId": 1266797999,
       "fullName": "DietrichGebert/ponytail",
-      "stars": 191308,
-      "observedAt": "2026-11-15T18:05:38.602Z"
+      "stars": 192004,
+      "observedAt": "2026-11-16T17:57:00.917Z"
     },
     {
       "repoId": 1333065091,
       "fullName": "deepseek-ai/deepseek-harness",
-      "stars": 281536,
-      "observedAt": "2026-11-15T18:05:38.602Z"
+      "stars": 282258,
+      "observedAt": "2026-11-16T17:57:00.917Z"
     },
     {
       "repoId": 1341206732,
       "fullName": "context-labs/whip",
-      "stars": 958,
-      "observedAt": "2026-11-15T18:05:38.602Z"
+      "stars": 961,
+      "observedAt": "2026-11-16T17:57:00.917Z"
     },
     {
       "repoId": 1342886503,
       "fullName": "duty1g/x64dbg-mcp-server",
-      "stars": 2829,
-      "observedAt": "2026-11-15T18:05:38.602Z"
+      "stars": 2833,
+      "observedAt": "2026-11-16T17:57:00.917Z"
     },
     {
       "repoId": 1342935078,
       "fullName": "bojieli/ai-infra-book",
-      "stars": 7813,
-      "observedAt": "2026-11-15T18:05:38.602Z"
+      "stars": 7925,
+      "observedAt": "2026-11-16T17:57:00.917Z"
     },
     {
       "repoId": 1350978527,
       "fullName": "Ryze-AI-Adgent/open-seo-mcp-skills",
-      "stars": 9942,
-      "observedAt": "2026-11-15T18:05:38.602Z"
+      "stars": 10176,
+      "observedAt": "2026-11-16T17:57:00.917Z"
     },
     {
       "repoId": 1351879111,
       "fullName": "Human-Agent-Society/reef",
-      "stars": 7826,
-      "observedAt": "2026-11-15T18:05:38.602Z"
+      "stars": 7831,
+      "observedAt": "2026-11-16T17:57:00.917Z"
     },
     {
       "repoId": 1354887280,
       "fullName": "NVlabs/SoL-Pi",
-      "stars": 3683,
-      "observedAt": "2026-11-15T18:05:38.602Z"
+      "stars": 3682,
+      "observedAt": "2026-11-16T17:57:00.917Z"
     },
     {
       "repoId": 1356077516,
       "fullName": "kajisho5/ffmpeg-skill",
-      "stars": 5914,
-      "observedAt": "2026-11-15T18:05:38.602Z"
+      "stars": 6433,
+      "observedAt": "2026-11-16T17:57:00.917Z"
     },
     {
       "repoId": 1365776373,
       "fullName": "qiz029/dscode",
-      "stars": 1001,
-      "observedAt": "2026-11-15T18:05:38.602Z"
+      "stars": 1002,
+      "observedAt": "2026-11-16T17:57:00.917Z"
     },
     {
       "repoId": 1368596582,
       "fullName": "google/elephant-goldfish-model",
-      "stars": 19595,
-      "observedAt": "2026-11-15T18:05:38.602Z"
+      "stars": 20257,
+      "observedAt": "2026-11-16T17:57:00.917Z"
     },
     {
       "repoId": 1370839144,
       "fullName": "agentvivekkumar/dontbemichael",
       "stars": 591,
-      "observedAt": "2026-11-15T18:05:38.602Z"
+      "observedAt": "2026-11-16T17:57:00.917Z"
     },
     {
       "repoId": 1378288598,
       "fullName": "zai-org/ZCode",
-      "stars": 8698,
-      "observedAt": "2026-11-15T18:05:38.602Z"
+      "stars": 8712,
+      "observedAt": "2026-11-16T17:57:00.917Z"
     },
     {
       "repoId": 1379574728,
       "fullName": "jev-chat/jev-chat-jarvis",
-      "stars": 8393,
-      "observedAt": "2026-11-15T18:05:38.602Z"
+      "stars": 8409,
+      "observedAt": "2026-11-16T17:57:00.917Z"
     },
     {
       "repoId": 1380635125,
       "fullName": "unreallabsai/unreal-agent",
-      "stars": 2232,
-      "observedAt": "2026-11-15T18:05:38.602Z"
+      "stars": 2235,
+      "observedAt": "2026-11-16T17:57:00.917Z"
     },
     {
       "repoId": 1382019778,
       "fullName": "AgnesAI-Labs/agnes-harness",
-      "stars": 2082,
-      "observedAt": "2026-11-15T18:05:38.602Z"
+      "stars": 2092,
+      "observedAt": "2026-11-16T17:57:00.917Z"
     },
     {
       "repoId": 1382460607,
       "fullName": "nealbridges/VulnHunter",
-      "stars": 817,
-      "observedAt": "2026-11-15T18:05:38.602Z"
+      "stars": 823,
+      "observedAt": "2026-11-16T17:57:00.917Z"
     },
     {
       "repoId": 1382503730,
       "fullName": "Parcha-ai/agentrun",
-      "stars": 1125,
-      "observedAt": "2026-11-15T18:05:38.602Z"
+      "stars": 1166,
+      "observedAt": "2026-11-16T17:57:00.917Z"
     },
     {
       "repoId": 1383809012,
       "fullName": "yetone/magpie",
-      "stars": 36891,
-      "observedAt": "2026-11-15T18:05:38.602Z"
+      "stars": 37520,
+      "observedAt": "2026-11-16T17:57:00.917Z"
     },
     {
       "repoId": 1385896447,
       "fullName": "Ebony-Vinyl/dsh-our-free-model",
-      "stars": 75625,
-      "observedAt": "2026-11-15T18:05:38.602Z"
+      "stars": 77185,
+      "observedAt": "2026-11-16T17:57:00.917Z"
     },
     {
       "repoId": 1393965829,
       "fullName": "KKKKhazix/AIHOT",
-      "stars": 10733,
-      "observedAt": "2026-11-15T18:05:38.602Z"
+      "stars": 10821,
+      "observedAt": "2026-11-16T17:57:00.917Z"
     },
     {
       "repoId": 1399841077,
       "fullName": "wuyoscar/AISafetyHot",
-      "stars": 2127,
-      "observedAt": "2026-11-15T18:05:38.602Z"
+      "stars": 2131,
+      "observedAt": "2026-11-16T17:57:00.917Z"
+    },
+    {
+      "repoId": 1412573009,
+      "fullName": "shaongitbd/doory",
+      "stars": 2756,
+      "observedAt": "2026-11-16T17:57:00.917Z"
+    },
+    {
+      "repoId": 1414685342,
+      "fullName": "onehumanbeing/esp32-iphone-agent",
+      "stars": 5025,
+      "observedAt": "2026-11-16T17:57:00.917Z"
+    },
+    {
+      "repoId": 1415214046,
+      "fullName": "zhuyansen/new-term-radar",
+      "stars": 2181,
+      "observedAt": "2026-11-16T17:57:00.917Z"
+    },
+    {
+      "repoId": 1416442720,
+      "fullName": "microsoft/TokenEconomizer",
+      "stars": 7058,
+      "observedAt": "2026-11-16T17:57:00.917Z"
+    },
+    {
+      "repoId": 1422597771,
+      "fullName": "amosblomqvist/learnharness",
+      "stars": 9709,
+      "observedAt": "2026-11-16T17:57:00.917Z"
+    },
+    {
+      "repoId": 1432859403,
+      "fullName": "qybaihe/bla",
+      "stars": 5895,
+      "observedAt": "2026-11-16T17:57:00.917Z"
+    },
+    {
+      "repoId": 1432967563,
+      "fullName": "ccch1mneyyy/dsh-Go",
+      "stars": 24685,
+      "observedAt": "2026-11-16T17:57:00.917Z"
+    },
+    {
+      "repoId": 1438540053,
+      "fullName": "wangzan101/Mika",
+      "stars": 8841,
+      "observedAt": "2026-11-16T17:57:00.917Z"
+    },
+    {
+      "repoId": 1448515937,
+      "fullName": "DIYgod/pinky",
+      "stars": 2283,
+      "observedAt": "2026-11-16T17:57:00.917Z"
+    },
+    {
+      "repoId": 1455416555,
+      "fullName": "hitkeeen/blender-ai-mcp-addon",
+      "stars": 2115,
+      "observedAt": "2026-11-16T17:57:00.917Z"
     },
     {
       "repoId": 1401476500,
@@ -191,57 +251,9 @@
       "observedAt": "2026-11-15T18:05:38.602Z"
     },
     {
-      "repoId": 1412573009,
-      "fullName": "shaongitbd/doory",
-      "stars": 2742,
-      "observedAt": "2026-11-15T18:05:38.602Z"
-    },
-    {
-      "repoId": 1414685342,
-      "fullName": "onehumanbeing/esp32-iphone-agent",
-      "stars": 4988,
-      "observedAt": "2026-11-15T18:05:38.602Z"
-    },
-    {
-      "repoId": 1415214046,
-      "fullName": "zhuyansen/new-term-radar",
-      "stars": 2177,
-      "observedAt": "2026-11-15T18:05:38.602Z"
-    },
-    {
       "repoId": 1422344223,
       "fullName": "reason-machines/reason-network",
       "stars": 1748,
-      "observedAt": "2026-11-15T18:05:38.602Z"
-    },
-    {
-      "repoId": 1422597771,
-      "fullName": "amosblomqvist/learnharness",
-      "stars": 9563,
-      "observedAt": "2026-11-15T18:05:38.602Z"
-    },
-    {
-      "repoId": 1432859403,
-      "fullName": "qybaihe/bla",
-      "stars": 5779,
-      "observedAt": "2026-11-15T18:05:38.602Z"
-    },
-    {
-      "repoId": 1432967563,
-      "fullName": "ccch1mneyyy/dsh-Go",
-      "stars": 23660,
-      "observedAt": "2026-11-15T18:05:38.602Z"
-    },
-    {
-      "repoId": 1438540053,
-      "fullName": "wangzan101/Mika",
-      "stars": 8702,
-      "observedAt": "2026-11-15T18:05:38.602Z"
-    },
-    {
-      "repoId": 1448515937,
-      "fullName": "DIYgod/pinky",
-      "stars": 2200,
       "observedAt": "2026-11-15T18:05:38.602Z"
     },
     {

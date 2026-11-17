@@ -30,6 +30,36 @@ Agent output quality is constrained by:
 - Use medium tools for common edit/read/search loops.
 - Use macro-tools only when round-trip overhead is the dominant cost.
 
+## Reversible Tool Selection
+
+When optimizing the exposed tool set, keep selection separate from permissions:
+
+1. Record the authorized catalog, schema/version, repository and task scope.
+   Distinguish tools actually loaded from unavailable ones, and completed uses
+   from failed attempts. Missing or truncated traces mean unknown usage.
+2. Treat repeated loaded-but-unused observations on comparable tasks as a
+   candidate for omission, not proof of irrelevance. Keep tools required by the
+   current request, verification, cancellation and recovery, including indirect
+   dependencies. Rare paths need explicit cases; a failed use is demand to
+   investigate, not evidence that the tool is unnecessary.
+3. Freeze the selected set for a task; use completed earlier tasks to propose
+   the next selection. Retain a supported way to recover needed tools from the
+   authorized baseline. If that path is unavailable, retain the required tools
+   or stop and report the missing capability. Never restore denied access or
+   change sandbox, approval or host policy to recover a capability.
+4. Apply only an authorized, reversible configuration change, preserving entries
+   owned by others. Verify the effective catalog at the session boundary where
+   the host applies it. Invalidate stale selection evidence when schemas, host
+   versions or task scope change; do not silently carry a mask across projects.
+5. Compare the baseline and candidate on held-out representative tasks, including
+   rare recovery and verification paths. Measure completion, failures, latency
+   and billed cost with cache pricing, selection overhead and cache rebuilds.
+   Fewer exposed schemas or raw tokens alone do not prove savings. Roll back
+   the selection on capability or correctness regressions within existing rights.
+
+These are integration requirements, not a tool-pruning controller. Validate the
+actual host adapter before claiming that selection or restoration is enforced.
+
 ## Observation Design
 
 Every tool response should include:

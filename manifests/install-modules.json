@@ -1680,6 +1680,56 @@
       "defaultInstall": false,
       "cost": "light",
       "stability": "beta"
+    },
+    {
+      "id": "visual-project-skills",
+      "kind": "skills",
+      "description": "Opt-in illustration styles, project character profiles and visual production workflows with reference artwork.",
+      "paths": [
+        "skills/acid-clay",
+        "skills/adult-comic",
+        "skills/botanical-mechanics",
+        "skills/dasha-character",
+        "skills/dirty-horror",
+        "skills/fairytale-fantasy",
+        "skills/game-art-production",
+        "skills/indie-grotesque",
+        "skills/ink-punk",
+        "skills/lisa-character",
+        "skills/model-texture-restyle",
+        "skills/paper-dream-theatre",
+        "skills/pop-animation",
+        "skills/retro-3d-painted",
+        "skills/visual-design-base",
+        "skills/visual-design-practice",
+        "skills/visual-novel-art",
+        "skills/visual-quality-review",
+        "skills/visual-style-development",
+        "assets/visual-project-skills"
+      ],
+      "targets": [
+        "claude",
+        "claude-project",
+        "cursor",
+        "antigravity",
+        "codex",
+        "copilot",
+        "opencode",
+        "codebuddy",
+        "joycode",
+        "qwen",
+        "zed",
+        "hermes",
+        "openclaw",
+        "kimi",
+        "adal"
+      ],
+      "dependencies": [
+        "design-workflows"
+      ],
+      "defaultInstall": false,
+      "cost": "heavy",
+      "stability": "beta"
     }
   ]
 }

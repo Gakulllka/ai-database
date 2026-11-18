@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "project": "",
+  "brief": "brief.md",
+  "style_guide": "style-guide.md",
+  "assets": [],
+  "asset_entry_fields": {
+    "id": "Стабильный идентификатор",
+    "role": "Назначение и потребитель",
+    "source_files": "Массив путей к редактируемым исходникам",
+    "export_file": "Путь к передаваемому файлу",
+    "provenance": "Автор, источник/генератор, референсы, дата и условия использования",
+    "technical_contract": "Размеры, alpha, pivot/единицы, кадры, формат; только применимые поля",
+    "visual_review": "Путь к разбору и просмотренная версия",
+    "file_checks": "Фактически выполненные проверки файла",
+    "runtime_check": "not_run / passed / failed, версия потребителя и доказательство",
+    "user_approval": "not_requested / pending / accepted / changes_requested"
+  }
+}

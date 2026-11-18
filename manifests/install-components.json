@@ -797,6 +797,14 @@
       "modules": [
         "design-workflows"
       ]
+    },
+    {
+      "id": "capability:visual-project-skills",
+      "family": "capability",
+      "description": "Illustration styles, character references and visual production workflows from the Visual project.",
+      "modules": [
+        "visual-project-skills"
+      ]
     }
   ]
 }

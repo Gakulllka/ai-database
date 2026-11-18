@@ -1,0 +1,4 @@
+interface:
+  display_name: "Лиза — персонаж"
+  short_description: "Сохранять внешность и домашний образ: Лиза"
+  default_prompt: "Используй $lisa-character и $ink-punk, чтобы нарисовать персонажа с сохранением утверждённой внешности и одежды."

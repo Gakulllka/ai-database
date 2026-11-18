@@ -40,8 +40,7 @@ HTML-макет не подтверждает работу формы 1С. Refer
 ## Подключение и сопровождение
 
 Канонические инструкции находятся в `skills/`, проекции Codex — в `.agents/skills/`.
-Для четырёх навыков `design-workflow`, `character-art-direction`,
-`frontend-design-direction`, `design-system`:
+Команды ниже проверяют четыре общих дизайн-навыка и [пакет «Визуал»](visual-project-skills.md):
 
 ```text
 node scripts/design/sync-skills.js --write

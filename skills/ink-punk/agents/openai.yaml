@@ -1,0 +1,4 @@
+interface:
+  display_name: "Ink Punk"
+  short_description: "Ink Punk alpha characters and visual-novel gallery CGs"
+  default_prompt: "Use $ink-punk with its bundled references: standalone game characters on transparency, backgrounds for visual-novel CG scenes."

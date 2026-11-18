@@ -1,0 +1,157 @@
+{
+  "skill": "acid-clay",
+  "version": "1.0.0",
+  "status": "accepted",
+  "created": "2026-11-17",
+  "generator": "built-in imagegen",
+  "medium": "static raster concept; no 3D or animation source",
+  "authorization": "user explicitly requested a first run and skill creation",
+  "source_roles": {
+    "v1": "two Pinterest screenshots used for style/material/deformation principles only",
+    "v2": "material correction of v1"
+  },
+  "external_references": [
+    {
+      "pin": "https://www.pinterest.com/pin/244320348532897085/",
+      "attribution": "collage Miluiel; description attributes source art to Mason Lindroth; fragment attribution unverified"
+    },
+    {
+      "pin": "https://www.pinterest.com/pin/244320348532897088/",
+      "attribution": "repost author and primary source unknown"
+    }
+  ],
+  "external_reference_reuse_rights": "not established; external reference files not bundled as production assets",
+  "assets": [
+    {
+      "path": "assets/visual-project-skills/acid-clay/references/images/deformation-v1.png",
+      "format": "PNG",
+      "width": 1774,
+      "height": 887,
+      "mode": "RGB",
+      "bytes": 2362161,
+      "sha256": "60c4f0e5a997fb297bb120eef57f71895594a2dc0c8e80d2524b4ec884284199",
+      "approval": "comparison only; initial clean render-like presentation criticised",
+      "matches_workspace_export": true
+    },
+    {
+      "path": "assets/visual-project-skills/acid-clay/references/images/deformation-v2.png",
+      "format": "PNG",
+      "width": 1774,
+      "height": 887,
+      "mode": "RGB",
+      "bytes": 1611891,
+      "sha256": "8ed220bfd22995b358a10dfd0ac0ebcf839a9d1dda6fe7f85042cfcb58495020",
+      "approval": "comparison only; initial clean render-like presentation criticised",
+      "matches_workspace_export": true
+    },
+    {
+      "path": "assets/visual-project-skills/acid-clay/references/images/practice-07.png",
+      "format": "PNG",
+      "width": 1672,
+      "height": 941,
+      "mode": "RGB",
+      "bytes": 1718523,
+      "sha256": "75a3c5198a686d8094f2a7028857efc8105d6a36e2d11a224ed0eea955e4db7d",
+      "approval": "role-specific anchor or overview for accepted style; not permanent character/location canon",
+      "matches_workspace_export": true
+    },
+    {
+      "path": "assets/visual-project-skills/acid-clay/references/images/practice-14.png",
+      "format": "PNG",
+      "width": 1672,
+      "height": 941,
+      "mode": "RGB",
+      "bytes": 1534331,
+      "sha256": "f64d3f4bc6bc0b08a208837a9e957e073f337b8d3e187aedb92369c015697369",
+      "approval": "role-specific anchor or overview for accepted style; not permanent character/location canon",
+      "matches_workspace_export": true
+    },
+    {
+      "path": "assets/visual-project-skills/acid-clay/references/images/practice-21.png",
+      "format": "PNG",
+      "width": 1672,
+      "height": 941,
+      "mode": "RGB",
+      "bytes": 1708374,
+      "sha256": "07dcaf8f093f91b4fc82753e96e981c4e7607189272e587cb7e9c9a88a0ab5df",
+      "approval": "role-specific anchor or overview for accepted style; not permanent character/location canon",
+      "matches_workspace_export": true
+    },
+    {
+      "path": "assets/visual-project-skills/acid-clay/references/images/practice-23.png",
+      "format": "PNG",
+      "width": 1672,
+      "height": 941,
+      "mode": "RGB",
+      "bytes": 1683457,
+      "sha256": "2417791735dd828c4641b7d492b3682d8ded2fc70c714b6c35aff9500bf60397",
+      "approval": "role-specific anchor or overview for accepted style; not permanent character/location canon",
+      "matches_workspace_export": true
+    },
+    {
+      "path": "assets/visual-project-skills/acid-clay/references/images/practice-25.png",
+      "format": "PNG",
+      "width": 1672,
+      "height": 941,
+      "mode": "RGB",
+      "bytes": 1692706,
+      "sha256": "180f2a41ec1181ca9fd02dc27977d9c95b98bb98c3f01069f9a7a9df454acac5",
+      "approval": "role-specific anchor or overview for accepted style; not permanent character/location canon",
+      "matches_workspace_export": true
+    },
+    {
+      "path": "assets/visual-project-skills/acid-clay/references/images/practice-28.png",
+      "format": "PNG",
+      "width": 1672,
+      "height": 941,
+      "mode": "RGB",
+      "bytes": 2009509,
+      "sha256": "f3f35a459a4a5055fe1ac5048ae7154b005229e5d2c1382be647b48931d97c42",
+      "approval": "role-specific anchor or overview for accepted style; not permanent character/location canon",
+      "matches_workspace_export": true
+    },
+    {
+      "path": "assets/visual-project-skills/acid-clay/references/images/practice-30-overview.png",
+      "format": "PNG",
+      "width": 1600,
+      "height": 1272,
+      "mode": "RGB",
+      "bytes": 2844806,
+      "sha256": "53f11757f97550ca501b2094b2c9f6e052c4e0be04311b07d7bef2be2a510aa9",
+      "approval": "role-specific anchor or overview for accepted style; not permanent character/location canon",
+      "matches_workspace_export": true
+    },
+    {
+      "path": "assets/visual-project-skills/acid-clay/references/images/waiting-room-v1.png",
+      "format": "PNG",
+      "width": 1672,
+      "height": 941,
+      "mode": "RGB",
+      "bytes": 1991172,
+      "sha256": "12a29b0054323a44a15e236f926266d7dd3320c772510f13dd008f430745cb07",
+      "approval": "role-specific anchor or overview for accepted style; not permanent character/location canon",
+      "matches_workspace_export": true
+    }
+  ],
+  "checks": {
+    "visual_review": "all 30 generation outputs and overview viewed; self-review only",
+    "human_recognition": "not tested",
+    "engine": "not tested",
+    "3d": "not created",
+    "animation": "not created",
+    "actual_prompts": "source/practice-30/results.json in project",
+    "source_images_in_generation": "none for the 30 practice runs"
+  },
+  "practice_generation_count": 30,
+  "practice_image_count": 30,
+  "updated_from": "0.2.0; preserved in source/skill-versions/acid-clay-0.2.0",
+  "user_feedback": "initial output too clean and similar to a 3D render; requested more anxiety and coarse raster",
+  "new_image_approval": "style direction accepted; individual anchor roles selected by assistant; known defects retained",
+  "automatic_skill_discovery": "acid-clay appeared in host skill catalog before promotion; version 1.0.0 reload not yet observed",
+  "approval": {
+    "scope": "visual style accepted after the 30-run series; individual characters and all scene details are not a permanent canon",
+    "user_instruction": "доведи навык с 0.2 до 1.0",
+    "basis": "explicit positive user evaluation of the visual style followed by release instruction"
+  },
+  "release_generation_count": 0
+}

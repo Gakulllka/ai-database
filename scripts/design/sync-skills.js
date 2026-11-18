@@ -3,9 +3,12 @@
 
 const path = require('path');
 const { syncSkillProjections } = require('../lib/sync-skill-projections');
+const { modules } = require('../../manifests/install-modules.json');
 const root = path.resolve(__dirname, '../..');
+const visualProject = modules.find(module => module.id === 'visual-project-skills');
+const visualSkills = visualProject.paths.filter(source => source.startsWith('skills/'));
 const names = new Set(['design-workflow', 'character-art-direction',
-  'frontend-design-direction', 'design-system']);
+  'frontend-design-direction', 'design-system', ...visualSkills.map(source => path.basename(source))]);
 
 function sync(write = false, repoRoot = root) {
   return syncSkillProjections({ write, repoRoot, select: name => names.has(name) });

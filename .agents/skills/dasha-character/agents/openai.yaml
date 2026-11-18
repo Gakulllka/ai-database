@@ -1,0 +1,4 @@
+interface:
+  display_name: "Даша — персонаж"
+  short_description: "Сохранять внешность и домашний образ: Даша"
+  default_prompt: "Используй $dasha-character и $ink-punk, чтобы нарисовать персонажа с сохранением утверждённой внешности и одежды."

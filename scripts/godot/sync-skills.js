@@ -3,11 +3,15 @@
 
 const path = require('path');
 const { syncSkillProjections } = require('../lib/sync-skill-projections');
+const { modules } = require('../../manifests/install-modules.json');
 const root = path.resolve(__dirname, '../..');
+const godotModule = modules.find(module => module.id === 'godot-development');
+const names = new Set(godotModule.paths.filter(source => source.startsWith('skills/'))
+  .map(source => path.basename(source)));
 
 function sync(write = false, repoRoot = root) {
   return syncSkillProjections({ write, repoRoot,
-    select: name => name.startsWith('godot-') || name === 'gdscript-patterns' });
+    select: name => names.has(name) });
 }
 
 if (require.main === module) {

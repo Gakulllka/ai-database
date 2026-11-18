@@ -1,0 +1,4 @@
+interface:
+  display_name: "Cost-Aware LLM Pipeline"
+  short_description: "Design model routing and per-attempt budget controls"
+  default_prompt: "Use $cost-aware-llm-pipeline to design model routing, retry accounting, and scoped budget controls."

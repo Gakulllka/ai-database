@@ -136,6 +136,39 @@ Do not silently turn malformed output into an empty success value. Return a type
 
 This step is complete when oversized output, invalid encoding, terminal-control sequences, malformed structured data, and a normal response all have deterministic tests.
 
+### 6. Bind Asynchronous Approval to the Action
+
+When building a runtime that pauses an action for approval, enforce the pause in
+the tool gateway. A model-supplied consent flag, approval ID or explanation is
+not a decision. Accept decisions only through an authenticated, authorized
+decision writer outside the agent-controlled tool arguments.
+
+- Bind the pending request to its principal, session/task, resource, tool and
+  exact normalized arguments, plus the relevant target version or state shown
+  to the approver. An opaque ID is a lookup key, not permission to change them.
+- Distinguish a pending response from dispatch. A shorter tool-call wait may
+  return pending while the original request remains open; resume only that
+  request under the same binding. Use the governing expiry and revocation
+  policy, refuse an unbounded configuration, and never infer consent from silence.
+- At dispatch, recheck current authorization, cancellation/takeover and the
+  relevant target state. Serialize validation with action admission where
+  possible; otherwise use a resource version or equivalent conditional write.
+  A changed target invalidates the old decision; do not redirect it to a new
+  element or resource. Report any remaining race the adapter cannot exclude.
+- Consume a one-action decision atomically so competing callers cannot both
+  dispatch. Keep pending, denied, expired and consumed states distinct. After
+  dispatch starts, an unknown outcome requires reconciliation, not a new ID or
+  blind retry. Approval consumption alone does not prove exactly-once effects.
+- Preserve valid scoped standing authorization; this contract does not require
+  repeated confirmation or expand permissions. Reuse the outbound draft, claim
+  and delivery protocol in canonical `skills/operator-approval-loop/SKILL.md`
+  rather than building a second ledger.
+
+Test forged consent, changed arguments/target, expired or revoked requests,
+pending continuation, concurrent pickup and unknown post-dispatch outcomes
+through the real action entry point. Record the actual dispatch count and state;
+instruction fixtures alone do not prove gateway enforcement.
+
 ## Verification Gate
 
 Before calling the framework hardened, verify all of these behaviors through its real entry point:

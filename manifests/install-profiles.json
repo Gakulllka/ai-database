@@ -112,7 +112,9 @@
         "delta-workflows",
         "database-evolution",
         "design-workflows",
-        "visual-project-skills"
+        "visual-project-skills",
+        "config-health",
+        "ecc-contribution-review"
       ]
     }
   }

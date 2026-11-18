@@ -1,0 +1,4 @@
+interface:
+  display_name: "Agent Harness Construction"
+  short_description: "Design tools and preserve observation evidence"
+  default_prompt: "Use $agent-harness-construction to improve this agent tool and observation workflow."

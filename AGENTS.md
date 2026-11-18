@@ -1,6 +1,6 @@
 # ECC — Agent Instructions
 
-This is a **production-ready AI coding plugin** providing 76 specialized agents, 371 skills, 98 commands, and automated hook workflows for software development.
+This is a **production-ready AI coding plugin** providing 77 specialized agents, 383 skills, 98 commands, and automated hook workflows for software development.
 
 **Version:** 2.2.3
 
@@ -91,6 +91,7 @@ Personal skills and agents belong in the existing `skills/` and `agents/` direct
 | harness-optimizer | Harness config tuning | Reliability, cost, throughput |
 | rust-reviewer | Rust code review | Rust projects |
 | rust-build-resolver | Rust build errors | Rust build failures |
+| gdscript-reviewer | GDScript and Godot 4 code review | Godot projects |
 | pytorch-build-resolver | PyTorch runtime/CUDA/training errors | PyTorch build/training failures |
 | mle-reviewer | Production ML pipeline review | ML pipelines, evals, serving, monitoring, rollback |
 | rag-pipeline-reviewer | RAG pipeline review | Retrieval quality, chunking, reranking, RAGAS evaluation coverage |
@@ -250,8 +251,8 @@ Troubleshoot failures: check test isolation → verify mocks → fix implementat
 ## Project Structure
 
 ```
-agents/          — 76 specialized subagents
-skills/          — 371 workflow skills and domain knowledge
+agents/          — 77 specialized subagents
+skills/          — 383 workflow skills and domain knowledge
 commands/        — 98 slash commands
 hooks/           — Trigger-based automations
 rules/           — Always-follow guidelines (common + per-language)

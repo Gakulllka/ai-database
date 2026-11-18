@@ -38,8 +38,9 @@ function normalizeMetadataText(value, label) {
   return value.replace(/\s+/g, ' ').trim();
 }
 
-// Match the installer's generated-file exclusions and npm's Python cache exclusions.
+// Compact carriers omit skill development tests in addition to generated files.
 function isExcludedResource(relativePath) {
+  if (/^skills\/[^/]+\/tests(?:\/|$)/.test(relativePath)) return true;
   return relativePath.split('/').some(part => EXCLUDED_DIRECTORIES.has(part)
     || ['.gitignore', '.npmignore'].includes(part) || /\.(pyc|pyo|pyd)$/i.test(part));
 }

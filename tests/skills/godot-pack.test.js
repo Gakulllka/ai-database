@@ -139,16 +139,16 @@ State="*res://state.gd"
 
   test('Godot projections include GDScript and preserve cross-tree references', () => {
     const fixture = path.join(scratch, 'projection');
-    write('projection/skills/godot-fixture/SKILL.md', '[rules](../../rules/godot/)\n[language](../gdscript-patterns/SKILL.md)');
+    write('projection/skills/godot-testing/SKILL.md', '[rules](../../rules/godot/)\n[language](../gdscript-patterns/SKILL.md)');
     write('projection/skills/gdscript-patterns/SKILL.md', '# GDScript');
-    write('projection/skills/1c-excluded/SKILL.md', '# Other pack');
+    write('projection/skills/godot-patterns/SKILL.md', '# Upstream framework module');
     fs.mkdirSync(path.join(fixture, '.agents/skills'), { recursive: true });
     assert.strictEqual(sync(false, fixture).skills, 2);
-    assert.ok(!fs.existsSync(path.join(fixture, '.agents/skills/godot-fixture/SKILL.md')));
+    assert.ok(!fs.existsSync(path.join(fixture, '.agents/skills/godot-testing/SKILL.md')));
     sync(true, fixture);
     assert.deepStrictEqual(sync(false, fixture).differences, []);
-    assert.ok(fs.readFileSync(path.join(fixture, '.agents/skills/godot-fixture/SKILL.md'), 'utf8').includes('../../../rules/godot/'));
-    assert.ok(!fs.existsSync(path.join(fixture, '.agents/skills/1c-excluded')));
+    assert.ok(fs.readFileSync(path.join(fixture, '.agents/skills/godot-testing/SKILL.md'), 'utf8').includes('../../../rules/godot/'));
+    assert.ok(!fs.existsSync(path.join(fixture, '.agents/skills/godot-patterns')));
   });
 
   test('actual Godot projection matches canonical sources', () => {

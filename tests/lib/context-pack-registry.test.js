@@ -55,6 +55,19 @@ test('npm-excluded Python caches do not alter source identity or become required
   assert.throws(() => loadContextRegistry({ repoRoot: root }), /excluded|cache|publish/i);
 }));
 
+test('compact inventory excludes skill test suites and retains runtime resources', () => withFixture(root => {
+  const before = loadContextRegistry({ repoRoot: root });
+  write(root, 'skills/feature/tests/fixtures/sample.json', '{}');
+  assert.deepEqual(loadContextRegistry({ repoRoot: root }), before);
+  write(root, 'skills/feature/scripts/tests/runner.js', 'module.exports = true;');
+  const entry = loadContextRegistry({ repoRoot: root }).entries.find(value => value.id === 'skill:feature');
+  assert.ok(entry.resources.some(resource => resource.path === 'skills/feature/scripts/tests/runner.js'));
+  update(root, REGISTRY, value => ({ ...value, overrides: [{
+    id: 'skill:feature', requiredResources: ['skills/feature/tests/fixtures/sample.json'],
+  }] }));
+  assert.throws(() => loadContextRegistry({ repoRoot: root }), /excluded/i);
+}));
+
 test('unknown and duplicate override IDs fail closed', () => withFixture(root => {
   update(root, REGISTRY, value => ({ ...value, overrides: [{ id: 'skill:missing', dependencies: [] }] }));
   assert.throws(() => loadContextRegistry({ repoRoot: root }), /unknown/i);

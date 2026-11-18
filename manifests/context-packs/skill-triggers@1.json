@@ -1,16 +1,16 @@
 {
   "coverage": {
-    "skills": 371,
-    "withTriggers": 37
+    "skills": 383,
+    "withTriggers": 42
   },
-  "generatedAt": "2026-11-10T12:58:25.354Z",
+  "generatedAt": "2026-10-30T00:01:34.569Z",
   "id": "skill-triggers@1",
   "model": {
     "effort": null,
     "id": "hand-seeded",
     "source": "manual-curation-pending-regeneration"
   },
-  "registryDigest": "f7569174104cf28975382789ed571c8a1645a6191c80698aa322fa0ecf178930",
+  "registryDigest": "498743bee9da84345704c187b01ca385119038ced9cf673ce4939e968896d0df",
   "schemaVersion": 1,
   "triggers": {
     "skill:agent-runtime-gateway-smoke-test": [
@@ -48,6 +48,16 @@
       "url path handling",
       "file server"
     ],
+    "skill:benchmark-optimization-loop": [
+      "turn user goal into benchmark",
+      "optimize task completion rate",
+      "compare implementation variants",
+      "improve correctness with fixed evaluation",
+      "reduce cost per resolved task",
+      "run bounded recursive optimization",
+      "verify improvement on independent cases",
+      "keep best measured admissible result"
+    ],
     "skill:browser-qa": [
       "deployed feature test",
       "visual regression screenshots",
@@ -63,13 +73,6 @@
       "console errors production",
       "sse stream check",
       "after deploy verification"
-    ],
-    "skill:character-art-direction": [
-      "character concept design",
-      "refine character appearance",
-      "character reference sheet",
-      "consistent character views",
-      "character silhouette and expression"
     ],
     "skill:code-tour": [
       "onboarding walkthrough",
@@ -119,12 +122,6 @@
       "ui audit",
       "design system bootstrap"
     ],
-    "skill:design-workflow": [
-      "choose design workflow",
-      "design pipeline selection",
-      "art versus functional interface",
-      "mixed game art and ui design"
-    ],
     "skill:django-patterns": [
       "django orm",
       "drf api",
@@ -148,6 +145,12 @@
       "docker compose setup",
       "container security",
       "multi service orchestration"
+    ],
+    "skill:ecc-contribution-review": [
+      "prepare ecc skill contribution for review",
+      "organize skill contribution security evidence",
+      "review cross-harness skill contribution observations",
+      "compile ecc skill contribution proposal"
     ],
     "skill:error-handling": [
       "error types",
@@ -177,13 +180,6 @@
       "keyboard navigation react",
       "a11y lint errors"
     ],
-    "skill:frontend-design-direction": [
-      "functional tool design",
-      "1c form usability",
-      "operational dashboard layout",
-      "interface states and hierarchy",
-      "web visual direction"
-    ],
     "skill:git-workflow": [
       "merge vs rebase",
       "commit conventions",
@@ -192,6 +188,27 @@
       "clean up commits",
       "pull request cleanup",
       "git history tidy"
+    ],
+    "skill:godot-patterns": [
+      "godot gdscript patterns",
+      "godot 4 best practices",
+      "gdscript static typing",
+      "godot signals vs direct calls",
+      "godot scene tree design",
+      "godot autoload singleton",
+      "godot resource data",
+      "gdscript style guide",
+      "godot node freed after await"
+    ],
+    "skill:godot-testing": [
+      "godot unit tests",
+      "gdunit4",
+      "gut godot tests",
+      "godot headless tests",
+      "test gdscript",
+      "godot ci tests",
+      "godot scene runner test",
+      "godot check-only"
     ],
     "skill:hexagonal-architecture": [
       "ports and adapters",
@@ -212,6 +229,14 @@
       "regression fix",
       "reproduce bug",
       "defect repair"
+    ],
+    "skill:platform-factory": [
+      "platform factory",
+      "pf freeze",
+      "pf build",
+      "reproducible oci image",
+      "oci sbom provenance",
+      "microvm container"
     ],
     "skill:postgres-patterns": [
       "slow postgres query",
@@ -266,6 +291,15 @@
       "rust concurrency",
       "idiomatic rust"
     ],
+    "skill:scientific-db-openalex-database": [
+      "openalex api",
+      "cross disciplinary literature search",
+      "look up paper by doi",
+      "resolve pmid to metadata",
+      "find open access copy",
+      "citation count lookup",
+      "verify a citation exists"
+    ],
     "skill:search-first": [
       "find existing library",
       "npm package research",
@@ -295,6 +329,13 @@
       "hook configuration audit",
       "settings json security"
     ],
+    "skill:short-video-distribution": [
+      "publish video to tiktok youtube reels",
+      "cross-post short video",
+      "schedule short-form video",
+      "upload reel and short",
+      "video captions per platform"
+    ],
     "skill:tdd-workflow": [
       "write test first",
       "failing test",
@@ -323,7 +364,19 @@
       "quality gates",
       "build lint test coverage",
       "before creating a pr"
+    ],
+    "skill:yoruba-localization-testing": [
+      "yoruba localization testing",
+      "yoruba english bilingual interface",
+      "yoruba tone marks",
+      "yoruba diacritics",
+      "yoruba unicode normalization",
+      "yoruba translation fallback",
+      "yoruba screen reader language",
+      "yoruba bilingual ui",
+      "test yoruba character preservation",
+      "yoruba accents not rendering"
     ]
   },
-  "triggersDigest": "164c4f3b3b0a1529539b7bbd1bb2e6b69105cc53e7034a8b543b6f0d164c14fa"
+  "triggersDigest": "b1f4c1bd0602860615fb67ecf4d16b6a0f7171ab4d65862c3db66aa0a2d6487c"
 }

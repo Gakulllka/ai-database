@@ -1,6 +1,6 @@
 ---
 name: godot-testing
-description: "Select and run meaningful Godot script, scene, gameplay and target checks with isolated user data. Use before claiming a Godot change, build or game behavior works."
+description: "Select and run meaningful Godot script, scene, gameplay and target checks with isolated user data. Use before claiming a Godot change, build or game behavior works, or to select a Godot 4 test framework."
 metadata:
   origin: "Database: Godot primary documentation and GameDev reference analysis"
 ---
@@ -20,6 +20,12 @@ Verify a 2D/3D, GDScript/C#, asset, save, networking or export change; match evi
 5. Exercise lifecycle/timing where relevant: enter/ready/rebind/exit, physics/map synchronization, pause, resize/input, retry, save restore and clean shutdown. Avoid arbitrary waits that hide the state under test.
 6. Add real rendering, audio, hardware input, network-peer or target-build checks only where required and available. Headless mode uses no ordinary display/audio output and cannot accept those properties.
 7. Report revision, engine, commands, environment and actual results. Keep stale failures/untested branches visible; historical pass totals and synthetic fixtures are not current whole-game acceptance.
+
+## Godot 4 Test Suites
+
+Use the [Godot 4 testing examples](references/godot4-testing-frameworks.md)
+for a project-owned check scene, gdUnit4, GUT or a CI smoke check. The examples
+assume matching project classes and framework versions.
 
 ## Optional Isolated Godot 4 Fixtures
 
@@ -46,9 +52,9 @@ C# support, exported target, graphics, sound or network acceptance.
 
 ## Related Skills
 
-[godot-development](../godot-development/SKILL.md),
-[godot-scenes-resources](../godot-scenes-resources/SKILL.md),
-[godot-testing](SKILL.md).
+For GDScript architecture, use the upstream `godot-patterns` skill when
+available in the framework-language module or Pi Core. If installed, also use the
+Database skills `godot-development`, `godot-scenes-resources` and `gdscript-patterns`.
 
 ## Primary Sources
 

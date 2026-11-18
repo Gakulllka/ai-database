@@ -165,8 +165,9 @@ describe('check-spec-freshness (v1, file-level)', () => {
 
     it('exits 2 for a symlinked project root', () => {
       const real = track(initRepo());
-      const link = path.join(os.tmpdir(), 'ecc-link-' + Date.now());
-      fs.symlinkSync(real, link);
+      const owner = track(fs.mkdtempSync(path.join(os.tmpdir(), 'ecc-link-')));
+      const link = path.join(owner, 'project');
+      fs.symlinkSync(real, link, process.platform === 'win32' ? 'junction' : 'dir');
       try {
         const result = runChecker(link);
         assert.strictEqual(result.exitCode, 2, result.stderr);
@@ -307,14 +308,20 @@ describe('check-spec-freshness (v1, file-level)', () => {
       const outsideDir = fs.mkdtempSync(path.join(os.tmpdir(), 'ecc-outside-'));
       const outside = path.join(outsideDir, 'outside.txt');
       fs.writeFileSync(outside, 'outside\n');
-      fs.mkdirSync(path.join(repo, 'src'), { recursive: true });
-      fs.symlinkSync(outside, path.join(repo, 'src', 'link.js'));
+      const source = path.join(repo, 'src');
+      const onWindows = process.platform === 'win32';
+      const link = path.join(source, onWindows ? 'linked-dir' : 'link.js');
+      const anchor = onWindows ? 'src/linked-dir/outside.txt::x' : 'src/link.js::x';
+      fs.mkdirSync(source, { recursive: true });
       try {
-        writeSpec(repo, 'escape', { lastVerified: daysAgo(1), anchors: ['src/link.js::x'] });
+        if (onWindows) fs.symlinkSync(outsideDir, link, 'junction');
+        else fs.symlinkSync(outside, link, 'file');
+        writeSpec(repo, 'escape', { lastVerified: daysAgo(1), anchors: [anchor] });
         const result = runChecker(repo);
         const spec = parseJson(result).specs.find((s) => s.path.includes('escape'));
         assert.strictEqual(spec.status, 'ORPHANED', JSON.stringify(spec));
       } finally {
+        if (fs.existsSync(link)) fs.unlinkSync(link);
         fs.rmSync(outsideDir, { recursive: true, force: true });
       }
     });

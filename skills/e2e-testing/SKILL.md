@@ -182,6 +182,35 @@ and the pinned `browser_use/agent/service.py` and `browser_use/agent/views.py`
 implementations. These precautions also apply when using another browser tool;
 they do not require installing Browser Use.
 
+### Agent-Driven Browser Boundaries
+
+Before an agent-driven test, record the installed tool/version, local or cloud
+browser, profile/test account, code runner and data recipients. Recheck these
+after upgrades; an unchanged API can acquire different execution defaults.
+
+Inspect what URL restrictions actually enforce in that mode. A navigation
+allowlist may leave page subresources, iframes and the runner's own networking
+unrestricted. A fresh profile, temporary workspace or cloud browser does not
+establish containment of a local code runner or limit the files it can read.
+When containment is required, verify the effective process, filesystem and
+network controls for both runner and browser before execution; unresolved
+boundaries leave that test INCONCLUSIVE. Preserve authorized staging/test scope.
+
+Check debugging endpoint access and browser lifetime on shared hosts; a loopback
+address alone does not authenticate other local users. Use an appropriately
+isolated test environment rather than exposing a logged-in profile.
+
+Inspect automatic evaluation and telemetry before the first call. Text/typed-secret
+redaction does not establish image redaction: screenshots, live views and a
+post-run judge can have separate data paths. Use sanitized fixtures and only
+authorized recipients; disable an unsupported outbound path or use an authorized
+alternative. Keep the judge's claim separate from verified application state.
+
+Evidence: [Browser Use 1.0 migration and trust model](https://github.com/browser-use/browser-use/blob/ccbdb8095fbaf903c748880a600054a34c7b6191/MIGRATING.md),
+with pinned `browser_use/domains.py`, `browser_use/repl/worker.py` and
+`browser_use/agent/judge.py`. These are integration preconditions, not a claim
+that ECC implements a sandbox or requires Browser Use.
+
 ### Common Causes & Fixes
 
 **Race conditions:**

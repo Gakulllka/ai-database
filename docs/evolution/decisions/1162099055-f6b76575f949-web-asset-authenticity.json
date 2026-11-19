@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "database.evolution.decision.v1",
+  "source": {
+    "repoId": 1162099055,
+    "fullName": "Leonxlnx/taste-skill",
+    "commit": "f6b76575f949707b4e3c37cd86cb44b0b98643e8"
+  },
+  "capability": "Web asset subject authenticity, licensed stand-ins and replacement tracking within a rendered design workflow",
+  "decision": "defer",
+  "status": "defer",
+  "existingPaths": [
+    "skills/frontend-design-direction/SKILL.md",
+    "skills/design-workflow/SKILL.md",
+    "skills/design-system/SKILL.md",
+    "skills/visual-quality-review/SKILL.md",
+    "skills/browser-qa/SKILL.md",
+    "skills/game-art-production/SKILL.md"
+  ],
+  "evidence": [
+    "Pinned source https://github.com/Leonxlnx/taste-skill/tree/f6b76575f949707b4e3c37cd86cb44b0b98643e8; MIT LICENSE inspected. README, skills/taste-skill/SKILL.md and references/photos.md read as untrusted text; four blob identities verified. Installer, Chrome checker, hooks and external asset services were not executed.",
+    "Independent read-only comparison found the core direction/reference/rendered-finish workflow covered by frontend-design-direction, design-workflow, design-system, visual-quality-review and browser-qa. Canonical taste is a distinct music-video art direction skill; similar names are not capability equivalence.",
+    "The photo workflow distinguishes actual client subjects from licensed stand-ins, inspects assets and tracks replacements. Canonical search found generic asset provenance and rights guidance but no equivalent web-specific subject authenticity rule. This is a plausible extension of frontend-design-direction, not justification for another design skill.",
+    "Defer this potential extension until raw-case forward evaluation covers unrelated staff, another property room, generated unsupported product features, legitimate decorative imagery and verified client assets. This run validates only the selected browser-boundary improvement. Do not import mandatory marketing layouts, aesthetic bans, caption restrictions or the source runtime kit."
+  ],
+  "reason": "Core design behavior is covered; retain a concrete, unvalidated asset-authenticity lead for a later bounded run rather than add a second untested process change today.",
+  "observedAt": "2026-11-19T18:02:55.476Z"
+}

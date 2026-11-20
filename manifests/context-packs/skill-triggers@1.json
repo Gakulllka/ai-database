@@ -1,16 +1,16 @@
 {
   "coverage": {
-    "skills": 383,
-    "withTriggers": 42
+    "skills": 388,
+    "withTriggers": 47
   },
-  "generatedAt": "2026-10-30T00:01:34.569Z",
+  "generatedAt": "2026-11-20T12:59:04.541Z",
   "id": "skill-triggers@1",
   "model": {
     "effort": null,
     "id": "hand-seeded",
     "source": "manual-curation-pending-regeneration"
   },
-  "registryDigest": "498743bee9da84345704c187b01ca385119038ced9cf673ce4939e968896d0df",
+  "registryDigest": "5b14c02467c70cf98164fcb4a4b70ee5193d2aa873141f4543a35e591282035c",
   "schemaVersion": 1,
   "triggers": {
     "skill:agent-runtime-gateway-smoke-test": [
@@ -73,6 +73,12 @@
       "console errors production",
       "sse stream check",
       "after deploy verification"
+    ],
+    "skill:clear-replies": [
+      "explain the result in plain language",
+      "make the report easy to scan",
+      "summarize the outcome and next step",
+      "write a short result summary"
     ],
     "skill:code-tour": [
       "onboarding walkthrough",
@@ -165,6 +171,12 @@
       "error codes",
       "config validation"
     ],
+    "skill:evidence-research": [
+      "research with primary sources",
+      "compare independent sources",
+      "trace claims to evidence",
+      "verify findings against original sources"
+    ],
     "skill:evm-token-decimals": [
       "token decimals",
       "wei conversion",
@@ -179,6 +191,15 @@
       "form labeling",
       "keyboard navigation react",
       "a11y lint errors"
+    ],
+    "skill:game-balance": [
+      "balance a game",
+      "tune game progression",
+      "compare character builds",
+      "balance game combat",
+      "tune an in-game economy",
+      "model game difficulty",
+      "make an interactive game balance model"
     ],
     "skill:git-workflow": [
       "merge vs rebase",
@@ -222,6 +243,13 @@
       "k8s rbac",
       "autoscaling config",
       "configmap secrets"
+    ],
+    "skill:learn-eval": [
+      "learn from completed work",
+      "turn a verified finding into a skill",
+      "make a correction reusable",
+      "improve a skill after a failure",
+      "evaluate a skill update"
     ],
     "skill:orch-fix-defect": [
       "fix a bug",
@@ -365,6 +393,12 @@
       "build lint test coverage",
       "before creating a pr"
     ],
+    "skill:verify-deliverables": [
+      "check deliverables against acceptance criteria",
+      "verify a fix through the normal workflow",
+      "check an integration outcome",
+      "verify a generated artifact"
+    ],
     "skill:yoruba-localization-testing": [
       "yoruba localization testing",
       "yoruba english bilingual interface",
@@ -378,5 +412,5 @@
       "yoruba accents not rendering"
     ]
   },
-  "triggersDigest": "b1f4c1bd0602860615fb67ecf4d16b6a0f7171ab4d65862c3db66aa0a2d6487c"
+  "triggersDigest": "1a006b751f3b7da9ada725342ba74ad58a3662bc1a6eb9fe86808dd951c68a0e"
 }

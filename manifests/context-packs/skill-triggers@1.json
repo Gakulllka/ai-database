@@ -1,16 +1,16 @@
 {
   "coverage": {
-    "skills": 388,
-    "withTriggers": 47
+    "skills": 389,
+    "withTriggers": 48
   },
-  "generatedAt": "2026-11-20T12:59:04.541Z",
+  "generatedAt": "2026-11-20T13:45:29.190Z",
   "id": "skill-triggers@1",
   "model": {
     "effort": null,
     "id": "hand-seeded",
     "source": "manual-curation-pending-regeneration"
   },
-  "registryDigest": "5b14c02467c70cf98164fcb4a4b70ee5193d2aa873141f4543a35e591282035c",
+  "registryDigest": "37868e88b4cb59de2ef175e143a0d7e9a39c8402944549403d24d000990e6560",
   "schemaVersion": 1,
   "triggers": {
     "skill:agent-runtime-gateway-smoke-test": [
@@ -200,6 +200,13 @@
       "tune an in-game economy",
       "model game difficulty",
       "make an interactive game balance model"
+    ],
+    "skill:game-playtest": [
+      "plan a short game playtest",
+      "observe a player try a game mechanic",
+      "analyze playtest notes",
+      "hand off a playable prototype for human feedback",
+      "make an interactive playtest feedback form"
     ],
     "skill:git-workflow": [
       "merge vs rebase",
@@ -412,5 +419,5 @@
       "yoruba accents not rendering"
     ]
   },
-  "triggersDigest": "1a006b751f3b7da9ada725342ba74ad58a3662bc1a6eb9fe86808dd951c68a0e"
+  "triggersDigest": "bc3ad00c8ff852f3d4be0cdc4efebc93ff4d71a831ac34a5cdf08aa73c94114b"
 }

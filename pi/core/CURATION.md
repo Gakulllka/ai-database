@@ -1,6 +1,6 @@
 # Curation
 
-pi/core includes 138 of 388 skills and 24 of 98 commands from the root of ECC.
+pi/core includes 138 of 389 skills and 24 of 98 commands from the root of ECC.
 Everything excluded is listed here with its reason.
 
 ## Rules
@@ -45,6 +45,7 @@ Exclude anything that:
 | `ecosystem-design-consistency` | Optional Database cross-product and data workflows. |
 | `evidence-research` | Optional Database learning workflows for Codex. |
 | `fairytale-fantasy` | Optional Visual project pack with separate reference artwork. |
+| `game-playtest` | Optional Database player-testing skill for Codex. |
 | `game-balance` | Optional Database game balancing skill. |
 | `game-art-production` | Optional Visual project pack with separate reference artwork. |
 | `gdscript-patterns` | Optional Database Godot pack. Core has portable upstream Godot guidance. |

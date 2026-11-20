@@ -201,6 +201,7 @@
       "ecosystem-design-consistency": "Optional Database cross-product and data workflows.",
       "evidence-research": "Optional Database learning workflows for Codex.",
       "fairytale-fantasy": "Optional Visual project pack with separate reference artwork.",
+      "game-playtest": "Optional Database player-testing skill for Codex.",
       "game-balance": "Optional Database game balancing skill.",
       "game-art-production": "Optional Visual project pack with separate reference artwork.",
       "gdscript-patterns": "Optional Database Godot pack. Core has portable upstream Godot guidance.",

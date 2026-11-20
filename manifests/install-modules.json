@@ -1805,6 +1805,21 @@
       "stability": "beta"
     },
     {
+      "id": "game-playtest",
+      "kind": "skills",
+      "description": "Short human game playtests with an interactive feedback handoff for AI-built mechanics.",
+      "paths": [
+        "skills/game-playtest"
+      ],
+      "targets": [
+        "codex"
+      ],
+      "dependencies": [],
+      "defaultInstall": false,
+      "cost": "light",
+      "stability": "beta"
+    },
+    {
       "id": "visual-project-skills",
       "kind": "skills",
       "description": "Opt-in illustration styles, project character profiles and visual production workflows with reference artwork.",

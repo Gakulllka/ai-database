@@ -1,0 +1,17 @@
+{
+  "description": "Recovery reminder after Codex compacts a session",
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "^compact$",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node -e \"console.log('After context compaction, recover the latest user constraints and the next unfinished action. For work already running, recover the existing job or session ID and check its status before restarting. Reuse verified results and existing artifacts. If a prior external write may have succeeded, read back the target state before retrying.')\"",
+            "timeout": 5
+          }
+        ]
+      }
+    ]
+  }
+}

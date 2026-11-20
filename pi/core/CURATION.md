@@ -1,6 +1,6 @@
 # Curation
 
-pi/core includes 138 of 383 skills and 24 of 98 commands from the root of ECC.
+pi/core includes 138 of 388 skills and 24 of 98 commands from the root of ECC.
 Everything excluded is listed here with its reason.
 
 ## Rules
@@ -37,12 +37,15 @@ Exclude anything that:
 | `ai-artifact-contracts` | Optional Database cross-product and data workflows. |
 | `botanical-mechanics` | Optional Visual project pack with separate reference artwork. |
 | `character-art-direction` | Optional Database task-based design pack. |
+| `clear-replies` | Optional Database learning workflows for Codex. |
 | `dasha-character` | Optional Visual project pack with separate reference artwork. |
 | `database-evolution` | Database owner maintenance and publication workflow. |
 | `design-workflow` | Optional Database task-based design pack. |
 | `dirty-horror` | Optional Visual project pack with separate reference artwork. |
 | `ecosystem-design-consistency` | Optional Database cross-product and data workflows. |
+| `evidence-research` | Optional Database learning workflows for Codex. |
 | `fairytale-fantasy` | Optional Visual project pack with separate reference artwork. |
+| `game-balance` | Optional Database game balancing skill. |
 | `game-art-production` | Optional Visual project pack with separate reference artwork. |
 | `gdscript-patterns` | Optional Database Godot pack. Core has portable upstream Godot guidance. |
 | `godot-2d` | Optional Database Godot pack. Core has portable upstream Godot guidance. |
@@ -63,6 +66,7 @@ Exclude anything that:
 | `godot-ui-input` | Optional Database Godot pack. Core has portable upstream Godot guidance. |
 | `indie-grotesque` | Optional Visual project pack with separate reference artwork. |
 | `ink-punk` | Optional Visual project pack with separate reference artwork. |
+| `learn-eval` | Optional Database learning workflows for Codex. |
 | `lisa-character` | Optional Visual project pack with separate reference artwork. |
 | `local-first-sync` | Optional Database cross-product and data workflows. |
 | `model-texture-restyle` | Optional Visual project pack with separate reference artwork. |
@@ -70,6 +74,7 @@ Exclude anything that:
 | `pop-animation` | Optional Visual project pack with separate reference artwork. |
 | `retro-3d-painted` | Optional Visual project pack with separate reference artwork. |
 | `tabular-import-reconciliation` | Optional Database cross-product and data workflows. |
+| `verify-deliverables` | Optional Database learning workflows for Codex. |
 | `visual-design-base` | Optional Visual project pack with separate reference artwork. |
 | `visual-design-practice` | Optional Visual project pack with separate reference artwork. |
 | `visual-novel-art` | Optional Visual project pack with separate reference artwork. |

@@ -25,6 +25,19 @@ Stable hook IDs and descriptions live in `hooks/hooks.metadata.json`, aligned by
 
 Each sidecar entry also carries a `fingerprint` of the matcher entry it describes (matcher plus hook commands), so reordering `hooks.json` without reordering the sidecar, or editing a command without updating the sidecar, is caught rather than silently swapping IDs. When reordering hooks, move the matching sidecar entries first. Then run `node scripts/ci/validate-hooks.js --update-fingerprints` to refresh changed commands and commit both files. The updater rejects known fingerprints at different positions and writes only after validation succeeds.
 
+## Codex Compaction Recovery
+
+[Codex compaction recovery](codex-compaction-recovery.json) is an optional
+user hook. When Codex starts again after compacting the conversation, it
+prompts Codex to recover the next unfinished step and check any running
+operation before retrying it. The command uses Node.js.
+
+Merge its `SessionStart` entry into the `hooks` object in your Codex user
+`hooks.json` (typically `~/.codex/hooks.json`), keeping existing entries.
+If that file is absent, use the example as the new file. If the same entry
+is already present, keep a single copy. Open `/hooks` in Codex to review and
+trust the entry.
+
 ## Installing These Hooks Manually
 
 For Claude Code manual installs, do not paste the raw repo `hooks.json` into `~/.claude/settings.json` or copy it directly into `~/.claude/hooks/hooks.json`. The checked-in file is plugin/repo-oriented and is meant to be installed through the ECC installer or loaded as a plugin.

@@ -823,6 +823,22 @@
       ]
     },
     {
+      "id": "capability:game-balance",
+      "family": "capability",
+      "description": "Genre-aware balance research and interactive HTML scenario comparisons.",
+      "modules": [
+        "game-balance"
+      ]
+    },
+    {
+      "id": "capability:learning-workflows",
+      "family": "capability",
+      "description": "Evidence research, skill evaluation, deliverable verification and clear reporting.",
+      "modules": [
+        "learning-workflows"
+      ]
+    },
+    {
       "id": "capability:visual-project-skills",
       "family": "capability",
       "description": "Illustration styles, character references and visual production workflows from the Visual project.",

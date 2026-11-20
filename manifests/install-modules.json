@@ -1772,6 +1772,39 @@
       "stability": "beta"
     },
     {
+      "id": "game-balance",
+      "kind": "skills",
+      "description": "Genre-aware balance research and interactive HTML scenario comparisons.",
+      "paths": [
+        "skills/game-balance"
+      ],
+      "targets": [
+        "codex"
+      ],
+      "dependencies": [],
+      "defaultInstall": false,
+      "cost": "light",
+      "stability": "beta"
+    },
+    {
+      "id": "learning-workflows",
+      "kind": "skills",
+      "description": "Evidence research, skill evaluation, deliverable verification and clear reporting.",
+      "paths": [
+        "skills/clear-replies",
+        "skills/evidence-research",
+        "skills/learn-eval",
+        "skills/verify-deliverables"
+      ],
+      "targets": [
+        "codex"
+      ],
+      "dependencies": [],
+      "defaultInstall": false,
+      "cost": "light",
+      "stability": "beta"
+    },
+    {
       "id": "visual-project-skills",
       "kind": "skills",
       "description": "Opt-in illustration styles, project character profiles and visual production workflows with reference artwork.",

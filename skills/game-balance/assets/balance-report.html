@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>Balance report</title>
+<style>
+:root {
+  --paper:#f5f3ec; --card:#fffdf8; --ink:#162b22; --muted:#4c6055;
+  --border:#d8dfd3; --forest:#13382c; --green:#216647; --mint:#e2efe1;
+}
+* { box-sizing:border-box; }
+[hidden] { display:none !important; }
+body { margin:0; background:var(--paper); color:var(--ink); font:16px/1.5 "Segoe UI",Arial,sans-serif; }
+h1,h2,h3,p,figure { margin:0; }
+a { color:var(--green); text-underline-offset:.2em; }
+button,input,select { font:inherit; }
+:focus-visible { outline:3px solid var(--green); outline-offset:3px; }
+.wrap { width:min(1100px,calc(100% - 58px)); margin-inline:auto; }
+header { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:14px 0; border-bottom:1px solid var(--border); }
+header a { font-weight:650; }
+.hero { display:grid; grid-template-columns:1.18fr .9fr; align-items:center; gap:30px; padding:40px 0 28px; }
+.hero h1 { font:600 clamp(2.3rem,5.4vw,4.1rem)/1 Georgia,serif; letter-spacing:-.04em; max-width:15ch; }
+.hero p { margin-top:12px; max-width:45ch; }
+.decision { background:var(--forest); color:white; padding:21px; border-radius:16px; }
+.decision p { color:#dce9df; }
+.card { background:var(--card); border:1px solid var(--border); padding:21px; border-radius:16px; }
+h2 { font:600 clamp(1.55rem,3vw,2.2rem)/1.14 Georgia,serif; letter-spacing:-.02em; }
+.intro,.note { color:var(--muted); margin-top:7px; }
+.lab { display:grid; grid-template-columns:minmax(0,.78fr) minmax(0,1fr); gap:22px; margin-top:15px; }
+.controls { min-width:0; background:#f4f7ef; border:1px solid var(--border); border-radius:12px; padding:13px; }
+.fields { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:9px; margin-top:10px; }
+label { display:block; font-size:.87rem; font-weight:650; }
+input,select { display:block; width:100%; margin-top:4px; padding:6px 8px; border:1px solid #a3b5a7; border-radius:6px; color:var(--ink); background:white; }
+button { margin-top:12px; padding:6px 9px; background:var(--mint); border:1px solid #a3b5a7; border-radius:6px; color:var(--ink); cursor:pointer; }
+button:hover { background:#d5e6d4; }
+.notice { min-height:1.6em; font-size:.86rem; color:#963b21; }
+.scroll-panel { max-width:100%; overflow:auto; }
+table { width:100%; border-collapse:collapse; font-size:.9rem; margin:4px 0 12px; }
+th,td { padding:7px 8px 7px 0; border-bottom:1px solid var(--border); text-align:left; overflow-wrap:anywhere; }
+thead th { color:var(--muted); font-size:.83rem; }
+td { font-variant-numeric:tabular-nums; }
+tr.current { background:#f0f5ee; }
+figure { margin-top:12px; }
+figcaption { font-weight:660; }
+.chart-row { margin-top:7px; }
+.chart-label { display:flex; justify-content:space-between; gap:10px; font-size:.88rem; }
+.rail { height:9px; margin-top:3px; background:var(--mint); border-radius:5px; overflow:hidden; }
+.rail i { display:block; height:100%; background:var(--green); border-radius:inherit; }
+.more { margin:24px 0 30px; }
+.more h2 { margin-bottom:10px; }
+details { background:var(--card); border:1px solid var(--border); border-radius:10px; }
+details+details { margin-top:7px; }
+summary { cursor:pointer; padding:11px 13px; font-weight:650; }
+details p { margin:0 13px 12px; }
+@media(max-width:670px) {
+  .wrap { width:calc(100% - 30px); }
+  .hero,.lab { grid-template-columns:1fr; gap:13px; }
+  .hero { padding:24px 0; }
+  .card { padding:14px; }
+}
+</style>
+</head>
+<body>
+<header class="wrap"><strong>Balance report</strong><a href="#details">Details</a></header>
+<main class="wrap">
+  <section class="hero" aria-labelledby="takeaway">
+    <div>
+      <!-- Replace this example with the actual finding and its scope. -->
+      <h1 id="takeaway">Set a target for the first purchase</h1>
+      <p>In this example, faster earnings bring the upgrade within reach sooner. Compare the cases, then set a target for the pace you want in your game.</p>
+    </div>
+    <aside class="decision">
+      <h2>What to check</h2>
+      <p>See whether each scenario reaches the same purchase, and how long it takes when earnings slow down.</p>
+    </aside>
+  </section>
+
+  <section class="card" aria-labelledby="comparison-title">
+    <h2 id="comparison-title">Compare the cases</h2>
+    <p class="intro">Pick a scenario to edit. The table keeps all scenarios side by side.</p>
+    <noscript><p>Enable JavaScript for editable comparisons.</p></noscript>
+    <div class="lab" id="lab" hidden>
+      <form class="controls" id="controls">
+        <label for="case-choice">Scenario to edit<select id="case-choice"></select></label>
+        <div class="fields" id="fields"></div>
+        <button id="reset" type="button">Reset scenarios</button>
+      </form>
+      <div>
+        <p class="notice" id="status" role="status"></p>
+        <div class="scroll-panel" tabindex="0" aria-label="Comparison table">
+          <table aria-label="Results by scenario">
+            <thead><tr id="head"></tr></thead>
+            <tbody id="rows"></tbody>
+          </table>
+        </div>
+        <figure id="figure" aria-labelledby="metric-title" hidden>
+          <figcaption id="metric-title"></figcaption>
+          <div id="bars"></div>
+        </figure>
+        <p class="note">An em dash marks an unavailable result.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="more" id="details" aria-labelledby="details-title">
+    <h2 id="details-title">Details</h2>
+    <!-- Replace the example explanation and add links to the primary sources used. -->
+    <details>
+      <summary>How the model works</summary>
+      <p>The example assumes earnings are constant until the first purchase. With 10 coins, a 70-coin price and 12 coins per minute, the wait is 5 minutes.</p>
+    </details>
+    <details>
+      <summary>Limits and what to verify</summary>
+      <p>In a real game, record the time between rewards, competing purchases and any access rules. Check the calculation against a known game session before tuning.</p>
+    </details>
+  </section>
+</main>
+
+<script>
+"use strict";
+// Replace these example fields, metrics, cases and the evaluator for the game.
+const fields = [
+  { key: "wallet", label: "Starting coins", min: 0, max: 100000, step: 1 },
+  { key: "rate", label: "Coins per minute", min: 0, max: 10000, step: 0.1 },
+  { key: "price", label: "Purchase price", min: 0, max: 100000, step: 1 },
+];
+const metrics = [
+  { key: "wait", label: "Wait (min)", precision: 2 },
+  { key: "walletAtFive", label: "Coins in 5 min", precision: 1 },
+];
+const cases = [
+  { name: "Baseline", values: { wallet: 10, rate: 12, price: 70 } },
+  { name: "Faster earnings", values: { wallet: 10, rate: 18, price: 70 } },
+  { name: "No earnings", values: { wallet: 10, rate: 0, price: 70 } },
+];
+function evaluate(values) {
+  const missing = Math.max(0, values.price - values.wallet);
+  return {
+    wait: missing === 0 ? 0 : values.rate > 0 ? missing / values.rate : null,
+    walletAtFive: values.wallet + 5 * values.rate,
+  };
+}
+
+const lab = document.querySelector("#lab");
+const form = document.querySelector("#controls");
+const picker = document.querySelector("#case-choice");
+const fieldList = document.querySelector("#fields");
+const status = document.querySelector("#status");
+const head = document.querySelector("#head");
+const rows = document.querySelector("#rows");
+const figure = document.querySelector("#figure");
+const chartTitle = document.querySelector("#metric-title");
+const bars = document.querySelector("#bars");
+let values = cases.map(item => ({ ...item.values }));
+
+function make(tag, text, className) {
+  const node = document.createElement(tag);
+  if (text !== undefined) node.textContent = text;
+  if (className) node.className = className;
+  return node;
+}
+
+function display(value, metric) {
+  if (value === null) return "\u2014";
+  return new Intl.NumberFormat(document.documentElement.lang, { maximumFractionDigits: metric.precision }).format(value);
+}
+
+function setFields() {
+  const selected = values[Number(picker.value)];
+  fieldList.replaceChildren(...fields.map(field => {
+    const label = make("label", field.label);
+    const input = make("input");
+    Object.assign(input, {
+      type: "number", name: field.key, min: field.min, max: field.max,
+      step: field.step, value: selected[field.key] ?? "", required: true,
+    });
+    label.append(input);
+    return label;
+  }));
+}
+
+function validate(input, field) {
+  if (!Number.isFinite(input) || input < field.min || input > field.max) return false;
+  const quanta = (input - field.min) / field.step;
+  return Math.abs(quanta - Math.round(quanta)) < 1e-7;
+}
+
+function run(item) {
+  const invalid = fields.find(field => !validate(item[field.key], field));
+  if (invalid) return { error: "Check " + invalid.label + "." };
+  try {
+    const output = evaluate(item);
+    if (metrics.every(metric => output[metric.key] === null || Number.isFinite(output[metric.key]))) return { output };
+    return { error: "The model returned an invalid result." };
+  } catch (error) {
+    return { error: error instanceof RangeError ? error.message : "The model could not calculate this scenario." };
+  }
+}
+
+function update() {
+  const selected = Number(picker.value);
+  const results = values.map(run);
+  status.textContent = results[selected].error || "";
+  rows.replaceChildren(...results.map((result, index) => {
+    const row = make("tr", undefined, index === selected ? "current" : "");
+    const title = make("th", cases[index].name);
+    title.scope = "row";
+    row.append(title);
+    if (result.error) {
+      const error = make("td", result.error);
+      error.colSpan = metrics.length;
+      row.append(error);
+    } else {
+      for (const metric of metrics) row.append(make("td", display(result.output[metric.key], metric)));
+    }
+    return row;
+  }));
+
+  const primary = metrics[0];
+  const plotted = results.flatMap((result, index) => {
+    const value = result.output?.[primary.key];
+    return Number.isFinite(value) ? [{ value, name: cases[index].name }] : [];
+  });
+  figure.hidden = plotted.length === 0 || plotted.some(item => item.value < 0);
+  if (figure.hidden) return;
+  const maximum = Math.max(...plotted.map(item => item.value), 0);
+  chartTitle.textContent = primary.label;
+  bars.replaceChildren(...plotted.map(item => {
+    const row = make("div", undefined, "chart-row");
+    const label = make("div", undefined, "chart-label");
+    label.append(make("span", item.name), make("strong", display(item.value, primary)));
+    const rail = make("div", undefined, "rail");
+    rail.setAttribute("aria-hidden", "true");
+    const fill = make("i");
+    fill.style.width = (maximum ? 100 * item.value / maximum : 0) + "%";
+    rail.append(fill);
+    row.append(label, rail);
+    return row;
+  }));
+}
+
+for (const [index, scenario] of cases.entries()) {
+  const option = make("option", scenario.name);
+  option.value = index;
+  picker.append(option);
+}
+for (const label of ["Scenario", ...metrics.map(metric => metric.label)]) {
+  const column = make("th", label);
+  column.scope = "col";
+  head.append(column);
+}
+picker.addEventListener("change", () => { setFields(); update(); });
+form.addEventListener("input", event => {
+  if (!(event.target instanceof HTMLInputElement)) return;
+  values[Number(picker.value)][event.target.name] = event.target.valueAsNumber;
+  update();
+});
+form.addEventListener("submit", event => event.preventDefault());
+document.querySelector("#reset").addEventListener("click", () => {
+  values = cases.map(item => ({ ...item.values }));
+  picker.value = "0";
+  setFields();
+  update();
+});
+setFields();
+update();
+lab.hidden = false;
+</script>
+</body>
+</html>

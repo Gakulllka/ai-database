@@ -1,0 +1,4 @@
+interface:
+  display_name: "Game Playtest"
+  short_description: "Plan human playtests and capture useful feedback"
+  default_prompt: "Use $game-playtest to plan or analyze this human game playtest with observable evidence."

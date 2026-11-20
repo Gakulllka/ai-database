@@ -100,6 +100,38 @@ untested state, not a reason to mark it not applicable.
 - Verify text fit on mobile and desktop. Long labels must wrap or resize
   cleanly rather than overflowing.
 
+### Web image identity and stand-ins
+
+For web images that imply facts about a business, person, place, product or
+software, check both usage rights and the depicted subject. A licensed photograph
+is not evidence that it shows this client's team, premises or product.
+
+- Keep a local asset list in the existing design record: source and usage terms,
+  intended subject and placement, verified client/supplier material or stand-in,
+  and the replacement needed for each stand-in. Inspect the actual image before
+  selection; a filename, search snippet or generated description is insufficient.
+- Prefer verified assets of the actual subject. Supplier media must match the
+  item being sold. Do not present unrelated people as staff/customers, another
+  property as the client's premises, or invented UI/product features as available.
+  Cropping a logo or adding a credit does not establish subject identity.
+- Generated images and licensed stock can serve decorative or explicitly
+  illustrative roles. Judge them by their placement and surrounding claims;
+  they cannot substantiate factual features or identities. Keep alt text accurate
+  to the image and its role; use empty alt text for purely decorative images.
+- When actual material is missing, continue with a clearly identified draft or
+  use a truthful composition that does not imply the missing fact. Track stand-ins
+  for replacement. Before public delivery, replace, remove or visibly contextualize
+  misleading stand-ins where the claim is made; an internal report alone cannot
+  correct the impression of the delivered page. Reuse existing authorization;
+  this adds no blanket confirmation step or mandatory photo count/style.
+- At the target viewports, inspect images, nearby copy and mobile crops together:
+  the intended subject must remain clear and the factual impression accurate.
+  Record remaining replacements and unverified claims in the handoff. The existing
+  evidence checker cannot authenticate a subject or verify an image's rights.
+
+This portable distinction was informed by the MIT-licensed
+[Taste photo workflow](https://github.com/Leonxlnx/taste-skill/blob/f6b76575f949707b4e3c37cd86cb44b0b98643e8/skills/taste-skill/references/photos.md).
+
 ## Anti-Patterns
 
 - Do not default to common generated patterns: purple gradients, decorative

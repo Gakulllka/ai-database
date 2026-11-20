@@ -1,0 +1,4 @@
+interface:
+  display_name: "Game Balance"
+  short_description: "Compare game mechanics with testable balance models"
+  default_prompt: "Use $game-balance to analyze this game balance decision and deliver testable comparisons."

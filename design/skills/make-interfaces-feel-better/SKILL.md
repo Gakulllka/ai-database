@@ -39,6 +39,19 @@ Geometric centering is not always visual centering. Icon buttons, play
 triangles, arrows, stars, and asymmetric icons often need a small offset. Fix the
 SVG when possible; otherwise adjust with a pixel-level margin or padding change.
 
+### Icon meaning in context
+
+Read adjacent actions together at the smallest supported rendered size, in the
+toolbar or row where people use them. Similar visual weight can coexist with
+confusingly similar meanings. If two controls suggest the same action, give them
+distinct familiar shapes or a short visible label, especially where hover is
+unavailable. Keep the hit area and accessible name even when the drawing is small.
+If an action sends or publishes content to others, explain the destination and
+any important consequence in visible copy before activation.
+For a toggle, check that its new state can be read after focus moves. Check the
+actual confirmation and check that neighboring values remain in place when the
+task calls for comparing table rows.
+
 ### Shadows And Borders
 
 Use borders for separation and focus rings. Use layered shadows when a card,
@@ -141,6 +154,7 @@ Omit principles that you checked but did not change.
 
 - Nested rounded elements are optically coherent.
 - Icons are visually centered.
+- Adjacent actions are distinguishable before activation at their rendered size.
 - Buttons, cards, and popovers use borders or shadows for the right reason.
 - Headings and short text avoid awkward wrapping.
 - Dynamic numbers use tabular numerals.

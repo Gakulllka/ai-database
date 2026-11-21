@@ -863,9 +863,6 @@ ECC/
 |   |-- frontend-slides/            # HTML スライドデッキと PPTX から Web へのプレゼンテーションワークフロー
 |   |-- article-writing/            # 汎用的な AI 口調を避け、指定された文体で書く長文ライティング
 |   |-- content-engine/             # マルチプラットフォームのソーシャルコンテンツと再利用ワークフロー
-|   |-- market-research/            # 出典を明記した市場、競合、投資家のリサーチ
-|   |-- investor-materials/         # ピッチデッキ、ワンページャー、メモ、財務モデル
-|   |-- investor-outreach/          # パーソナライズされた資金調達アウトリーチとフォローアップ
 |   |-- continuous-learning/        # レガシー v1 の Stop hook によるパターン抽出
 |   |-- continuous-learning-v2/     # 信頼度スコアリング付きの instinct ベース学習
 |   |-- iterative-retrieval/        # サブエージェント向けの段階的なコンテキスト精緻化

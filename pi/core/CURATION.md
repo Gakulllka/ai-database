@@ -1,6 +1,6 @@
 # Curation
 
-pi/core includes 138 of 390 skills and 24 of 98 commands from the root of ECC.
+pi/core includes 138 of 374 skills and 24 of 98 commands from the root of ECC.
 Everything excluded is listed here with its reason.
 
 ## Rules
@@ -92,8 +92,6 @@ Exclude anything that:
 | `autonomous-loops` | Claude-Code-only autonomous loops |
 | `benchmark-methodology` | competitive/marketing benchmarking |
 | `blender-motion-state-inspection` | niche 3D/Blender domain pack |
-| `brand-discovery` | brand/marketing content |
-| `brand-voice` | marketing/outreach voice profiling |
 | `browser-qa` | requires a browser automation MCP server at runtime |
 | `canary-watch` | makes network calls to deployed URLs |
 | `carrier-relationship-management` | supply chain/logistics domain pack |
@@ -101,8 +99,6 @@ Exclude anything that:
 | `ck` | Claude-Code-only persistent memory commands |
 | `devfleet` | multi-agent orchestration via external DevFleet product |
 | `codehealth-mcp` | wraps CodeScene MCP SaaS |
-| `competitive-platform-analysis` | competitive/marketing analysis |
-| `competitive-report-structure` | competitive/marketing reporting |
 | `config-gc` | Claude-Code-only config garbage collection (~/.claude) |
 | `config-health` | Claude Code startup hook and configuration monitoring |
 | `configure-ecc` | ECC-specific setup wizard |
@@ -115,7 +111,6 @@ Exclude anything that:
 | `cost-tracking` | Claude Code cost tracking |
 | `council-multi-model` | requires external Codex CLI at runtime |
 | `counterparty-channel-discipline` | agent messaging ops policy |
-| `crosspost` | social/marketing distribution |
 | `customer-billing-ops` | billing/ops skill over connected billing tools |
 | `ecc-contribution-review` | ECC-specific contribution packet compiler over repository manifests and cross-harness review evidence |
 | `customs-trade-compliance` | customs/trade niche domain |
@@ -161,8 +156,6 @@ Exclude anything that:
 | `hookify-rules` | hookify (Claude-Code-only hooks) |
 | `i18n-sync` | built around a third-party npm CLI (locakit) with external source links; not self-contained |
 | `inventory-demand-planning` | supply chain niche domain |
-| `investor-materials` | fundraising/marketing content |
-| `investor-outreach` | fundraising outreach |
 | `ios-icon-gen` | Iconify API network calls at runtime |
 | `iterative-retrieval` | multi-agent subagent context mechanics; links to external social post |
 | `ito-baskets` | venture-specific ito-* |
@@ -172,14 +165,11 @@ Exclude anything that:
 | `jira-integration` | wraps Jira SaaS API |
 | `knowledge-ops` | ops skill over MCP memory and vector stores |
 | `laravel-plugin-discovery` | wraps LaraPlugins.io SaaS MCP |
-| `lead-intelligence` | sales outreach pipeline |
 | `llm-trading-agent-security` | trading-agent niche domain |
 | `logistics-exception-management` | logistics niche domain |
 | `loop-design-check` | agent loop design mechanics |
 | `mailtrap-email-integration` | wraps Mailtrap SaaS API |
 | `manim-video` | niche video production; pip installs at runtime |
-| `market-research` | web research over network sources |
-| `marketing-campaign` | marketing |
 | `master-agreement-generator` | legal docs niche |
 | `messages-ops` | messaging ops skill |
 | `nanoclaw-repl` | ECC product-specific REPL |
@@ -228,14 +218,10 @@ Exclude anything that:
 | `search-first` | network searches (npm/PyPI/GitHub) at runtime |
 | `security-bounty-hunter` | offensive security (bug bounty) |
 | `security-scan` | wraps AgentShield commercial product |
-| `seo` | SEO/marketing |
-| `short-video-distribution` | social/media distribution |
 | `skill-comply` | runs agent rosters for compliance checks |
 | `skill-host-compat` | runs an ECC repo CI script (scripts/ci/validate-skill-host-compat.js) |
 | `skill-scout` | network searches of skill marketplaces |
 | `skill-stocktake` | subagent-based Claude skill audit |
-| `social-graph-ranker` | social graph (X and LinkedIn) |
-| `social-publisher` | wraps SocialClaw SaaS |
 | `strategic-compact` | Claude Code session compaction mechanics |
 | `taste` | media/creative-direction niche pack |
 | `taste-application` | media generation via fal.ai SaaS |
@@ -256,10 +242,8 @@ Exclude anything that:
 | `web-perimeter-owasp-2025-audit` | live web perimeter probes and network audit workflow |
 | `video-editing` | media production niche |
 | `videodb` | wraps VideoDB SaaS |
-| `visa-doc-translate` | visa/legal docs niche; OCR network calls |
 | `windows-desktop-e2e` | niche Windows desktop automation; pip installs at runtime |
 | `workspace-surface-audit` | ECC harness surface audit |
-| `x-api` | wraps X/Twitter SaaS API |
 | `prompt-caching-strategy` | Provider-specific cache economics and runtime measurement are outside the curated Pi core. |
 | `osint-investigation` | External source investigation and evidence collection are outside the curated offline Pi core. |
 | `mcp-dependency-review` | MCP server configuration and selector review are outside the curated Pi core. |

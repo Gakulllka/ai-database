@@ -1,6 +1,6 @@
 ---
 name: benchmark-methodology
-description: "Score a scoped competitor set into comparable profile cards: nine weighted dimensions (positioning, voice, visual craft, offer packaging, evidence, enterprise-readiness, thought leadership, pricing, client tension) with 1-5 evidence-anchored rubrics and a tension 2x2 plot. Use when benchmarking or scoring competitors, building a competitive comparison matrix, or grading rival positioning before assembling the report; runs after competitive-platform-analysis and before competitive-report-structure."
+description: "Score a scoped competitor set into comparable profile cards: nine weighted dimensions (positioning, voice, visual craft, offer packaging, evidence, enterprise-readiness, thought leadership, pricing, client tension) with 1-5 evidence-anchored rubrics and a tension 2x2 plot. Use when benchmarking or scoring competitors, building a competitive comparison matrix, or grading rival positioning before assembling the report."
 license: MIT
 ---
 
@@ -14,14 +14,14 @@ number for any competitor.
 
 ## When to Activate
 
-- A scoped, tiered competitor set from competitive-platform-analysis is ready to score.
+- A scoped, tiered competitor set is ready to score.
 - Need comparable, evidence-anchored scores across competitors — not gut-feel rankings.
 - Client's strategic tension (the paired axes defining their target white-space) has been established.
-- Preparing to produce profile cards for assembly in competitive-report-structure.
+- Preparing a set of profile cards and a comparison plot for a benchmark report.
 
 ## Client positioning brief (establish first)
 
-Before scoring, establish the client's positioning brief. It supplies:
+Before scoring, establish the client's positioning brief and the scope of the comparison. Record the market and competitor tiers if the brief leaves them open. The brief supplies:
 
 - **Strategic tension** — the two axes (e.g., memorability × hireability) whose
   intersection marks the client's target white-space. Dimension 9 is always
@@ -170,7 +170,7 @@ from:
 - **Threat to [client]:** <…>
 ```
 
-Hand the completed cards plus the tension plot to `competitive-report-structure`.
+Return the completed cards and tension plot together. If the user asks for report copy, carry over the dimension evidence and report the tension axes separately.
 
 ## Anti-Patterns
 
@@ -178,9 +178,4 @@ Hand the completed cards plus the tension plot to `competitive-report-structure`
 - **Scoring without evidence.** Every score requires a one-line justification and a source link. A score without evidence is an opinion, not a benchmark.
 - **Creating a single composite score.** Report dimension scores individually. A weighted average hides the asymmetric strengths that matter for positioning.
 - **Applying generic rubric anchors without adapting.** The 1–5 anchors must be calibrated to the specific dimension and competitor set. The generic descriptions are a starting point, not a fixed standard.
-- **Running before the competitor set is scoped.** Use competitive-platform-analysis first to produce a tiered, pruned set. Scoring an unscoped list wastes effort on irrelevant competitors.
-
-## Related Skills
-
-- `competitive-platform-analysis` — the prerequisite; produces the tiered competitor set this skill scores.
-- `competitive-report-structure` — the next step; assembles the scored profile cards into a client-deliverable report.
+- **Running before the competitor set is scoped.** Define the market and competitor tiers before scoring. Scoring an unscoped list wastes effort on irrelevant competitors.

@@ -17,7 +17,6 @@ Pull these ECC-native skills into the workflow when relevant:
 
 - `customer-billing-ops` for customer-specific remediation and follow-up
 - `research-ops` when competitor pricing or current market evidence matters
-- `market-research` when the answer should end in a pricing recommendation
 - `github-ops` when the billing truth depends on code, backlog, or release state in sibling repos
 - `verification-loop` when the answer depends on proving checkout, seat handling, or entitlement behavior
 
@@ -83,6 +82,8 @@ If the answer depends on implementation truth, inspect the code path:
 - billing portal or self-serve management support
 
 ### 4. End with a decision and product gap
+
+For a pricing recommendation, compare like-for-like plans and state what the current evidence supports.
 
 Report:
 

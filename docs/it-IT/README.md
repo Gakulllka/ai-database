@@ -926,10 +926,7 @@ ECC/
 |   |-- frontend-slides/            # Slide deck in HTML e workflow di conversione da PPTX a presentazioni web
 |   |-- article-writing/            # Scrittura long-form con una voce fornita, senza il tono generico dell'AI
 |   |-- content-engine/             # Contenuti social multipiattaforma e workflow di riutilizzo
-|   |-- market-research/            # Ricerca su mercato, concorrenti e investitori con attribuzione delle fonti
 |   |-- osint-investigation/        # Metodologia OSINT: ipotesi concorrenti, falsificazione, verifica visiva e delle prove
-|   |-- investor-materials/         # Pitch deck, one-pager, memo e modelli finanziari
-|   |-- investor-outreach/          # Outreach personalizzato per la raccolta fondi e relativo follow-up
 |   |-- continuous-learning/        # Estrazione di pattern legacy v1 tramite Stop-hook
 |   |-- continuous-learning-v2/     # Apprendimento basato su instinct con punteggio di confidenza
 |   |-- iterative-retrieval/        # Raffinamento progressivo del contesto per i subagent

@@ -137,5 +137,4 @@ modify hooks automatically.
 ## Related
 
 - [frontend-patterns](../frontend-patterns/SKILL.md)
-- [seo](../seo/SKILL.md)
 - [Locakit package reference](https://www.npmjs.com/package/locakit)

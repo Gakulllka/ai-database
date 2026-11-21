@@ -256,8 +256,8 @@ End every human-readable result with exactly one closing line for the mode:
 ## Useful skill chains
 
 - `deep-research` or `exa-search` for source discovery.
-- `x-api` for public social signal discovery when configured.
-- `market-research` for sizing, competitors, or business use cases.
+- Use available public sources for social signals and label them separately from verified market data.
+- `research-ops` for evidence-backed comparisons of market size, competitors, or business use cases.
 - `prediction-market-risk-review` before anything execution-adjacent.
 - `ito-compute` only when the user separately wants GPU compute; the two
   surfaces share no credentials.

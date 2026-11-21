@@ -264,7 +264,7 @@ Copy-Item -Recurse rules/typescript "$HOME/.claude/rules/"
 /plugin list ecc@ecc
 ```
 
-**搞定！** 你现在可以使用 77 个智能体、390 项技能和 98 个命令了。
+**搞定！** 你现在可以使用 77 个智能体、374 项技能和 98 个命令了。
 
 ***
 
@@ -362,9 +362,6 @@ ECC/
 |   |-- frontend-slides/            # HTML 幻灯片与 PPTX 转 Web 演示工作流（新增）
 |   |-- article-writing/            # 按指定风格撰写长文，避免通用 AI 语气（新增）
 |   |-- content-engine/             # 多平台内容生成与复用工作流（新增）
-|   |-- market-research/            # 带来源引用的市场、竞品与投资人研究（新增）
-|   |-- investor-materials/         # 融资演示文稿、单页材料、备忘录与财务模型（新增）
-|   |-- investor-outreach/          # 个性化融资沟通与跟进（新增）
 |   |-- continuous-learning/        # 从会话中自动提取模式（长文指南）
 |   |-- continuous-learning-v2/     # 基于直觉的学习与置信度评分
 |   |-- iterative-retrieval/        # 子代理渐进式上下文优化
@@ -1105,11 +1102,9 @@ Codex macOS 应用：
 | api-design | REST API 设计模式 |
 | article-writing | 根据笔记和语音参考进行长文写作 |
 | backend-patterns | API 设计、数据库、缓存 |
-| brand-voice | 从真实内容中提取来源驱动的写作风格 |
 | bun-runtime | Bun 运行时、包管理器、打包器和测试运行器 |
 | coding-standards | 通用编码标准 |
 | content-engine | 平台原生的社交内容和再利用 |
-| crosspost | X、LinkedIn、Threads 等多平台内容分发 |
 | deep-research | 多源研究、综合和来源归属 |
 | dmux-workflows | 使用 tmux pane manager 进行多智能体编排 |
 | documentation-lookup | 通过 Context7 MCP 获取最新库和框架文档 |
@@ -1120,9 +1115,6 @@ Codex macOS 应用：
 | fal-ai-media | 图像、视频和音频的统一媒体生成 |
 | frontend-patterns | React/Next.js 模式 |
 | frontend-slides | HTML 演示文稿、PPTX 转换、视觉风格探索 |
-| investor-materials | 幻灯片、备忘录、模型和一页纸文档 |
-| investor-outreach | 个性化外联、跟进和介绍摘要 |
-| market-research | 带来源归属的市场和竞争对手研究 |
 | mcp-server-patterns | 使用 Node/TypeScript SDK 构建 MCP 服务器 |
 | nextjs-turbopack | Next.js 16+ 和 Turbopack 增量打包 |
 | product-capability | 将产品目标转化为有范围的能力图 |
@@ -1131,7 +1123,6 @@ Codex macOS 应用：
 | tdd-workflow | 测试驱动开发，覆盖率 80%+ |
 | verification-loop | 构建、测试、代码检查、类型检查、安全 |
 | video-editing | 使用 FFmpeg 和 Remotion 的 AI 辅助视频编辑工作流 |
-| x-api | X/Twitter 发帖和分析 API 集成 |
 
 ### 关键限制
 
@@ -1178,7 +1169,7 @@ opencode
 |---------|---------------|----------|--------|
 | 智能体 | PASS: 77 个    | PASS: 12 个 | **Claude Code 领先** |
 | 命令 | PASS: 98 个    | PASS: 35 个 | **Claude Code 领先** |
-| 技能 | PASS: 390 项   | PASS: 37 项 | **Claude Code 领先** |
+| 技能 | PASS: 374 项   | PASS: 37 项 | **Claude Code 领先** |
 | 钩子 | PASS: 8 种事件类型 | PASS: 11 种事件 | **OpenCode 更多！** |
 | 规则 | PASS: 29 条    | PASS: 13 条指令 | **Claude Code 领先** |
 | MCP 服务器 | PASS: 14 个    | PASS: 完整 | **完全对等** |
@@ -1286,7 +1277,7 @@ ECC 是**第一个最大化利用每个主要 AI 编码工具的插件**。以�
 |---------|-----------------------|------------|-----------|----------|
 | **智能体** | 77                    | 共享 (AGENTS.md) | 共享 (AGENTS.md) | 12 |
 | **命令** | 98                    | 共享 | 基于指令 | 35 |
-| **技能** | 390                   | 共享 | 10 (原生格式) | 37 |
+| **技能** | 374                   | 共享 | 10 (原生格式) | 37 |
 | **钩子事件** | 8 种类型                 | 15 种类型 | SessionStart（1 种类型） | 11 种类型 |
 | **钩子脚本** | 20+ 个脚本               | 16 个脚本 (DRY 适配器) | 1 个 SessionStart 引导脚本 | 插件钩子 |
 | **规则** | 34 (通用 + 语言)          | 34 (YAML 前页) | 基于指令 | 13 条指令 |

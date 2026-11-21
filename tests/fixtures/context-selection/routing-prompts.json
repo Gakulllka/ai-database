@@ -1,5 +1,5 @@
 {
-  "description": "Routing prompts from community PR #2945 (Jeffrey Montoya). Paraphrased prompts avoid the target skill vocabulary. Auto admission may load nothing, but anything it loads must be in expected.",
+  "description": "Routing prompts from community PR #2945 (Jeffrey Montoya). Paraphrased prompts avoid the target skill vocabulary. Auto admission may load nothing, but anything it loads must be in expected. The dedicated SEO prompt was retired when its skill was removed and no supported replacement remained.",
   "direct": [
     {
       "query": "apply react patterns when refactoring this component",
@@ -260,15 +260,8 @@
     {
       "query": "do deep research on competitors in the market for this product",
       "expected": [
-        "skill:competitive-platform-analysis",
         "skill:deep-research",
-        "skill:market-research"
-      ]
-    },
-    {
-      "query": "improve the seo of the marketing site",
-      "expected": [
-        "skill:seo"
+        "skill:evidence-research"
       ]
     },
     {

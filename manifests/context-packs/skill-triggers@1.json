@@ -1,7 +1,7 @@
 {
   "coverage": {
-    "skills": 390,
-    "withTriggers": 49
+    "skills": 374,
+    "withTriggers": 48
   },
   "generatedAt": "2026-11-21T08:06:00.337Z",
   "id": "skill-triggers@1",
@@ -10,7 +10,7 @@
     "id": "hand-seeded",
     "source": "manual-curation-pending-regeneration"
   },
-  "registryDigest": "1931d6c5ed5857e9fdae47d5781eecf76a84ebb99557d99f40ca68e92f6ca96f",
+  "registryDigest": "1ca0a254d82ec51023c8bba027d5639d62a62bdbbcaf4b3ffd55735dbb0d8da5",
   "schemaVersion": 1,
   "triggers": {
     "skill:agent-runtime-gateway-smoke-test": [
@@ -370,13 +370,6 @@
       "hook configuration audit",
       "settings json security"
     ],
-    "skill:short-video-distribution": [
-      "publish video to tiktok youtube reels",
-      "cross-post short video",
-      "schedule short-form video",
-      "upload reel and short",
-      "video captions per platform"
-    ],
     "skill:tdd-workflow": [
       "write test first",
       "failing test",
@@ -425,5 +418,5 @@
       "yoruba accents not rendering"
     ]
   },
-  "triggersDigest": "1f32ccef9ef4a44c4f7a743fa2343f2432ca1c9a32511fc9b8f396b3dea98e26"
+  "triggersDigest": "5b1e5df206c66858571be6c43538ceff48e56dbfc98e5e065f2c2ace2a04ae96"
 }

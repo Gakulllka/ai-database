@@ -9,7 +9,7 @@ metadata:
 
 Use this when the user asks to research something current, compare options, enrich people or companies, or turn repeated lookups into a monitored workflow.
 
-This is the operator wrapper around the repo's research stack. It is not a replacement for `deep-research`, `exa-search`, or `market-research`; it tells you when and how to use them together.
+This workflow selects the research approach that fits the decision and records which evidence supports the result.
 
 ## Skill Stack
 
@@ -17,8 +17,6 @@ Pull these ECC-native skills into the workflow when relevant:
 
 - `exa-search` for fast current-web discovery
 - `deep-research` for multi-source synthesis with citations
-- `market-research` when the end result should be a recommendation or ranked decision
-- `lead-intelligence` when the task is people/company targeting instead of generic research
 - `knowledge-ops` when the result should be stored in durable context afterward
 
 ## When to Use
@@ -63,8 +61,8 @@ Choose the right lane before searching:
 
 - use `exa-search` for fast discovery
 - escalate to `deep-research` when synthesis or multiple sources matter
-- use `market-research` when the outcome should end in a recommendation
-- hand off to `lead-intelligence` when the real ask is target ranking or warm-path discovery
+- for a recommendation, compare the options against explicit criteria and note gaps in the evidence
+- for target ranking or warm paths, verify relevant roles and ties through public evidence or information supplied by the user
 
 ### 4. Report with explicit evidence boundaries
 

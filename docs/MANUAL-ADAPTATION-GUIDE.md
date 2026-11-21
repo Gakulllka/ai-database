@@ -57,10 +57,8 @@ Good minimal examples:
   - `skills/backend-patterns/SKILL.md`
   - `skills/security-review/SKILL.md`
   - `skills/tdd-workflow/SKILL.md`
-- Content/outbound work:
-  - `skills/brand-voice/SKILL.md`
+- Content work:
   - `skills/content-engine/SKILL.md`
-  - `skills/crosspost/SKILL.md`
 
 If the harness supports file upload, upload only those files.
 

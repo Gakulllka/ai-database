@@ -165,7 +165,7 @@
     {
       "id": "capability:content",
       "family": "capability",
-      "description": "Business, writing, market, investor communication, and reusable voice-system skills.",
+      "description": "Product capability modeling, long-form writing, and content adaptation.",
       "modules": [
         "business-content"
       ]
@@ -224,14 +224,6 @@
       "description": "Experimental Nasiko CLI lifecycle bridge guidance for pinned installation, read-only status, qualified uninstall, and opt-in telemetry boundaries.",
       "modules": [
         "nasiko-control-plane"
-      ]
-    },
-    {
-      "id": "capability:social",
-      "family": "capability",
-      "description": "Social publishing and distribution skills.",
-      "modules": [
-        "social-distribution"
       ]
     },
     {
@@ -393,7 +385,7 @@
     {
       "id": "capability:documents",
       "family": "capability",
-      "description": "Document processing, conversion, and translation skills.",
+      "description": "Document conversion, OCR, extraction, redaction, signing and form filling.",
       "modules": [
         "document-processing"
       ]

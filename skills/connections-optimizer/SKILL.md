@@ -41,11 +41,9 @@ If the user does not specify a mode, use `default`.
 
 ### Preferred
 
-- `x-api` for X graph inspection and recent activity
-- `lead-intelligence` for target discovery and warm-path ranking
-- `social-graph-ranker` when the user wants bridge value scored independently of the broader lead workflow
-- Exa / deep research for person and company enrichment
-- `brand-voice` before drafting outbound
+- authorized account access or user-supplied exports for connection and activity evidence
+- Exa or deep research when public information is needed to assess a person or company
+- approved tone guidance or the user's examples for outbound drafts
 
 ### Fallbacks
 
@@ -128,12 +126,12 @@ Mutuals and real warm-path bridges should be penalized less aggressively than on
 2. Pull the current following / connection inventory.
 3. Score prune candidates with explicit reasons.
 4. Score keep candidates with explicit reasons.
-5. Use `lead-intelligence` plus research surfaces to rank expansion candidates.
+5. Rank expansion candidates by fit to current priorities and verified connections. Label inferred or unavailable warm paths.
 6. Match the right channel:
    - X DM for warm, fast social touch points
    - LinkedIn message for professional graph adjacency
    - Apple Mail draft for higher-context intros or outreach
-7. Run `brand-voice` before drafting messages.
+7. Match the user's supplied tone or examples when drafting messages.
 8. Return a review pack before any apply step.
 
 ## Review Pack Format
@@ -183,8 +181,4 @@ Drafts
 
 ## Related Skills
 
-- `brand-voice` for the reusable voice profile
-- `social-graph-ranker` for the standalone bridge-scoring and warm-path math
-- `lead-intelligence` for weighted target and warm-path discovery
-- `x-api` for X graph access, drafting, and optional apply flows
 - `content-engine` when the user also wants public launch content around network moves

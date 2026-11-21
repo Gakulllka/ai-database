@@ -161,12 +161,12 @@ ECC is MIT-licensed open source. It works best with Claude Code today, has nativ
 
 Browse [Database skill packs](docs/database-skill-packs.md) by task, and fetch the selected pack with its complete skill folders.
 
-Access to 77 agents, 390 skills, and 98 legacy command shims, plus hooks, rules, memory, continuous learning, and AgentShield security scanning. The agents are specialized for planning, review, build repair, security, architecture, and domain work.
+Access to 77 agents, 374 skills, and 98 legacy command shims, plus hooks, rules, memory, continuous learning, and AgentShield security scanning. The agents are specialized for planning, review, build repair, security, architecture, and domain work.
 
 | Included         |       Count | What it gives you                                                                    |
 | ---------------- | ----------: | ------------------------------------------------------------------------------------ |
 | Agents           |   77 agents | Planning, review, build repair, security, architecture, and domain work              |
-| Skills           |  390 skills | TDD, research, security, docs, frontend, data, ML, operations, and more              |
+| Skills           |  374 skills | TDD, research, security, docs, frontend, data, ML, operations, and more              |
 | Commands         | 98 commands | Convenient entry points while ECC moves to a skills-first surface                    |
 | Hooks and memory |     Runtime | Enforcement, session summaries, continuous learning, instincts, and context controls |
 | Rules            |   Selective | Always-loaded standards you choose by language or project                            |
@@ -883,7 +883,7 @@ Stable graduation of the 2.0 line: control-pane substrate, worktree lifecycle se
 ```text
 ECC/
 |-- agents/           # 77 specialized subagents for delegation
-|-- skills/           # 390 reusable workflows loaded on demand
+|-- skills/           # 374 reusable workflows loaded on demand
 |-- commands/         # 98 maintained slash-command shims
 |-- rules/            # opt-in common and language standards
 |-- hooks/            # runtime automation and enforcement
@@ -947,10 +947,7 @@ ECC/
 |   |-- frontend-slides/            # HTML slide decks and PPTX-to-web presentation workflows
 |   |-- article-writing/            # Long-form writing in a supplied voice without generic AI tone
 |   |-- content-engine/             # Multi-platform social content and repurposing workflows
-|   |-- market-research/            # Source-attributed market, competitor, and investor research
 |   |-- osint-investigation/        # OSINT methodology: competing hypotheses, falsification, visual and evidence verification
-|   |-- investor-materials/         # Pitch decks, one-pagers, memos, and financial models
-|   |-- investor-outreach/          # Personalized fundraising outreach and follow-up
 |   |-- continuous-learning/        # Legacy v1 Stop-hook pattern extraction
 |   |-- continuous-learning-v2/     # Instinct-based learning with confidence scoring
 |   |-- iterative-retrieval/        # Progressive context refinement for subagents

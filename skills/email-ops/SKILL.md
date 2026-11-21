@@ -15,8 +15,6 @@ This is not a generic writing skill. It is an operator workflow around the actua
 
 Pull these ECC-native skills into the workflow when relevant:
 
-- `brand-voice` before drafting anything user-facing
-- `investor-outreach` for investor, partner, or sponsor-facing mail
 - `customer-billing-ops` when the thread is a billing/support incident rather than generic correspondence
 - `knowledge-ops` when the message or thread should be captured into durable context afterward
 - `research-ops` when a reply depends on fresh external facts
@@ -70,9 +68,11 @@ If creating a new outbound:
 
 - identify warmth level
 - select the correct channel and sender account
-- pull `brand-voice` before drafting
+- use the brief to confirm the relationship, purpose, and specific ask for investor, partner, or sponsor correspondence
 
 ### 3. Draft, then verify
+
+Match the user's supplied voice or writing examples. Use a clear, appropriate tone when no examples are available.
 
 For draft-only work:
 

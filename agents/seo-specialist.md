@@ -65,7 +65,3 @@ Fix: Exact change to make
 - no manipulative pattern recommendations
 - no advice detached from the actual site structure
 - recommendations should be implementable by the receiving engineer or content owner
-
-## Reference
-
-Use `skills/seo` for the canonical ECC SEO workflow and implementation guidance.

@@ -539,9 +539,6 @@ ECC/
 |   |-- frontend-slides/            # HTML-Foliendecks und PPTX-zu-Web-Präsentations-Workflows (NEU)
 |   |-- article-writing/            # Langform-Texte in einer vorgegebenen Stimme ohne generischen KI-Ton (NEU)
 |   |-- content-engine/             # Multi-Plattform-Social-Content und Repurposing-Workflows (NEU)
-|   |-- market-research/            # Quellenbelegte Markt-, Wettbewerber- und Investorenrecherche (NEU)
-|   |-- investor-materials/         # Pitch-Decks, One-Pager, Memos und Finanzmodelle (NEU)
-|   |-- investor-outreach/          # Personalisierte Fundraising-Ansprache und Follow-up (NEU)
 |   |-- continuous-learning/        # Legacy-v1-Stop-Hook-Musterextraktion
 |   |-- continuous-learning-v2/     # Instinct-basiertes Lernen mit Konfidenz-Scoring
 |   |-- iterative-retrieval/        # Progressive Kontextverfeinerung für Subagents
@@ -1338,11 +1335,9 @@ Kanonische Anthropic-Skills wie `claude-api`, `frontend-design` und `skill-creat
 | api-design | REST-API-Design-Patterns |
 | article-writing | Langform-Texte aus Notizen und Stimm-Referenzen |
 | backend-patterns | API-Design, Datenbank, Caching |
-| brand-voice | Quellenbasierte Schreibstil-Profile aus echtem Content |
 | bun-runtime | Bun als Runtime, Paketmanager, Bundler und Test-Runner |
 | coding-standards | Universelle Coding-Standards |
 | content-engine | Plattform-nativer Social-Content und Repurposing |
-| crosspost | Multi-Plattform-Content-Verteilung über X, LinkedIn, Threads |
 | deep-research | Recherche aus mehreren Quellen mit Synthese und Quellenangabe |
 | dmux-workflows | Multi-Agent-Orchestrierung mit tmux-Pane-Manager |
 | documentation-lookup | Aktuelle Bibliotheks- und Framework-Dokumentation über Context7 MCP |
@@ -1353,9 +1348,6 @@ Kanonische Anthropic-Skills wie `claude-api`, `frontend-design` und `skill-creat
 | fal-ai-media | Vereinheitlichte Mediengenerierung für Bilder, Video und Audio |
 | frontend-patterns | React-/Next.js-Patterns |
 | frontend-slides | HTML-Präsentationen, PPTX-Konvertierung, Erkundung visueller Stile |
-| investor-materials | Decks, Memos, Modelle und One-Pager |
-| investor-outreach | Personalisierte Ansprache, Follow-ups und Intro-Blurbs |
-| market-research | Quellenbelegte Markt- und Wettbewerberrecherche |
 | mcp-server-patterns | MCP-Server mit Node-/TypeScript-SDK bauen |
 | nextjs-turbopack | Next.js 16+ und inkrementelles Turbopack-Bundling |
 | product-capability | Produktziele in abgegrenzte Capability-Maps übersetzen |
@@ -1364,7 +1356,6 @@ Kanonische Anthropic-Skills wie `claude-api`, `frontend-design` und `skill-creat
 | tdd-workflow | Testgetriebene Entwicklung mit 80 %+ Coverage |
 | verification-loop | Build, Test, Lint, Typecheck, Sicherheit |
 | video-editing | KI-unterstützte Videobearbeitungs-Workflows mit FFmpeg und Remotion |
-| x-api | X-/Twitter-API-Integration für Posting und Analytics |
 
 ### Wesentliche Einschränkung
 

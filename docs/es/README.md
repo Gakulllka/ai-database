@@ -541,9 +541,6 @@ ECC/
 |   |-- frontend-slides/            # Presentaciones HTML y flujos de trabajo de conversión PPTX a web (NUEVO)
 |   |-- article-writing/            # Escritura de formato largo con voz propia sin tono genérico de IA (NUEVO)
 |   |-- content-engine/             # Contenido social multiplataforma y flujos de reutilización (NUEVO)
-|   |-- market-research/            # Investigación de mercado, competidores e inversores con fuentes (NUEVO)
-|   |-- investor-materials/         # Pitch decks, one-pagers, memos y modelos financieros (NUEVO)
-|   |-- investor-outreach/          # Alcance personalizado de fundraising y seguimiento (NUEVO)
 |   |-- continuous-learning/        # Patrón legado v1 de extracción con hook Stop
 |   |-- continuous-learning-v2/     # Aprendizaje basado en instintos con puntuación de confianza
 |   |-- iterative-retrieval/        # Refinamiento progresivo de contexto para subagentes

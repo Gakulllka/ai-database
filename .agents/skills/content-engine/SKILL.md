@@ -35,21 +35,9 @@ Before drafting, identify the source set:
 - screenshots
 - prior posts from the same author
 
-If the user wants a specific voice, build a voice profile from real examples before writing.
-Use `brand-voice` as the canonical workflow when voice consistency matters across more than one output.
-
 ## Voice Handling
 
-`brand-voice` is the canonical voice layer.
-
-Run it first when:
-
-- there are multiple downstream outputs
-- the user explicitly cares about writing style
-- the content is launch, outreach, or reputation-sensitive
-
-Reuse the resulting `VOICE PROFILE` here instead of rebuilding a second voice model.
-If the user wants Affaan / ECC voice specifically, still treat `brand-voice` as the source of truth and feed it the best live or source-derived material available.
+Reuse a supplied voice profile. When tone matters, use the user's guidance or real examples to note pacing, diction, and phrases to avoid. Apply those same notes across the campaign. If examples are unavailable, use the stated tone and flag assumptions.
 
 ## Hard Bans
 
@@ -123,9 +111,3 @@ Before delivering:
 - no fake engagement bait remains
 - no duplicated copy across platforms unless requested
 - any CTA is earned and user-approved
-
-## Related Skills
-
-- `brand-voice` for source-derived voice profiles
-- `crosspost` for platform-specific distribution
-- `x-api` for sourcing recent posts and publishing approved X output

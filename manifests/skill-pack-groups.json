@@ -544,55 +544,40 @@
     },
     {
       "id": "content-publishing",
-      "title": "Контент и публикации",
-      "description": "Тексты, бренд, распространение материалов и обработка документов.",
+      "title": "Контент и документы",
+      "description": "Длинные тексты, адаптация контента, продуктовые возможности и обработка документов.",
       "keywords": [
-        "publishing workflow",
         "content production",
+        "document processing",
         "подготовка контента",
-        "публикация материалов"
+        "обработка документов"
       ],
       "packs": [
         {
           "id": "business-content",
-          "title": "Контент, бренд и маркетинг",
+          "title": "Тексты и продуктовые возможности",
           "keywords": [
-            "marketing research",
-            "brand voice",
-            "SEO",
             "article writing",
-            "competitive analysis",
-            "маркетинг",
-            "голос бренда",
+            "newsletter writing",
+            "content adaptation",
+            "product capability",
             "написать статью",
-            "анализ конкурентов"
-          ]
-        },
-        {
-          "id": "social-distribution",
-          "title": "Публикация в соцсетях",
-          "keywords": [
-            "social publisher",
-            "crosspost",
-            "X API",
-            "short video distribution",
-            "публикация в соцсетях",
-            "кросспостинг",
-            "дистрибуция коротких видео"
+            "адаптация контента",
+            "рассылка",
+            "продуктовые возможности"
           ]
         },
         {
           "id": "document-processing",
-          "title": "Обработка и перевод документов",
+          "title": "Обработка документов",
           "keywords": [
             "document processing",
             "PDF processing",
-            "document translation",
-            "visa documents",
+            "OCR",
+            "digitize forms",
             "обработка документов",
-            "перевод документов",
             "PDF",
-            "визовые документы"
+            "распознавание текста"
           ]
         }
       ]

@@ -668,10 +668,10 @@ function runTests() {
   if (test('fails when a selected component depends on an excluded component module', () => {
     assert.throws(
       () => resolveInstallPlan({
-        includeComponentIds: ['capability:social'],
-        excludeComponentIds: ['capability:content'],
+        includeComponentIds: ['capability:visual-project-skills'],
+        excludeComponentIds: ['capability:design-workflows'],
       }),
-      /depends on excluded module business-content/
+      /depends on excluded module design-workflows/
     );
   })) passed++; else failed++;
 

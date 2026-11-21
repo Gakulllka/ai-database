@@ -200,7 +200,7 @@ Copy-Item -Recurse rules/typescript "$HOME/.claude/rules/"
 /plugin list ecc@ecc
 ```
 
-**完成！** 你现在可以使用 77 个代理、390 个技能和 98 个命令。
+**完成！** 你现在可以使用 77 个代理、374 个技能和 98 个命令。
 
 ### multi-* 命令需要额外配置
 
@@ -312,9 +312,6 @@ ECC/
 |   |-- frontend-slides/            # HTML 幻灯片与 PPTX 转网页工作流（新增）
 |   |-- article-writing/            # 长文本写作，保留指定风格、避免通用 AI 腔调（新增）
 |   |-- content-engine/             # 多平台社交内容创作与复用工作流（新增）
-|   |-- market-research/            # 带来源引用的市场、竞品与投资方研究（新增）
-|   |-- investor-materials/         # 融资路演 PPT、单页摘要、备忘录与财务模型（新增）
-|   |-- investor-outreach/          # 定制化融资触达与跟进（新增）
 |   |-- continuous-learning/        # 从会话中自动提取模式（长文本指南）
 |   |-- continuous-learning-v2/     # 基于本能的学习，附带置信度评分
 |   |-- iterative-retrieval/        # 为子智能体渐进式优化上下文

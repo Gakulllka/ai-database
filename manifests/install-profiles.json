@@ -57,7 +57,7 @@
       ]
     },
     "research": {
-      "description": "Research and content-oriented setup for investigation, synthesis, and publishing workflows.",
+      "description": "Research and content-oriented setup for investigation, synthesis, and content planning.",
       "modules": [
         "rules-core",
         "agents-core",
@@ -66,8 +66,7 @@
         "platform-configs",
         "workflow-quality",
         "research-apis",
-        "business-content",
-        "social-distribution"
+        "business-content"
       ]
     },
     "full": {
@@ -93,7 +92,6 @@
         "operator-desk-patterns",
         "ito-compute",
         "nasiko-control-plane",
-        "social-distribution",
         "media-generation",
         "orchestration",
         "swift-apple",

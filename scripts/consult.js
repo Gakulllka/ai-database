@@ -67,9 +67,8 @@ const COMPONENT_ALIASES = Object.freeze({
   ],
   'capability:database': ['db', 'migration', 'migrations', 'postgres', 'postgresql', 'schema', 'sql'],
   'capability:research': ['api', 'apis', 'exa', 'external', 'investigation', 'search'],
-  'capability:content': ['article', 'brand', 'business', 'copy', 'linkedin', 'writing'],
+  'capability:content': ['article', 'business', 'copy', 'linkedin', 'newsletter', 'writing'],
   'capability:operators': ['automation', 'billing', 'connected', 'ops', 'operator', 'workspace'],
-  'capability:social': ['distribution', 'post', 'posting', 'publish', 'publishing', 'twitter', 'x'],
   'capability:media': ['editing', 'image', 'remotion', 'slides', 'video'],
   'capability:orchestration': ['dmux', 'parallel', 'tmux', 'worktree', 'worktrees'],
   'capability:machine-learning': [

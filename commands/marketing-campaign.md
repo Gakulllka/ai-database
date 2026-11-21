@@ -1,5 +1,5 @@
 ---
-description: Plan and execute a full marketing campaign. Accepts a product brief and returns positioning, landing page copy, email sequence, social posts, ad variants, video scripts, and a content calendar. Can also review existing copy for conversion quality. This is the slash-command entrypoint that delegates to the marketing-agent; prefer the marketing-campaign skill for the same end-to-end workflow in conversation.
+description: Plan and execute a full marketing campaign. Accepts a product brief and returns positioning, landing page copy, email sequence, social posts, ad variants, video scripts, and a content calendar. Can also review existing copy for conversion quality. This slash command delegates campaign planning and copy production to the marketing agent.
 allowed-tools: ["Read", "Grep", "Glob", "WebSearch", "WebFetch", "Write"]
 ---
 
@@ -113,10 +113,9 @@ Confirm the save location before writing files.
 
 This command invokes:
 - `marketing-agent` — campaign planning and copy production
-- `brand-voice` — voice capture when tone needs locking across multiple outputs
 - `content-engine` — platform-native social content production
-- `crosspost` — multi-platform distribution
-- `market-research` — deep audience or competitive intelligence
+
+Use the supplied voice guidance or writing examples when tone needs to stay consistent across outputs. Use `research-ops` when the audience or competitor brief needs current evidence.
 
 ## Related Commands
 

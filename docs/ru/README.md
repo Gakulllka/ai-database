@@ -484,9 +484,6 @@ ECC/
 |   |-- frontend-slides/            # HTML-слайды и PPTX-to-web workflow презентаций (НОВОЕ)
 |   |-- article-writing/            # Длинные тексты в заданном голосе без generic AI tone (НОВОЕ)
 |   |-- content-engine/             # Мультиплатформенный social content и переупаковка материалов (НОВОЕ)
-|   |-- market-research/            # Market/competitor/investor research с атрибуцией источников (НОВОЕ)
-|   |-- investor-materials/         # Pitch decks, one-pagers, memos и финансовые модели (НОВОЕ)
-|   |-- investor-outreach/          # Персонализированный fundraising outreach и follow-up (НОВОЕ)
 |   |-- continuous-learning/        # Legacy v1 Stop-hook extraction паттернов
 |   |-- continuous-learning-v2/     # Обучение на основе инстинктов с confidence scoring
 |   |-- iterative-retrieval/        # Прогрессивное уточнение контекста для субагентов
@@ -1266,11 +1263,9 @@ Skills в `.agents/skills/` автоматически загружаются Co
 | api-design | Паттерны REST API design |
 | article-writing | Long-form writing из заметок и voice references |
 | backend-patterns | API design, database, caching |
-| brand-voice | Source-derived writing style profiles из реального контента |
 | bun-runtime | Bun как runtime, package manager, bundler и test runner |
 | coding-standards | Универсальные coding standards |
 | content-engine | Platform-native social content и repurposing |
-| crosspost | Multi-platform distribution по X, LinkedIn, Threads |
 | deep-research | Multi-source research с synthesis и source attribution |
 | dmux-workflows | Multi-agent orchestration через tmux pane manager |
 | documentation-lookup | Актуальные docs библиотек и фреймворков через Context7 MCP |
@@ -1281,9 +1276,6 @@ Skills в `.agents/skills/` автоматически загружаются Co
 | fal-ai-media | Unified media generation для images, video и audio |
 | frontend-patterns | React/Next.js patterns |
 | frontend-slides | HTML presentations, PPTX conversion, visual style exploration |
-| investor-materials | Decks, memos, models и one-pagers |
-| investor-outreach | Personalized outreach, follow-ups и intro blurbs |
-| market-research | Market и competitor research с атрибуцией источников |
 | mcp-server-patterns | Build MCP servers with Node/TypeScript SDK |
 | nextjs-turbopack | Next.js 16+ и Turbopack incremental bundling |
 | product-capability | Перевод product goals в scoped capability maps |
@@ -1292,7 +1284,6 @@ Skills в `.agents/skills/` автоматически загружаются Co
 | tdd-workflow | Test-driven development с 80%+ coverage |
 | verification-loop | Build, test, lint, typecheck, security |
 | video-editing | AI-assisted video editing workflows с FFmpeg и Remotion |
-| x-api | Интеграция X/Twitter API для posting и analytics |
 
 ### Ключевое ограничение
 

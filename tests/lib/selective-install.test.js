@@ -109,11 +109,11 @@ function runTests() {
       'node', 'install-apply.js',
       '--profile', 'full',
       '--without', 'capability:media',
-      '--without', 'capability:social',
+      '--without', 'capability:documents',
     ]);
     assert.deepStrictEqual(parsed.excludeComponentIds, [
       'capability:media',
-      'capability:social',
+      'capability:documents',
     ]);
   })) passed++; else failed++;
 
@@ -226,10 +226,10 @@ function runTests() {
       profileId: 'full',
       moduleIds: [],
       includeComponentIds: [],
-      excludeComponentIds: ['capability:media', 'capability:media', 'capability:social'],
+      excludeComponentIds: ['capability:media', 'capability:media', 'capability:documents'],
       languages: [],
     });
-    assert.deepStrictEqual(request.excludeComponentIds, ['capability:media', 'capability:social']);
+    assert.deepStrictEqual(request.excludeComponentIds, ['capability:media', 'capability:documents']);
   })) passed++; else failed++;
 
   // ─── Component Catalog Validation ───
@@ -333,14 +333,14 @@ function runTests() {
   if (test('multiple --without flags exclude multiple modules', () => {
     const plan = resolveInstallPlan({
       profileId: 'full',
-      excludeComponentIds: ['capability:media', 'capability:social', 'capability:supply-chain'],
+      excludeComponentIds: ['capability:media', 'capability:documents', 'capability:supply-chain'],
       target: 'claude',
     });
     assert.ok(!plan.selectedModuleIds.includes('media-generation'));
-    assert.ok(!plan.selectedModuleIds.includes('social-distribution'));
+    assert.ok(!plan.selectedModuleIds.includes('document-processing'));
     assert.ok(!plan.selectedModuleIds.includes('supply-chain-domain'));
     assert.ok(plan.excludedModuleIds.includes('media-generation'));
-    assert.ok(plan.excludedModuleIds.includes('social-distribution'));
+    assert.ok(plan.excludedModuleIds.includes('document-processing'));
     assert.ok(plan.excludedModuleIds.includes('supply-chain-domain'));
   })) passed++; else failed++;
 
@@ -364,8 +364,8 @@ function runTests() {
   if (test('--without on a dependency of --with raises an error', () => {
     assert.throws(
       () => resolveInstallPlan({
-        includeComponentIds: ['capability:social'],
-        excludeComponentIds: ['capability:content'],
+        includeComponentIds: ['capability:visual-project-skills'],
+        excludeComponentIds: ['capability:design-workflows'],
       }),
       /depends on excluded module/
     );

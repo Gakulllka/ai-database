@@ -636,22 +636,11 @@
     {
       "id": "business-content",
       "kind": "skills",
-      "description": "Business, writing, market, and investor communication skills.",
+      "description": "Product capability modeling, long-form writing, and content adaptation.",
       "paths": [
         "skills/article-writing",
-        "skills/brand-voice",
         "skills/content-engine",
-        "skills/investor-materials",
-        "skills/investor-outreach",
-        "skills/lead-intelligence",
-        "skills/product-capability",
-        "skills/social-graph-ranker",
-        "skills/seo",
-        "skills/market-research",
-        "skills/brand-discovery",
-        "skills/competitive-platform-analysis",
-        "skills/competitive-report-structure",
-        "skills/marketing-campaign"
+        "skills/product-capability"
       ],
       "targets": [
         "claude",
@@ -848,37 +837,6 @@
       "defaultInstall": false,
       "cost": "light",
       "stability": "experimental"
-    },
-    {
-      "id": "social-distribution",
-      "kind": "skills",
-      "description": "Social publishing and distribution skills.",
-      "paths": [
-        "skills/crosspost",
-        "skills/x-api",
-        "skills/social-publisher",
-        "skills/short-video-distribution"
-      ],
-      "targets": [
-        "claude",
-        "claude-project",
-        "cursor",
-        "antigravity",
-        "antigravity-home",
-        "codex",
-        "copilot",
-        "opencode",
-        "codebuddy",
-        "joycode",
-        "qwen",
-        "zed"
-      ],
-      "dependencies": [
-        "business-content"
-      ],
-      "defaultInstall": false,
-      "cost": "medium",
-      "stability": "stable"
     },
     {
       "id": "media-generation",
@@ -1184,10 +1142,9 @@
     {
       "id": "document-processing",
       "kind": "skills",
-      "description": "Document processing, conversion, and translation skills.",
+      "description": "Document conversion, OCR, extraction, redaction, signing and form filling.",
       "paths": [
-        "skills/nutrient-document-processing",
-        "skills/visa-doc-translate"
+        "skills/nutrient-document-processing"
       ],
       "targets": [
         "claude",

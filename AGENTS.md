@@ -21,8 +21,10 @@ Personal skills and agents belong in the existing `skills/` and `agents/` direct
   [the sync procedure](docs/database-sync.md). Fetch does not merge working files.
   Integrate official updates in a Database maintenance task, preserving personal
   additions and resolving conflicts before publishing to `origin`.
-- Check the current directories when selecting skills and agents so new personal
-  additions remain discoverable.
+- Start at [the Database skill-pack catalog](docs/database-skill-packs.md) for
+  skill selection. Resolve the task to a pack and read the applicable skills
+  inside it. When working from GitHub, fetch the whole matching pack and its
+  declared dependencies in one operation.
 - For ambiguous or mixed visual work, read
   [design-workflow](skills/design-workflow/SKILL.md) to select the pipeline.
   Functional tools and 1C forms reuse `frontend-design-direction`'s functional UX

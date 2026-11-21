@@ -32,11 +32,11 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File "./scripts/form-edit.ps1
 | `commands` | Команды: добавить; `{ "remove": "Имя" }` — удалить |
 | `parameters` | Параметры формы: добавить; `{ "remove": "Имя" }` — удалить |
 | `title` | Заголовок формы (строка или `{ru, en}`); `null` — убрать |
-| `properties` | Свойства формы: `{ "windowOpeningMode": "LockOwnerWindow" }`; `null` у свойства — убрать (`references/form-properties.md`) |
+| `properties` | Свойства формы: `{ "windowOpeningMode": "LockOwnerWindow" }`; `null` у свойства — убрать ([form-properties.md](../form-compile/references/form-properties.md)) |
 | `events` | Обработчики событий формы: `{ "OnOpen": "ПриОткрытии" }` |
 | `excludedCommands` | Исключить стандартные команды: `["Copy"]`; вернуть: `{ "remove": ["Copy"] }` |
-| `conditionalAppearance` | Добавить правила условного оформления (`references/appearance.md`) |
-| `commandInterface` | Добавить команды в панели формы (`references/command-interface.md`) |
+| `conditionalAppearance` | Добавить правила условного оформления ([appearance.md](../form-compile/references/appearance.md)) |
+| `commandInterface` | Добавить команды в панели формы ([command-interface.md](../form-compile/references/command-interface.md)) |
 
 Все ключи необязательны, в одной правке можно сочетать любые. Имена элементов, реквизитов и команд — из `/form-info`. Процедуры обработчиков в модуле формы не создаются — их добавляют в `Module.bsl` отдельно.
 
@@ -102,15 +102,15 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File "./scripts/form-edit.ps1
 
 | Ключ | Элемент | Подробно |
 |------|---------|----------|
-| `input` | Поле ввода | `input-fields.md` |
-| `check` / `radio` | Флажок / переключатель | `input-fields.md` |
-| `labelField` | Поле-надпись (значение без редактирования) | `input-fields.md` |
-| `label` | Надпись, текст — в `title` | `tooltips-text.md` |
-| `group` | Группа: `vertical` / `horizontalIfPossible` / `alwaysHorizontal` | `groups-pages.md` |
-| `pages` / `page` | Страницы / страница | `groups-pages.md` |
-| `table` / `columnGroup` | Таблица / группа колонок | `table-advanced.md` |
-| `button` / `popup` / `buttonGroup` / `cmdBar` | Кнопка / подменю / группа кнопок / командная панель | `buttons-commands.md` |
-| `picture` / `picField` | Картинка / поле-картинка | `pictures.md` |
+| `input` | Поле ввода | [input-fields.md](../form-compile/references/input-fields.md) |
+| `check` / `radio` | Флажок / переключатель | [input-fields.md](../form-compile/references/input-fields.md) |
+| `labelField` | Поле-надпись (значение без редактирования) | [input-fields.md](../form-compile/references/input-fields.md) |
+| `label` | Надпись, текст — в `title` | [tooltips-text.md](../form-compile/references/tooltips-text.md) |
+| `group` | Группа: `vertical` / `horizontalIfPossible` / `alwaysHorizontal` | [groups-pages.md](../form-compile/references/groups-pages.md) |
+| `pages` / `page` | Страницы / страница | [groups-pages.md](../form-compile/references/groups-pages.md) |
+| `table` / `columnGroup` | Таблица / группа колонок | [table-advanced.md](../form-compile/references/table-advanced.md) |
+| `button` / `popup` / `buttonGroup` / `cmdBar` | Кнопка / подменю / группа кнопок / командная панель | [buttons-commands.md](../form-compile/references/buttons-commands.md) |
+| `picture` / `picField` | Картинка / поле-картинка | [pictures.md](../form-compile/references/pictures.md) |
 
 Табличный документ, HTML, календарь, диаграммы и другие особые поля — по индексу ниже.
 
@@ -171,7 +171,7 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File "./scripts/form-edit.ps1
 "parameters": [ { "name": "Основание", "type": "DocumentRef.Заказ", "key": true } ]
 ```
 
-Типы: `string`, `string(100)`, `decimal(15,2)`, `boolean`, `date`, `dateTime`, `CatalogRef.X`, `DocumentRef.X`, `EnumRef.X`, `ValueTable`, `ValueList`, `DynamicList`, `Тип1 | Тип2` — все типы в `references/type-system-advanced.md`. Остальные ключи реквизитов — `attributes-advanced.md`, команд — `buttons-commands.md`.
+Типы: `string`, `string(100)`, `decimal(15,2)`, `boolean`, `date`, `dateTime`, `CatalogRef.X`, `DocumentRef.X`, `EnumRef.X`, `ValueTable`, `ValueList`, `DynamicList`, `Тип1 | Тип2` — все типы в [type-system-advanced.md](../form-compile/references/type-system-advanced.md). Остальные ключи реквизитов — [attributes-advanced.md](../form-compile/references/attributes-advanced.md), команд — [buttons-commands.md](../form-compile/references/buttons-commands.md).
 
 ## Форма расширения
 
@@ -194,29 +194,29 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File "./scripts/form-edit.ps1
 
 ## Задача → справочник
 
-Под задачу подгрузите файл из `references/`:
+Откройте нужный раздел [общего справочника форм](../form-compile/references/).
 
 | Задача | Справочник |
 |--------|-----------|
-| Поле ввода, флажок, переключатель: кнопки, список выбора, быстрый выбор, своя форма выбора, маска, формат, пароль, выключатель/тумблер, поле составного типа | `input-fields.md` |
-| Ограничить выбор отбором, связать поле с другим полем, связь по типу | `choice-params.md` |
-| Группа и страницы: ориентация, рамка, свёрнутая группа, интервалы, заголовок из данных, значок закладки, мастер по шагам | `groups-pages.md` |
-| Таблица: колонки и группы колонок, итоги в подвале, дерево, выделение строк, закрепление колонок, поиск, перетаскивание | `table-advanced.md` |
-| Форма списка: источник данных, запрос, отбор, сортировка, группировка, иерархия | `dynamic-list.md` |
-| Кнопки, подменю, команды: картинка кнопки, переключатель в панели, команды таблицы в группе кнопок, своё контекстное меню у поля, команда для текущей строки | `buttons-commands.md` |
-| Подсветить цветом, шрифт, рамка, условное оформление (в форме списка — `dynamic-list.md`) | `appearance.md` |
-| Расширенная подсказка под полем, надпись с выделением или ссылкой | `tooltips-text.md` |
-| Картинка, значок в колонке, иконка по значению | `pictures.md` |
-| Табличный документ (печатная форма, отчёт на форме) | `spreadsheet.md` |
-| HTML, текстовый документ, индикатор, ползунок, календарь, период | `special-fields.md` |
-| Диаграмма, диаграмма Ганта, планировщик | `charts.md` |
-| Свойства формы: модальность, размер, прокрутка, Enter, время и проведение документа | `form-properties.md` |
-| Форма отчёта (СКД) | `report-form.md` |
-| Реквизиты: сохранение в настройках, проверка заполнения, функциональные опции | `attributes-advanced.md` |
-| Типы реквизитов, составные типы и наборы | `type-system-advanced.md` |
-| Видимость и доступ по ролям | `roles-access.md` |
-| Командный интерфейс формы (переходы, важные команды) | `command-interface.md` |
-| Размеры, выравнивание, фокус по умолчанию, узкие экраны | `layout-advanced.md` |
+| Поле ввода, флажок, переключатель: кнопки, список выбора, быстрый выбор, своя форма выбора, маска, формат, пароль, выключатель/тумблер, поле составного типа | [input-fields.md](../form-compile/references/input-fields.md) |
+| Ограничить выбор отбором, связать поле с другим полем, связь по типу | [choice-params.md](../form-compile/references/choice-params.md) |
+| Группа и страницы: ориентация, рамка, свёрнутая группа, интервалы, заголовок из данных, значок закладки, мастер по шагам | [groups-pages.md](../form-compile/references/groups-pages.md) |
+| Таблица: колонки и группы колонок, итоги в подвале, дерево, выделение строк, закрепление колонок, поиск, перетаскивание | [table-advanced.md](../form-compile/references/table-advanced.md) |
+| Форма списка: источник данных, запрос, отбор, сортировка, группировка, иерархия | [dynamic-list.md](../form-compile/references/dynamic-list.md) |
+| Кнопки, подменю, команды: картинка кнопки, переключатель в панели, команды таблицы в группе кнопок, своё контекстное меню у поля, команда для текущей строки | [buttons-commands.md](../form-compile/references/buttons-commands.md) |
+| Подсветить цветом, шрифт, рамка, условное оформление (в форме списка — [dynamic-list.md](../form-compile/references/dynamic-list.md)) | [appearance.md](../form-compile/references/appearance.md) |
+| Расширенная подсказка под полем, надпись с выделением или ссылкой | [tooltips-text.md](../form-compile/references/tooltips-text.md) |
+| Картинка, значок в колонке, иконка по значению | [pictures.md](../form-compile/references/pictures.md) |
+| Табличный документ (печатная форма, отчёт на форме) | [spreadsheet.md](../form-compile/references/spreadsheet.md) |
+| HTML, текстовый документ, индикатор, ползунок, календарь, период | [special-fields.md](../form-compile/references/special-fields.md) |
+| Диаграмма, диаграмма Ганта, планировщик | [charts.md](../form-compile/references/charts.md) |
+| Свойства формы: модальность, размер, прокрутка, Enter, время и проведение документа | [form-properties.md](../form-compile/references/form-properties.md) |
+| Форма отчёта (СКД) | [report-form.md](../form-compile/references/report-form.md) |
+| Реквизиты: сохранение в настройках, проверка заполнения, функциональные опции | [attributes-advanced.md](../form-compile/references/attributes-advanced.md) |
+| Типы реквизитов, составные типы и наборы | [type-system-advanced.md](../form-compile/references/type-system-advanced.md) |
+| Видимость и доступ по ролям | [roles-access.md](../form-compile/references/roles-access.md) |
+| Командный интерфейс формы (переходы, важные команды) | [command-interface.md](../form-compile/references/command-interface.md) |
+| Размеры, выравнивание, фокус по умолчанию, узкие экраны | [layout-advanced.md](../form-compile/references/layout-advanced.md) |
 
 ## Workflow
 

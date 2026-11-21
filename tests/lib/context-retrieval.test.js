@@ -18,6 +18,21 @@ test('exact canonical name anchors the cited skill first', () => {
   assert.equal(ranked[0].exact, true);
 });
 
+test('a complete skill name takes priority over its nested short name', () => {
+  const index = buildRetrievalIndex([
+    entry('skill:continuous-learning', 'continuous-learning', 'Continuous learning workflow.'),
+    entry('skill:continuous-learning-v2', 'continuous-learning-v2', 'Instinct-based learning.'),
+  ]);
+  for (const query of ['continuous-learning-v2', 'Use continuous-learning-v2']) {
+    const ranked = searchRetrieval(index, query);
+    assert.equal(ranked[0].id, 'skill:continuous-learning-v2');
+    assert.equal(ranked[0].exact, true);
+    assert.ok(!ranked.find(candidate => candidate.id === 'skill:continuous-learning')?.exact);
+  }
+  const citedBoth = searchRetrieval(index, 'Use continuous-learning-v2 and continuous-learning');
+  assert.equal(citedBoth.filter(candidate => candidate.exact).length, 2);
+});
+
 test('bm25 ranks multi-token description matches over single incidental matches', () => {
   const index = buildRetrievalIndex([
     entry('skill:a', 'a', 'Keyboard navigation and focus management for forms.'),
@@ -26,6 +41,25 @@ test('bm25 ranks multi-token description matches over single incidental matches'
   ]);
   const ranked = searchRetrieval(index, 'keyboard navigation in my settings form');
   assert.equal(ranked[0].id, 'skill:a');
+});
+
+test('a one-word dense match cannot displace stronger lexical context', () => {
+  const index = buildRetrievalIndex([
+    entry('skill:web-accessibility', 'web-accessibility',
+      'Keyboard navigation and focus management for React settings forms. Includes labels, ARIA and semantic HTML.'),
+    entry('skill:godot-navigation', 'godot-navigation',
+      'Build and diagnose Godot navigation. Navigation baking and movement integration.'),
+  ]);
+  const query = 'make keyboard navigation work in our React settings form';
+  const ranked = searchRetrieval(index, query);
+  assert.equal(ranked[0].id, 'skill:web-accessibility');
+  const oneWordMatch = ranked.find(candidate => candidate.id === 'skill:godot-navigation');
+  assert.deepEqual(oneWordMatch.matchedTerms, ['navigation']);
+  assert.ok(oneWordMatch.dense > 0.35);
+
+  const cited = searchRetrieval(index, query + ' using godot-navigation');
+  assert.equal(cited[0].id, 'skill:godot-navigation');
+  assert.equal(cited[0].exact, true);
 });
 
 test('a single incidental query token produces no candidates', () => {

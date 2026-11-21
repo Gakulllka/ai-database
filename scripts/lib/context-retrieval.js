@@ -139,6 +139,30 @@ function buildRetrievalIndex(entries) {
   return { documents, documentFrequency, averageLength: averageLength || 1, idf, entryCount: documents.length };
 }
 
+function completeQueryAliases(documents, query) {
+  const spans = [];
+  for (const alias of new Set(documents.flatMap(document => document.aliases))) {
+    if (!alias) continue;
+    const needle = ' ' + alias + ' ';
+    for (let start = query.indexOf(needle); start >= 0; start = query.indexOf(needle, start + 1)) {
+      spans.push({ alias, start, end: start + needle.length });
+    }
+  }
+
+  // A shorter name wholly inside a longer matched name is not another citation.
+  // Prefer the longer occurrence at a common start and keep independent mentions.
+  spans.sort((left, right) => left.start - right.start || right.end - left.end);
+  const aliases = new Set();
+  let furthestEnd = 0;
+  for (const { alias, end } of spans) {
+    if (end > furthestEnd) {
+      aliases.add(alias);
+      furthestEnd = end;
+    }
+  }
+  return aliases;
+}
+
 /** Rank entries for a free-text query. Returns candidates sorted by fused score. */
 function searchRetrieval(index, query, { limit = 5 } = {}) {
   const queryTokens = tokenize(query || '');
@@ -164,26 +188,35 @@ function searchRetrieval(index, query, { limit = 5 } = {}) {
   // Query-coverage floor: a single incidental token (e.g. "capital" of
   // "capital of Japan") is not evidence of relevance. Short queries need two
   // matched terms; longer technical queries carry signal in one strong domain
-  // term. Exact names and strong morphology matches anchor regardless.
+  // term. Exact names are anchored separately below.
   const uniqueTerms = new Set(queryTokens);
   const minimumCoverage = Math.min(2, uniqueTerms.size);
   const eligible = new Set();
+  const multiTermMatches = new Set();
   for (const [document] of bm25Ranked) {
     const matchedCount = [...uniqueTerms].filter(term => document.weighted.has(term)).length;
     if (matchedCount >= minimumCoverage || (matchedCount >= 1 && uniqueTerms.size >= 4)) eligible.add(document);
+    if (matchedCount >= 2) multiTermMatches.add(document);
   }
-  for (const [document, cosine] of denseRanked) if (cosine >= DENSE_ADMIT_COSINE) eligible.add(document);
+  // A single shared word can produce a strong n-gram match to an unrelated
+  // skill. Prefer multi-term evidence when present and keep morphology as a
+  // fallback when the query has no such match.
+  const contextualDense = multiTermMatches.size > 0
+    ? denseRanked.filter(([document]) => multiTermMatches.has(document))
+    : denseRanked;
+  for (const [document] of contextualDense) eligible.add(document);
   const fused = new Map();
   const addRank = (ranked, weight) => ranked.forEach(([document], rank) => {
     if (!eligible.has(document)) return;
     fused.set(document, (fused.get(document) || 0) + weight / (RRF_K + rank + 1));
   });
   addRank(bm25Ranked, 1);
-  addRank(denseRanked, 0.8);
+  addRank(contextualDense, 0.8);
   // A complete canonical/native name in the query anchors that skill first,
   // matching the previous contract and how agents cite skills.
+  const exactAliases = completeQueryAliases(index.documents, normalizedQuery);
   const exactAnchors = index.documents.map(document => ({ document,
-    alias: document.aliases.filter(alias => alias && normalizedQuery.includes(` ${alias} `))
+    alias: document.aliases.filter(alias => exactAliases.has(alias))
       .sort((a, b) => b.length - a.length)[0] || null }))
     .filter(anchor => anchor.alias);
   for (const { document } of exactAnchors) fused.set(document, (fused.get(document) || 0) + 1);

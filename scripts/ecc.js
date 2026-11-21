@@ -27,6 +27,10 @@ const COMMANDS = {
     script: 'catalog.js',
     description: 'Discover install profiles and component IDs',
   },
+  packs: {
+    script: 'skill-packs.js',
+    description: 'Browse, search and fetch whole Database skill packs',
+  },
   consult: {
     script: 'consult.js',
     description: 'Recommend ECC components and profiles from a natural language query',
@@ -115,6 +119,7 @@ const PRIMARY_COMMANDS = [
   'install',
   'plan',
   'catalog',
+  'packs',
   'consult',
   'profile',
   'control-pane',
@@ -171,6 +176,7 @@ Examples:
   ecc catalog profiles
   ecc catalog components --family language
   ecc catalog show framework:nextjs
+  ecc packs find "плейтест игры"
   ecc consult "security reviews"
   ecc profile preview lean@1 --target codex --selection auto --json
   ecc control-pane --port 8765

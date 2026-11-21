@@ -53,7 +53,7 @@ const MIN_ANCHOR_TERMS = 1;
 // v10: illustrative instructions do not supply or withdraw a direct request.
 // v11: a contrastive current-task instruction ends the preceding example scope.
 // v12: preserve current-main evidence floors and anchor checks.
-const ROUTING_POLICY_VERSION = 12;
+const ROUTING_POLICY_VERSION = 13;
 const TASK_KEYS = new Set(['sessionId', 'taskId', 'revision', 'phase', 'query', 'explicitIds', 'proposedIds', 'noWorkflow']);
 
 const DIRECTIVE_VERB = /\b(use|apply|invoke|run|follow|load)\s+(the\s+)?/i;

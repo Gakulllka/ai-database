@@ -24,6 +24,13 @@ explicit scope and record the limit.
 
 ## Failures and evidence
 
+For integrated user journeys, **e2e-runner** selects the actual platform profile
+from the installed development guidance. Supply the target, expected behavior,
+permitted test data/actions, test-file writes and artifact locations. It may run
+authorized tests and isolated interactions, but product fixes remain with the
+implementation-worker. Do not install a runner or upload screenshots/traces just
+because an upstream example suggests it. Unavailable checks remain unverified.
+
 Check isolation, assumptions, fixture fidelity and the real entry point. Fix the
 implementation unless evidence shows the test contract is wrong. Do not delete,
 weaken or quarantine a test just to obtain a pass; record the risk and permitted

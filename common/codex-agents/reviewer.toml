@@ -1,5 +1,5 @@
-model = "gpt-6-sol"
-model_reasoning_effort = "high"
+name = "reviewer"
+description = "Independently review changes for correctness, security and missing tests."
 sandbox_mode = "read-only"
 
 developer_instructions = """

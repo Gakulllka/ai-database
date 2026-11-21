@@ -159,6 +159,10 @@
   ],
   "mounts": [
     {
+      "from": "codex-agents",
+      "to": "codex-agents"
+    },
+    {
       "from": "docs",
       "to": "docs"
     },

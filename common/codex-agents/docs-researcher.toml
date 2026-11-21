@@ -1,5 +1,5 @@
-model = "gpt-6-luna"
-model_reasoning_effort = "medium"
+name = "docs-researcher"
+description = "Verify API and framework claims against current primary documentation."
 sandbox_mode = "read-only"
 
 developer_instructions = """

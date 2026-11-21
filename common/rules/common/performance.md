@@ -1,60 +1,31 @@
-# Performance Optimization
+# Performance and Model Routing
 
-## Model Selection Strategy
+The main AI remains the orchestrator. Select a model and reasoning effort for the
+actual assignment from the host's available choices, rather than hard-coding a
+provider's product names or an unmeasured cost/quality ratio.
 
-**Haiku** (90% of Sonnet capability, 3x cost savings):
-- Lightweight agents with frequent invocation
-- Pair programming and code generation
-- Worker agents in multi-agent systems
+| Assignment | Routing guideline |
+| --- | --- |
+| Bounded lookup, classification, repository exploration | Fast capable model; low or medium supported reasoning |
+| Scoped implementation and focused tests | Model reliable for the actual stack; sufficient reasoning for the failure risk |
+| Ambiguous planning, security, architecture or independent review | Stronger reasoning and adequate context |
+| Unreliable result or unresolved evidence | Improve context or escalate capability; recheck the result |
 
-**Sonnet** (Best coding model):
-- Main development work
-- Orchestrating multi-agent workflows
-- Complex coding tasks
+Use explicit model/effort launch parameters when the host supports them. Omitted
+fields inherit available settings. Role-level fixed fields may override a launch
+choice, so preserve and account for user customizations. A full-history fork may
+not accept role/model overrides; use a self-contained fresh task when needed.
 
-**Opus** (Deepest reasoning):
-- Complex architectural decisions
-- Maximum reasoning requirements
-- Research and analysis tasks
+Run independent reads and checks in parallel, with isolated write ownership.
+Keep the orchestrator's context focused on constraints, verified outcomes and
+remaining work; pass evidence locations to workers. Retain compact handoffs before
+context is reduced. Do not claim a speedup or lower cost without a measurement.
 
-## Context Window Management
+## Build troubleshooting
 
-Avoid last 20% of context window for:
-- Large-scale refactoring
-- Feature implementation spanning multiple files
-- Debugging complex interactions
-
-Lower context sensitivity tasks:
-- Single-file edits
-- Independent utility creation
-- Documentation updates
-- Simple bug fixes
-
-## Extended Thinking + Plan Mode
-
-In Claude Code, adaptive reasoning lets the model choose how much to think for each task.
-For Fable models, Sonnet 5 and later, and Opus 4.7 and later, use effort to control reasoning
-rather than a fixed token budget. Available levels depend on the model.
-
-Control thinking via:
-- **Effort**: Use `/effort` in a session, `--effort <level>` at launch, or `CLAUDE_CODE_EFFORT_LEVEL`. Save a per-model level in `modelSettings` in `~/.claude/settings.json`; the older user-level `effortLevel` key does not apply to Opus 5.5 or newer models.
-- **Toggle**: Option+T (macOS) / Alt+T (Windows/Linux), or `alwaysThinkingEnabled` in settings. These cannot disable thinking on Opus 5.5, Sonnet 5.5, or Fable models.
-- **Fixed budget**: Claude Code ignores positive `MAX_THINKING_TOKENS` values on adaptive reasoning models. On Opus 4.6 or Sonnet 4.6, set `CLAUDE_CODE_DISABLE_ADAPTIVE_THINKING=1` to use a fixed budget with `MAX_THINKING_TOKENS`.
-- **Verbose mode**: Ctrl+O to see thinking output
-
-See [Claude Code model configuration](https://code.claude.com/docs/en/model-config#adjust-effort-level)
-and [environment variables](https://code.claude.com/docs/en/env-vars) for supported controls.
-
-For complex tasks requiring deep reasoning:
-1. Choose a higher supported effort level, such as `/effort high`
-2. Enable **Plan Mode** for structured approach
-3. Use multiple critique rounds for thorough analysis
-4. Use split role sub-agents for diverse perspectives
-
-## Build Troubleshooting
-
-If build fails:
-1. Use **build-error-resolver** agent
-2. Analyze error messages
-3. Fix incrementally
-4. Verify after each fix
+For the development pack, delegate diagnosis to **build-error-resolver**.
+Use **1c-build-resolver** or **godot-build-resolver** for those domains. The parent
+applies a verified minimal correction and runs the relevant check. If the requested
+role is unavailable, report the limitation and use an available scoped worker.
+Do not install dependencies, delete caches/lockfiles or change permissions merely
+to make a diagnostic green.

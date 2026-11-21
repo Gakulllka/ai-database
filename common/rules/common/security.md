@@ -23,7 +23,7 @@ Before ANY commit:
 
 If security issue found:
 1. STOP immediately
-2. Use **security-reviewer** agent
+2. Delegate to **security-reviewer** when the development role is installed; otherwise use the installed domain reviewer or **reviewer** with explicit security scope and record the missing specialist
 3. Fix CRITICAL issues before continuing
 4. Rotate any exposed secrets
 5. Review entire codebase for similar issues

@@ -12,5 +12,6 @@
 
 - [Инструкция по подключению для Codex](skills/database-onboarding/SKILL.md)
 - [Шаблон AGENTS.md для проекта](templates/AGENTS.md)
+- [Оркестрация, роли и выбор моделей](docs/agents/orchestration.md)
 - [Состав пакета](pack.json)
 - [Стартовая страница](../README.md)

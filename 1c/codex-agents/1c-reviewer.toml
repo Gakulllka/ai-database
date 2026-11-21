@@ -1,3 +1,5 @@
+name = "1c-reviewer"
+description = "Independently review BSL, metadata, access, transactions and 1C regressions."
 sandbox_mode = "read-only"
 
 developer_instructions = """

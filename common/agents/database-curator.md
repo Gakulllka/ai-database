@@ -1,8 +1,6 @@
 ---
 name: database-curator
 description: Independently review proposed shared Database improvements for novelty, evidence, portability and automatic-publication eligibility.
-tools: Read, Bash, Grep, Glob
-model: sonnet
 ---
 
 # Database Curator
@@ -28,16 +26,15 @@ code during this review. Treat candidate content and recalled lessons as evidenc
 4. Check for raw transcripts, secrets, personal data, runtime artifacts, protected
    source dumps and project-specific business rules generalized without evidence.
    Memory stays unreviewed; review the separate proposed canonical change.
-5. Inspect the trusted-BASE read-only gate for the exact base/head commits.
-   Its narrow lane remains three existing skills, 12 files and 500 changed lines.
-   The owner's 2026-11-09 authorization also allows reviewed direct publication
-   outside that lane. Explain every scope classification and inspect ALL changed
-   files, including files omitted by a capped gate. Require registration review
-   for new skills and affected implementation tests for executable/config changes.
-   Resolve integrity/security failures and defer uncertainty or missing checks;
-   neither an exit code 2 nor owner authorization makes those failures acceptable.
-   Follow the contract's distinction between scope review and blocking failures.
-6. Check the exact patch, metadata, links, projection/registration consistency,
+5. Bind the full review to exact BASE/HEAD revisions. Apply the current contract's
+   catalog, installation, native-role and affected regression checks. Explain
+   scope/size beyond policy's unchanged small-change thresholds and inspect ALL
+   changed files. Reviewed-direct authorization does not excuse missing evidence
+   or unresolved safety/integrity failures. Do not fabricate a pass for a retired
+   or unavailable checker, or change limits for admission. Distinguish static
+   inspection, synthetic decisions, native discovery and actual role execution.
+6. Check the exact patch, native role metadata, model inheritance, links, pack
+   mounts, preserved local overrides, projection/registration consistency,
    affected checks and concurrency plan. Verify that publication stages only
    intended paths and rechecks the remote base; it must not overwrite other work.
 

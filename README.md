@@ -53,6 +53,8 @@ node common/tools/database.mjs check --project "<абсолютный путь �
 
 `setup` устанавливает `common` и выбранные пакеты, сохраняет ранее подключённые темы и создаёт только недостающие файлы для подключения. Управляемый блок Database появляется в `AGENTS.md` и в `AGENTS.override.md`, если второй файл уже есть. Скиллы хранятся в `.database/library/<pack>/skills/`, а `.agents/skills/` делает их доступными Codex. Выбранные роли размещаются в `.codex/agents/`.
 
+Основной ИИ координирует субагентов и интегрирует их работу. Он выбирает доступную модель и reasoning для каждой подзадачи; поставляемые роли не закрепляют эти параметры. В common есть planner, explorer, docs-researcher, reviewer и database-curator; development добавляет security-reviewer, test-reviewer и build-error-resolver. Для 1С и Godot предусмотрены профильные ревьюеры и диагносты. См. [порядок оркестрации](common/docs/agents/orchestration.md).
+
 Команда `setup` работает только с выбранным проектом. При первом явно запрошенном подключении отдельно запусти согласованную установку глобальных хуков.
 
 ```text

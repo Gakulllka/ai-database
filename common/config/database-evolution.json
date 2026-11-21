@@ -9,7 +9,8 @@
     "separateModelApiRequired": false,
     "schedule": "daily at 21:00 Europe/Moscow",
     "maxMinutesPerRun": 30,
-    "maxDeepReviews": 3
+    "maxDeepReviews": 3,
+    "workflow": "orchestrated"
   },
   "radar": {
     "queries": [
@@ -24,7 +25,7 @@
     "perQuery": 10,
     "timeoutMs": 15000,
     "maxInventoryFiles": 2500,
-    "statePath": "docs/evolution/github-observations.json"
+    "statePath": "common/docs/evolution/github-observations.json"
   },
   "policy": {
     "maxSkillChanges": 3,
@@ -38,15 +39,31 @@
     "permissionChangesRequirePullRequest": false,
     "scopeClassificationsRequireCompleteReview": true,
     "allowForcePush": false,
-    "allowUntrustedCodeExecution": false
+    "allowUntrustedCodeExecution": false,
+    "verificationCommands": [
+      "node common/tools/database.mjs verify",
+      "node --test common/tools/database.test.mjs"
+    ],
+    "publicationContract": "common/docs/design/database-evolution.md"
   },
   "learning": {
-    "store": "Database Memory Vault team lessons",
+    "store": "Authorized scoped sanitized Markdown lessons; existing Memory Vault optional",
     "scope": "team",
     "kind": "lesson",
     "rawTranscriptsAllowed": false,
     "projectSpecificRulesRemainLocal": true,
     "proposalPublication": "reviewed direct push of verified sanitized lessons; defer unproven lessons locally",
     "deduplication": "source revision, capability and evidence; cross-PC paths are not identity"
+  },
+  "orchestration": {
+    "primary": "The main AI orchestrates scoped subagents, verifies evidence and integrates results",
+    "modelSelection": "Per task from available host models and supported reasoning; packaged roles inherit unless explicitly overridden at launch",
+    "parallelism": "Independent lanes within host limits; isolate write ownership",
+    "roleRoots": [
+      "common/codex-agents",
+      "development/codex-agents",
+      "1c/codex-agents",
+      "godot/codex-agents"
+    ]
   }
 }

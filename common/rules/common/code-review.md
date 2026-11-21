@@ -63,12 +63,16 @@ Use these agents for code review:
 
 | Agent | Purpose |
 |-------|---------|
-| **code-reviewer** | General code quality, patterns, best practices |
+| **reviewer** | General code quality, correctness and regressions |
 | **security-reviewer** | Security vulnerabilities, OWASP Top 10 |
-| **typescript-reviewer** | TypeScript/JavaScript specific issues |
-| **python-reviewer** | Python specific issues |
-| **go-reviewer** | Go specific issues |
-| **rust-reviewer** | Rust specific issues |
+| **test-reviewer** | Whether tests protect the changed behavior |
+| **1c-reviewer** | BSL, metadata and 1C platform behavior |
+| **godot-reviewer** | Godot code, scenes, resources and gameplay |
+
+Use only roles installed by the selected packs. Security and test reviewers ship
+with development; domain reviewers ship with their topic. When unavailable, scope
+the installed reviewer to the relevant project skills and report the missing
+specialist. Do not assume language-specific roles exist because ECC names them.
 
 ## Review Workflow
 

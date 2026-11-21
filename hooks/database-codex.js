@@ -7,6 +7,7 @@ const gitCommand = /^\s*(?:&\s+)?git(?:\.exe)?\s+/i;
 const forcedPush = /^push\b[^\r\n]*(?:--force(?:\b|=)|\s-f(?:\s|$))/i;
 const destructiveGit = /^(?:reset\s+--hard\b|clean\s+-[dfx]*f[dfx]*\b|branch\s+-D\b)/;
 const verification = /\b(?:npm|pnpm|yarn|bun)\s+(?:(?:run|exec)\s+)?(?:test|lint|typecheck|build|check)\b|\b(?:pytest|cargo\s+test|go\s+test|dotnet\s+test|node\s+--test|git\s+diff\s+--check)\b/;
+const directTest = /^\s*(?:&\s+)?(?:(?:npm|pnpm|yarn|bun)(?:\.cmd|\.exe)?\s+(?:run\s+)?test|pytest|cargo\s+test|go\s+test|dotnet\s+test|node\s+--test)\b/i;
 const secret = /(?:gh[pousr]_[A-Za-z0-9]{30,}|github_pat_[A-Za-z0-9_]{45,}|(?:sk-(?:proj-)?|sk-ant-api\d{2}-)[A-Za-z0-9_-]{30,}|AKIA[A-Z0-9]{16}|-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----)/;
 
 function context(event, message) {
@@ -37,6 +38,13 @@ function outputExitCode(result) {
   const chunk = /^Chunk ID:[^\r\n]*\r?\nWall time:[^\r\n]*\r?\nProcess exited with code (\d+)\b/.exec(result);
   return chunk ? Number(chunk[1]) : null;
 }
+
+const failedTestSummaries = [
+  /^(#|\u2139\uFE0F?) tests \d+\r?\n\1 suites \d+\r?\n\1 pass \d+\r?\n\1 fail [1-9]\d*[ \t]*\r?$/m,
+  /^=+ [^\r\n]*\b[1-9]\d* (?:failed|errors?)\b[^\r\n]* in \d+(?:\.\d+)?s =+\r?$/m,
+  /^test result: FAILED\. \d+ passed; [1-9]\d* failed;/m,
+  /^FAIL\t\S+\t(?:\d+(?:\.\d+)?s|\[build failed\])[ \t]*\r?$/m,
+];
 
 function evaluate(action, payload) {
   if (!payload || typeof payload !== 'object') return null;
@@ -72,8 +80,16 @@ function evaluate(action, payload) {
   }
 
   if (action === 'check-result' && payload.hook_event_name === 'PostToolUse' && payload.tool_name === 'Bash' &&
-      verification.test(command) && (outputExitCode(payload.tool_response) ?? 0) !== 0) {
-    return context('PostToolUse', 'A verification command exited unsuccessfully. Check its result and distinguish a change regression from an environment failure before reporting delivery.');
+      verification.test(command)) {
+    const result = payload.tool_response;
+    const exitCode = outputExitCode(result);
+    if (exitCode !== null && exitCode !== 0) {
+      return context('PostToolUse', 'A verification command exited unsuccessfully. Check its result and distinguish a change regression from an environment failure before reporting delivery.');
+    }
+    // Some Codex executors supply only raw stdout to PostToolUse.
+    if (exitCode === null && directTest.test(command) && typeof result === 'string' && failedTestSummaries.some(pattern => pattern.test(result))) {
+      return context('PostToolUse', 'A test summary reports failures. Check its result and distinguish a change regression from an environment failure before reporting delivery.');
+    }
   }
 
   return null;

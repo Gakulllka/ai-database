@@ -15,8 +15,8 @@ The installer uses `CODEX_HOME` or the default user configuration directory. Pas
 | Before a shell command | Reminds Codex to check the target and scope of potentially destructive Git operations. |
 | Before applying a patch | Flags added lines that resemble credentials or private keys. |
 | After applying a patch | Flags apparent conflict markers or debug statements added by the patch. |
-| After a shell command | Flags an unsuccessful verification command so the failure can be explained before delivery. |
+| After a shell command | Flags a failed exit or a test summary that reports failures. |
 
-On Windows the standalone commands use the default PowerShell shell. The checks give advisory messages for supported native tool events and recognizable exit results. Codex approvals and project permissions still apply. The [optional native Codex plugin](../.codex-plugin/README.md) has a separate session startup hook. The [compaction recovery definition](codex-compaction-recovery.json) is included by the standalone installer.
+On Windows the standalone commands use the default PowerShell shell. The checks give advisory messages for supported native tool events. The verification hook uses a reported exit code or a recognized test summary (Node, pytest, Rust or Go). Codex approvals and project permissions still apply. The [optional native Codex plugin](../.codex-plugin/README.md) has a separate session startup hook. The [compaction recovery definition](codex-compaction-recovery.json) is included by the standalone installer.
 
 Database supplies lifecycle registrations only for Codex. Other adapters continue to provide their supported skills, tools and commands. Git hooks and scripts bundled as explicit skill examples remain separate.

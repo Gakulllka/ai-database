@@ -48,6 +48,28 @@ test('verification advice requires a recognized command and an actual failed exi
   assert.equal(evaluate('check-result', event('PostToolUse', 'Bash', 'echo done', { exit_code: 1 })), null);
 });
 
+test('raw runner output reports failures only from recognized summaries', () => {
+  const payload = (command, output) => event('PostToolUse', 'Bash', command, output);
+  for (const [command, summary] of [
+    ['node --test', '\u2139 tests 1\r\n\u2139 suites 0\r\n\u2139 pass 0\r\n\u2139 fail 1\r\n'],
+    ['node --test', 'TAP version 13\n# tests 2\n# suites 0\n# pass 0\n# fail 2\n'],
+    ['pytest', '===== 1 failed, 2 passed in 0.10s ====='],
+    ['cargo test', 'test result: FAILED. 0 passed; 1 failed; 0 ignored;'],
+    ['go test ./...', 'FAIL\tpackage/example\t0.004s\n'],
+  ]) {
+    assert.match(evaluate('check-result', payload(command, summary)).hookSpecificOutput.additionalContext, /summary reports failures/);
+  }
+  assert.equal(evaluate('check-result', payload('node --test', '\u2139 fail 0\n')), null);
+  assert.equal(evaluate('check-result', payload('node --test', 'expected 1 failed test in documentation')), null);
+  assert.equal(evaluate('check-result', payload('echo done', '# fail 1\n')), null);
+  const validSummary = '# tests 2\n# suites 0\n# pass 1\n# fail 1\n';
+  assert.equal(evaluate('check-result', payload('echo node --test', validSummary)), null);
+  assert.equal(evaluate('check-result', payload('npm run lint', validSummary)), null);
+  assert.equal(evaluate('check-result', payload('node --test', '# fail 1\n')), null);
+  assert.equal(evaluate('check-result', payload('pytest', '=== 1 error in documentation ===')), null);
+  assert.equal(evaluate('check-result', payload('npm test', { exit_code: 0, output: validSummary })), null);
+});
+
 test('merging hooks preserves user entries, deduplicates and handles a moved Node executable', () => {
   const local = { hooks: [{ type: 'command', command: 'user-specific check' }] };
   const script = path.join(os.tmpdir(), 'directory with spaces', 'database-codex.js');

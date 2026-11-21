@@ -48,6 +48,15 @@ typical and large data sets; retain selection/filters across refresh when useful
 and consistent with the application. An arbitrary record-count threshold is not
 proof that a particular virtualization strategy is needed.
 
+For numeric records, keep a measured zero as a number. Give missing readings
+and qualitative observations distinct visible labels or defined symbols when
+the distinction affects a decision or what the user can conclude from the
+record. Show a shared unit in the column header or keep the unit with its
+measurement in a mixed table. When comparing decimals of different precision,
+align on the decimal separator where it helps scanning and avoid implying extra
+precision. Check the applicable states at the target size in monochrome for
+meaning, and check legibility in each supported theme.
+
 Keep status color semantic; prioritize readable text, hierarchy and visible
 focus. Choose density and target sizes for actual input devices, users and
 platform conventions. Apply the existing design system rather than importing

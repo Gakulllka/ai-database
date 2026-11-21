@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "id": "1c",
+  "title": "1С",
+  "dependsOn": [
+    "common"
+  ],
+  "skills": [
+    "1c-bsl-patterns",
+    "1c-data-composition",
+    "1c-development",
+    "1c-extensions",
+    "1c-external-files",
+    "1c-infobase",
+    "1c-managed-forms",
+    "1c-metadata",
+    "1c-mxl-templates",
+    "1c-platform-tools",
+    "1c-testing",
+    "1c-web-client",
+    "1c-xdto",
+    "article-writing",
+    "content-engine",
+    "planfix-tracker",
+    "ui-demo"
+  ],
+  "mounts": [
+    {
+      "from": "codex-agents",
+      "to": "codex-agents"
+    },
+    {
+      "from": "docs",
+      "to": "docs"
+    },
+    {
+      "from": "rules",
+      "to": "rules"
+    },
+    {
+      "from": "skills",
+      "to": "skills"
+    },
+    {
+      "from": "templates",
+      "to": "templates"
+    }
+  ]
+}

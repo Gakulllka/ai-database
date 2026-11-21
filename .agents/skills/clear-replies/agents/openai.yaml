@@ -1,4 +1,0 @@
-interface:
-  display_name: "Clear Replies"
-  short_description: "Explain results with practical meaning first"
-  default_prompt: "Use $clear-replies to present the result and practical meaning in clear, concise language."

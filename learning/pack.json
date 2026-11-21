@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "id": "learning",
+  "title": "Обучение и исследования",
+  "dependsOn": [
+    "common"
+  ],
+  "skills": [
+    "deep-research",
+    "evidence-research",
+    "osint-investigation",
+    "research-ops",
+    "scientific-db-openalex-database",
+    "scientific-thinking-literature-review"
+  ],
+  "mounts": [
+    {
+      "from": "skills",
+      "to": "skills"
+    }
+  ]
+}

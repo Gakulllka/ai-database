@@ -1,0 +1,26 @@
+{
+  "schemaVersion": "database.evolution.decision.v1",
+  "source": {
+    "repoId": 1378288598,
+    "fullName": "zai-org/ZCode",
+    "commit": "fec975905a2abd4c07e35c40d51fa097a2258ec9"
+  },
+  "capability": "Interactive MCP application panels with negotiated host capabilities and shared artifact edits",
+  "decision": "defer",
+  "status": "defer",
+  "existingPaths": [
+    "development/skills/mcp-server-patterns/SKILL.md",
+    "development/skills/ai-artifact-contracts/SKILL.md",
+    "development/skills/local-first-sync/SKILL.md",
+    "design/skills/ecosystem-design-consistency/SKILL.md",
+    "common/skills/mcp-dependency-review/SKILL.md"
+  ],
+  "evidence": [
+    "Source: https://github.com/zai-org/ZCode/tree/fec975905a2abd4c07e35c40d51fa097a2258ec9",
+    "Read pinned README/README.en.md, root Apache-2.0 LICENSE, NOTICE.md and UI_PLUGIN.en.md; five source blob hashes matched. NOTICE records separate third-party terms and data-flow boundaries; component redistribution was not approved. No desktop build, bootstrap, MCP server, installer, remote workspace or account was run/accessed.",
+    "UI guide describes official MCP Apps SDK use, negotiated capabilities rather than version guesses, host approvals/cancellation, stable element IDs, shared undo/redo, and current desktop-local panel scope. Web/mobile/remote retain ordinary tool records without equivalent interactive panels. It distinguishes fixture tests from Electron sandbox/real permissions/real engines. These are documentation claims, not observed enforcement or compatibility.",
+    "MCP-server patterns owns protocol/schema/tool contracts; artifact-contracts owns generation-to-edit/save/reopen/export identity; local-first-sync owns revisions/conflicts; ecosystem design owns shared tokens; dependency review owns inspected pins. These already cover the transferable interface principles. An interactive Electron/MCP Apps adapter is a separate runtime capability, not an absent general skill."
+  ],
+  "reason": "Defer adapter/runtime adoption until a concrete authorized host integration, exact supported capability contract and real lifecycle/storage/permission tests exist. Do not transplant release settings, external account/data flows or plugin code into the shared foundation.",
+  "observedAt": "2026-11-15T18:11:10.313Z"
+}

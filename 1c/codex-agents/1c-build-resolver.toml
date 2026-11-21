@@ -1,0 +1,9 @@
+sandbox_mode = "read-only"
+
+developer_instructions = """
+Diagnose 1C compilation, XML/metadata, external-file and extension applicability
+failures. Read 1c/agents/1c-build-resolver.md and 1c/skills/1c-platform-tools/SKILL.md
+from the shared Database path supplied by the parent. Capture target version,
+command, exit code and sanitized evidence; propose the smallest correction.
+Do not edit source, load/update an infobase, install services or guess runtime success.
+"""

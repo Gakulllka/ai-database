@@ -1,0 +1,24 @@
+{
+  "schemaVersion": "database.evolution.decision.v1",
+  "source": {
+    "repoId": 1200597263,
+    "fullName": "Graphify-Labs/graphify",
+    "commit": "d4a5b323ef8501518b82c58a05fe21b35ce24992"
+  },
+  "capability": "Persisted code graph with extraction/inference provenance and dependency queries",
+  "decision": "defer",
+  "status": "defer",
+  "existingPaths": [
+    "common/skills/codebase-onboarding/SKILL.md",
+    "development/skills/change-impact/SKILL.md",
+    "agents/code-explorer.md",
+    "development/skills/ai-artifact-contracts/SKILL.md"
+  ],
+  "evidence": [
+    "Pinned default-v8 source: https://github.com/Graphify-Labs/graphify/tree/d4a5b323ef8501518b82c58a05fe21b35ce24992. Read bounded README sections, LICENSE, LICENSE-MIT and NOTICE; four blob hashes checked. Product declares Apache-2.0 while NOTICE retains MIT terms for older portions. Cloud claims were not treated as observed OSS behavior.",
+    "README claims versioned graph output, EXTRACTED/INFERRED edges and source/confidence labels. No implementation, graph build/query or benchmark was run. Existing onboarding/explorer trace entry points and dependencies; change-impact requires real dependency evidence and artifact contracts cover identity/schema/provenance. None claims a benchmarked equivalent of the external runtime.",
+    "The prior local scout deferred graph adoption pending a repository fixture showing a missing capability and measured benefit. This new revision/README did not supply that evidence; no runtime/skill is adopted and no complete graph accuracy or coverage is claimed."
+  ],
+  "reason": "General mapping, impact and provenance are covered by existing owners. Retain the graph-runtime deferral until a concrete fixture establishes missing behavior, accuracy, stale-index handling and benefit.",
+  "observedAt": "2026-11-15T14:48:23.844Z"
+}

@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "id": "godot",
+  "title": "Godot",
+  "dependsOn": [
+    "common"
+  ],
+  "skills": [
+    "gdscript-patterns",
+    "godot-2d",
+    "godot-3d",
+    "godot-animation-audio",
+    "godot-assets-pipeline",
+    "godot-csharp",
+    "godot-development",
+    "godot-editor-extensions",
+    "godot-export",
+    "godot-gameplay",
+    "godot-navigation",
+    "godot-networking",
+    "godot-performance",
+    "godot-save-load",
+    "godot-scenes-resources",
+    "godot-shaders-rendering",
+    "godot-testing",
+    "godot-ui-input"
+  ],
+  "mounts": [
+    {
+      "from": "codex-agents",
+      "to": "codex-agents"
+    },
+    {
+      "from": "docs",
+      "to": "docs"
+    },
+    {
+      "from": "rules",
+      "to": "rules"
+    },
+    {
+      "from": "skills",
+      "to": "skills"
+    },
+    {
+      "from": "templates",
+      "to": "templates"
+    }
+  ]
+}

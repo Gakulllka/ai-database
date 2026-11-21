@@ -1,0 +1,29 @@
+{
+  "schemaVersion": "database.evolution.decision.v1",
+  "source": {
+    "repoId": 1416442720,
+    "fullName": "microsoft/TokenEconomizer",
+    "commit": "b57d03f81585a18b936a0eaecbd1eb51cdcecf71"
+  },
+  "capability": "Scoped reversible tool selection with observed availability and permission-preserving recovery",
+  "decision": "extend",
+  "status": "applied",
+  "existingPaths": [
+    "development/skills/agent-harness-construction/SKILL.md",
+    "common/skills/benchmark-optimization-loop/SKILL.md",
+    "common/skills/agent-eval/SKILL.md",
+    "common/skills/skill-stocktake/SKILL.md",
+    "development/skills/prompt-caching-strategy/SKILL.md",
+    "development/skills/cost-aware-llm-pipeline/SKILL.md"
+  ],
+  "evidence": [
+    "Source: https://github.com/microsoft/TokenEconomizer/tree/b57d03f81585a18b936a0eaecbd1eb51cdcecf71",
+    "Pinned README, MIT LICENSE, architecture, pricing and toolprune README/tools.py/codex.py were read as untrusted text. All seven blobs matched their Git hashes; no foreign plugin, scripts, tests, installer or separate model API was executed.",
+    "The source separates evidence pruning from capability selection and records catalog fingerprints, loaded exposures, attempts/completions and later-task masks. Static source inspection also shows experiment-only task judges and source-specific capability lists. Published savings and compatibility are source claims, not independently reproduced results.",
+    "Searched canonical skills/rules/agents for tool pruning, loaded/unused tools, restore, catalog and rare paths. Read harness construction, benchmark optimization, agent eval, stocktake, prompt caching and cost-aware accounting. Those already cover granularity, holdouts, missing usage, cache stability and bills; they lacked a single tool-selection contract distinguishing hidden tools from exposed unused ones and restoring only within the authorized baseline.",
+    "Extended the existing harness owner with original scoped evidence, required/indirect/rare-path retention, reversible owned config changes, session-boundary verification and schema/version/scope invalidation. Failed attempts count as demand to investigate rather than a transferable zero-completed pruning rule. No hardcoded capability list, thresholds, plugin default, provider configuration or permissions were adopted.",
+    "Seven independent raw synthetic cases cover incomplete/hidden exposure, failed demand, denied recovery, stale cross-project masks, rare visual/cancellation paths, cache-aware total cost and config ownership/effective availability. They validate instruction decisions only; no pruning adapter, host enforcement or measured savings is claimed."
+  ],
+  "reason": "Extend the established harness skill rather than add a controller or another optimization skill. General measurement remains with existing owners; the specific missing behavior is reversible tool selection under actual availability and authorization constraints.",
+  "observedAt": "2026-11-17T18:04:13.858Z"
+}

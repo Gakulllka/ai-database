@@ -1,0 +1,28 @@
+{
+  "schemaVersion": "database.evolution.decision.v1",
+  "source": {
+    "repoId": 1162099055,
+    "fullName": "Leonxlnx/taste-skill",
+    "commit": "f6b76575f949707b4e3c37cd86cb44b0b98643e8"
+  },
+  "capability": "Web asset subject authenticity, licensed stand-ins and replacement tracking within a rendered design workflow",
+  "decision": "extend",
+  "status": "applied",
+  "existingPaths": [
+    "common/skills/frontend-design-direction/SKILL.md",
+    "common/skills/design-workflow/SKILL.md",
+    "common/skills/design-system/SKILL.md",
+    "design/skills/visual-quality-review/SKILL.md",
+    "development/skills/browser-qa/SKILL.md",
+    "design/skills/game-art-production/SKILL.md"
+  ],
+  "evidence": [
+    "Pinned source https://github.com/Leonxlnx/taste-skill/tree/f6b76575f949707b4e3c37cd86cb44b0b98643e8; repo ID and current main ref rechecked 2026-11-20. MIT LICENSE inspected; README, skills/taste-skill/SKILL.md and references/photos.md examined as untrusted text; all four Git blob hashes verified. No foreign code, installer, browser checker or asset service executed.",
+    "Compared canonical frontend-design-direction, design-workflow, design-system, visual-quality-review, browser-qa and game-art-production, plus targeted frontend-patterns/SEO/brand guidance search. Direction, asset provenance and rendered finish are covered; no equivalent web-specific distinction between licensed subjects and actual client identities was found in this scope. Native copies are projections. Reused this existing source/revision/capability card instead of duplicating it.",
+    "Added 32 original lines to existing frontend-design-direction and its maintained native projection, preserving metadata, UI, registration, native functional UX and existing finish checker. Source-specific layout/photo quotas, stylistic bans, supplier runtime, and instructions to conceal stand-ins on a public page were not adopted. Legitimate generated/decorative imagery and explicitly identified internal drafts remain usable; existing authorization remains sufficient.",
+    "Seven fresh independent no-parent raw-case instruction evaluations: stock actors as clinicians, another lodge room with private-only replacement note, generated unsupported cooling feature, legitimate decorative stock, verified matching supplier images, a clearly identified internal stand-in draft, and misleading mobile crop/caption context. All decisions matched held-out intended outcomes; evaluator reported no access to expected answers or extra files. Exact skill/input hashes verified. These are synthetic instruction decisions, not rendered-image inspection or runtime enforcement.",
+    "Required skill/host validators, affected projection and registration checks, source blob identities, bounded successful snapshot/schema, links, privacy/secret checks and trusted-BASE exact-commit gate are required before publication. Independent exact-diff curator review determines eligibility; check-change exit 0 establishes narrow mechanics only."
+  ],
+  "reason": "Reused the deferred finding and existing frontend-design-direction owner. Added original web-specific guidance separating subject identity from usage rights, truthful drafts from public impressions, and decorative imagery from unsupported factual claims; independent raw-case instruction evaluation supports the scoped extension.",
+  "observedAt": "2026-11-20T20:17:44.917Z"
+}

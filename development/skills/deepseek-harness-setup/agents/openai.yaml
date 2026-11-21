@@ -1,0 +1,6 @@
+interface:
+  display_name: "DeepSeek Harness Compatibility"
+  short_description: "Inspect a legacy DeepSeek-to-Codex setup"
+  default_prompt: "Use $deepseek-harness-setup to review the named legacy setup before a Codex migration."
+policy:
+  allow_implicit_invocation: false

@@ -1,4 +1,0 @@
-interface:
-  display_name: "Agent Security Hardening"
-  short_description: "Harden tool gateways and approval boundaries"
-  default_prompt: "Use $agent-security-hardening to review this agent runtime and its action boundaries."

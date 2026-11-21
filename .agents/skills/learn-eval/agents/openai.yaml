@@ -1,4 +1,0 @@
-interface:
-  display_name: "Learn and Evaluate"
-  short_description: "Turn verified lessons into focused skill improvements"
-  default_prompt: "Use $learn-eval to extract a verified reusable lesson and check the resulting skill change."

@@ -1,0 +1,151 @@
+{
+  "package": "pop-animation",
+  "version": "1.1.0",
+  "date": "2026-11-17",
+  "png_count": 14,
+  "prior_pngs_retained": 9,
+  "new_pngs": 5,
+  "external_reference_images_included": false,
+  "assets": [
+    {
+      "path": "design/assets/visual-project-skills/pop-animation/references/images/cafe-v2.png",
+      "source_project_path": "projects/style-studies/pop-animation/exports/cafe/cafe-v2.png",
+      "sha256": "6c8109896dc85778b420e12e34965ff294c20e4f5e1062b2a88f4cac9689bf81",
+      "width": 1536,
+      "height": 1024,
+      "origin": "Own built-in image_gen output; copied without edits",
+      "role": "Everyday cafe scene; corrected daylight, final for this request",
+      "acceptance": "Style accepted; individual practice output not separately accepted"
+    },
+    {
+      "path": "design/assets/visual-project-skills/pop-animation/references/images/expressions-v1.png",
+      "source_project_path": "projects/style-studies/pop-animation/exports/t1/expressions-v1.png",
+      "sha256": "50120b6a6358f05391fc39a17beb8ac9e53d041221e1e9aedafba7b8e02ce530",
+      "width": 2172,
+      "height": 724,
+      "origin": "Own built-in image_gen output; copied without edits",
+      "role": "Moderate expression and identity candidate",
+      "acceptance": "Style accepted; individual practice output not separately accepted"
+    },
+    {
+      "path": "design/assets/visual-project-skills/pop-animation/references/images/poster-v1.png",
+      "source_project_path": "projects/style-studies/pop-animation/exports/t1/poster-v1.png",
+      "sha256": "7786bb7d6e8c56a24e39b5196e4cb47a3861f4b4a2e8b4d1a579e7f741ceeb1f",
+      "width": 1122,
+      "height": 1402,
+      "origin": "Own built-in image_gen output; copied without edits",
+      "role": "Original ensemble and drawing candidate",
+      "acceptance": "Style accepted; individual practice output not separately accepted"
+    },
+    {
+      "path": "design/assets/visual-project-skills/pop-animation/references/images/practice-06.png",
+      "source_project_path": "projects/style-studies/pop-animation/exports/practice-30/06.png",
+      "sha256": "db563c06dd0350a4c1e65cc8bed49da60ca5cc6b14c37accc5be8d1eeebc1f4e",
+      "width": 1536,
+      "height": 1024,
+      "origin": "Own built-in image_gen output; copied without edits",
+      "role": "Мягкая мимика без улыбки",
+      "acceptance": "Style accepted; individual practice output not separately accepted"
+    },
+    {
+      "path": "design/assets/visual-project-skills/pop-animation/references/images/practice-16.png",
+      "source_project_path": "projects/style-studies/pop-animation/exports/practice-30/16.png",
+      "sha256": "10a3508e6f95fd5f2af48999df688a8767c077afb3607f059dba7c5fd55b3691",
+      "width": 1536,
+      "height": 1024,
+      "origin": "Own built-in image_gen output; copied without edits",
+      "role": "Ножницы — читаемое раскрытие",
+      "acceptance": "Style accepted; individual practice output not separately accepted"
+    },
+    {
+      "path": "design/assets/visual-project-skills/pop-animation/references/images/practice-18.png",
+      "source_project_path": "projects/style-studies/pop-animation/exports/practice-30/18.png",
+      "sha256": "5776f830d9172eb5ccb05fa5530b3aeed175527f43ddb34c9f13d1c195fc5f2a",
+      "width": 1536,
+      "height": 1024,
+      "origin": "Own built-in image_gen output; copied without edits",
+      "role": "Посадка — колени раздельно",
+      "acceptance": "Style accepted; individual practice output not separately accepted"
+    },
+    {
+      "path": "design/assets/visual-project-skills/pop-animation/references/images/practice-25.png",
+      "source_project_path": "projects/style-studies/pop-animation/exports/practice-30/25.png",
+      "sha256": "ec4dda5594744258783c145607aa074ad1d72fa13442d9c0ec9f023bea62286d",
+      "width": 1536,
+      "height": 1024,
+      "origin": "Own built-in image_gen output; copied without edits",
+      "role": "Вечер — исправление падающих теней",
+      "acceptance": "Style accepted; individual practice output not separately accepted"
+    },
+    {
+      "path": "design/assets/visual-project-skills/pop-animation/references/images/practice-27.png",
+      "source_project_path": "projects/style-studies/pop-animation/exports/practice-30/27.png",
+      "sha256": "aaccf29cdc6c48f215b3b57ca5718c9d9b8cae6bcb472e8c73eda1fa63ec4c65",
+      "width": 1536,
+      "height": 1024,
+      "origin": "Own built-in image_gen output; copied without edits",
+      "role": "Возврат на сцену — новые костюмы",
+      "acceptance": "Style accepted; individual practice output not separately accepted"
+    },
+    {
+      "path": "design/assets/visual-project-skills/pop-animation/references/images/practice-29.png",
+      "source_project_path": "projects/style-studies/pop-animation/exports/practice-30/29.png",
+      "sha256": "b980114815c5753cc65aa93bfddb3b97763665e60d370644ea6222085cdff2fb",
+      "width": 1536,
+      "height": 1024,
+      "origin": "Own built-in image_gen output; copied without edits",
+      "role": "Новые лица — передача букета",
+      "acceptance": "Style accepted; individual practice output not separately accepted"
+    },
+    {
+      "path": "design/assets/visual-project-skills/pop-animation/references/images/practice-57.png",
+      "source_project_path": "projects/style-studies/pop-animation/exports/practice-50/57.png",
+      "sha256": "aac32774bbae02f3b9a11891ca524bbc429b26c9073f2ae4e008138433dcaf65",
+      "width": 1536,
+      "height": 1024,
+      "origin": "Own built-in image_gen output; copied without edits",
+      "role": "Чёрный бархат и металл",
+      "acceptance": "Style accepted; individual practice output not separately accepted"
+    },
+    {
+      "path": "design/assets/visual-project-skills/pop-animation/references/images/practice-67.png",
+      "source_project_path": "projects/style-studies/pop-animation/exports/practice-50/67.png",
+      "sha256": "0d04820113cee4d479da0a4ba1b1770283731826c3d64b42068b475387572a6b",
+      "width": 1536,
+      "height": 1024,
+      "origin": "Own built-in image_gen output; copied without edits",
+      "role": "Среда — спальня ночью",
+      "acceptance": "Style accepted; individual practice output not separately accepted"
+    },
+    {
+      "path": "design/assets/visual-project-skills/pop-animation/references/images/practice-77.png",
+      "source_project_path": "projects/style-studies/pop-animation/exports/practice-50/77.png",
+      "sha256": "cbd8fc0778924a84daa6d61ae3a0d7a2c2bdd3bc586db5bdf364378b0004bdc4",
+      "width": 1086,
+      "height": 1448,
+      "origin": "Own built-in image_gen output; copied without edits",
+      "role": "Правка — фаза подъёма сумки",
+      "acceptance": "Style accepted; individual practice output not separately accepted"
+    },
+    {
+      "path": "design/assets/visual-project-skills/pop-animation/references/images/practice-78.png",
+      "source_project_path": "projects/style-studies/pop-animation/exports/practice-50/78.png",
+      "sha256": "1bf3f9bc0ed2bc29f65d0b6f91f0f6c012e1189c00a0def1df2d7f7ece6da7fd",
+      "width": 1536,
+      "height": 1024,
+      "origin": "Own built-in image_gen output; copied without edits",
+      "role": "Правка — видимый экран",
+      "acceptance": "Style accepted; individual practice output not separately accepted"
+    },
+    {
+      "path": "design/assets/visual-project-skills/pop-animation/references/images/practice-79.png",
+      "source_project_path": "projects/style-studies/pop-animation/exports/practice-50/79.png",
+      "sha256": "cff9a1efe0063cfc20a9a2440dc1696f9cee922dc4d3a55f64f58a09bc15df56",
+      "width": 1536,
+      "height": 1024,
+      "origin": "Own built-in image_gen output; copied without edits",
+      "role": "Правка — лишние серьги",
+      "acceptance": "Style accepted; individual practice output not separately accepted"
+    }
+  ]
+}

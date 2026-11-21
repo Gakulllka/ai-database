@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "database.evolution.decision.v1",
+  "source": {
+    "repoId": 1183888342,
+    "fullName": "stablyai/orca",
+    "commit": "6c95adb5e0a2ddc83f7ed3bca5ba6043b0b59eeb"
+  },
+  "capability": "Current-dispatch lifecycle settlement and keyed recovery of uncertain orchestration mutations",
+  "decision": "defer",
+  "status": "defer",
+  "existingPaths": [
+    "common/skills/dmux-workflows/SKILL.md",
+    "common/skills/dmux-workflows/references/attempt-completion.md",
+    "common/skills/team-agent-orchestration/SKILL.md",
+    "development/skills/agent-security-hardening/SKILL.md"
+  ],
+  "evidence": [
+    "Pinned source https://github.com/stablyai/orca/tree/6c95adb5e0a2ddc83f7ed3bca5ba6043b0b59eeb; MIT LICENSE inspected. README, orchestration skill, current message-send-handler.ts and orchestration-mutation-recovery.ts inspected as untrusted text; five blob identities verified. Old documentation path returned 404 and is excluded from evidence.",
+    "Current handler requires originating terminal/session evidence for lifecycle reports and waits for worker_done settlement. Recovery text distinguishes in_progress/not_sent/outcome_unknown and reuses the same request identity after inspection. These are static source observations, not a verified deployment guarantee.",
+    "Canonical dmux task/attempt completion already covers trusted origin, stale and duplicate receipts, revision-bound dependency release and timeout isolation; agent security guidance covers unknown side-effect outcomes and once-only admission. Reuse those portable rules rather than add a second workflow.",
+    "Orca-specific durable request recovery, remote placement and capability settlement need a concrete authorized adapter plus outage/reconnect/duplicate/partial-delivery tests. No runtime adoption or source CLI execution was performed."
+  ],
+  "reason": "General coordinator behavior is covered. Defer the distinct durable/runtime integration because static handler inspection does not establish Database adapter compatibility or idempotent recovery; preserve the previously applied attempt-completion decision.",
+  "observedAt": "2026-11-19T18:02:55.476Z"
+}

@@ -1,0 +1,7 @@
+interface:
+  display_name: "Database Skill Contribution Review"
+  short_description: "Prepare evidence-aware Database skill review packets"
+  brand_color: "#0EA5E9"
+  default_prompt: "Use $database-contribution-review to prepare an Database skill contribution review packet from current observations and evidence."
+policy:
+  allow_implicit_invocation: true

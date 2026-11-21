@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "database.evolution.decision.v1",
+  "source": {
+    "repoId": 1432967563,
+    "fullName": "ccch1mneyyy/dsh-Go",
+    "commit": "9f31a4620b1faeba2a5540f1c56be4419f64473d"
+  },
+  "capability": "Android local or remote DeepSeek Harness client and remote session control",
+  "decision": "defer",
+  "status": "defer",
+  "existingPaths": [
+    "development/skills/deepseek-harness-setup/SKILL.md",
+    "common/skills/dmux-workflows/SKILL.md",
+    "development/skills/local-first-sync/SKILL.md",
+    "common/skills/unified-memory/SKILL.md",
+    "common/docs/evolution/decisions/1438540053-4af80975822b-remote-device-tasks.json"
+  ],
+  "evidence": [
+    "Pinned source: https://github.com/ccch1mneyyy/dsh-Go/tree/9f31a4620b1faeba2a5540f1c56be4419f64473d. Read bounded README.md/README.en.md, LICENSE, SECURITY.en.md and engine-host guide; five blob hashes checked. Root is AGPL-3.0; README reports MIT exceptions for sdk/examples, not independently reviewed component licenses. No APK, remote host, relay or source code was executed/copied.",
+    "Documentation describes local Android operation, SSH/DSH Remote connections, feature differences and accessibility permissions. Task/relay implementation, authorization enforcement and reconnect/cancellation behavior were not inspected or tested; security-reporting instructions do not prove enforcement.",
+    "Existing harness setup owns Database host integration; dmux covers assignment/lifecycle, local-first-sync covers reconnect and scope/permission boundaries, unified-memory excludes task tracking. The prior Mika review likewise deferred a specialized Android runtime until an actual authorized integration and live lifecycle tests. A different client name does not establish a missing portable instruction."
+  ],
+  "reason": "Defer the specialized remote/mobile runtime. Revisit only with a concrete Database integration, component-license review and device/host permission, reconnect and cancellation evidence.",
+  "observedAt": "2026-11-15T14:48:23.844Z"
+}

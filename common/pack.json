@@ -1,0 +1,112 @@
+{
+  "schemaVersion": 1,
+  "id": "common",
+  "title": "Общее",
+  "dependsOn": [],
+  "skills": [
+    "accessibility",
+    "agent-eval",
+    "agent-self-evaluation",
+    "agent-sort",
+    "agentic-os",
+    "ai-first-engineering",
+    "architecture-decision-records",
+    "autonomous-agent-harness",
+    "autonomous-loops",
+    "benchmark-optimization-loop",
+    "ck",
+    "clear-replies",
+    "code-tour",
+    "codebase-onboarding",
+    "config-gc",
+    "config-health",
+    "context-and-decisions",
+    "continuous-agent-loop",
+    "continuous-learning-v2",
+    "council",
+    "council-multi-model",
+    "counterparty-channel-discipline",
+    "database-contribution-review",
+    "database-evolution",
+    "database-onboarding",
+    "delivery-gate",
+    "design-system",
+    "design-workflow",
+    "dev-team",
+    "dmux-workflows",
+    "docs-governance",
+    "documentation-lookup",
+    "eval-harness",
+    "frontend-design-direction",
+    "growth-log",
+    "hookify-rules",
+    "intent-driven-development",
+    "iterative-retrieval",
+    "knowledge-ops",
+    "learn-eval",
+    "learning-lab",
+    "living-docs-governance",
+    "loop-design-check",
+    "mcp-dependency-review",
+    "messages-ops",
+    "parallel-execution-optimizer",
+    "plan-canvas",
+    "plan-orchestrate",
+    "product-capability",
+    "prompt-optimizer",
+    "recursive-decision-ledger",
+    "rules-distill",
+    "safety-guard",
+    "santa-method",
+    "search-first",
+    "skill-comply",
+    "skill-scout",
+    "skill-stocktake",
+    "story-lifecycle",
+    "strategic-compact",
+    "team-agent-orchestration",
+    "team-builder",
+    "token-budget-advisor",
+    "unified-memory",
+    "verification-loop",
+    "workspace-surface-audit"
+  ],
+  "mounts": [
+    {
+      "from": "codex-agents",
+      "to": "codex-agents"
+    },
+    {
+      "from": "config",
+      "to": "config"
+    },
+    {
+      "from": "docs",
+      "to": "docs"
+    },
+    {
+      "from": "licenses",
+      "to": "licenses"
+    },
+    {
+      "from": "rules",
+      "to": "rules"
+    },
+    {
+      "from": "scripts",
+      "to": "scripts"
+    },
+    {
+      "from": "skills",
+      "to": "skills"
+    },
+    {
+      "from": "templates",
+      "to": "templates"
+    },
+    {
+      "from": "examples",
+      "to": "examples"
+    }
+  ]
+}

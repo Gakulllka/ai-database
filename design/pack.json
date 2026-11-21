@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "id": "design",
+  "title": "Дизайн",
+  "dependsOn": [
+    "common"
+  ],
+  "skills": [
+    "acid-clay",
+    "adult-comic",
+    "blender-motion-state-inspection",
+    "botanical-mechanics",
+    "character-art-direction",
+    "dirty-horror",
+    "ecosystem-design-consistency",
+    "frontend-slides",
+    "game-art-production",
+    "game-balance",
+    "game-playtest",
+    "indie-grotesque",
+    "ink-punk",
+    "make-interfaces-feel-better",
+    "model-texture-restyle",
+    "paper-dream-theatre",
+    "pop-animation",
+    "visual-design-base",
+    "visual-design-practice",
+    "visual-novel-art",
+    "visual-quality-review",
+    "visual-style-development"
+  ],
+  "mounts": [
+    {
+      "from": "assets",
+      "to": "assets"
+    },
+    {
+      "from": "docs",
+      "to": "docs"
+    },
+    {
+      "from": "skills",
+      "to": "skills"
+    }
+  ]
+}

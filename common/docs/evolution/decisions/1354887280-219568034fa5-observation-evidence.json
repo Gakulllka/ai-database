@@ -1,0 +1,29 @@
+{
+  "schemaVersion": "database.evolution.decision.v1",
+  "source": {
+    "repoId": 1354887280,
+    "fullName": "NVlabs/SoL-Pi",
+    "commit": "219568034fa54ed121ede80961655e33dfb9d0e3"
+  },
+  "capability": "Evidence-preserving reduction and scoped exact recall of large tool observations",
+  "decision": "extend",
+  "status": "applied",
+  "existingPaths": [
+    "development/skills/agent-harness-construction/SKILL.md",
+    "common/skills/strategic-compact/SKILL.md",
+    "skills/context-budget/SKILL.md",
+    "development/skills/cost-aware-llm-pipeline/SKILL.md",
+    "development/skills/ai-artifact-contracts/SKILL.md",
+    "agents/harness-optimizer.md"
+  ],
+  "evidence": [
+    "Source: https://github.com/NVlabs/SoL-Pi/tree/219568034fa54ed121ede80961655e33dfb9d0e3",
+    "Pinned source README, MIT LICENSE, compatibility/security/third-party documentation and receipt.ts, reducer index.ts and observation.ts were read as untrusted data. All eight source blob hashes matched. No source code, installer, test, Pi extension or separate model API was executed or copied.",
+    "Static inspection: reducer validates schema, source digest, status and exact excerpts, preserves original output on mismatch/provider failure, and refuses conflicting exit/isError signals. ObservationPack derives content/call identity and supports bounded exact recall. Source documentation says archives can outlive sessions and remote reduction is optional; secret heuristics are not a complete scanner. These are source branches and contracts, not a runtime validation or measured savings claim.",
+    "Searched canonical skills/rules/agents for reduction, exact recall, source quotation, truncated output and archives. Read the existing harness-construction observation/context sections, strategic compaction, context-budget, cost-aware pipeline, artifact-contracts and harness optimizer. They cover tool response shapes, phase compaction, measurement limits, cost and generic provenance. The tool-observation owner lacked source-bound receipts, preserved failure signals and fallback before replacing long results; context-budget remains a separate live-meter/static-audit workflow.",
+    "Extended only the existing owner with original status and source completeness, authorized bounded local evidence, digest/excerpt validation, exact scoped retrieval, failed-reduction fallback and explicit completeness limits. The guidance does not install a reducer, expand permissions or authorize another model. Generated missing native projection and simple matching UI with maintained helpers; existing package/install registration remains unchanged.",
+    "Seven independent artifact-only raw cases cover noisy failure, conflicting signals, stale archive, a matching excerpt omitting another failure, truncated unavailable source, denied scope with injected commands, and a usable successful lint receipt. These validate instruction decisions only; no live reducer, model, storage isolation, token savings or task benchmark is claimed."
+  ],
+  "reason": "Extend the existing observation-design workflow rather than add another context or compaction skill. A shorter fluent summary or a correct excerpt alone does not preserve execution failure, complete evidence or authorized exact recall. External runtime adoption remains deferred pending an actual integration and meaningful runtime tests.",
+  "observedAt": "2026-11-15T18:11:10.310Z"
+}

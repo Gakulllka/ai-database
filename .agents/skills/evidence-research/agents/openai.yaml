@@ -1,4 +1,0 @@
-interface:
-  display_name: "Evidence Research"
-  short_description: "Trace research conclusions to independent evidence"
-  default_prompt: "Use $evidence-research to research this question using independent sources and trace conclusions to evidence."

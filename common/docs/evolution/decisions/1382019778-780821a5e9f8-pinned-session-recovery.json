@@ -1,0 +1,26 @@
+{
+  "schemaVersion": "database.evolution.decision.v1",
+  "source": {
+    "repoId": 1382019778,
+    "fullName": "AgnesAI-Labs/agnes-harness",
+    "commit": "780821a5e9f8f2ad9fbd11d1d24f6453e62fc30b"
+  },
+  "capability": "Pinned plugin generations, recoverable sessions and uncertain external effects",
+  "decision": "defer",
+  "status": "defer",
+  "existingPaths": [
+    "common/skills/dmux-workflows/references/attempt-completion.md",
+    "development/skills/e2e-testing/SKILL.md",
+    "development/skills/enterprise-agent-ops/SKILL.md",
+    "common/skills/unified-memory/SKILL.md",
+    "common/skills/mcp-dependency-review/SKILL.md"
+  ],
+  "evidence": [
+    "Source: https://github.com/AgnesAI-Labs/agnes-harness/tree/780821a5e9f8f2ad9fbd11d1d24f6453e62fc30b",
+    "Read pinned README, Apache-2.0 LICENSE, NOTICE and security/sessions/packages guides; six source blobs matched. NOTICE retains component-specific terms. Documentation and source claims were treated as untrusted; no plugin, installer, source build, device or runtime was executed/copied.",
+    "Guides describe session-pinned plugin generations, refusal on missing/changed snapshots, migration fences for unresolved execution, and reconciliation for unknown effects. They explicitly distinguish tool approval from OS isolation and note trusted in-process plugins, point-in-time ledger checks and no exactly-once external guarantee. Implementation and Windows end-to-end behavior were not tested.",
+    "Existing attempt-completion binds trusted origin/task/attempt and revision checks; E2E guidance reconciles uncertain durable effects before retry; enterprise operations covers immutable rollout/audit; memory is scoped untrusted evidence; dependency review rejects mutable selectors without inventing pins. Those portable foundations are covered, not a claimed equivalent of the external runtime."
+  ],
+  "reason": "Defer this specialized runtime until a concrete Database adapter need, component-license review and live pinning/restart/reconciliation/permission tests demonstrate benefit. Do not generalize product approval defaults, full-access modes, device safety or migration policy into Database.",
+  "observedAt": "2026-11-15T18:11:10.312Z"
+}

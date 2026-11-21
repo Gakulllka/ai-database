@@ -178,18 +178,22 @@ test('explanation keeps installer declarations separate from native observation'
   assert.throws(() => explainContextEntry({ repoRoot: root, id: 'skill:feature', target: 'typo' }), /target/i);
 }));
 
-test('resource limits reject oversized files and cumulative reads', () => withFixture(root => {
+test('resource limits allow larger inventories and reject oversized reads', () => withFixture(root => {
   const large = path.join(root, 'skills/feature/large.bin');
   write(root, 'skills/feature/large.bin', '');
   fs.truncateSync(large, 4 * 1024 * 1024 + 1);
   assert.throws(() => loadContextRegistry({ repoRoot: root }), /byte|large|limit/i);
   fs.rmSync(large);
-  for (let index = 0; index < 5; index++) {
+  for (let index = 0; index < 7; index++) {
     const relative = `skills/feature/part-${index}.bin`;
     write(root, relative, '');
     fs.truncateSync(path.join(root, relative), 4 * 1024 * 1024);
   }
-  assert.throws(() => loadContextRegistry({ repoRoot: root }), /total|cumulative|limit/i);
+  assert.doesNotThrow(() => loadContextRegistry({ repoRoot: root }));
+  const overflow = 'skills/feature/part-7.bin';
+  write(root, overflow, '');
+  fs.truncateSync(path.join(root, overflow), 4 * 1024 * 1024);
+  assert.throws(() => loadContextRegistry({ repoRoot: root }), /Cumulative source byte limit exceeded/);
 }));
 
 test('symlinked skill root and manifest ancestors are rejected', () => withFixture(root => {

@@ -555,7 +555,6 @@
     "docs/godot/",
     "examples/godot-project-AGENTS.md",
     "scripts/godot/",
-    "scripts/lib/sync-skill-projections.js",
     "tests/skills/godot-pack.test.js",
     "skills/ecosystem-design-consistency/",
     "skills/local-first-sync/",
@@ -594,7 +593,13 @@
     "skills/visual-design-practice/",
     "skills/visual-novel-art/",
     "skills/visual-quality-review/",
-    "skills/visual-style-development/"
+    "skills/visual-style-development/",
+    "skills/clear-replies/",
+    "skills/evidence-research/",
+    "skills/game-balance/",
+    "skills/game-playtest/",
+    "skills/learn-eval/",
+    "skills/verify-deliverables/"
   ],
   "bin": {
     "ecc": "scripts/ecc.js",

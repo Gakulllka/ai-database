@@ -12,8 +12,11 @@ const { applyInstallPlan } = load(require.resolve('../../scripts/lib/install/app
 const {
   getDisabledOpenCodePluginContent,
   parseJsoncConfig,
+  planMaterializesHookRuntime,
   withHookConsent,
 } = require('../../scripts/lib/install/hook-consent');
+const { createManifestInstallPlan } = require('../../scripts/lib/install/plan');
+const { normalizeInstallRequest } = require('../../scripts/lib/install/request');
 const { createInstallState, readInstallState, writeInstallState } = require('../../scripts/lib/install-state');
 const { buildDoctorReport, repairInstalledStates } = load(require.resolve('../../scripts/lib/install-lifecycle'));
 
@@ -173,6 +176,18 @@ function runTests() {
     try { callback(); passed++; console.log(`  PASS ${name}`); }
     catch (error) { failed++; console.error(`  FAIL ${name}: ${error.stack}`); }
   };
+  test('the current OpenCode install keeps skills but rejects legacy hook opt-in', () => {
+    const request = normalizeInstallRequest({
+      target: 'opencode', moduleIds: ['workflow-quality'], enableHooks: true,
+    });
+    const plan = withHookConsent(createManifestInstallPlan({
+      ...request, homeDir: os.tmpdir(), projectRoot: os.tmpdir(),
+    }), request.hookConsent);
+    assert.strictEqual(plan.hookConsent, 'declined');
+    assert.ok(plan.selectedModuleIds.includes('workflow-quality'));
+    assert.ok(plan.operations.some(operation => operation.moduleId === 'workflow-quality'));
+    assert.strictEqual(planMaterializesHookRuntime(plan), false);
+  });
   test('JSONC rejects commas without a preceding value but keeps valid trailing commas', () => {
     for (const content of ['{"plugin":[,]}', '{"plugin":[/* note */,]}', '{"plugin":[1,,]}', '{,}', '{"plugin":,}']) {
       assert.throws(() => parseJsoncConfig(content, 'opencode.json'), /Failed to parse opencode\.json/);

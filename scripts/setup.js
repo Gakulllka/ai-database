@@ -39,14 +39,10 @@ Install scopes:
   project   Shared project configuration; the repository can enable ECC for collaborators.
   local     Private project configuration; ECC is enabled here without committing the choice.
 
-Hook preferences:
-  --hooks off|minimal|standard|strict
-             Save a personal hook preference in Claude user settings.
-
 Options:
   --mode claude-plugin
   --scope <scope>
-  --hooks <preference>
+  --hooks <preference>   Legacy option. Hooks stay off in Claude.
   --move-scope            Explicitly request migration (normally auto-detected).
   --yes, -y               Skip the confirmation prompt.
   --dry-run               Inspect and report without changing anything.
@@ -233,41 +229,9 @@ async function collectInteractiveOptions(options, defaults = {}, providedTermina
       scopeChoices,
       scopeDefaultIndex
     );
-    const hookChoices = [
-      {
-        value: 'off',
-        label: 'Off',
-        description: 'Keep skills and commands without local hook automation.',
-      },
-      {
-        value: 'minimal',
-        label: 'Minimal',
-        description: 'Run only the lightest lifecycle and safety automation.',
-      },
-      {
-        value: 'standard',
-        label: 'Standard',
-        description: 'Balanced quality and safety automation.',
-      },
-      {
-        value: 'strict',
-        label: 'Strict',
-        description: 'Use the strongest checks and reminders.',
-      },
-    ];
-    const detectedHookDefault = hookChoices.findIndex(
-      choice => choice.value === defaults.hooks
-    );
-    const hookDefaultIndex = detectedHookDefault === -1 ? 2 : detectedHookDefault;
-    const hooks = options.hooks || await askChoice(
-      terminal,
-      'How should ECC hooks run?',
-      hookChoices,
-      hookDefaultIndex
-    );
     return {
       ...options,
-      hooks,
+      hooks: 'off',
       mode: MODE,
       scope,
     };
@@ -289,8 +253,7 @@ async function confirm(options, providedTerminal) {
     const scopeLabel = options.scope || 'the detected';
     const answer = await questionWithCancellation(
       terminal,
-      `${operation} ${MODE} setup at ${scopeLabel} scope`
-      + ` with hooks=${options.hooks || 'standard'}? [y/N] `
+      `${operation} ${MODE} setup at ${scopeLabel} scope? [y/N] `
     );
     return /^y(es)?$/i.test(answer.trim());
   } finally {
@@ -343,7 +306,6 @@ function needsInteractiveChoices(options) {
   return (
     options.mode === undefined
     || options.scope === undefined
-    || options.hooks === undefined
   );
 }
 
@@ -351,7 +313,7 @@ function validateInteractiveJsonOptions(options, interactive) {
   if (!interactive || !options.json) return;
   if (needsInteractiveChoices(options)) {
     throw new Error(
-      'Interactive --json requires explicit --mode, --scope, and --hooks values.'
+      'Interactive --json requires explicit --mode and --scope values.'
     );
   }
   if (!options.yes && !options.dryRun) {
@@ -362,7 +324,7 @@ function validateInteractiveJsonOptions(options, interactive) {
 function reconcileClaudePlugin(options) {
   const setupOptions = {
     dryRun: options.dryRun,
-    hooks: options.hooks,
+    hooks: 'off',
     scope: options.scope,
   };
   if (options.moveScope) {
@@ -456,7 +418,7 @@ async function main(argv = process.argv.slice(2)) {
       if (!await confirm(options, terminal)) {
         printResult({
           action: 'cancelled',
-          hooks: options.hooks || 'standard',
+          hooks: 'off',
           pluginId: 'ecc@ecc',
           scope: options.scope || 'detected',
         }, options.json);

@@ -1,15 +1,8 @@
 #!/usr/bin/env node
 /**
- * Quality Gate Hook
+ * Quality Gate Tool
  *
- * Runs lightweight quality checks after file edits.
- * - Targets one file when file_path is provided
- * - Falls back to no-op when language/tooling is unavailable
- *
- * For JS/TS files with Biome, this hook is skipped because
- * post-edit-format.js already runs `biome check --write`.
- * This hook still handles .json/.md files for Biome, and all
- * Prettier / Go / Python checks.
+ * Runs a formatter check for one requested file when suitable tooling is configured.
  */
 
 'use strict';
@@ -54,7 +47,6 @@ function log(msg) {
 
 /**
  * Run quality-gate checks for a single file based on its extension.
- * Skips JS/TS files when Biome is configured (handled by post-edit-format).
  *
  * @param {string} filePath - Path to the edited file
  */
@@ -76,12 +68,6 @@ function maybeRunQualityGate(filePath) {
     const formatter = detectFormatter(projectRoot);
 
     if (formatter === 'biome') {
-      // JS/TS already handled by post-edit-format via `biome check --write`
-      if (['.ts', '.tsx', '.js', '.jsx'].includes(ext)) {
-        return;
-      }
-
-      // .json / .md — still need quality gate
       const resolved = resolveFormatterBin(projectRoot, 'biome');
       if (!resolved) return;
       const args = [...resolved.prefix, 'check', filePath];

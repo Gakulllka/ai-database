@@ -29,6 +29,7 @@ const { isHookRuntimeOperation } = require('./hook-consent');
  */
 
 const SHA256_PATTERN = /^[a-f0-9]{64}$/i;
+const RETIRED_HOOK_MODULES = new Set(['hooks-runtime', 'hermes-hooks']);
 
 function comparablePath(filePath) {
   const resolvedPath = path.resolve(filePath);
@@ -61,11 +62,12 @@ function prepareStaleOperationsReconciliation(plan, migration) {
   const unchanged = { ...migration, staleOperationCandidates: [] };
   const finalOperations = migration && migration.finalState && migration.finalState.operations;
   const resolution = plan && plan.statePreview && plan.statePreview.resolution;
-  if (!Array.isArray(finalOperations) || !resolution || !materializesWholeModules(plan)) {
+  if (!Array.isArray(finalOperations) || !resolution) {
     return unchanged;
   }
 
   const selectedModules = new Set(resolution.selectedModules || []);
+  const wholeModules = materializesWholeModules(plan);
   const plannedDestinations = destinationKeys([
     ...(plan.operations || []),
     ...(plan.statePreview.operations || []),
@@ -81,10 +83,14 @@ function prepareStaleOperationsReconciliation(plan, migration) {
       || operation.kind !== 'copy-file'
       || operation.ownership !== 'managed'
       || typeof operation.destinationPath !== 'string'
-      || !selectedModules.has(operation.moduleId)
-      // Declining hooks strips hook files without the module dropping them.
-      || (skipHookRuntime && isHookRuntimeOperation(operation))
     ) {
+      return false;
+    }
+    const selected = selectedModules.has(operation.moduleId);
+    // A retired module is absent from the new catalog. Drop its managed
+    // copies even though normal selective installs preserve unselected modules.
+    const retired = skipHookRuntime && !selected && RETIRED_HOOK_MODULES.has(operation.moduleId);
+    if (!retired && (!wholeModules || !selected || (skipHookRuntime && isHookRuntimeOperation(operation)))) {
       return false;
     }
     const key = comparablePath(operation.destinationPath);

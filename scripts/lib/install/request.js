@@ -5,6 +5,8 @@ const { resolveHookConsentFlags } = require('./hook-consent');
 
 const LEGACY_INSTALL_TARGETS = ['claude', 'claude-project', 'cursor', 'antigravity'];
 const LOCALE_COMPONENT_IDS = new Set(Object.values(LOCALE_ALIAS_TO_COMPONENT_ID));
+const RETIRED_HOOK_MODULES = new Set(['hooks-runtime', 'hermes-hooks']);
+const RETIRED_HOOK_COMPONENT = 'baseline:hooks';
 
 function dedupeStrings(values) {
   return [...new Set((Array.isArray(values) ? values : []).map(value => String(value).trim()).filter(Boolean))];
@@ -123,9 +125,8 @@ function normalizeInstallRequest(options = {}) {
   const profileId = options.profileId || config?.profileId || null;
   const target = options.target || config?.target || 'claude';
   const supportsLocale = target === 'claude' || target === 'claude-project';
-  const moduleIds = validateInstallModuleIds(
-    dedupeStrings([...(config?.moduleIds || []), ...(options.moduleIds || [])])
-  );
+  const requestedModuleIds = dedupeStrings([...(config?.moduleIds || []), ...(options.moduleIds || [])]);
+  const moduleIds = validateInstallModuleIds(requestedModuleIds.filter(id => !RETIRED_HOOK_MODULES.has(id)));
   const locale = options.locale || config?.locale || null;
   const localeComponentId = locale ? LOCALE_ALIAS_TO_COMPONENT_ID[locale] : null;
   if (locale && !localeComponentId) {
@@ -141,35 +142,35 @@ function normalizeInstallRequest(options = {}) {
     ...(options.includeComponentIds || []),
   ]);
   const includeComponentIds = dedupeStrings([
-    ...requestedIncludeComponentIds,
+    ...requestedIncludeComponentIds.filter(id => id !== RETIRED_HOOK_COMPONENT),
     ...(localeComponentId ? [localeComponentId] : []),
   ]);
   const excludeComponentIds = dedupeStrings([
     ...(config?.excludeComponentIds || []),
     ...(options.excludeComponentIds || []),
-  ]);
+  ]).filter(id => id !== RETIRED_HOOK_COMPONENT);
   const legacyLanguages = dedupeStrings(dedupeStrings([
     ...(Array.isArray(options.legacyLanguages) ? options.legacyLanguages : []),
     ...(Array.isArray(options.languages) ? options.languages : []),
   ]).map(language => language.toLowerCase()));
-  const hookConsent = resolveHookConsentFlags({
+  const requestedHookConsent = resolveHookConsentFlags({
     ...options,
     enableHooks: options.enableHooks === true || options.consentHooks === true,
   });
+  // Older install state and scripts can still pass their hook flags. Only the separate
+  // Codex hook installer enables Database hooks, so retire non-Codex consent on replay.
+  const hookConsent = target === 'codex' ? requestedHookConsent : 'declined';
   const trust = options.trust === true;
   const consentMcp = dedupeStrings(options.consentMcp || []);
   const sourceSha = options.sourceSha || null;
   if (sourceSha && (target !== 'grok' || !/^[0-9a-f]{40}$/.test(sourceSha))) {
     throw new Error('--source-sha requires --target grok and a 40-character lowercase commit SHA');
   }
-  if (hookConsent === 'declined' && moduleIds.includes('hooks-runtime')) {
-    throw new Error('--no-hooks cannot be combined with an explicit hooks-runtime module selection');
-  }
   const hasManifestBaseSelection = Boolean(profileId) || moduleIds.length > 0 || includeComponentIds.length > 0;
   const hasNonLocaleManifestSelection = Boolean(profileId)
     || moduleIds.length > 0
     // Install-state persists --locale as a component; auto-update replays it via --with.
-    || requestedIncludeComponentIds.some(id => !supportsLocale || !LOCALE_COMPONENT_IDS.has(id))
+    || requestedIncludeComponentIds.some(id => id !== RETIRED_HOOK_COMPONENT && (!supportsLocale || !LOCALE_COMPONENT_IDS.has(id)))
     || excludeComponentIds.length > 0;
   const usingManifestMode = hasManifestBaseSelection || excludeComponentIds.length > 0;
 
@@ -180,6 +181,9 @@ function normalizeInstallRequest(options = {}) {
   }
 
   if (!options.help && !hasManifestBaseSelection && legacyLanguages.length === 0) {
+    if (requestedModuleIds.length || requestedIncludeComponentIds.includes(RETIRED_HOOK_COMPONENT)) {
+      throw new Error('The selected hook packages have been retired. Database hooks are installed separately for Codex.');
+    }
     throw new Error('No install profile, module IDs, included components, or legacy languages were provided');
   }
 
@@ -203,6 +207,8 @@ function normalizeInstallRequest(options = {}) {
 
 module.exports = {
   LEGACY_INSTALL_TARGETS,
+  RETIRED_HOOK_COMPONENT,
+  RETIRED_HOOK_MODULES,
   normalizeInstallRequest,
   parseInstallArgs,
 };

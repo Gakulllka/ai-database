@@ -159,7 +159,7 @@ if (test('returns original input for existing file with no formatter configured'
 
 // Exercise real executable shims: .cmd on Windows, executable shell scripts elsewhere.
 
-function withFormatterFixture(formatter, fallback, fn) {
+function withFormatterFixture(formatter, fallback, fn, extension) {
   const root = fs.realpathSync(fs.mkdtempSync(path.join(os.tmpdir(), 'quality-gate project ')));
   try {
     const srcDir = path.join(root, 'source files');
@@ -169,7 +169,7 @@ function withFormatterFixture(formatter, fallback, fn) {
     fs.writeFileSync(path.join(root, 'package.json'), '{}');
     fs.writeFileSync(path.join(root, formatter === 'biome' ? 'biome.json' : '.prettierrc'), '{}');
     const fileName = 'edited %ECC_TEST_LITERAL% !ECC_TEST_LITERAL! & file';
-    const filePath = path.join(srcDir, fileName + (formatter === 'biome' ? '.json' : '.js'));
+    const filePath = path.join(srcDir, fileName + (extension || (formatter === 'biome' ? '.json' : '.js')));
     const original = formatter === 'biome' ? '{"value":1}\n' : 'const value=1;\n';
     fs.writeFileSync(filePath, original);
     const capturePath = path.join(root, 'invocation.json');
@@ -247,6 +247,14 @@ for (const formatter of ['prettier', 'biome']) {
     });
   })) passed++; else failed++;
 }
+
+if (test('standalone Biome checks TypeScript without another formatter hook', () => {
+  withFormatterFixture('biome', false, fixture => {
+    const result = fixture.runHook();
+    assertInvocation(fixture, result, ['check', fixture.filePath]);
+    assert.strictEqual(fs.readFileSync(fixture.filePath, 'utf8'), fixture.original);
+  }, '.ts');
+})) passed++; else failed++;
 
 if (test('preserves literal formatter arguments even if invocation options drift to shell:true', () => {
   withFormatterFixture('prettier', false, fixture => {

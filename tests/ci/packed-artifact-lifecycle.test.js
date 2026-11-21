@@ -131,7 +131,7 @@ test('Windows public CLI invocation accepts the exact opt-in capability selectio
       'ecc', 'install', '--profile', 'core',
       '--with', 'capability:security',
       '--with', 'capability:research',
-      '--target', 'cursor', '--enable-hooks', '--json',
+      '--target', 'cursor', '--json',
     ],
     { ComSpec: 'C:\\Windows\\System32\\cmd.exe' },
     'win32'
@@ -140,19 +140,21 @@ test('Windows public CLI invocation accepts the exact opt-in capability selectio
   assert.strictEqual(invocation.command, 'C:\\Windows\\System32\\cmd.exe');
   assert.strictEqual(
     invocation.args[3],
-    'npm exec --offline --yes=false -- ecc install --profile core --with capability:security --with capability:research --target cursor --enable-hooks --json'
+    'npm exec --offline --yes=false -- ecc install --profile core --with capability:security --with capability:research --target cursor --json'
   );
 });
 
-test('workflow-quality target smoke explicitly opts into hooks', () => {
+test('workflow-quality target smoke exercises content with hooks off', () => {
   const source = fs.readFileSync(
     path.join(__dirname, 'packed-artifact-lifecycle.js'),
     'utf8'
   );
   assert.match(
     source,
-    /'--modules', 'workflow-quality'[\s\S]*'--enable-hooks'/
+    /'--modules', 'workflow-quality'\]/
   );
+  assert.doesNotMatch(source, /'--enable-hooks'/);
+  assert.match(source, /assert\.strictEqual\(state\.request\.hookConsent, 'declined'\)/);
 });
 
 test('packed lifecycle exercises the Mistral Vibe skills-only target', () => {

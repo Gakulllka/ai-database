@@ -128,9 +128,10 @@ function createModularInstallRoot(options = {}) {
   return root
 }
 
-/** Load the compiled plugin from a fake install root instead of the repo dist. */
-async function loadPluginFrom(root) {
-  return import(pathToFileURL(path.join(root, "plugins", "ecc-hooks.js")).href)
+/** Invoke retained hook utilities directly without using either public plugin entry. */
+async function loadHookRuntime(pluginDir) {
+  const { createEccRuntime } = await import(pathToFileURL(path.join(pluginDir, "lib", "ecc-runtime.js")).href)
+  return async (input) => (await createEccRuntime(input, pluginDir)).hooks
 }
 
 /**
@@ -287,6 +288,7 @@ async function main() {
   process.on("unhandledRejection", (reason) => unhandledRejections.push(reason))
   installSpawnSpy()
   const { ECCHooksPlugin } = await loadPlugin()
+  const runLegacyHookFixtures = await loadHookRuntime(path.join(__dirname, "..", ".opencode", "dist", "plugins"))
   const tests = [
     [
       "plugin initializes and hooks stay usable when plugins/lib is missing",
@@ -307,7 +309,7 @@ async function main() {
 
           // Plugin initialization must resolve even though changed-files-store.js
           // cannot be found -- it must not throw and crash session startup (#2530).
-          const hooks = await ECCHooksPlugin({ client, $, directory: projectDir })
+          const hooks = await runLegacyHookFixtures({ client, $, directory: projectDir })
 
           const disabledWarnings = client.logs.filter(
             (entry) =>
@@ -336,7 +338,7 @@ async function main() {
         const client = createClient()
         const $ = createFailingShell()
 
-        const hooks = await ECCHooksPlugin({ client, $, directory: projectDir })
+        const hooks = await runLegacyHookFixtures({ client, $, directory: projectDir })
 
         assert.ok(
           !client.logs.some(
@@ -381,7 +383,7 @@ async function main() {
         async (projectDir) => {
           const client = createClient()
           const $ = createFailingShell()
-          const hooks = await ECCHooksPlugin({ client, $, directory: projectDir })
+          const hooks = await runLegacyHookFixtures({ client, $, directory: projectDir })
 
           const existingEnv = Object.freeze({ EXISTING_ENV: "preserved" })
           const output = { env: existingEnv }
@@ -406,7 +408,7 @@ async function main() {
       async () => withTempProject(["CLAUDE.md"], async (projectDir) => {
         const client = createClient()
         const $ = createFailingShell()
-        const hooks = await ECCHooksPlugin({ client, $, directory: projectDir })
+        const hooks = await runLegacyHookFixtures({ client, $, directory: projectDir })
 
         await hooks["session.created"]()
 
@@ -426,7 +428,7 @@ async function main() {
 
           const client = createClient()
           const $ = createFailingShell()
-          const hooks = await ECCHooksPlugin({ client, $, directory: projectDir })
+          const hooks = await runLegacyHookFixtures({ client, $, directory: projectDir })
 
           await hooks["session.created"]()
 
@@ -450,7 +452,7 @@ async function main() {
 
           const client = createClient()
           const $ = createFailingShell()
-          const hooks = await ECCHooksPlugin({ client, $, directory: projectDir })
+          const hooks = await runLegacyHookFixtures({ client, $, directory: projectDir })
 
           const output = { env: {} }
           await hooks["shell.env"]({ cwd: projectDir }, output)
@@ -471,7 +473,7 @@ async function main() {
       async () => withTempProject([], async (projectDir) => {
         const client = createClient()
         const $ = createFailingShell()
-        const hooks = await ECCHooksPlugin({ client, $, directory: projectDir })
+        const hooks = await runLegacyHookFixtures({ client, $, directory: projectDir })
 
         // OpenCode may invoke the hook with no output object; the previous
         // implementation dereferenced output.env unconditionally and aborted
@@ -487,7 +489,7 @@ async function main() {
       async () => withTempProject([], async (projectDir) => {
         const client = createClient()
         const $ = createFailingShell()
-        const hooks = await ECCHooksPlugin({ client, $, directory: projectDir })
+        const hooks = await runLegacyHookFixtures({ client, $, directory: projectDir })
         const existingContext = Object.freeze(["Existing plugin context"])
         const output = { context: existingContext }
 
@@ -507,7 +509,7 @@ async function main() {
       async () => withTempProject([], async (projectDir) => {
         const client = createClient()
         const $ = createFailingShell()
-        const hooks = await ECCHooksPlugin({ client, $, directory: projectDir })
+        const hooks = await runLegacyHookFixtures({ client, $, directory: projectDir })
 
         for (const customPrompt of ["Another plugin's custom prompt", ""]) {
           const existingContext = Object.freeze(["Existing plugin context"])
@@ -528,7 +530,7 @@ async function main() {
       async () => withTempProject([], async (projectDir) => {
         const client = createClient()
         const $ = createFailingShell()
-        const hooks = await ECCHooksPlugin({ client, $, directory: projectDir })
+        const hooks = await runLegacyHookFixtures({ client, $, directory: projectDir })
 
         // OpenCode may invoke the hook with no output object; the previous
         // implementation dereferenced output.prompt unconditionally and aborted
@@ -545,7 +547,7 @@ async function main() {
         async (projectDir) => {
           const client = createClient()
           const $ = createFailingShell()
-          const hooks = await ECCHooksPlugin({ client, $, directory: projectDir })
+          const hooks = await runLegacyHookFixtures({ client, $, directory: projectDir })
 
           // Test read-only tools
           const readResult = await hooks["permission.ask"]({ tool: "read", args: {} })
@@ -569,7 +571,7 @@ async function main() {
         async (projectDir) => {
           const client = createClient()
           const $ = createFailingShell()
-          const hooks = await ECCHooksPlugin({ client, $, directory: projectDir })
+          const hooks = await runLegacyHookFixtures({ client, $, directory: projectDir })
 
           // Formatter and test commands must fall through to the user's
           // permission system: a prefix regex over a free-form shell string
@@ -625,7 +627,7 @@ async function main() {
         try {
           const client = createClient()
           const $ = createFailingShell()
-          const hooks = await ECCHooksPlugin({ client, $, directory: projectDir })
+          const hooks = await runLegacyHookFixtures({ client, $, directory: projectDir })
 
           assert.ok(
             !client.logs.some(
@@ -660,7 +662,7 @@ async function main() {
         try {
           const client = createClient()
           const $ = createFailingShell()
-          const hooks = await ECCHooksPlugin({ client, $, directory: projectDir })
+          const hooks = await runLegacyHookFixtures({ client, $, directory: projectDir })
 
           await hooks["tool.execute.after"]({ tool: "edit", args: { path: "src/a.ts" } }, {})
           await hooks["tool.execute.after"]({ tool: "bash", args: { command: "ls" } }, {})
@@ -685,7 +687,7 @@ async function main() {
         try {
           const client = createClient()
           const $ = createFailingShell()
-          const hooks = await ECCHooksPlugin({ client, $, directory: projectDir })
+          const hooks = await runLegacyHookFixtures({ client, $, directory: projectDir })
 
           await hooks["tool.execute.after"]({ tool: "skill", args: { name: "code-review" } }, {})
 
@@ -708,7 +710,7 @@ async function main() {
         try {
           const client = createClient()
           const $ = createFailingShell()
-          const hooks = await ECCHooksPlugin({ client, $, directory: projectDir })
+          const hooks = await runLegacyHookFixtures({ client, $, directory: projectDir })
 
           const output = { env: {} }
           await hooks["shell.env"]({ cwd: projectDir }, output)
@@ -737,7 +739,7 @@ async function main() {
         try {
           const client = createClient()
           const $ = createFailingShell()
-          const hooks = await ECCHooksPlugin({ client, $, directory: projectDir })
+          const hooks = await runLegacyHookFixtures({ client, $, directory: projectDir })
 
           const output = { env: {} }
           await hooks["shell.env"]({ cwd: projectDir }, output)
@@ -765,7 +767,7 @@ async function main() {
         try {
           const client = createClient()
           const $ = createFailingShell()
-          const hooks = await ECCHooksPlugin({ client, $, directory: projectDir })
+          const hooks = await runLegacyHookFixtures({ client, $, directory: projectDir })
 
           // An earlier plugin chose a root. The final merge below spreads our env
           // over output.env, so a guard that only checked process.env would
@@ -805,9 +807,9 @@ async function main() {
             "the fixture must not contain skills/, or it would not test the modular case"
           )
 
-          const { ECCHooksPlugin: modularPlugin } = await loadPluginFrom(root)
+          const modularRuntime = await loadHookRuntime(path.join(root, "plugins"))
           const client = createClient()
-          const hooks = await modularPlugin({
+          const hooks = await modularRuntime({
             client,
             $: createFailingShell(),
             directory: projectDir,
@@ -851,7 +853,7 @@ async function main() {
           fs.writeFileSync(evilPath, "")
           try {
             const client = createClient()
-            const hooks = await ECCHooksPlugin({ client, $: createFailingShell(), directory: projectDir })
+            const hooks = await runLegacyHookFixtures({ client, $: createFailingShell(), directory: projectDir })
 
             resetSpawns()
             await hooks["file.edited"]({ path: evil })
@@ -925,7 +927,7 @@ async function main() {
           fs.mkdirSync(path.dirname(target), { recursive: true })
           fs.writeFileSync(target, "")
           const client = createClient()
-          const hooks = await ECCHooksPlugin({ client, $: createFailingShell(), directory: projectDir })
+          const hooks = await runLegacyHookFixtures({ client, $: createFailingShell(), directory: projectDir })
 
           resetSpawns({ code: 2 })
           spawnBehavior = { code: 2 }
@@ -955,7 +957,7 @@ async function main() {
       "detached notification registers its error listener before returning (T03) and hides windows (T14)",
       async () => withTempProject([], async (projectDir) => {
         const client = createClient()
-        const hooks = await ECCHooksPlugin({ client, $: createFailingShell(), directory: projectDir })
+        const hooks = await runLegacyHookFixtures({ client, $: createFailingShell(), directory: projectDir })
 
         // Track one edited file so session.idle proceeds to the audit + notify.
         const noted = path.join(projectDir, "src", "a.ts")
@@ -989,212 +991,46 @@ async function main() {
       }),
     ],
     [
-      "V2 setup(ctx) registers domain hooks, executes them, and disposes cleanly (T05)",
+      "V1 returns only on-demand tools and no lifecycle handlers",
       async () => withTempProject([], async (projectDir) => {
-        const mod = await loadPlugin()
-        const definition = mod.default
-        assert.strictEqual(definition.id, "ecc-hooks")
-        assert.strictEqual(typeof definition.setup, "function")
-
+        const result = await ECCHooksPlugin({ client: createClient(), directory: projectDir })
+        assert.deepStrictEqual(Object.keys(result), ["tool"])
+        assert.deepStrictEqual(Object.keys(result.tool), ["changed-files", "dependency-analyzer"])
+        assert.ok(Object.values(result.tool).every(tool => typeof tool.execute === "function"))
+      }),
+    ],
+    [
+      "V2 exposes the two custom tools without lifecycle registrations",
+      async () => withTempProject([], async (projectDir) => {
+        const definition = (await loadPlugin()).default
         const ctx = createMockV2Context(projectDir)
         const dispose = await definition.setup(ctx)
+        assert.deepStrictEqual(ctx.state.registered, [])
+        assert.strictEqual(ctx.state.subscribeCalls, 0)
+        const tools = new Map()
+        ctx.state.transform({ add: (definition) => tools.set(definition.name, definition) })
+        assert.deepStrictEqual([...tools.keys()], ["changed-files", "dependency-analyzer"])
+        const storeUrl = pathToFileURL(path.join(__dirname, "..", ".opencode", "dist", "plugins", "lib", "changed-files-store.js"))
+        const store = await import(storeUrl.href)
+        store.clearChanges()
+        assert.strictEqual(spawnSync("git", ["init", "--quiet"], { cwd: projectDir }).status, 0)
+        fs.writeFileSync(path.join(projectDir, "draft.txt"), "example")
+        const result = await tools.get("changed-files").execute({ format: "json" }, { worktree: projectDir })
+        assert.deepStrictEqual(JSON.parse(result.content), {
+          changed: true, source: "git-worktree", filter: "all",
+          files: [{ path: "draft.txt", changeType: "added" }], diffCommands: [],
+        })
 
-        // tool×2 + shell + session + permission (transform and subscribe tracked separately)
-        assert.deepStrictEqual(
-          ctx.state.registered.sort(),
-          ["permission.evaluate", "session.compaction", "shell.create.before",
-           "tool.execute.after", "tool.execute.before"].sort(),
-        )
-        assert.strictEqual(ctx.state.subscribeCalls, 1)
-
-        // Executing the registered permission callback: read-only allows,
-        // bash never auto-allows (T02 end-to-end through the V2 surface).
-        const readEvent = { action: "read", resources: ["src/index.ts"] }
-        await ctx.state.handlers["permission.evaluate"](readEvent)
-        assert.strictEqual(readEvent.effect, "allow")
-
-        const bashEvent = { action: "bash", resources: ["npx prettier --write x.ts"] }
-        await ctx.state.handlers["permission.evaluate"](bashEvent)
-        assert.strictEqual(bashEvent.effect, undefined)
-
-        // Tool hooks run without throwing.
-        await ctx.state.handlers["tool.execute.before"]({ tool: "write", callID: "c1", input: { filePath: "a.ts" } })
-        await ctx.state.handlers["tool.execute.after"]({ tool: "write", callID: "c1", input: { filePath: "a.ts" }, output: {} })
-
-        // R2-1: the execute.after adapter must hand the skill tracker the RAW
-        // tool output. The tracker reads error fields (is_error/isError/
-        // status/error) directly off tool_response, so a `{ result: … }`
-        // wrapper made failed skills record as successes.
-        {
-          const previousHome = process.env.HOME
-          const previousUserProfile = process.env.USERPROFILE
-          const skillHome = fs.mkdtempSync(path.join(os.tmpdir(), "ecc-v2-skill-home-"))
-          process.env.HOME = skillHome
-          process.env.USERPROFILE = skillHome
-          try {
-            await ctx.state.handlers["tool.execute.after"]({
-              tool: "skill",
-              callID: "c2",
-              input: { name: "code-review" },
-              output: { output: "skill crashed", is_error: true },
-            })
-            const runs = readRecordedRuns(skillHome)
-            assert.strictEqual(runs.length, 1, "the skill run must be recorded through V2")
-            assert.strictEqual(
-              runs[0].outcome,
-              "failure",
-              "an error-bearing skill response must record as failure, not success",
-            )
-            await ctx.state.handlers["tool.execute.after"]({
-              tool: "skill",
-              callID: "c3",
-              input: { name: "code-review" },
-              output: { output: "all good" },
-            })
-            const both = readRecordedRuns(skillHome)
-            assert.strictEqual(both.length, 2)
-            assert.strictEqual(both[1].outcome, "success", "clean responses still record as success")
-            // Actual OpenCode 2.x failures have status/error, no result/output.
-            await ctx.state.handlers["tool.execute.after"]({
-              tool: "skill", id: "c4", input: { name: "code-review" },
-              status: "error", error: { message: "native tool failed" },
-            })
-            const nativeRuns = readRecordedRuns(skillHome)
-            assert.strictEqual(nativeRuns.length, 3)
-            assert.strictEqual(nativeRuns[2].outcome, "failure", "native V2 errors must not become successes")
-          } finally {
-            restoreEnv({ HOME: previousHome, USERPROFILE: previousUserProfile })
-            fs.rmSync(skillHome, { recursive: true, force: true })
-          }
-        }
-
-        // Session compaction appends ECC context through the V2 event object.
-        const compactionEvent = { system: [] }
-        await ctx.state.handlers["session.compaction"](compactionEvent)
-        assert.ok(compactionEvent.system.some((part) => String(part.text).includes("# ECC")))
-
-        // shell.create.before mutates event.env like the V1 shell.env hook.
-        const shellEvent = { env: {} }
-        await ctx.state.handlers["shell.create.before"](shellEvent)
-        assert.strictEqual(typeof shellEvent.env, "object")
-
-        // Custom tools arrive through the transform editor.
-        const added = []
-        await ctx.state.transform({ add: (t) => added.push(t.name) })
-        assert.ok(added.includes("changed-files"))
-        assert.ok(added.includes("dependency-analyzer"))
-
-        // A second setup for the SAME directory must not double-register.
-        const ctx2 = createMockV2Context(projectDir)
-        const dispose2 = await definition.setup(ctx2)
-        assert.strictEqual(ctx2.state.registered.length, 0, "directory guard must block re-registration")
-        assert.strictEqual(ctx2.state.subscribeCalls, 0)
-
-        // Dispose everything; one registration rejects its dispose (T13) and
-        // must not leave an unhandled rejection or stop the others.
-        ctx.state.regObjects[0].rejectsDispose = true
+        const second = createMockV2Context(projectDir)
+        await definition.setup(second)
+        assert.strictEqual(second.state.transform, null)
         await dispose()
-        await new Promise((resolve) => setTimeout(resolve, 20))
-        assert.strictEqual(unhandledRejections.length, 0, "dispose must not leave unhandled rejections")
-        assert.ok(
-          ctx.state.regObjects.every((r) => r.disposed >= 1),
-          "every registration must be disposed",
-        )
-        await dispose2()
+        assert.strictEqual(ctx.state.regObjects[0].disposed, 1)
 
-        // After dispose, the guard is released: re-setup registers again.
-        const ctx3 = createMockV2Context(projectDir)
-        const dispose3 = await definition.setup(ctx3)
-        assert.strictEqual(ctx3.state.registered.length, 5)
-        await dispose3()
-      }),
-    ],
-    [
-      "V2 maps the shell tool id and runs post-edit hooks from completed write/edit calls",
-      async () => withTempProject([], async (projectDir) => {
-        const mod = await loadPlugin()
-        const definition = mod.default
-        fs.mkdirSync(path.join(projectDir, "src"), { recursive: true })
-        fs.writeFileSync(path.join(projectDir, "src", "a.ts"), "console.log('debug')\n")
-
-        const previousProfile = process.env.ECC_HOOK_PROFILE
-        process.env.ECC_HOOK_PROFILE = "strict"
-        resetSpawns()
-        const lines = []
-        const originals = { info: console.info, warn: console.warn, debug: console.debug }
-        console.info = (...args) => lines.push(args.join(" "))
-        console.warn = (...args) => lines.push(args.join(" "))
-        console.debug = () => {}
-        const ctx = createMockV2Context(projectDir)
-        let dispose = async () => {}
-        try {
-          dispose = await definition.setup(ctx)
-
-          // OpenCode 2 names the V1 `bash` tool `shell`.
-          await ctx.state.handlers["tool.execute.before"]({ tool: "shell", id: "s1", input: { command: "git push origin main" } })
-          assert.ok(
-            lines.some((line) => line.includes("Remember to review changes before pushing")),
-            "the git-push reminder must fire for the V2 shell tool",
-          )
-
-          // OpenCode 2 publishes no file.edited event; a completed edit with
-          // V2's `{ path }` input must still run the post-edit hook.
-          lines.length = 0
-          await ctx.state.handlers["tool.execute.after"]({
-            tool: "edit", id: "e1", input: { path: "src/a.ts" }, status: "completed", result: {},
-          })
-          assert.ok(
-            lines.some((line) => line.includes("console.log found in src/a.ts")),
-            "the console.log warning must fire for a completed V2 edit",
-          )
-          assert.ok(
-            spawnCalls.some((call) => call.args.join(" ").includes("prettier")),
-            "the strict-profile formatter must run for a completed V2 edit",
-          )
-
-          // A failed edit must not run the post-edit hook.
-          lines.length = 0
-          resetSpawns()
-          await ctx.state.handlers["tool.execute.after"]({
-            tool: "edit", id: "e2", input: { path: "src/a.ts" }, status: "error", error: { message: "no match" },
-          })
-          assert.ok(
-            !lines.some((line) => line.includes("console.log found")),
-            "a failed V2 edit must not trigger the post-edit hook",
-          )
-          assert.ok(
-            !spawnCalls.some((call) => call.args.join(" ").includes("prettier")),
-            "a failed V2 edit must not run the formatter",
-          )
-        } finally {
-          await dispose()
-          Object.assign(console, originals)
-          restoreEnv({ ECC_HOOK_PROFILE: previousProfile })
-          resetSpawns()
-        }
-      }),
-    ],
-    [
-      "setup() rolls back registrations when a later domain fails (T10)",
-      async () => withTempProject([], async (projectDir) => {
-        const mod = await loadPlugin()
-        const definition = mod.default
-
-        const ctx = createMockV2Context(projectDir, { failAt: "permission.evaluate" })
-        await assert.rejects(() => definition.setup(ctx))
-
-        // Registrations already made before the failure must be disposed.
-        assert.ok(ctx.state.regObjects.length >= 3, "earlier domains registered before the failure")
-        assert.ok(
-          ctx.state.regObjects.every((r) => r.disposed >= 1),
-          "failed setup must dispose every registration it already made",
-        )
-
-        // The directory guard must be released so a retry can succeed.
         const retry = createMockV2Context(projectDir)
-        const dispose = await definition.setup(retry)
-        assert.strictEqual(retry.state.registered.length, 5, "retry after rollback must register the full hook set")
-        await dispose()
+        const disposeRetry = await definition.setup(retry)
+        assert.strictEqual(typeof retry.state.transform, "function")
+        await disposeRetry()
       }),
     ],
   ]

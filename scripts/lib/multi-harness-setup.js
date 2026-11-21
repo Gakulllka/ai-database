@@ -33,13 +33,13 @@ function normalizeGuidedInstallRequest(input = {}) {
   }
 
   const claudeScope = includesClaude ? (input.claudeScope || 'user') : undefined;
-  const claudeHooks = includesClaude ? (input.claudeHooks || 'standard') : undefined;
+  const claudeHooks = includesClaude ? 'off' : undefined;
   const profile = includesKimi ? (input.profile || 'core') : undefined;
   if (claudeScope && !VALID_CLAUDE_SCOPES.has(claudeScope)) {
     throw new Error(`Invalid Claude scope: ${claudeScope}`);
   }
-  if (claudeHooks && !VALID_CLAUDE_HOOKS.has(claudeHooks)) {
-    throw new Error(`Invalid Claude hooks preference: ${claudeHooks}`);
+  if (input.claudeHooks !== undefined && !VALID_CLAUDE_HOOKS.has(input.claudeHooks)) {
+    throw new Error(`Invalid Claude hooks preference: ${input.claudeHooks}`);
   }
   if (profile && !VALID_PROFILES.has(profile)) {
     throw new Error(`Invalid Kimi install profile: ${profile}`);

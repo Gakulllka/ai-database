@@ -36,7 +36,7 @@ Usage: install.sh [--target <${LEGACY_INSTALL_TARGETS.join('|')}>] [--dry-run] [
 Targets:
   claude       (default) - Install ECC into ~/.claude/ with managed rules under rules/ecc and flat skills under skills/
   claude-project - Install ECC into ./.claude/ (per-project) with managed rules under rules/ecc and flat skills under skills/
-  cursor       - Install rules, hooks, and bundled Cursor configs to ./.cursor/
+  cursor       - Install rules and bundled Cursor configs to ./.cursor/
   antigravity  - Install rules, workflows, skills, and agents to ./.agents/
   codex        - Install shared agents/config into ~/.codex/
   copilot      - Install skills and agents into ./.github/ for GitHub Copilot CLI (ECC hooks not configured)
@@ -63,11 +63,10 @@ Options:
   --locale <code>     Install translated docs to ~/.claude/docs/<locale>/ (or ./.claude/docs/<locale>/ for claude-project)
                       (claude or claude-project target only; can be combined with --profile or --with)
   --config <path>     Load install intent from ecc-install.json
-  --enable-hooks      Confirm installing the automatic hook runtime (required
-                      when the selected profile/modules materialize hooks)
-  --no-hooks          Install everything except the automatic hook runtime
-  --trust             Trust executable Grok capabilities (still requires each consent flag)
-  --consent-hooks     Allow Grok hooks for this install
+  --enable-hooks, --no-hooks
+                      Legacy options. Install Database hooks separately for Codex.
+  --trust             Trust explicitly selected Grok MCP servers
+  --consent-hooks     Legacy option. Hooks stay off in Grok.
   --consent-mcp <ids> Allow named Grok MCP servers, comma-separated
   --source-sha <sha>   Install or roll back Grok to an exact 40-character Git commit
   --dry-run    Show the install plan without copying files

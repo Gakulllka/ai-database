@@ -48,8 +48,8 @@ const englishSkill = fs.readFileSync(
   'utf8'
 );
 
-test('English continuous-learning-v2 skill says plugin installs auto-load hooks/hooks.json', () => {
-  assert.ok(englishSkill.includes('auto-loads the plugin `hooks/hooks.json`'));
+test('English continuous-learning-v2 skill keeps collection explicit', () => {
+  assert.ok(englishSkill.includes('Run collection explicitly'));
 });
 
 test('English continuous-learning-v2 skill tells plugin users to remove duplicated settings.json hooks', () => {

@@ -65,7 +65,7 @@ test('metadata sidecar exists and lines up with hooks.json', () => {
   assert.deepStrictEqual(mismatches, [], `metadata is misaligned:\n${mismatches.join('\n')}`);
 });
 
-test('every matcher entry has a unique id after merging', () => {
+test('retired Claude graph contains zero matcher entries after merging', () => {
   const merged = readHooksConfig(HOOKS_PATH);
   const seen = new Map();
   let count = 0;
@@ -80,7 +80,7 @@ test('every matcher entry has a unique id after merging', () => {
     seen.set(entry.id, label);
   });
 
-  assert.ok(count > 0, 'expected at least one matcher entry');
+  assert.strictEqual(count, 0, 'Claude has no Database lifecycle registration');
 });
 
 test('merging leaves hook commands untouched', () => {

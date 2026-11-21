@@ -8,6 +8,7 @@ const fs = require('fs');
 const os = require('os');
 const path = require('path');
 const { execFileSync } = require('child_process');
+const { seedLegacyClaudeHooks } = require('../lib/helpers/legacy-hook-install-fixture');
 
 const INSTALL_SCRIPT = path.join(__dirname, '..', '..', 'scripts', 'install-apply.js');
 const SCRIPT = path.join(__dirname, '..', '..', 'scripts', 'uninstall.js');
@@ -97,7 +98,7 @@ function runTests() {
     const projectRoot = createTempDir('uninstall-project-');
 
     try {
-      const installStdout = execFileSync('node', [INSTALL_SCRIPT, '--target', 'cursor', 'typescript', '--enable-hooks'], {
+      const installStdout = execFileSync('node', [INSTALL_SCRIPT, '--target', 'cursor', '--skills', 'tdd-workflow'], {
         cwd: projectRoot,
         env: {
           ...process.env,
@@ -110,7 +111,8 @@ function runTests() {
       assert.ok(installStdout.includes('Done. Install-state written'));
 
       const normalizedProjectRoot = fs.realpathSync(projectRoot);
-      const managedPath = path.join(normalizedProjectRoot, '.cursor', 'hooks.json');
+      const managedPath = path.join(normalizedProjectRoot, '.cursor', 'skills', 'tdd-workflow', 'SKILL.md');
+      assert.ok(fs.existsSync(managedPath));
       const statePath = path.join(normalizedProjectRoot, '.cursor', 'ecc-install-state.json');
       const unrelatedPath = path.join(normalizedProjectRoot, '.cursor', 'custom-user-note.txt');
       fs.writeFileSync(unrelatedPath, 'leave me alone');
@@ -119,7 +121,7 @@ function runTests() {
         cwd: projectRoot,
         homeDir,
       });
-      assert.strictEqual(uninstallResult.code, 0, uninstallResult.stderr);
+      assert.strictEqual(uninstallResult.code, 0, uninstallResult.stderr || uninstallResult.stdout);
       assert.ok(uninstallResult.stdout.includes('Uninstall summary'));
       assert.ok(uninstallResult.stdout.includes('quick-feedback.yml'));
       assert.ok(uninstallResult.stdout.includes('public GitHub issue'));
@@ -140,17 +142,7 @@ function runTests() {
     const statePath = path.join(claudeRoot, 'ecc', 'install-state.json');
 
     try {
-      execFileSync(
-        'node',
-        [INSTALL_SCRIPT, '--target', 'claude', '--modules', 'hooks-runtime,config-health', '--enable-hooks'],
-        {
-          cwd: projectRoot,
-          env: { ...process.env, HOME: homeDir, USERPROFILE: homeDir },
-          encoding: 'utf8',
-          stdio: ['pipe', 'pipe', 'pipe'],
-          timeout: CLI_TIMEOUT_MS,
-        }
-      );
+      seedLegacyClaudeHooks(claudeRoot, { includeConfigHealth: true, otherSettings: { theme: 'dark' } });
       const state = JSON.parse(fs.readFileSync(statePath, 'utf8'));
       const settingsOperations = state.operations.filter(operation => (
         operation.kind === 'update-claude-settings'
@@ -174,12 +166,13 @@ function runTests() {
         cwd: projectRoot,
         homeDir,
       });
-      assert.strictEqual(uninstallResult.code, 0, uninstallResult.stderr);
+      assert.strictEqual(uninstallResult.code, 0, uninstallResult.stderr || uninstallResult.stdout);
       assert.ok(!fs.existsSync(statePath), 'uninstall must remove the install-state record');
 
       const settings = fs.existsSync(settingsPath)
         ? JSON.parse(fs.readFileSync(settingsPath, 'utf8'))
         : {};
+      assert.strictEqual(settings.theme, 'dark');
       const remainingIds = Object.values(settings.hooks || {})
         .flat()
         .map(entry => entry.id);
@@ -210,21 +203,7 @@ function runTests() {
       fs.writeFileSync(userPackagePath, userPackage);
       fs.writeFileSync(scriptsPackagePath, userScriptsPackage);
 
-      execFileSync(
-        'node',
-        [INSTALL_SCRIPT, '--target', 'claude-project', '--modules', 'hooks-runtime', '--enable-hooks'],
-        {
-          cwd: projectRoot,
-          env: {
-            ...process.env,
-            HOME: homeDir,
-            USERPROFILE: homeDir,
-          },
-          encoding: 'utf8',
-          stdio: ['pipe', 'pipe', 'pipe'],
-          timeout: CLI_TIMEOUT_MS,
-        }
-      );
+      seedLegacyClaudeHooks(claudeRoot, { target: 'claude-project', scriptBoundaries: true });
       assert.deepStrictEqual(JSON.parse(fs.readFileSync(hooksPackagePath, 'utf8')), { type: 'commonjs' });
       assert.deepStrictEqual(JSON.parse(fs.readFileSync(libPackagePath, 'utf8')), { type: 'commonjs' });
       assert.strictEqual(fs.readFileSync(scriptsPackagePath, 'utf8'), userScriptsPackage);
@@ -233,7 +212,7 @@ function runTests() {
         cwd: projectRoot,
         homeDir,
       });
-      assert.strictEqual(uninstallResult.code, 0, uninstallResult.stderr);
+      assert.strictEqual(uninstallResult.code, 0, uninstallResult.stderr || uninstallResult.stdout);
       assert.strictEqual(fs.readFileSync(userPackagePath, 'utf8'), userPackage);
       assert.strictEqual(fs.readFileSync(scriptsPackagePath, 'utf8'), userScriptsPackage);
       assert.ok(!fs.existsSync(hooksPackagePath));
@@ -329,7 +308,7 @@ function runTests() {
         cwd: projectRoot,
         homeDir,
       });
-      assert.strictEqual(uninstallResult.code, 0, uninstallResult.stderr);
+      assert.strictEqual(uninstallResult.code, 0, uninstallResult.stderr || uninstallResult.stdout);
       assert.ok(uninstallResult.stdout.includes('Uninstall summary'));
       assert.ok(!fs.existsSync(copiedPath));
       assert.deepStrictEqual(JSON.parse(fs.readFileSync(mergedPath, 'utf8')), {
@@ -395,7 +374,7 @@ function runTests() {
         cwd: projectRoot,
         homeDir,
       });
-      assert.strictEqual(uninstallResult.code, 0, uninstallResult.stderr);
+      assert.strictEqual(uninstallResult.code, 0, uninstallResult.stderr || uninstallResult.stdout);
 
       const parsed = JSON.parse(uninstallResult.stdout);
       assert.strictEqual(parsed.dryRun, true);
@@ -463,7 +442,7 @@ function runTests() {
         homeDir,
         env: { ECC_DRY_RUN: '1' },
       });
-      assert.strictEqual(uninstallResult.code, 0, uninstallResult.stderr);
+      assert.strictEqual(uninstallResult.code, 0, uninstallResult.stderr || uninstallResult.stdout);
 
       const parsed = JSON.parse(uninstallResult.stdout);
       assert.strictEqual(parsed.dryRun, true, 'ECC_DRY_RUN=1 must enable dry-run mode');
@@ -527,7 +506,7 @@ function runTests() {
         cwd: projectRoot,
         homeDir,
       });
-      assert.strictEqual(uninstallResult.code, 0, uninstallResult.stderr);
+      assert.strictEqual(uninstallResult.code, 0, uninstallResult.stderr || uninstallResult.stdout);
 
       assert.ok(uninstallResult.stdout.includes('dry run'), 'summary header must carry the dry-run marker');
       assert.ok(uninstallResult.stdout.includes('WOULD UNINSTALL (dry run)'), 'status must use conditional wording');
@@ -649,7 +628,7 @@ function runTests() {
       fs.writeFileSync(userFilePath, 'unrelated');
 
       const uninstallResult = run([], { cwd: projectRoot, homeDir });
-      assert.strictEqual(uninstallResult.code, 0, uninstallResult.stderr);
+      assert.strictEqual(uninstallResult.code, 0, uninstallResult.stderr || uninstallResult.stdout);
       assert.ok(!uninstallResult.stdout.includes('No ECC install-state files found'), uninstallResult.stdout);
       assert.ok(uninstallResult.stdout.includes('Legacy Codex sync cleanup summary'), uninstallResult.stdout);
       assert.ok(!fs.existsSync(promptPath));
@@ -687,7 +666,7 @@ function runTests() {
         env: { ECC_DRY_RUN: '1' },
       });
 
-      assert.strictEqual(uninstallResult.code, 0, uninstallResult.stderr);
+      assert.strictEqual(uninstallResult.code, 0, uninstallResult.stderr || uninstallResult.stdout);
       assert.match(uninstallResult.stdout, /Status: PLANNED/);
       assert.match(uninstallResult.stdout, /Planned changes:/);
       assert.doesNotMatch(uninstallResult.stdout, /Status: UNINSTALLED|Removed paths:/);
@@ -747,7 +726,7 @@ function runTests() {
       fs.writeFileSync(conversationPath, 'conversation history');
 
       const uninstallResult = run([], { cwd: projectRoot, homeDir });
-      assert.strictEqual(uninstallResult.code, 0, uninstallResult.stderr);
+      assert.strictEqual(uninstallResult.code, 0, uninstallResult.stderr || uninstallResult.stdout);
       assert.ok(uninstallResult.stdout.includes('No ECC install-state files found'), uninstallResult.stdout);
       assert.ok(!uninstallResult.stdout.includes('Legacy Codex sync cleanup summary'), uninstallResult.stdout);
       assert.strictEqual(fs.readFileSync(configPath, 'utf8'), 'model = "user"\n');
@@ -770,7 +749,7 @@ function runTests() {
       fs.writeFileSync(configPath, 'model = "user"\n');
 
       const uninstallResult = run(['--legacy-codex-sync', '--json'], { cwd: projectRoot, homeDir });
-      assert.strictEqual(uninstallResult.code, 0, uninstallResult.stderr);
+      assert.strictEqual(uninstallResult.code, 0, uninstallResult.stderr || uninstallResult.stdout);
       const parsed = JSON.parse(uninstallResult.stdout);
       assert.strictEqual(parsed.status, 'not-found');
       assert.deepStrictEqual(parsed.plannedRemovals, []);
@@ -802,7 +781,7 @@ function runTests() {
       fs.writeFileSync(conversationPath, 'conversation history');
 
       const uninstallResult = run([], { cwd: projectRoot, homeDir });
-      assert.strictEqual(uninstallResult.code, 0, uninstallResult.stderr);
+      assert.strictEqual(uninstallResult.code, 0, uninstallResult.stderr || uninstallResult.stdout);
       assert.ok(uninstallResult.stdout.includes('No ECC install-state files found'), uninstallResult.stdout);
       assert.ok(!uninstallResult.stdout.includes('Legacy Codex sync cleanup summary'), uninstallResult.stdout);
       assert.strictEqual(fs.readFileSync(agentsPath, 'utf8'), '# User instructions\n\n<!-- BEGIN ECC -->\n# ECC managed\n<!-- END ECC -->\n');
@@ -829,7 +808,7 @@ function runTests() {
       );
 
       const uninstallResult = run(['--legacy-codex-sync'], { cwd: projectRoot, homeDir });
-      assert.strictEqual(uninstallResult.code, 0, uninstallResult.stderr);
+      assert.strictEqual(uninstallResult.code, 0, uninstallResult.stderr || uninstallResult.stdout);
       assert.ok(uninstallResult.stdout.includes('Legacy Codex sync cleanup summary'), uninstallResult.stdout);
       assert.ok(uninstallResult.stdout.includes('Status: UNINSTALLED'), uninstallResult.stdout);
       assert.strictEqual(fs.readFileSync(agentsPath, 'utf8'), '# User instructions\n\n');

@@ -1,85 +1,26 @@
-/**
- * Regression coverage for supported manual Claude hook installation guidance.
- */
+'use strict';
 
-const assert = require('assert');
-const fs = require('fs');
-const path = require('path');
+const assert = require('node:assert/strict');
+const fs = require('node:fs');
+const path = require('node:path');
+const { test } = require('node:test');
 
-const README = path.join(__dirname, '..', '..', 'README.md');
-const HOOKS_README = path.join(__dirname, '..', '..', 'hooks', 'README.md');
-const HOOK_REGISTRATION_PHRASE =
-  'registers the resolved hook entries in `~/.claude/settings.json`';
+const root = path.resolve(__dirname, '../..');
+const install = 'node scripts/codex/install-database-hooks.js';
+const read = file => fs.readFileSync(path.join(root, file), 'utf8');
 
-function normalizeWhitespace(text) {
-  return text.replace(/\s+/g, ' ');
-}
+test('root README points to the supported standalone Codex hook install', () => {
+  const text = read('README.md');
+  assert.ok(text.includes(install + ' --dry-run'));
+  assert.match(text, /\(hooks\/README\.md\)/);
+  assert.doesNotMatch(text, /--modules hooks-runtime --enable-hooks/);
+});
 
-function test(name, fn) {
-  try {
-    fn();
-    console.log(`  \u2713 ${name}`);
-    return true;
-  } catch (error) {
-    console.log(`  \u2717 ${name}`);
-    console.log(`    Error: ${error.message}`);
-    return false;
-  }
-}
-
-function runTests() {
-  console.log('\n=== Testing manual hook install docs ===\n');
-
-  let passed = 0;
-  let failed = 0;
-
-  const readme = fs.readFileSync(README, 'utf8');
-  const hooksReadme = fs.readFileSync(HOOKS_README, 'utf8');
-
-  if (test('README warns against raw hook file copying', () => {
-    assert.ok(
-      readme.includes('Do not copy the raw repo `hooks/hooks.json` into `~/.claude/settings.json` or `~/.claude/hooks/hooks.json`'),
-      'README should warn against unsupported raw hook copying'
-    );
-    assert.ok(
-      readme.includes('bash ./install.sh --target claude --modules hooks-runtime --enable-hooks'),
-      'README should document the supported Bash hook install path'
-    );
-    assert.ok(
-      readme.includes('pwsh -File .\\install.ps1 --target claude --modules hooks-runtime --enable-hooks'),
-      'README should document the supported PowerShell hook install path'
-    );
-    assert.ok(
-      readme.includes('%USERPROFILE%\\.claude'),
-      'README should call out the correct Windows Claude config root'
-    );
-    assert.ok(
-      normalizeWhitespace(readme).includes(HOOK_REGISTRATION_PHRASE),
-      'README should explain that manual installs register hooks in Claude settings'
-    );
-  })) passed++; else failed++;
-
-  if (test('hooks/README mirrors supported manual install guidance', () => {
-    assert.ok(
-      hooksReadme.includes('do not paste the raw repo `hooks.json` into `~/.claude/settings.json` or copy it directly into `~/.claude/hooks/hooks.json`'),
-      'hooks/README should warn against unsupported raw hook copying'
-    );
-    assert.ok(
-      hooksReadme.includes('bash ./install.sh --target claude --modules hooks-runtime --enable-hooks'),
-      'hooks/README should document the supported Bash hook install path'
-    );
-    assert.ok(
-      hooksReadme.includes('pwsh -File .\\install.ps1 --target claude --modules hooks-runtime --enable-hooks'),
-      'hooks/README should document the supported PowerShell hook install path'
-    );
-    assert.ok(
-      normalizeWhitespace(hooksReadme).includes(HOOK_REGISTRATION_PHRASE),
-      'hooks/README should explain that manual installs register hooks in Claude settings'
-    );
-  })) passed++; else failed++;
-
-  console.log(`\nResults: Passed: ${passed}, Failed: ${failed}`);
-  process.exit(failed > 0 ? 1 : 0);
-}
-
-runTests();
+test('Codex hook instructions cover plan, install, global settings and trust', () => {
+  const text = read('hooks/README.md');
+  assert.ok(text.includes(install + ' --dry-run'));
+  assert.ok(text.includes(install + '\n'));
+  assert.match(text, /hooks\.json/);
+  assert.match(text, /trust[\s\S]+\/hooks/);
+  assert.doesNotMatch(text, /--modules hooks-runtime --enable-hooks/);
+});

@@ -293,12 +293,8 @@ function runTests() {
     assert.strictEqual(plan.installStatePath, path.join(projectRoot, '.cursor', 'ecc-install-state.json'));
     assert.ok(plan.operations.length > 0, 'Should include scaffold operations');
     assert.ok(
-      plan.operations.some(operation => (
-        operation.sourceRelativePath === '.cursor/hooks.json'
-        && operation.destinationPath === path.join(projectRoot, '.cursor', 'hooks.json')
-        && operation.strategy === 'preserve-relative-path'
-      )),
-      'Developer Cursor installs should register hooks through hooks-runtime'
+      !plan.operations.some(operation => operation.sourceRelativePath === '.cursor/hooks.json'),
+      'Developer Cursor installs leave hooks unregistered'
     );
     assert.ok(
       plan.operations.some(operation => (
@@ -329,15 +325,14 @@ function runTests() {
         'rules-core',
         'agents-core',
         'commands-core',
-        'hooks-runtime',
+        'shared-runtime-libraries',
         'platform-configs',
         'skill-unified-memory',
         'workflow-quality',
         'shared-script-utils'
       ]
     );
-    assert.ok(!plan.skippedModuleIds.includes('hooks-runtime'));
-    assert.ok(plan.operations.some(operation => operation.destinationPath === path.join(projectRoot, '.agents', 'hooks.json')));
+    assert.ok(!plan.operations.some(operation => operation.destinationPath === path.join(projectRoot, '.agents', 'hooks.json')));
     assert.ok(!plan.skippedModuleIds.includes('platform-configs'));
     assert.ok(!plan.skippedModuleIds.includes('workflow-quality'));
     assert.strictEqual(plan.targetAdapterId, 'antigravity-project');
@@ -396,8 +391,8 @@ function runTests() {
       'Should install Qwen native config'
     );
     assert.ok(
-      !plan.operations.some(operation => operation.destinationPath.includes(`${path.sep}hooks`)),
-      'Qwen minimal profile should not install hook runtime files'
+      !plan.operations.some(operation => operation.destinationPath === path.join(plan.targetRoot, 'hooks.json')),
+      'Qwen minimal profile should not register hooks'
     );
   })) passed++; else failed++;
 
@@ -530,7 +525,8 @@ function runTests() {
     assert.ok(selection.moduleIds.includes('rules-core'));
     assert.ok(selection.moduleIds.includes('agents-core'));
     assert.ok(selection.moduleIds.includes('commands-core'));
-    assert.ok(selection.moduleIds.includes('hooks-runtime'));
+    assert.ok(selection.moduleIds.includes('shared-runtime-libraries'));
+    assert.ok(!selection.moduleIds.includes('hooks-runtime'));
     assert.ok(selection.moduleIds.includes('platform-configs'));
     assert.ok(selection.moduleIds.includes('workflow-quality'));
     assert.ok(selection.moduleIds.includes('framework-language'));

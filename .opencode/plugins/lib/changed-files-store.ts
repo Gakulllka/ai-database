@@ -63,9 +63,9 @@ function addToTree(children: TreeNode[], segs: string[], fullPath: string, chang
   addToTree(child.children, rest, fullPath, changeType)
 }
 
-export function buildTree(filter?: ChangeType): TreeNode[] {
+export function buildTree(filter?: ChangeType, entries: ReadonlyMap<string, ChangeType> = changes): TreeNode[] {
   const root: TreeNode[] = []
-  for (const [relPath, changeType] of changes) {
+  for (const [relPath, changeType] of entries) {
     if (filter && changeType !== filter) continue
     const segs = relPath.split(path.sep).filter(Boolean)
     if (segs.length === 0) continue
@@ -83,9 +83,9 @@ export function buildTree(filter?: ChangeType): TreeNode[] {
   return sortNodes(root)
 }
 
-export function getChangedPaths(filter?: ChangeType): Array<{ path: string; changeType: ChangeType }> {
+export function getChangedPaths(filter?: ChangeType, entries: ReadonlyMap<string, ChangeType> = changes): Array<{ path: string; changeType: ChangeType }> {
   const list: Array<{ path: string; changeType: ChangeType }> = []
-  for (const [p, t] of changes) {
+  for (const [p, t] of entries) {
     if (filter && t !== filter) continue
     list.push({ path: p, changeType: t })
   }

@@ -160,11 +160,11 @@ function runGuidedPtyFixture(exchanges) {
     const output = capture();
     const result = await collectInteractiveOptions(parseArgs([]), {
       output,
-      terminal: fakeTerminal(['bogus', '1,3', '3', '2', '4']),
+      terminal: fakeTerminal(['bogus', '1,3', '3', '4']),
     });
     assert.deepStrictEqual(result.harnesses, ['claude', 'kimi']);
     assert.strictEqual(result.claudeScope, 'local');
-    assert.strictEqual(result.claudeHooks, 'minimal');
+    assert.strictEqual(result.claudeHooks, 'off');
     assert.strictEqual(result.profile, 'security');
     assert.match(output.read(), /Please choose/i);
     assert.doesNotMatch(output.read(), /Codex.*scope/i);
@@ -172,14 +172,13 @@ function runGuidedPtyFixture(exchanges) {
 
   await test('interactive prompts keep spacing, recommended defaults, and one visible confirmation', async () => {
     const output = capture();
-    const terminal = fakeTerminal(['all', '1', '3', '2']);
+    const terminal = fakeTerminal(['all', '1', '2']);
     const options = await collectInteractiveOptions(parseArgs([]), { output, terminal });
     assert.deepStrictEqual(options.harnesses, ['claude', 'codex', 'kimi']);
     assert.match(output.read(), /Advanced adapters[^\n]+\.\n\n\nWhere should Claude/);
     assert.deepStrictEqual(terminal.prompts, [
       'Choose one or more (for example 1,3 or all): ',
       'Choose [Recommended: user] (one option only): ',
-      'Choose [Recommended: standard] (one option only): ',
       'Choose [Recommended: core] (one option only): ',
     ]);
 
@@ -210,7 +209,6 @@ function runGuidedPtyFixture(exchanges) {
     const result = await runGuidedPtyFixture([
       { expect: 'Choose one or more (for example 1,3 or all):', send: 'all' },
       { expect: 'Choose [Recommended: user] (one option only):', send: '1' },
-      { expect: 'Choose [Recommended: standard] (one option only):', send: '3' },
       { expect: 'Choose [Recommended: core] (one option only):', send: '2' },
       { expect: 'Apply ECC to these harnesses? [y/N]:', send: 'y' },
     ]);
@@ -220,7 +218,6 @@ function runGuidedPtyFixture(exchanges) {
     const orderedPrompts = [
       'Choose one or more (for example 1,3 or all):',
       'Choose [Recommended: user] (one option only):',
-      'Choose [Recommended: standard] (one option only):',
       'Choose [Recommended: core] (one option only):',
       'Apply ECC to these harnesses? [y/N]:',
       'PTY_WELCOME_SHOWN',
@@ -241,7 +238,7 @@ function runGuidedPtyFixture(exchanges) {
     );
     assert.throws(
       () => validateExecutionMode(parseArgs(['--harness', 'claude', '--json']), true),
-      /Claude.*scope.*hooks/i
+      /Claude.*scope/i
     );
     assert.throws(
       () => validateExecutionMode(parseArgs([
@@ -380,7 +377,7 @@ function runGuidedPtyFixture(exchanges) {
     assert.strictEqual(code, 1);
     assert.match(
       errorOutput.read(),
-      /Retry with: ecc-universal install --guided --harness claude --harness kimi --claude-scope local --claude-hooks strict --profile developer/
+      /Retry with: ecc-universal install --guided --harness claude --harness kimi --claude-scope local --profile developer/
     );
   });
 
@@ -396,16 +393,15 @@ function runGuidedPtyFixture(exchanges) {
     assert.doesNotMatch(errorOutput.read(), /\[31m/);
   });
 
-  await test('printPlan discloses hook capabilities for non-off Claude hook profiles', async () => {
+  await test('printPlan reports hooks disabled even for a legacy request', async () => {
     let written = '';
     const output = { write: chunk => { written += chunk; } };
     printPlan({
       harnesses: [{ id: 'claude', channel: 'native-plugin' }],
       request: { harnesses: ['claude'], claudeHooks: 'standard' },
     }, output);
-    assert.ok(written.includes("hook profile 'standard'"));
-    assert.ok(written.includes('modify project source files'));
-    assert.ok(written.includes("--claude-hooks off"));
+    assert.match(written, /Claude note: ECC hooks are disabled/);
+    assert.doesNotMatch(written, /enables automation/);
   });
 
   await test('printPlan omits the hook disclosure when Claude hooks are off', async () => {

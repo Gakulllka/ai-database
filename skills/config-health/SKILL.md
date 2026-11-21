@@ -17,41 +17,13 @@ Start with the effective workspace and host version. Identify the user and proje
 
 ## Claude Code and prior integrations
 
-A real-time monitoring layer. delivery-gate blocks at session end; config-health catches problems during the session — when cheap to fix.
+Run the standalone checker on demand from the project directory.
 
-## When to Activate
+```sh
+python3 scripts/config-health.py --check
+```
 
-- After installing delivery-gate and wanting defense in depth
-- When hooks silently stop firing
-- When config rules accumulate but you're unsure which still work
-- At session startup for config integrity scan
-- Optionally before high-risk Edit/Write operations; this is opt-in, not default
-
-## How It Works
-
-Session Start → config-health scans rules/hooks (soft warnings, never blocks)
-Session Work → optional PreToolUse guard, only if you wire it yourself
-Session End → delivery-gate verifies (hard block, exit 2)
-
-Boundary: "Can this be fixed retroactively?" Config drift → config-health warns. Missing growth-log → delivery-gate blocks (hard exit 2).
-
-## What It Monitors
-
-1. Hook Wiring Audit: every script a hook command references, checked against
-   disk. Runs at session start by default. An optional PreToolUse mode can also
-   run it per matched Edit/Write call; that mode is not part of the default
-   wiring and is not recommended unless you want the recurring cost.
-2. Rule Health: every `rules/*.md` referenced from `CLAUDE.md` exists.
-3. Guard Staleness: rules whose fire counter has been zero across the last five
-   sessions recorded in `rule-health.jsonl` — the last five *records*, then
-   filtered down to the ones complex enough to judge, so a verdict needs at
-   least five records in total.
-
-The default wiring is SessionStart only. PreToolUse is available as an opt-in
-mode, but it is not recommended by default: it adds a fresh-process parse of
-this script to every matched Edit and Write without adding tool-specific
-evidence. See [PreToolUse Cost](#pretooluse-cost-opt-in).
-
+It audits references to installed hook scripts, rule files and stale guard records. Run it when a hook stops firing, after upgrading a setup, or when more than one settings file may own an entry.
 ## Hook Paths
 
 Hook commands are split the way a shell splits them before any path is
@@ -172,9 +144,7 @@ Net: **+4.1 ms on a ~55 ms hook invocation, about 8%**, and the honest
 attribution is script size, not the audit. Stripping every docstring recovers
 0.15 ms of the compile, so it is the code, not the prose.
 
-This is why the default wiring keeps only `--startup`: the audit runs once per
-session instead of once per matched tool call, and the parse cost goes with it.
-Opt in only if the per-call check is worth about 8% on each matched call.
+Use the standalone check to audit the effective settings once.
 
 The hook payload is drained and discarded, never parsed and never printed. Its
 size cannot change the verdict. `timeout` in the hook wiring, not the read, is
@@ -210,47 +180,11 @@ dir; plus the plugin's own `hooks/hooks.json` when `CLAUDE_PLUGIN_ROOT` (or
 `~/.claude/session-data/rule-health.jsonl`). It reads no documentation to find
 references, and it does not count how many places a script is wired.
 
-## Install
+## Install the standalone checker
 
-**ECC users:** install the `config-health` module with an explicit hook decision — `npx ecc-universal install --modules config-health --enable-hooks` for the default SessionStart wiring, or the `full` profile with hook consent. The installer refuses to apply a hook-shipping module without `--enable-hooks` or `--no-hooks`. It is a **Claude-only** module; PreToolUse is opt-in. It does not target other harnesses, so it stays isolated from shared 13-harness modules.
+Install the Claude checker with `npx ecc-universal install --target claude --modules config-health`. The module supplies the skill and checker files. Run `config-health.py --check` when you want a report.
 
-The module ships its own hook config (`manifests/install-assets/config-health-hooks.json`), merged into `settings.json` at install time with the install root substituted for `${CLAUDE_PLUGIN_ROOT}` — so a home install points at `~/.claude/scripts/config-health.py` and a project install at `<project>/.claude/scripts/config-health.py`. Because that merge is a settings write, it is gated by hook consent:
-
-- `npx ecc-universal install --modules config-health --enable-hooks` wires the SessionStart hook.
-- `npx ecc-universal install --modules config-health --no-hooks` installs the script and skill only; nothing is written to `settings.json`, and you wire it yourself from the JSON below.
-
-Uninstall removes the hook entry along with the files.
-
-**Standalone:** copy `scripts/config-health.py` and the three helper modules
-(`config_health_constants.py`, `config_health_paths.py`, `config_health_scan.py`)
-to `${CLAUDE_CONFIG_DIR:-~/.claude}/scripts/` and verify the entry point exists
-before enabling. The helpers must sit in the same directory as the entry point.
-If your launcher sets `CLAUDE_CONFIG_DIR`, use that path in the hook command;
-`~/.claude` is not the file Claude loads in that setup.
-
-**Important:** Merge these hook entries into your existing `hooks` object — do not replace it, or you will lose hooks like delivery-gate.
-
-Default (SessionStart only):
-
-```json
-{
-  "hooks": {
-    "SessionStart": [{"hooks": [{"type": "command", "command": "python3 ~/.claude/scripts/config-health.py --startup", "timeout": 60}]}]
-  }
-}
-```
-
-Optional per-tool mode (opt-in; adds a fresh process on every matched Edit and
-Write; not recommended by default):
-
-```json
-{
-  "hooks": {
-    "PreToolUse": [{"matcher": "Edit|Write", "hooks": [{"type": "command", "command": "python3 ~/.claude/scripts/config-health.py --pretool", "timeout": 60}]}]
-  }
-}
-```
-
+For a manual copy, keep `config-health.py` and `config_health_constants.py`, `config_health_paths.py`, and `config_health_scan.py` in the same directory.
 ## Design Principles
 
 1. Never block on process monitoring — config-health warns; delivery-gate blocks
@@ -268,7 +202,7 @@ Write; not recommended by default):
 
 | File | Purpose | Hook |
 |------|---------|------|
-| scripts/config-health.py | CLI entry: startup, pre-tool, check | SessionStart; PreToolUse opt-in |
+| scripts/config-health.py | Standalone configuration checker | Run with `--check` |
 | scripts/config_health_constants.py | Constants, regexes, audit sets | — |
 | scripts/config_health_paths.py | Path resolution and defensive reads | — |
 | scripts/config_health_scan.py | Shell-command tokenising and scanning | — |

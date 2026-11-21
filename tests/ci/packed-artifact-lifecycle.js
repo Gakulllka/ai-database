@@ -379,7 +379,7 @@ function findDriftCandidate(state, cursorRoot) {
 function runTargetSmoke(options) {
   const selectionArgs = Array.isArray(options.selectionArgs)
     ? options.selectionArgs
-    : ['--modules', 'workflow-quality', '--enable-hooks'];
+    : ['--modules', 'workflow-quality'];
   parseJsonOutput(
     options.runCli([
       'install',
@@ -397,6 +397,9 @@ function runTargetSmoke(options) {
     'SKILL.md'
   );
   assert.ok(fs.existsSync(statePath), `${options.target} install-state must exist`);
+  const state = JSON.parse(fs.readFileSync(statePath, 'utf8'));
+  assert.strictEqual(state.request.hookConsent, 'declined');
+  assert.ok(!state.operations.some(operation => operation.moduleId === 'hooks-runtime'));
   assert.ok(
     fs.existsSync(installedSkillPath),
     `${options.target} must install skill-comply from the packed archive`
@@ -512,6 +515,7 @@ function runLifecycle(options) {
     assert.strictEqual(claudeSetupDryRun.action, 'would-install');
     assert.strictEqual(claudeSetupDryRun.dryRun, true);
     assert.strictEqual(claudeSetupDryRun.scope, 'user');
+    assert.strictEqual(claudeSetupDryRun.hooks, 'off');
     assert.deepStrictEqual(
       fs.readdirSync(claudeConfigDir).sort(),
       claudeConfigBeforeDryRun,
@@ -547,11 +551,11 @@ function runLifecycle(options) {
     );
     const claudeInitialSetup = runPackedClaudeSetup('standard');
     assert.strictEqual(claudeInitialSetup.action, 'installed');
-    assert.strictEqual(claudeInitialSetup.hooks, 'standard');
+    assert.strictEqual(claudeInitialSetup.hooks, 'off');
     assert.strictEqual(claudeInitialSetup.scope, 'user');
     const claudeUpdatedSetup = runPackedClaudeSetup('strict');
     assert.strictEqual(claudeUpdatedSetup.action, 'updated');
-    assert.strictEqual(claudeUpdatedSetup.hooks, 'strict');
+    assert.strictEqual(claudeUpdatedSetup.hooks, 'off');
     assert.strictEqual(claudeUpdatedSetup.scope, 'user');
 
     const fakeClaudeState = JSON.parse(fs.readFileSync(fakeClaudeStatePath, 'utf8'));
@@ -582,8 +586,8 @@ function runLifecycle(options) {
       fs.readFileSync(path.join(claudeConfigDir, 'settings.json'), 'utf8')
     );
     assert.strictEqual(
-      claudeSettings.pluginConfigs['ecc@ecc'].options.hook_profile,
-      'strict'
+      claudeSettings.pluginConfigs['ecc@ecc'].options.hooks_enabled,
+      false
     );
     assert.strictEqual(
       fs.readFileSync(claudeSetupSentinel, 'utf8'),
@@ -691,7 +695,6 @@ function runLifecycle(options) {
       '--with', 'capability:security',
       '--with', 'capability:research',
       '--target', 'cursor',
-      '--enable-hooks',
       '--json',
     ];
     parseJsonOutput(
@@ -701,6 +704,8 @@ function runLifecycle(options) {
     assert.ok(fs.existsSync(statePath), 'initial install must write Cursor install-state');
     const initialState = JSON.parse(fs.readFileSync(statePath, 'utf8'));
     const initialLedger = getOperationLedger(initialState);
+    assert.strictEqual(initialState.request.hookConsent, 'declined');
+    assert.ok(!fs.existsSync(path.join(cursorRoot, 'hooks.json')), 'packed Cursor install must not register hooks');
     assert.ok(
       initialState.operations.some(operation => operation.moduleId === 'security'),
       'installed ledger must include the security module'
@@ -850,6 +855,7 @@ function runLifecycle(options) {
       targetRoot: antigravityRoot,
     });
     assert.ok(!fs.existsSync(path.join(projectDir, '.agent')));
+    assert.ok(!fs.existsSync(path.join(antigravityRoot, 'hooks.json')));
 
     const opencodeRoot = path.join(homeDir, '.config', 'opencode');
     runTargetSmoke({

@@ -58,7 +58,7 @@ function createPinnedFixture() {
   const parent = fs.mkdtempSync(path.join(os.tmpdir(), 'ecc-grok-canonical-'));
   const sourceRoot = path.join(parent, 'source');
   const homeDir = path.join(parent, 'home');
-  git(parent, ['clone', '--quiet', '--no-local', repoRoot, sourceRoot]);
+  git(parent, ['clone', '--quiet', '--depth', '1', '--no-local', repoRoot, sourceRoot]);
   git(sourceRoot, ['remote', 'add', 'pinned-source', sourceRoot]);
   fs.mkdirSync(homeDir, { recursive: true });
 
@@ -146,7 +146,7 @@ function inspectWithGrok(fixture) {
 function runTests() {
   console.log('\n=== Canonical Grok install contract ===\n');
 
-  if (test('preview and apply use one canonical operation set with explicit capability consent', () => {
+  if (test('preview and apply honor explicit MCP consent and skip retired lifecycle hooks', () => {
     const fixture = createPinnedFixture();
     try {
       const rawPlan = createPlan(fixture);
@@ -168,33 +168,21 @@ function runTests() {
       assert.ok(installOperations.every(operation => typeof operation.contentTransform === 'object'));
       assert.ok(installOperations.every(operation => !Object.keys(operation).some(key => key.startsWith('grok'))));
       assert.ok(installOperations.some(operation => operation.contentTransform.type === 'json-set'));
-      assert.ok(installOperations.some(operation => operation.contentTransform.type === 'grok-hooks'));
+      assert.ok(!installOperations.some(operation => operation.contentTransform.type === 'grok-hooks'));
       assert.ok(installOperations.some(operation => operation.contentTransform.type === 'json-filter-object-keys'));
 
       const manifest = JSON.parse(fs.readFileSync(path.join(installedRoot(fixture), '.grok-plugin', 'plugin.json'), 'utf8'));
       const mcp = JSON.parse(fs.readFileSync(path.join(installedRoot(fixture), '.mcp.json'), 'utf8'));
-      assert.strictEqual(manifest.hooks, 'hooks/hooks.json');
+      assert.strictEqual(manifest.hooks, '');
       assert.strictEqual(manifest.mcpServers, '.mcp.json');
       assert.deepStrictEqual(Object.keys(mcp.mcpServers), ['other-mcp']);
       assert.ok(!JSON.stringify(mcp).includes('chrome-devtools'));
-      const installedHooks = fs.readFileSync(path.join(installedRoot(fixture), 'hooks', 'hooks.json'), 'utf8');
-      assert.ok(installedHooks.includes('GROK_PLUGIN_ROOT'));
-      const installedHooksConfig = JSON.parse(installedHooks);
-      const terminalHooks = installedHooksConfig.hooks.PreToolUse.filter(entry => entry.matcher === 'run_terminal_command');
-      assert.strictEqual(terminalHooks.length, 2);
-      assert.ok(!installedHooksConfig.hooks.PreToolUse.some(entry => ['Bash', 'PowerShell'].includes(entry.matcher)));
-      if (process.platform === 'win32') {
-        assert.ok(terminalHooks.every(entry => entry.hooks[0].command.startsWith(`"${process.execPath}" `)));
-      }
-      const sharedHooks = fs.readFileSync(path.join(repoRoot, 'hooks', 'hooks.json'), 'utf8');
-      assert.ok(!sharedHooks.includes('GROK_PLUGIN_ROOT'));
-      assert.ok(sharedHooks.includes('"matcher": "Bash"'));
-      assert.ok(sharedHooks.includes('"matcher": "PowerShell"'));
+      assert.ok(!fs.existsSync(path.join(installedRoot(fixture), 'hooks', 'hooks.json')));
       const inspection = inspectWithGrok(fixture);
       if (inspection) {
         const plugin = inspection.plugins.find((item) => item.name === 'ecc');
         assert.ok(plugin && plugin.enabled);
-        assert.strictEqual(plugin.provides.hooks, true);
+        assert.strictEqual(plugin.provides.hooks, false);
         assert.strictEqual(plugin.provides.mcpServers, 1);
       }
     } finally {
@@ -215,7 +203,7 @@ function runTests() {
         const plan = createPlan(fixture, options);
         applyInstallPlan(plan);
         const manifest = JSON.parse(fs.readFileSync(path.join(installedRoot(fixture), '.grok-plugin', 'plugin.json'), 'utf8'));
-        const hooksEnabled = options.trust && options.hooks;
+        const hooksEnabled = false;
         const mcpEnabled = options.trust && options.mcp.length > 0;
         assert.strictEqual(manifest.hooks, hooksEnabled ? 'hooks/hooks.json' : '');
         assert.strictEqual(manifest.mcpServers, mcpEnabled ? '.mcp.json' : '');
@@ -514,8 +502,8 @@ function runTests() {
       assert.strictEqual(repairedState.source.repoCommit, firstState.source.repoCommit);
       assert.strictEqual(repairedState.request.trust, true);
       assert.deepStrictEqual(repairedState.request.consentMcp, ['other-mcp']);
-      assert.strictEqual(repairedState.request.hookConsent, 'enabled');
-      assert.ok(fs.readFileSync(path.join(installedRoot(fixture), 'hooks', 'hooks.json'), 'utf8').includes('SessionStart'));
+      assert.strictEqual(repairedState.request.hookConsent, 'declined');
+      assert.ok(!fs.existsSync(path.join(installedRoot(fixture), 'hooks', 'hooks.json')));
       const repairedMcp = JSON.parse(fs.readFileSync(path.join(installedRoot(fixture), '.mcp.json'), 'utf8'));
       assert.deepStrictEqual(Object.keys(repairedMcp.mcpServers), ['other-mcp']);
       assert.strictEqual(

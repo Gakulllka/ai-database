@@ -1,5 +1,5 @@
 {
-  "description": "Reference lifecycle hook definitions for ECC memory persistence. The production hook graph is hooks/hooks.json.",
+  "description": "Historical reference for the previous ECC memory persistence lifecycle. This file is not a runtime registration.",
   "events": [
     {
       "event": "SessionStart",

@@ -10,7 +10,7 @@ The executable implementations live in `scripts/hooks/`:
 - `observe-runner.js` records tool-use observations for continuous learning.
 - `session-activity-tracker.js` records tool usage and file activity for ECC2 status and observability.
 
-The installed hook graph is still `hooks/hooks.json`. This directory is the stable, human-readable lifecycle definition surface referenced by the harness audit and longform docs.
+This directory records the previous memory lifecycle design. Use the [Codex hook guide](../README.md) for current Database lifecycle registration.
 
 ## Lifecycle Contract
 

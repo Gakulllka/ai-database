@@ -2,7 +2,7 @@
   "version": 1,
   "profiles": {
     "minimal": {
-      "description": "Low-context Claude Code setup with rules, agents, commands, platform configs, and quality workflow support, but no hook runtime.",
+      "description": "Low-context setup with rules, agents, commands, platform configs, and quality workflow support.",
       "modules": [
         "rules-core",
         "agents-core",
@@ -12,7 +12,7 @@
       ]
     },
     "opencode": {
-      "description": "Default OpenCode setup with commands, platform configs, and quality workflow support. It intentionally excludes hooks-runtime; opt in with --modules hooks-runtime.",
+      "description": "Default OpenCode setup with commands, platform configs, and quality workflows.",
       "modules": [
         "commands-core",
         "platform-configs",
@@ -20,12 +20,12 @@
       ]
     },
     "core": {
-      "description": "Minimal harness baseline with commands, hooks, platform configs, and quality workflow support.",
+      "description": "Core harness baseline with commands, shared libraries, platform configs, and quality workflows.",
       "modules": [
         "rules-core",
         "agents-core",
         "commands-core",
-        "hooks-runtime",
+        "shared-runtime-libraries",
         "platform-configs",
         "workflow-quality"
       ]
@@ -36,7 +36,7 @@
         "rules-core",
         "agents-core",
         "commands-core",
-        "hooks-runtime",
+        "shared-runtime-libraries",
         "platform-configs",
         "workflow-quality",
         "framework-language",
@@ -50,7 +50,7 @@
         "rules-core",
         "agents-core",
         "commands-core",
-        "hooks-runtime",
+        "shared-runtime-libraries",
         "platform-configs",
         "workflow-quality",
         "security"
@@ -62,7 +62,7 @@
         "rules-core",
         "agents-core",
         "commands-core",
-        "hooks-runtime",
+        "shared-runtime-libraries",
         "platform-configs",
         "workflow-quality",
         "research-apis",
@@ -76,7 +76,7 @@
         "agents-core",
         "shared-script-utils",
         "commands-core",
-        "hooks-runtime",
+        "shared-runtime-libraries",
         "platform-configs",
         "framework-language",
         "database",
@@ -97,7 +97,6 @@
         "machine-learning",
         "document-processing",
         "documentation-context",
-        "hermes-hooks",
         "documentation-change-impact",
         "documentation-module-governance",
         "documentation-test-regression",

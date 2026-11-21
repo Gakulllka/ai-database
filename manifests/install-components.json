@@ -26,14 +26,6 @@
       ]
     },
     {
-      "id": "baseline:hooks",
-      "family": "baseline",
-      "description": "Hook runtime configs and hook helper scripts.",
-      "modules": [
-        "hooks-runtime"
-      ]
-    },
-    {
       "id": "baseline:platform",
       "family": "baseline",
       "description": "Platform configs, package-manager setup, and MCP catalog defaults.",

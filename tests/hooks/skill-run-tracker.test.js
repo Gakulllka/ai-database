@@ -16,7 +16,6 @@ const os = require('os');
 const path = require('path');
 
 const { buildRecord, deriveOutcome, extractSkillId, isSkillToolCall, run } = require('../../scripts/hooks/skill-run-tracker');
-const { readHooksConfig } = require('../../scripts/lib/hooks-config');
 const {
   MAX_RUN_RECORDS,
   RUNS_FILE_MODE,
@@ -282,24 +281,6 @@ test('an end-to-end Skill hook run lands exactly one non-sensitive record', () =
       if (previousUserProfile === undefined) delete process.env.USERPROFILE; else process.env.USERPROFILE = previousUserProfile;
     }
   });
-});
-
-// deriveOutcome treats PostToolUseFailure as a hard failure. That branch is
-// only reachable if the hook is actually registered for the event: the
-// PostToolUse dispatcher does not fan out PostToolUseFailure, so the tracker
-// needs its own hooks.json entry. Without it, hard Skill failures are silently
-// dropped and the dashboard's success rate is inflated.
-test('the tracker is registered for PostToolUseFailure so hard failures are recorded', () => {
-  const hooksConfig = readHooksConfig(path.join(__dirname, '..', '..', 'hooks', 'hooks.json'));
-  const entries = (hooksConfig.hooks.PostToolUseFailure || [])
-    .filter(entry => entry.id === 'post:skill:track');
-
-  assert.strictEqual(entries.length, 1, 'expected one post:skill:track PostToolUseFailure entry');
-  assert.strictEqual(entries[0].matcher, 'Skill', 'tracker must only match the Skill tool');
-  assert.ok(
-    entries[0].hooks[0].command.includes('scripts/hooks/skill-run-tracker.js'),
-    'entry should invoke skill-run-tracker.js'
-  );
 });
 
 console.log(`\nPassed: ${passed}`);

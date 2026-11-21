@@ -155,7 +155,7 @@ bash skills/continuous-learning-v2/scripts/migrate-homunculus.sh
 
 **If installed as a plugin** (recommended):
 
-No extra `settings.json` hook block is required. Claude Code v2.1+ auto-loads the plugin `hooks/hooks.json`, and `observe.sh` is already registered there.
+Run collection explicitly using the standalone observation workflow below. This skill ships the helper without registering it in the Claude plugin.
 
 If you previously copied `observe.sh` into `~/.claude/settings.json`, remove that duplicate `PreToolUse` / `PostToolUse` block. Duplicating the plugin hook causes double execution and `${CLAUDE_PLUGIN_ROOT}` resolution errors because that variable is only available inside plugin-managed `hooks/hooks.json` entries.
 

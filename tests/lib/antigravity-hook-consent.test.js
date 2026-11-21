@@ -4,30 +4,51 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const os = require('node:os');
 const path = require('node:path');
-const { spawnSync } = require('node:child_process');
 const { test } = require('node:test');
 const { createManifestInstallPlan } = require('../../scripts/lib/install/plan');
 const { applyInstallPlan, previewInstallPlan } = require('../../scripts/lib/install/apply');
-const { readInstallState } = require('../../scripts/lib/install-state');
+const { readInstallState, writeInstallState } = require('../../scripts/lib/install-state');
 const { withHookConsent } = require('../../scripts/lib/install/hook-consent');
+
+function seedPriorHookRegistration(plan, { legacy = false } = {}) {
+  const hooksPath = path.join(plan.targetRoot, 'hooks.json');
+  const setupPath = path.join(plan.targetRoot, 'ecc', 'setup.json');
+  const bridgePath = path.join(plan.targetRoot, 'scripts', 'hooks', 'antigravity-hook-bridge.js');
+  const mergePayload = {
+    'ecc-guard': {
+      PostToolUse: [{ matcher: 'write_to_file', hooks: [{ type: 'command', command: 'previous-ecc-hook' }] }],
+    },
+  };
+  fs.mkdirSync(path.dirname(bridgePath), { recursive: true });
+  fs.writeFileSync(bridgePath, '// Synthetic prior bridge. It must never be invoked.\n');
+  fs.writeFileSync(hooksPath, JSON.stringify(mergePayload));
+  if (!legacy) {
+    fs.mkdirSync(path.dirname(setupPath), { recursive: true });
+    fs.writeFileSync(setupPath, JSON.stringify({ hooks: { enabled: true }, userSetting: 'keep' }));
+  }
+
+  const state = {
+    ...plan.statePreview,
+    request: { ...plan.statePreview.request, modules: ['hooks-runtime'], hookConsent: 'enabled' },
+    resolution: { ...plan.statePreview.resolution, selectedModules: ['hooks-runtime'] },
+    operations: [{
+      kind: 'merge-json', moduleId: 'hooks-runtime', sourceRelativePath: 'hooks/hooks.json',
+      destinationPath: hooksPath, strategy: 'merge-json', ownership: 'managed', scaffoldOnly: false,
+      mergePayload,
+    }],
+  };
+  writeInstallState(plan.installStatePath, state);
+  return { hooksPath, setupPath };
+}
 
 for (const target of ['antigravity', 'antigravity-home']) {
   for (const legacy of [false, true]) {
-    test(`${target} revokes ${legacy ? 'legacy' : 'current'} hooks and can re-enable them`, () => {
+    test(`${target} revokes ${legacy ? 'older' : 'previously managed'} hooks and does not reactivate them`, () => {
       const root = fs.mkdtempSync(path.join(os.tmpdir(), 'ecc-hook-consent-'));
       try {
-        const options = { moduleIds: ['hooks-runtime'], target, homeDir: root, projectRoot: root };
-        const enabled = withHookConsent(createManifestInstallPlan(options), 'enabled');
-        applyInstallPlan(enabled);
-        const hooksPath = path.join(enabled.targetRoot, 'hooks.json');
-        const setupPath = path.join(enabled.targetRoot, 'ecc', 'setup.json');
-        const bridgePath = path.join(enabled.targetRoot, 'scripts', 'hooks', 'antigravity-hook-bridge.js');
-        const marker = path.join(root, 'hook-ran');
-        // Simulate an already installed bridge that predates managed flag support.
-        if (legacy) {
-          fs.rmSync(setupPath);
-          fs.writeFileSync(bridgePath, `require('node:fs').writeFileSync(${JSON.stringify(marker)}, 'ran');`);
-        }
+        const options = { moduleIds: ['commands-core'], target, homeDir: root, projectRoot: root };
+        const plan = createManifestInstallPlan(options);
+        const { hooksPath, setupPath } = seedPriorHookRegistration(plan, { legacy });
         const config = JSON.parse(fs.readFileSync(hooksPath, 'utf8'));
         const userHook = { Stop: [{ type: 'command', command: 'user-selected-hook' }] };
         fs.writeFileSync(hooksPath, JSON.stringify({ ...config, 'user-hook': userHook }));
@@ -40,25 +61,15 @@ for (const target of ['antigravity', 'antigravity-home']) {
         applyInstallPlan(declinePlan);
         const declined = JSON.parse(fs.readFileSync(hooksPath, 'utf8'));
         assert.deepEqual(declined['user-hook'], userHook);
-        for (const handler of declined['ecc-guard']?.PostToolUse || []) {
-          for (const hook of handler.hooks || []) {
-            const result = spawnSync(hook.command, {
-              shell: true, cwd: root, encoding: 'utf8',
-              input: JSON.stringify({ toolCall: { name: 'write_to_file', args: { TargetFile: path.join(root, 'file.js') } } }),
-            });
-            assert.equal(result.status, 0, result.stderr);
-          }
-        }
-        assert.equal(fs.existsSync(marker), false, 'Declined legacy hook must not execute');
         assert.equal(Object.hasOwn(declined, 'ecc-guard'), false);
-        assert.equal(JSON.parse(fs.readFileSync(setupPath, 'utf8')).hooks.enabled, false);
-        assert.equal(readInstallState(enabled.installStatePath).request.hookConsent, 'declined');
+        const setup = JSON.parse(fs.readFileSync(setupPath, 'utf8'));
+        assert.equal(setup.hooks.enabled, false);
+        if (!legacy) assert.equal(setup.userSetting, 'keep');
+        assert.equal(readInstallState(plan.installStatePath).request.hookConsent, 'declined');
         applyInstallPlan(withHookConsent(createManifestInstallPlan(options), 'declined'));
-        assert.deepEqual(JSON.parse(fs.readFileSync(hooksPath, 'utf8'))['user-hook'], userHook);
-        applyInstallPlan(withHookConsent(createManifestInstallPlan(options), 'enabled'));
-        assert.ok(JSON.parse(fs.readFileSync(hooksPath, 'utf8'))['ecc-guard']);
-        assert.equal(JSON.parse(fs.readFileSync(setupPath, 'utf8')).hooks.enabled, true);
+        assert.deepEqual(JSON.parse(fs.readFileSync(hooksPath, 'utf8')), { 'user-hook': userHook });
       } finally {
+        assert.equal(path.dirname(fs.realpathSync(root)), fs.realpathSync(os.tmpdir()));
         fs.rmSync(root, { recursive: true, force: true });
       }
     });
@@ -71,11 +82,9 @@ for (const target of ['antigravity', 'antigravity-home']) {
     }, () => {
       const root = fs.mkdtempSync(path.join(os.tmpdir(), 'ecc-unsafe-revocation-'));
       try {
-        const options = { moduleIds: ['hooks-runtime'], target, homeDir: root, projectRoot: root };
-        const enabled = withHookConsent(createManifestInstallPlan(options), 'enabled');
-        applyInstallPlan(enabled);
-        const hooksPath = path.join(enabled.targetRoot, 'hooks.json');
-        const setupPath = path.join(enabled.targetRoot, 'ecc', 'setup.json');
+        const options = { moduleIds: ['commands-core'], target, homeDir: root, projectRoot: root };
+        const plan = createManifestInstallPlan(options);
+        const { hooksPath, setupPath } = seedPriorHookRegistration(plan);
         const original = fs.readFileSync(hooksPath, 'utf8');
         if (unsafe === 'modified-hooks') {
           const hooks = JSON.parse(original);
@@ -98,22 +107,24 @@ for (const target of ['antigravity', 'antigravity-home']) {
           /modified Antigravity hooks|symlink|outside the install root/i);
         if (unsafe !== 'swapped-setup') assert.equal(fs.readFileSync(hooksPath, 'utf8'), before);
         assert.equal(fs.existsSync(path.join(root, 'outside.json')), false);
-        assert.equal(JSON.parse(fs.readFileSync(enabled.installStatePath, 'utf8')).request.hookConsent, 'enabled');
+        assert.equal(JSON.parse(fs.readFileSync(plan.installStatePath, 'utf8')).request.hookConsent, 'enabled');
       } finally {
+        assert.equal(path.dirname(fs.realpathSync(root)), fs.realpathSync(os.tmpdir()));
         fs.rmSync(root, { recursive: true, force: true });
       }
     });
   }
 
-  test(`${target} fresh declined installation creates no hook runtime`, () => {
+  test(`${target} fresh installation creates no hook runtime`, () => {
     const root = fs.mkdtempSync(path.join(os.tmpdir(), 'ecc-fresh-declined-'));
     try {
-      const plan = withHookConsent(createManifestInstallPlan({ moduleIds: ['hooks-runtime'], target, homeDir: root, projectRoot: root }), 'declined');
+      const plan = createManifestInstallPlan({ moduleIds: ['commands-core'], target, homeDir: root, projectRoot: root });
       applyInstallPlan(plan);
       assert.equal(fs.existsSync(path.join(plan.targetRoot, 'hooks.json')), false);
       assert.equal(fs.existsSync(path.join(plan.targetRoot, 'ecc', 'setup.json')), false);
       assert.equal(fs.existsSync(path.join(plan.targetRoot, 'scripts', 'hooks')), false);
     } finally {
+      assert.equal(path.dirname(fs.realpathSync(root)), fs.realpathSync(os.tmpdir()));
       fs.rmSync(root, { recursive: true, force: true });
     }
   });
@@ -121,21 +132,22 @@ for (const target of ['antigravity', 'antigravity-home']) {
   test(`${target} failed deactivation does not record declined consent`, () => {
     const root = fs.mkdtempSync(path.join(os.tmpdir(), 'ecc-decline-failure-'));
     try {
-      const options = { moduleIds: ['hooks-runtime'], target, homeDir: root, projectRoot: root };
-      const enabled = withHookConsent(createManifestInstallPlan(options), 'enabled');
-      applyInstallPlan(enabled);
+      const options = { moduleIds: ['commands-core'], target, homeDir: root, projectRoot: root };
+      const plan = createManifestInstallPlan(options);
+      const { setupPath } = seedPriorHookRegistration(plan);
       const declined = withHookConsent(createManifestInstallPlan(options), 'declined');
       assert.throws(() => applyInstallPlan(declined, {
         beforeOperationWrite({ operation }) {
-          if (operation.destinationPath === path.join(enabled.targetRoot, 'ecc', 'setup.json')) {
+          if (operation.destinationPath === setupPath) {
             throw new Error('injected setup write failure');
           }
         },
       }), /injected setup write failure/);
-      assert.equal(readInstallState(enabled.installStatePath).request.hookConsent, 'enabled');
+      assert.equal(readInstallState(plan.installStatePath).request.hookConsent, 'enabled');
       applyInstallPlan(declined);
-      assert.equal(readInstallState(enabled.installStatePath).request.hookConsent, 'declined');
+      assert.equal(readInstallState(plan.installStatePath).request.hookConsent, 'declined');
     } finally {
+      assert.equal(path.dirname(fs.realpathSync(root)), fs.realpathSync(os.tmpdir()));
       fs.rmSync(root, { recursive: true, force: true });
     }
   });

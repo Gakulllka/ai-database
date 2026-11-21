@@ -99,13 +99,13 @@
       "stability": "stable"
     },
     {
-      "id": "hooks-runtime",
-      "kind": "hooks",
-      "description": "Runtime hook configs and hook script helpers.",
+      "id": "shared-runtime-libraries",
+      "kind": "platform",
+      "description": "Shared libraries for commands, inspection, and managed install lifecycle.",
       "paths": [
-        "hooks",
-        "scripts/hooks",
-        "scripts/lib"
+        "scripts/lib",
+        "scripts/hooks/quality-gate.js",
+        "scripts/hooks/pre-bash-commit-quality.js"
       ],
       "targets": [
         "claude",
@@ -119,23 +119,6 @@
       "dependencies": [],
       "defaultInstall": true,
       "cost": "medium",
-      "stability": "stable"
-    },
-    {
-      "id": "hermes-hooks",
-      "kind": "hooks",
-      "description": "Hermes-native guard hooks (config protection, console.log warning) plus install guide.",
-      "paths": [
-        "hooks/hermes",
-        "docs/HERMES-HOOKS.md"
-      ],
-      "targets": [
-        "hermes",
-        "openclaw"
-      ],
-      "dependencies": [],
-      "defaultInstall": true,
-      "cost": "light",
       "stability": "stable"
     },
     {
@@ -775,7 +758,7 @@
     {
       "id": "config-health",
       "kind": "skills",
-      "description": "Runtime configuration integrity monitoring for Claude Code (Claude-only; SessionStart by default, PreToolUse opt-in).",
+      "description": "On-demand runtime configuration integrity checks.",
       "paths": [
         "skills/config-health",
         "scripts/config-health.py",

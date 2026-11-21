@@ -1,26 +1,16 @@
-/**
- * Qoder native plugin contract tests.
- *
- * These tests intentionally execute the declared hook entry point instead of
- * only inspecting JSON. Qoder launches hooks without a shell when `command`
- * and `args` are separate, which keeps the same contract on Windows, macOS,
- * and Linux.
- */
+/** Qoder plugin manifest and retired lifecycle registration. */
 
 'use strict';
 
 const assert = require('assert');
 const fs = require('fs');
-const os = require('os');
 const path = require('path');
-const { spawnSync } = require('child_process');
 
 const repoRoot = path.resolve(__dirname, '..');
 const manifestPath = path.join(repoRoot, '.qoder-plugin', 'plugin.json');
 const hooksPath = path.join(repoRoot, 'hooks', 'qoder-hooks.json');
 const packageJson = JSON.parse(fs.readFileSync(path.join(repoRoot, 'package.json'), 'utf8'));
 const releaseScript = fs.readFileSync(path.join(repoRoot, 'scripts', 'release.sh'), 'utf8');
-const HOOK_TIMEOUT_BUFFER_MS = 5000;
 
 let passed = 0;
 let failed = 0;
@@ -87,93 +77,8 @@ if (fs.existsSync(manifestPath) && fs.existsSync(hooksPath)) {
     }
   });
 
-  test('Qoder hook is a minimal SessionStart projection using exec form', () => {
-    assert.deepStrictEqual(Object.keys(hooks.hooks), ['SessionStart']);
-    const registrations = hooks.hooks.SessionStart;
-    assert.strictEqual(registrations.length, 1);
-    assert.strictEqual(registrations[0].matcher, 'startup|resume|clear|compact|new');
-    assert.strictEqual(registrations[0].hooks.length, 1);
-    const hook = registrations[0].hooks[0];
-    assert.strictEqual(hook.type, 'command');
-    assert.strictEqual(hook.command, 'node');
-    assert.ok(Array.isArray(hook.args));
-    assert.ok(Number.isInteger(hook.timeout) && hook.timeout > 0);
-    assert.strictEqual(hook.args[0], '${QODER_PLUGIN_ROOT}/scripts/hooks/plugin-hook-bootstrap.js');
-    assert.deepStrictEqual(hook.args.slice(1), [
-      'node',
-      'scripts/hooks/session-start-bootstrap.js',
-    ]);
-  });
-
-  test('declared Qoder SessionStart launcher executes from QODER_PLUGIN_ROOT', () => {
-    const hook = hooks.hooks.SessionStart[0].hooks[0];
-    const args = hook.args.map(value => value.replace('${QODER_PLUGIN_ROOT}', repoRoot));
-    const isolatedRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'ecc-qoder-hook-'));
-    const isolatedHome = path.join(isolatedRoot, 'home');
-    const isolatedCwd = path.join(isolatedRoot, 'project');
-    const agentDataHome = path.join(isolatedRoot, 'agent-data');
-    const learnedSkillsDir = path.join(agentDataHome, 'skills', 'learned');
-    const contextSentinel = 'QODER_SESSION_START_CONTEXT_SENTINEL';
-    fs.mkdirSync(isolatedHome, { recursive: true });
-    fs.mkdirSync(isolatedCwd, { recursive: true });
-    fs.mkdirSync(learnedSkillsDir, { recursive: true });
-    fs.writeFileSync(
-      path.join(learnedSkillsDir, 'qoder-hook.md'),
-      `# Qoder Hook Verification\n\n## When to Use\n\n${contextSentinel}\n`
-    );
-
-    const {
-      CLAUDE_PLUGIN_ROOT: _claudePluginRoot,
-      CLAUDE_CONFIG_DIR: _claudeConfigDir,
-      CLAUDE_SESSION_ID: _claudeSessionId,
-      ECC_PLUGIN_ROOT: _eccPluginRoot,
-      CODEX_PLUGIN_ROOT: _codexPluginRoot,
-      PLUGIN_ROOT: _pluginRoot,
-      ...baseEnv
-    } = process.env;
-
-    try {
-      const result = spawnSync(hook.command, args, {
-        cwd: isolatedCwd,
-        env: {
-          ...baseEnv,
-          HOME: isolatedHome,
-          USERPROFILE: isolatedHome,
-          ECC_AGENT_DATA_HOME: agentDataHome,
-          XDG_DATA_HOME: path.join(isolatedRoot, 'xdg-data'),
-          QODER_PLUGIN_ROOT: repoRoot,
-          CLAUDE_PROJECT_DIR: isolatedCwd,
-          ECC_HOOKS_ENABLED: 'true',
-          ECC_HOOK_PROFILE: 'standard',
-          ECC_DISABLED_HOOKS: '',
-          ECC_DRY_RUN: '0',
-          ECC_SESSION_START_CONTEXT: 'on',
-          ECC_SESSION_START_MAX_CHARS: '8000',
-          ECC_SESSION_RETENTION_DAYS: '0',
-        },
-        input: JSON.stringify({
-          hook_event_name: 'SessionStart',
-          source: 'startup',
-          cwd: isolatedCwd,
-        }),
-        encoding: 'utf8',
-        timeout: hook.timeout * 1000 + HOOK_TIMEOUT_BUFFER_MS,
-        windowsHide: true,
-      });
-
-      assert.ifError(result.error);
-      assert.strictEqual(result.signal, null);
-      assert.strictEqual(result.status, 0, result.stderr);
-      assert.ok(result.stdout.trim(), 'Expected SessionStart to emit a payload');
-      const output = JSON.parse(result.stdout);
-      assert.strictEqual(output.hookSpecificOutput?.hookEventName, 'SessionStart');
-      assert.ok(
-        output.hookSpecificOutput?.additionalContext.includes(contextSentinel),
-        'Expected the enabled Qoder hook to inject isolated SessionStart context'
-      );
-    } finally {
-      fs.rmSync(isolatedRoot, { recursive: true, force: true });
-    }
+  test('Qoder package has no Database lifecycle hook registrations', () => {
+    assert.deepStrictEqual(hooks, { hooks: {} });
   });
 }
 

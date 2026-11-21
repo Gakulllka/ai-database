@@ -1,6 +1,6 @@
 # ECC for Kiro
 
-Bring [ECC](https://github.com/affaan-m/ECC) workflows to [Kiro](https://kiro.dev). This repository provides custom agents, skills, hooks, steering files, and scripts that can be installed into any Kiro project with a single command.
+Bring [ECC](https://github.com/affaan-m/ECC) workflows to [Kiro](https://kiro.dev). This repository provides custom agents, skills, steering files, and scripts that can be installed into any Kiro project with a single command.
 
 ## Quick Start
 
@@ -28,7 +28,6 @@ The installer uses non-destructive copy — it will not overwrite your existing 
 | Agents (MD) | 33 | `.kiro/agents/*.md` |
 | Skills | 43 | `.kiro/skills/*/SKILL.md` |
 | Steering Files | 22 | `.kiro/steering/*.md` |
-| IDE Hooks | 13 | `.kiro/hooks/*.kiro.hook` |
 | Scripts | 2 | `.kiro/scripts/*.sh` |
 | MCP Examples | 1 | `.kiro/settings/mcp.json.example` |
 | Documentation | 5 | `docs/*.md` |
@@ -200,88 +199,16 @@ Your rules here...
 
 ### Hooks
 
-Kiro supports two types of hooks:
-
-1. **IDE Hooks** - Standalone JSON files in `.kiro/hooks/` (for Kiro IDE)
-2. **CLI Hooks** - Embedded in agent configurations (for `kiro-cli`)
-
-#### IDE Hooks (Standalone Files)
-
-These hooks appear in the Agent Hooks panel in the Kiro IDE and can be toggled on/off. Hook files use the `.kiro.hook` extension.
-
-| Hook | Trigger | Action | Description |
-|------|---------|--------|-------------|
-| `quality-gate` | Manual (`userTriggered`) | `runCommand` | Runs build, type check, lint, and tests via `quality-gate.sh`. Click to trigger comprehensive quality checks. |
-| `typecheck-on-edit` | File edited (`*.ts`, `*.tsx`) | `askAgent` | Checks for type errors when TypeScript files are edited to catch issues early. |
-| `console-log-check` | File edited (`*.js`, `*.ts`, `*.tsx`) | `askAgent` | Checks for console.log statements to prevent debug code from being committed. |
-| `tdd-reminder` | File created (`*.ts`, `*.tsx`) | `askAgent` | Reminds you to write tests first when creating new TypeScript files. |
-| `git-push-review` | Before shell command | `askAgent` | Reviews git push commands to ensure code quality before pushing. |
-| `code-review-on-write` | After write operation | `askAgent` | Triggers code review after file modifications. |
-| `auto-format` | File edited (`*.ts`, `*.tsx`, `*.js`) | `askAgent` | Checks for formatting issues and fixes them inline without spawning a terminal. |
-| `extract-patterns` | Agent stops | `askAgent` | Suggests patterns to add to lessons-learned.md after completing work. |
-| `session-summary` | Agent stops | `askAgent` | Provides a summary of work completed in the session. |
-| `doc-file-warning` | Before write operation | `askAgent` | Warns before modifying documentation files to ensure intentional changes. |
-| `rust-check-on-edit` | File edited (`*.rs`) | `askAgent` | Checks for compilation errors, ownership issues, or lifetime problems in Rust files. |
-| `python-lint-on-edit` | File edited (`*.py`) | `askAgent` | Checks for type errors, PEP 8 violations, or common anti-patterns in Python files. |
-| `security-check-on-create` | File created (`**/auth/**`, `**/api/**`, `**/middleware/**`) | `askAgent` | Runs a quick security check when new files are created in sensitive directories. |
-
-**IDE Hook Format:**
-
-```json
-{
-  "version": "1.0.0",
-  "enabled": true,
-  "name": "hook-name",
-  "description": "What this hook does",
-  "when": {
-    "type": "fileEdited",
-    "patterns": ["*.ts"]
-  },
-  "then": {
-    "type": "runCommand",
-    "command": "npx tsc --noEmit"
-  }
-}
-```
-
-**Required fields:** `version`, `enabled`, `name`, `description`, `when`, `then`
-
-**Available trigger types:** `fileEdited`, `fileCreated`, `fileDeleted`, `userTriggered`, `promptSubmit`, `agentStop`, `preToolUse`, `postToolUse`
-
-#### CLI Hooks (Embedded in Agents)
-
-CLI hooks are embedded within agent configuration files for use with `kiro-cli`.
-
-**Example:** See `.kiro/agents/tdd-guide-with-hooks.json` for an agent with embedded hooks.
-
-**CLI Hook Format:**
-
-```json
-{
-  "name": "my-agent",
-  "hooks": {
-    "postToolUse": [
-      {
-        "matcher": "fs_write",
-        "command": "npx tsc --noEmit"
-      }
-    ]
-  }
-}
-```
-
-**Available triggers:** `agentSpawn`, `userPromptSubmit`, `preToolUse`, `postToolUse`, `stop`
-
-See `.kiro/hooks/README.md` for complete documentation on both hook types.
+Database lifecycle hook installation is [available for Codex](../hooks/README.md).
 
 ### Scripts
 
-Shell scripts used by hooks to perform quality checks and formatting.
+Run these project scripts when you need quality checks or formatting.
 
 | Script | Description |
 |--------|-------------|
 | `quality-gate.sh` | Detects your package manager (pnpm/yarn/bun/npm) and runs build, type check, lint, and test commands. Skips checks gracefully if tools are missing. |
-| `format.sh` | Detects your formatter (biome or prettier) and auto-formats the specified file. Used by formatting hooks. |
+| `format.sh` | Detects your formatter (biome or prettier) and auto-formats the specified file. |
 
 ## Project Structure
 
@@ -349,21 +276,6 @@ Shell scripts used by hooks to perform quality checks and formatting.
 │   ├── dev-mode.md               # Manual: #dev-mode
 │   ├── review-mode.md            # Manual: #review-mode
 │   └── research-mode.md          # Manual: #research-mode
-├── hooks/                        # 13 IDE hooks
-│   ├── README.md                      # Documentation on IDE and CLI hooks
-│   ├── quality-gate.kiro.hook         # Manual quality gate hook
-│   ├── typecheck-on-edit.kiro.hook    # Auto typecheck on edit
-│   ├── console-log-check.kiro.hook    # Check for console.log
-│   ├── tdd-reminder.kiro.hook         # TDD reminder on file create
-│   ├── git-push-review.kiro.hook      # Review before git push
-│   ├── code-review-on-write.kiro.hook # Review after write
-│   ├── auto-format.kiro.hook          # Auto-format on edit
-│   ├── extract-patterns.kiro.hook     # Extract patterns on stop
-│   ├── session-summary.kiro.hook      # Summary on stop
-│   ├── doc-file-warning.kiro.hook     # Warn before doc changes
-│   ├── rust-check-on-edit.kiro.hook   # Rust compilation check
-│   ├── python-lint-on-edit.kiro.hook  # Python lint on edit
-│   └── security-check-on-create.kiro.hook # Security check on sensitive dirs
 ├── scripts/                      # 2 shell scripts
 │   ├── quality-gate.sh           # Quality gate shell script
 │   └── format.sh                 # Auto-format shell script
@@ -385,7 +297,6 @@ All files are yours to modify after installation. The installer never overwrites
 - **Edit agent prompts** in `.kiro/agents/*.json` to adjust behavior or add project-specific instructions
 - **Modify skill workflows** in `.kiro/skills/*/SKILL.md` to match your team's processes
 - **Adjust steering rules** in `.kiro/steering/*.md` to enforce your coding standards
-- **Toggle or edit hooks** in `.kiro/hooks/*.json` to automate your workflow
 - **Customize scripts** in `.kiro/scripts/*.sh` to match your tooling setup
 
 ## Recommended Workflow
@@ -394,7 +305,7 @@ All files are yours to modify after installation. The installer never overwrites
 2. **Write tests first**: Invoke the `tdd-workflow` skill before implementing
 3. **Review your code**: Switch to `code-reviewer` agent after writing code
 4. **Check security**: Use `security-reviewer` agent for auth, API endpoints, or sensitive data handling
-5. **Run quality gate**: Trigger the `quality-gate` hook before committing
+5. **Run quality gate**: Run `.kiro/scripts/quality-gate.sh` before committing
 6. **Verify comprehensively**: Use the `verification-loop` skill before creating PRs
 
 The always-loaded steering files (coding-style, security, testing) ensure consistent standards throughout your session.
@@ -425,8 +336,7 @@ kiro-cli --agent planner
 > /agent swap security-reviewer
 > "Check for security vulnerabilities in the auth system"
 
-# 6. Trigger quality gate before committing
-# (In IDE: Click the quality-gate hook in Agent Hooks panel)
+# 6. Run .kiro/scripts/quality-gate.sh before committing
 ```
 
 ### Example 2: Code Review Workflow
@@ -494,32 +404,6 @@ kiro-cli --agent python-reviewer
 # - typescript-patterns.md loads when editing .ts/.tsx files
 ```
 
-### Example 5: Using Hooks for Automation
-
-```bash
-# Hooks run automatically based on triggers:
-
-# 1. typecheck-on-edit hook
-# - Triggers when you save .ts or .tsx files
-# - Agent checks for type errors inline, no terminal spawned
-
-# 2. console-log-check hook
-# - Triggers when you save .js, .ts, or .tsx files
-# - Agent flags console.log statements and offers to remove them
-
-# 3. tdd-reminder hook
-# - Triggers when you create a new .ts or .tsx file
-# - Reminds you to write tests first
-# - Reinforces TDD discipline
-
-# 4. extract-patterns hook
-# - Runs when agent stops working
-# - Suggests patterns to add to lessons-learned.md
-# - Builds your team's knowledge base over time
-
-# Toggle hooks on/off in the Agent Hooks panel (IDE)
-# or disable them in the hook JSON files
-```
 
 ### Example 6: Manual Context Modes
 
@@ -579,7 +463,6 @@ kiro-cli --agent build-error-resolver
 > "Set up a GitHub Actions workflow for deployment"
 
 # 4. Run quality gate before deployment
-# (Trigger quality-gate hook to run all checks)
 ```
 
 ### Example 9: Refactoring and Cleanup
@@ -613,7 +496,6 @@ kiro-cli --agent doc-updater
 # - Generate API documentation
 # - Keep docs in sync with code
 
-# 3. doc-file-warning hook prevents accidental doc changes
 # - Triggers before writing to documentation files
 # - Asks for confirmation
 # - Prevents unintentional modifications

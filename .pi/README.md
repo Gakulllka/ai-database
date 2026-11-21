@@ -2,24 +2,18 @@
 
 This directory contains the **Pi adapter** for ECC — a thin extension that connects the
 [@earendil-works/pi-coding-agent](https://github.com/earendil-works/pi-coding-agent)
-terminal coding agent to ECC's canonical skills, prompts, and lifecycle hooks.
+terminal coding agent to ECC's canonical skills and prompts.
 
 ## Design Principle
 
-ECC's canonical assets—skills, agents, commands, and hooks—**remain the single source of truth**.
+ECC's canonical assets—skills, agents, and commands—**remain the single source of truth**.
 This adapter contains **only the integration logic**. No copies, no duplication.
 
 ## What This Provides
 
 - **ECC's skills** from `./skills/` — available in Pi as `/skill:<name>`
 - **ECC's commands** from `./commands/` — available in Pi as `/<name>`
-- **ECC's engineering rules** from `./rules/common/` — injected into Pi's system
-  prompt on every turn, so coding style, testing, security, git workflow, and
-  code-review standards apply in Pi as they do in other harnesses
-- **Session lifecycle hooks** — ECC's SessionStart and SessionEnd hooks, run through ECC's own
-  `run-with-flags.js`, so `ECC_HOOK_PROFILE` and `ECC_DISABLED_HOOKS` keep working under Pi
-- **Session context injection** — whatever ECC's SessionStart hook returns as
-  `additionalContext` is folded into Pi's system prompt for the next turn
+- **Engineering rules** from `rules/common/` can be referenced by your project instructions.
 - **`/ecc-doctor`** — diagnostic command to verify the integration
 
 Verified against Pi 0.84.1: a global install exposes 285 skills and 94 commands, resolved
@@ -43,7 +37,7 @@ pi install -l /path/to/ECC
 pi list
 ```
 
-Then inside Pi, run `/ecc-doctor` to confirm skills, commands, and hooks are available.
+Then inside Pi, run `/ecc-doctor` to confirm skills and commands are available.
 
 To uninstall:
 
@@ -63,49 +57,11 @@ from `~/.pi/agent/settings.json`:
 }
 ```
 
-This gives you skills and commands directly. It does **not** include the lifecycle hook adapter
-or `/ecc-doctor` — use Option 1 for the full integration.
+This gives you skills and commands directly. Option 1 also provides `/ecc-doctor`.
 
 ## How It Works
 
-The `extensions/index.ts` file handles:
-
-1. **Skill and command mounting** — Pi reads `./skills` and `./commands` directly via the
-   `pi` key in `package.json`. No transformation is needed: ECC's `SKILL.md` files already
-   follow the Agent Skills standard Pi implements, and ECC's command frontmatter
-   (`description`, `argument-hint`) is already Pi's prompt-template format
-2. **Lifecycle hooks** — Maps Pi's `session_start` to ECC's `session:start` hook
-   (`scripts/hooks/session-start.js`) and Pi's `session_shutdown` to ECC's `session:end:marker`
-   hook (`scripts/hooks/session-end-marker.js`), both invoked through
-   `scripts/hooks/run-with-flags.js` so ECC's profile and disable flags are honored
-3. **Rule injection** — Reads ECC's portable engineering rules from the canonical
-   `rules/common/` directory at runtime and appends them to the system prompt inside an
-   `<ecc-engineering-rules>` block on every turn. Nothing is copied into `.pi/`.
-   `agents.md`, `hooks.md`, and `performance.md` are excluded on purpose: they describe
-   Claude Code primitives Pi does not have (Task/TodoWrite delegation, Claude hook event
-   types, thinking-budget toggles), so injecting them would point the model at tools that
-   are not there. Language-specific rules under `rules/<language>/` are not injected in this
-   first adapter. Set `ECC_PI_RULES` to `0`, `false`, `off`, `none`, or `disabled` to turn
-   injection off; `/ecc-doctor` reports the current state and the injected size
-4. **Context injection** — Parses `hookSpecificOutput.additionalContext` from the SessionStart
-   hook and appends it to the system prompt on the next `before_agent_start`, wrapped in an
-   `<ecc-session-context>` block. Non-JSON hook output is tolerated, not treated as an error
-5. **Hook isolation** — Failing, missing, slow, or misconfigured hooks degrade to
-   a warning and never terminate the Pi session. Hook execution is bounded by a
-   timeout and an output limit
-6. **Package resolution** — Resolves hook scripts from the installed package via `__dirname`,
-   never from `process.cwd()`, so a global install works from any project directory. Hooks
-   still *run* in the user's project directory, so project detection stays correct
-
-All hook execution is non-shell (`execFile` without shell interpretation), so paths containing
-spaces, tabs, or shell metacharacters are safe.
-
-Hook runtime selection uses the host `process.execPath` only under Node.
-Without an override, compiled OMP/Bun falls back to `node` instead of
-recursively launching the OMP binary as a hook runner. Set `ECC_HOOK_NODE` to
-an explicit absolute Node executable path when `node` is not available on
-`PATH`.
-Relative values are rejected when the hook runs and surfaced as a warning.
+Pi reads skills and prompt templates from the paths in `package.json`. The extension preserves command arguments and registers `/ecc-doctor`. Put any shared engineering rules your project needs in its project instructions.
 
 ## Scope
 
@@ -177,18 +133,12 @@ registered with `pi list`.
 3. Run `/ecc-doctor` again
 
 `/ecc-doctor` prints the resolved package root, the skill and command counts it found, the
-hook runner path, the active hook profile, and which optional companion packages are present.
+available rules, and which optional companion packages are present.
 A `NOT FOUND` line points at the specific path that failed to resolve.
 
-### Hooks not firing
+### Lifecycle hooks
 
-**Cause:** the extension is not loaded, or the hooks are gated off by an ECC hook profile.
-
-**Fix:**
-1. Confirm `pi list` shows ECC and that `/ecc-doctor` reports the hook runner as found
-2. Check `ECC_HOOK_PROFILE` and `ECC_DISABLED_HOOKS` — `/ecc-doctor` prints both. A hook
-   listed in `ECC_DISABLED_HOOKS` is skipped by design
-3. Restart Pi so the extension reloads
+Database lifecycle hook installation is [available for Codex](../hooks/README.md).
 
 ## Notes
 

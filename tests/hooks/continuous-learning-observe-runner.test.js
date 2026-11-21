@@ -13,11 +13,9 @@ const path = require('path');
 const { spawnSync } = require('child_process');
 
 const repoRoot = path.resolve(__dirname, '..', '..');
-const hooksJsonPath = path.join(repoRoot, 'hooks', 'hooks.json');
 const runWithFlagsPath = path.join(repoRoot, 'scripts', 'hooks', 'run-with-flags.js');
 const observeRunner = require(path.join(repoRoot, 'scripts', 'hooks', 'observe-runner.js'));
 const postToolUseDispatcher = require(path.join(repoRoot, 'scripts', 'hooks', 'posttooluse-dispatcher.js'));
-const { readHooksConfig } = require(path.join(repoRoot, 'scripts', 'lib', 'hooks-config.js'));
 
 function test(name, fn) {
   try {
@@ -29,16 +27,6 @@ function test(name, fn) {
     console.log(`    Error: ${err.message}`);
     return false;
   }
-}
-
-function loadHook(id) {
-  const hookGroups = readHooksConfig(hooksJsonPath).hooks;
-  const hooks = Object.values(hookGroups).flat();
-  const hook = hooks.find(candidate => candidate.id === id);
-  assert.ok(hook, `Expected ${id} in hooks/hooks.json`);
-  assert.ok(Array.isArray(hook.hooks), `Expected ${id} to define hook commands`);
-  assert.strictEqual(hook.hooks.length, 1, `Expected ${id} to have one command`);
-  return hook.hooks[0].command;
 }
 
 function withTempPluginRoot(fn) {
@@ -116,12 +104,7 @@ function runTests() {
   let passed = 0;
   let failed = 0;
 
-  if (test('observe hooks use node-mode runner instead of shell-mode dispatch', () => {
-    const preCommand = loadHook('pre:observe:continuous-learning');
-    assert.ok(preCommand.includes('node scripts/hooks/run-with-flags.js pre:observe scripts/hooks/observe-runner.js standard,strict'));
-    assert.ok(!preCommand.includes('shell scripts/hooks/run-with-flags-shell.sh'));
-    assert.ok(!preCommand.includes('skills/continuous-learning-v2/hooks/observe.sh'));
-
+  if (test('standalone PostToolUse dispatcher routes observations through the node runner', () => {
     const postHook = postToolUseDispatcher.ASYNC_HOOKS.find(hook => hook.id === 'post:observe:continuous-learning');
     assert.ok(postHook, 'PostToolUse dispatcher should retain the observe hook ID');
     assert.strictEqual(postHook.script, 'scripts/hooks/observe-runner.js');

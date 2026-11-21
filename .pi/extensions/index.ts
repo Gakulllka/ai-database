@@ -1,30 +1,6 @@
-/**
- * ECC adapter for the Pi coding agent.
- *
- * This is the ONLY adapter logic ECC ships for Pi. ECC's canonical assets stay
- * the single source of truth: `skills/` and `commands/` are mounted directly by
- * the `pi` manifest in the repo's root `package.json`. Nothing is copied or
- * generated under `.pi/`.
- *
- * What this file adapts:
- *   - Pi lifecycle events -> ECC's existing hook runner (`run-with-flags.js`),
- *     so ECC hook profiles and disable flags keep working under Pi.
- *   - ECC's SessionStart `additionalContext` payload -> Pi's system prompt.
- *   - A `/ecc-doctor` command for install diagnostics.
- *
- * Design constraints (see .pi/README.md):
- *   - Hooks resolve relative to THIS file, never `process.cwd()`, so a global
- *     `pi install` works from any project directory.
- *   - Hooks execute via `execFile(hookRuntime, [...])` with no shell, so paths
- *     containing spaces or shell metacharacters are safe. The hook runtime is
- *     selected separately because compiled OMP may report `process.release.name`
- *     as `node` while `process.execPath` points back to `omp`; Bun is detected
- *     separately via `process.versions.bun`.
- *   - Hook failures are isolated: a broken, missing, slow, or misconfigured hook
- *     degrades to a warning and never terminates the Pi session.
- */
+/** Pi adapter for explicit command input and install diagnostics. */
 
-import { execFile, execFileSync } from "node:child_process"
+import { execFileSync } from "node:child_process"
 import * as fs from "node:fs"
 import * as os from "node:os"
 import * as path from "node:path"
@@ -55,22 +31,6 @@ interface ExtensionContext {
   sessionManager: PiSessionManager
 }
 
-interface SessionStartEvent {
-  reason: "startup" | "reload" | "new" | "resume" | "fork"
-}
-
-interface SessionShutdownEvent {
-  reason: "quit" | "reload" | "new" | "resume" | "fork"
-}
-
-interface BeforeAgentStartEvent {
-  systemPrompt: string
-}
-
-interface BeforeAgentStartResult {
-  systemPrompt?: string
-}
-
 interface PiSlashCommandInfo { name: string; source: "extension" | "prompt" | "skill"; sourceInfo: { path: string } }
 
 interface InputEvent { text: string; source: "interactive" | "rpc" | "extension"; streamingBehavior?: "steer" | "followUp" }
@@ -82,21 +42,6 @@ interface ExtensionAPI {
   on(
     event: "input",
     handler: (event: InputEvent, ctx: ExtensionContext) => Promise<InputEventResult> | InputEventResult
-  ): void
-  on(
-    event: "session_start",
-    handler: (event: SessionStartEvent, ctx: ExtensionContext) => Promise<void> | void
-  ): void
-  on(
-    event: "session_shutdown",
-    handler: (event: SessionShutdownEvent, ctx: ExtensionContext) => Promise<void> | void
-  ): void
-  on(
-    event: "before_agent_start",
-    handler: (
-      event: BeforeAgentStartEvent,
-      ctx: ExtensionContext
-    ) => Promise<BeforeAgentStartResult | void> | BeforeAgentStartResult | void
   ): void
   registerCommand(
     name: string,
@@ -119,19 +64,13 @@ interface ExtensionAPI {
  */
 const ECC_ROOT = path.resolve(__dirname, "..", "..")
 
-/** ECC's universal hook runner. It applies hook-profile and disable flags. */
-const HOOK_RUNNER = path.join(ECC_ROOT, "scripts", "hooks", "run-with-flags.js")
-
-const HOOK_TIMEOUT_MS = 30_000
-const MAX_HOOK_OUTPUT_BYTES = 1024 * 1024
-
 /**
- * ECC rules injected into Pi's system prompt, read from the canonical
+ * Portable engineering rules available for Pi project guidance, read from the canonical
  * `rules/common/` directory at runtime. Nothing is copied or generated.
  *
  * Excluded on purpose: `agents.md`, `hooks.md`, and `performance.md`. Those
  * describe Claude Code primitives Pi does not have (Task/TodoWrite delegation,
- * Claude hook event types, thinking-budget toggles), so injecting them would
+ * Claude hook event types, thinking-budget toggles), so adding them to Pi project guidance would
  * instruct the model to use tools that are not there.
  */
 const PORTABLE_RULE_FILES = [
@@ -144,7 +83,7 @@ const PORTABLE_RULE_FILES = [
   "code-review.md",
 ] as const
 
-/** Upper bound on injected rule text, so a large edit cannot flood the prompt. */
+/** Upper bound on rule text counted by ecc-doctor. */
 const MAX_RULES_BYTES = 32 * 1024
 
 /** Values ECC treats as "off" across its existing environment switches. */
@@ -163,197 +102,6 @@ const COMPANION_PACKAGES = [
   "@juicesharp/rpiv-ask-user-question",
   "@juicesharp/rpiv-todo",
 ] as const
-
-interface HookSpec {
-  /** ECC hook id, used for profile gating and disable flags. */
-  id: string
-  /** Hook script path relative to the ECC package root. */
-  script: string
-  /** Hook profiles the hook participates in. */
-  profiles: string
-}
-
-/** Mirrors the SessionStart wiring in `hooks/hooks.json`. */
-const SESSION_START_HOOK: HookSpec = {
-  id: "session:start",
-  script: "scripts/hooks/session-start.js",
-  profiles: "minimal,standard,strict",
-}
-
-/** Mirrors the SessionEnd wiring in `hooks/hooks.json`. */
-const SESSION_END_HOOK: HookSpec = {
-  id: "session:end:marker",
-  script: "scripts/hooks/session-end-marker.js",
-  profiles: "minimal,standard,strict",
-}
-
-interface HookResult {
-  stdout: string
-  failure?: string
-}
-
-/**
- * Run an ECC hook through ECC's own runner.
- *
- * Never rejects: an invalid runtime override, a missing runner, a non-zero exit,
- * a timeout, or a spawn error all resolve to a `failure` string that the caller
- * surfaces as a warning.
- */
-function runEccHook(
-  spec: HookSpec,
-  payload: unknown,
-  env: NodeJS.ProcessEnv,
-  cwd: string
-): Promise<HookResult> {
-  return new Promise(resolve => {
-    if (!fs.existsSync(HOOK_RUNNER)) {
-      resolve({ stdout: "", failure: `hook runner not found at ${HOOK_RUNNER}` })
-      return
-    }
-    let hookRuntime: string
-    try {
-      hookRuntime = resolveHookRuntime()
-    } catch (error) {
-      resolve({
-        stdout: "",
-        failure: `${spec.id}: ${(error as Error).message}`,
-      })
-      return
-    }
-
-    const child = execFile(
-      hookRuntime,
-      [HOOK_RUNNER, spec.id, spec.script, spec.profiles],
-      {
-        // Hooks inspect the user's project, so they run there. Only the script
-        // path is package-relative, and the runner resolves that from
-        // CLAUDE_PLUGIN_ROOT rather than from the working directory.
-        cwd,
-        env,
-        timeout: HOOK_TIMEOUT_MS,
-        maxBuffer: MAX_HOOK_OUTPUT_BYTES,
-        encoding: "utf8",
-      },
-      (error, stdout) => {
-        const text = typeof stdout === "string" ? stdout : ""
-        if (error) {
-          resolve({ stdout: text, failure: `${spec.id}: ${error.message}` })
-          return
-        }
-        resolve({ stdout: text })
-      }
-    )
-
-    child.on("error", error => {
-      resolve({ stdout: "", failure: `${spec.id}: ${error.message}` })
-    })
-
-    // stdin.end() writes asynchronously. A hook that exits, short-circuits, or
-    // is killed by the timeout before reading the payload makes the write fail
-    // with EPIPE, which Node reports as an `error` event rather than a throw.
-    // Without this listener that event is unhandled and would take the Pi
-    // session down, breaking the isolation guarantee documented above.
-    child.stdin?.on("error", error => {
-      resolve({ stdout: "", failure: `${spec.id}: could not write hook payload (${error.message})` })
-    })
-
-    try {
-      child.stdin?.end(JSON.stringify(payload))
-    } catch (error) {
-      resolve({
-        stdout: "",
-        failure: `${spec.id}: could not write hook payload (${(error as Error).message})`,
-      })
-    }
-  })
-}
-
-/**
- * Working directory for hook execution: the user's project. Falls back to the
- * ECC package root if Pi reports a directory that no longer exists, so a stale
- * cwd degrades to a working hook rather than a spawn failure.
- */
-function resolveHookCwd(ctx: ExtensionContext): string {
-  try {
-    if (ctx.cwd && fs.existsSync(ctx.cwd)) {
-      return ctx.cwd
-    }
-  } catch {
-    // Fall through to the package root.
-  }
-  return ECC_ROOT
-}
-
-function readSessionId(ctx: ExtensionContext): string | undefined {
-  try {
-    return ctx.sessionManager.getSessionId() || undefined
-  } catch {
-    return undefined
-  }
-}
-
-/**
- * Build the environment ECC hooks expect.
- *
- * `CLAUDE_PLUGIN_ROOT` / `ECC_PLUGIN_ROOT` are how every ECC hook locates the
- * package; setting them from `ECC_ROOT` is what makes a global install resolve
- * correctly instead of probing the user's project. The `CLAUDE_*` session vars
- * are the names ECC's shared hook scripts already read across harnesses.
- */
-function buildHookEnv(ctx: ExtensionContext): NodeJS.ProcessEnv {
-  const env: NodeJS.ProcessEnv = {
-    ...process.env,
-    CLAUDE_PLUGIN_ROOT: ECC_ROOT,
-    ECC_PLUGIN_ROOT: ECC_ROOT,
-    CLAUDE_PROJECT_DIR: ctx.cwd,
-  }
-
-  const sessionId = readSessionId(ctx)
-  if (sessionId) {
-    env.CLAUDE_SESSION_ID = sessionId
-  }
-
-  return env
-}
-
-/**
- * Map Pi's session reason onto the `source` values ECC's SessionStart hook
- * understands. Pi's `new` and `reload` have no Claude Code equivalent, so they
- * report as a fresh startup.
- */
-function mapSessionSource(reason: SessionStartEvent["reason"]): string {
-  switch (reason) {
-    case "resume":
-    case "fork":
-      return "resume"
-    default:
-      return "startup"
-  }
-}
-
-/**
- * Extract `hookSpecificOutput.additionalContext` from a hook's stdout.
- *
- * ECC hooks emit a JSON envelope, but the runner passes stdin straight through
- * when a hook is disabled by profile, so non-JSON stdout is expected and must
- * not be treated as an error.
- */
-function extractAdditionalContext(stdout: string): string | undefined {
-  const trimmed = stdout.trim()
-  if (!trimmed.startsWith("{")) {
-    return undefined
-  }
-
-  try {
-    const parsed = JSON.parse(trimmed) as {
-      hookSpecificOutput?: { additionalContext?: unknown }
-    }
-    const context = parsed.hookSpecificOutput?.additionalContext
-    return typeof context === "string" && context.trim() ? context : undefined
-  } catch {
-    return undefined
-  }
-}
 
 function isDisabledByEnv(value: string | undefined): boolean {
   return typeof value === "string" && DISABLED_VALUES.has(value.trim().toLowerCase())
@@ -649,11 +397,9 @@ function buildDoctorReport(ctx: ExtensionContext): string {
     `  commands/      ${commandCount > 0 ? `${commandCount} command(s)` : "NOT FOUND"} (${commandsDir})`,
     `  agents/        ${agentLine} (${agentsDir})`,
     "",
-    "Engineering rules (injected into the system prompt)",
+    "Engineering rules available to load for your project",
     `  ${describeRulesStatus()}`,
     "",
-    "Hook runner",
-    `  ${fs.existsSync(HOOK_RUNNER) ? "found" : "NOT FOUND"} (${HOOK_RUNNER})`,
     `  profile:       ${process.env.ECC_HOOK_PROFILE || "standard (default)"}`,
     `  disabled:      ${process.env.ECC_DISABLED_HOOKS || "none"}`,
     "",
@@ -673,7 +419,7 @@ function buildDoctorReport(ctx: ExtensionContext): string {
 
   lines.push(
     "",
-    "Companion packages are optional; ECC skills, commands, and session hooks",
+    "Companion packages are optional; ECC skills and commands",
     "work without them. See .pi/README.md for what each one unlocks.",
     "Detection reads Pi's `packages` list, so a companion vendored some other",
     "way may work while reporting as not installed."
@@ -693,87 +439,8 @@ export default function (pi: ExtensionAPI): void {
     })
   )
 
-  /**
-   * ECC's SessionStart hook returns context for the model, but Pi has no
-   * equivalent of Claude Code's `additionalContext` field. It is held here and
-   * folded into the system prompt on the next agent start, which is the
-   * documented Pi injection point that does not fabricate a user turn.
-   */
-  let pendingContext: string | undefined
-
-  pi.on("session_start", async (event, ctx) => {
-    const payload = {
-      hook_event_name: "SessionStart",
-      source: mapSessionSource(event.reason),
-      cwd: ctx.cwd,
-      session_id: readSessionId(ctx),
-    }
-
-    // Drop any context captured by an earlier session start that has not been
-    // injected yet. Pi can start a new session (/new, /resume, /fork) before
-    // `before_agent_start` consumes the previous value, and replaying context
-    // built for a different session would describe the wrong project state.
-    pendingContext = undefined
-
-    const result = await runEccHook(
-      SESSION_START_HOOK,
-      payload,
-      buildHookEnv(ctx),
-      resolveHookCwd(ctx)
-    )
-
-    if (result.failure) {
-      ctx.ui.notify(`ECC session-start hook skipped (${result.failure})`, "warning")
-      return
-    }
-
-    pendingContext = extractAdditionalContext(result.stdout)
-  })
-
-  pi.on("before_agent_start", event => {
-    const additions: string[] = []
-
-    // Rules describe standing engineering policy, so they are re-applied on
-    // every turn. The session context is a one-shot handoff and is consumed.
-    const rules = loadPortableRules()
-    if (rules) {
-      additions.push(`<ecc-engineering-rules>\n${rules}\n</ecc-engineering-rules>`)
-    }
-
-    if (pendingContext) {
-      additions.push(`<ecc-session-context>\n${pendingContext}\n</ecc-session-context>`)
-      pendingContext = undefined
-    }
-
-    if (additions.length === 0) {
-      return
-    }
-
-    return { systemPrompt: [event.systemPrompt, ...additions].join("\n\n") }
-  })
-
-  pi.on("session_shutdown", async (event, ctx) => {
-    const payload = {
-      hook_event_name: "SessionEnd",
-      reason: event.reason,
-      cwd: ctx.cwd,
-      session_id: readSessionId(ctx),
-    }
-
-    const result = await runEccHook(
-      SESSION_END_HOOK,
-      payload,
-      buildHookEnv(ctx),
-      resolveHookCwd(ctx)
-    )
-
-    if (result.failure) {
-      ctx.ui.notify(`ECC session-end hook skipped (${result.failure})`, "warning")
-    }
-  })
-
   pi.registerCommand("ecc-doctor", {
-    description: "Report ECC adapter status: package root, canonical resources, hooks, companions",
+    description: "Report ECC adapter status: package root, canonical resources and companions",
     handler: async (_args, ctx) => {
 // No deliverAs: "nextTurn" here. In Pi 1.x that queues the message until
       // the user's next prompt, so the report never appears when the command runs.

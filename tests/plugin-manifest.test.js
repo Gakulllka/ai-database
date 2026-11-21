@@ -249,32 +249,9 @@ test('claude plugin.json does NOT have explicit hooks declaration', () => {
   assert.ok(!('hooks' in claudePlugin), 'hooks field must NOT be declared — Claude Code v2.1+ auto-loads hooks/hooks.json by convention');
 });
 
-test('claude plugin.json exposes only supported durable hook preferences', () => {
-  assert.deepStrictEqual(
-    Object.keys(claudePlugin.userConfig || {}).sort(),
-    ['hook_profile', 'hooks_enabled']
-  );
-
-  const hooksEnabled = claudePlugin.userConfig.hooks_enabled;
-  assert.deepStrictEqual(
-    Object.keys(hooksEnabled).sort(),
-    ['default', 'description', 'title', 'type']
-  );
-  assert.strictEqual(hooksEnabled.type, 'boolean');
-  assert.strictEqual(hooksEnabled.default, true);
-  assert.ok(typeof hooksEnabled.title === 'string' && hooksEnabled.title.trim());
-  assert.ok(typeof hooksEnabled.description === 'string' && hooksEnabled.description.trim());
-
-  const hookProfile = claudePlugin.userConfig.hook_profile;
-  assert.deepStrictEqual(
-    Object.keys(hookProfile).sort(),
-    ['default', 'description', 'title', 'type'],
-    'Claude userConfig does not support enum'
-  );
-  assert.strictEqual(hookProfile.type, 'string');
-  assert.strictEqual(hookProfile.default, 'standard');
-  assert.ok(typeof hookProfile.title === 'string' && hookProfile.title.trim());
-  assert.ok(typeof hookProfile.description === 'string' && hookProfile.description.trim());
+test('Claude plugin leaves Database lifecycle hooks disabled', () => {
+  assert.ok(!('userConfig' in claudePlugin));
+  assert.deepStrictEqual(readHooksConfig(path.join(repoRoot, 'hooks', 'hooks.json')).hooks, {});
 });
 
 console.log('\n=== .claude-plugin/marketplace.json ===\n');
@@ -397,30 +374,13 @@ test('codex lifecycle hook bundle contains only Codex 0.146-supported schema', (
     }
   }
 
-  const claudeConfig = readHooksConfig(path.join(repoRoot, 'hooks', 'hooks.json'), 'hooks/hooks.json');
-  const sourceSessionStart = claudeConfig.hooks.SessionStart.find(group => group.id === 'session:start');
-  const expectedSessionStart = {
-    ...sourceSessionStart,
-    hooks: sourceSessionStart.hooks.map(handler => ({
-      ...handler,
-      command: handler.command.replace(
-        'node -e "',
-        'node -e "if(!process.env.PLUGIN_ROOT)throw new Error(\'Missing Codex PLUGIN_ROOT\');process.env.CLAUDE_PLUGIN_ROOT=process.env.PLUGIN_ROOT;'
-      )
-    }))
-  };
-  assert.deepStrictEqual(config.hooks.SessionStart[0], expectedSessionStart, 'Codex SessionStart hook must track its canonical implementation with a Codex-root bootstrap');
+  assert.match(config.hooks.SessionStart[0].hooks[0].command, /scripts\/hooks\/session-start-bootstrap\.js/);
 });
 
-test('hook documentation distinguishes the Claude off setting from runtime profiles', () => {
+test('hook documentation gives the standalone Codex installer and trust step', () => {
   const source = fs.readFileSync(hooksReadmePath, 'utf8');
-  assert.ok(source.includes('Claude setup-only value:'), 'Expected hooks README to label off as a Claude setup-only value');
-  const runtimeProfiles = source.match(/Runtime hook profiles:\n((?:- `[^`]+`[^\n]*\n)+)/);
-  assert.ok(runtimeProfiles, 'Expected hooks README to identify runtime hook profiles separately');
-  assert.ok(!runtimeProfiles[1].includes('`off`'), 'off is a Claude setup value, not a runtime hook profile');
-  for (const profile of ['minimal', 'standard', 'strict']) {
-    assert.ok(runtimeProfiles[1].includes(`\`${profile}\``), `Expected documented runtime hook profile: ${profile}`);
-  }
+  assert.ok(source.includes('node scripts/codex/install-database-hooks.js --dry-run'));
+  assert.ok(source.includes('/hooks'));
 });
 
 test('Chinese capability matrix documents the native Codex SessionStart hook', () => {
@@ -803,7 +763,7 @@ test('package.json files includes the Grok plugin directory', () => {
   );
 });
 
-test('.grok-plugin README documents install, trust, enable, MCP, and hook profile', () => {
+test('.grok-plugin README documents install, trust, enable, MCP, and Codex-only hooks', () => {
   const readme = fs.readFileSync(grokPluginReadmePath, 'utf8');
   assert.ok(readme.includes('canonical installer'), 'ECC trusted install uses the canonical installer');
   assert.ok(readme.includes('install-apply.js --target grok'), 'Grok entrypoint delegates to install-apply');
@@ -814,7 +774,7 @@ test('.grok-plugin README documents install, trust, enable, MCP, and hook profil
     /not ECC capability consent|not ECC consent|discovery/i.test(readme),
     'Grok CLI --trust must not be documented as ECC capability consent'
   );
-  assert.ok(readme.includes('ECC_HOOK_PROFILE'), 'Grok has no Claude userConfig; document ECC_HOOK_PROFILE');
+  assert.ok(readme.includes('../hooks/README.md'), 'Grok docs point to the Codex lifecycle hook guide');
   assert.ok(readme.includes('.mcp.json'), 'Document root .mcp.json as a consent-gated MCP source');
   assert.ok(readme.includes('chrome-devtools'), 'Name chrome-devtools as a consent-gated MCP capability');
   assert.ok(

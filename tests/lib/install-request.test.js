@@ -273,7 +273,7 @@ function runTests() {
     assert.strictEqual(request.mode, 'manifest');
     assert.strictEqual(request.target, 'cursor');
     assert.strictEqual(request.profileId, 'developer');
-    assert.strictEqual(request.hookConsent, 'enabled');
+    assert.strictEqual(request.hookConsent, 'declined');
     assert.deepStrictEqual(request.includeComponentIds, ['lang:typescript']);
     assert.deepStrictEqual(request.excludeComponentIds, ['capability:media']);
     assert.deepStrictEqual(request.legacyLanguages, []);
@@ -335,7 +335,7 @@ function runTests() {
     );
   })) passed++; else failed++;
 
-  if (test('rejects --no-hooks with an explicit hooks-runtime selection', () => {
+  if (test('reports a retired hook-only selection', () => {
     assert.throws(
       () => normalizeInstallRequest({
         target: 'claude',
@@ -346,7 +346,7 @@ function runTests() {
         languages: [],
         noHooks: true,
       }),
-      /--no-hooks cannot be combined/
+      /selected hook packages have been retired/
     );
   })) passed++; else failed++;
 

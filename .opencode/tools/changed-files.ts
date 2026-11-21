@@ -1,3 +1,6 @@
+import { execFile } from "node:child_process"
+import * as path from "node:path"
+import { promisify } from "node:util"
 import { tool, type ToolDefinition } from "./tool.ts"
 import type { ChangeType, TreeNode } from "../plugins/lib/changed-files-store.ts"
 
@@ -46,9 +49,26 @@ async function loadChangedFilesStore(): Promise<ChangedFilesStore> {
   return changedFilesStorePromise
 }
 
+const runGit = promisify(execFile)
+
+async function readGitChanges(cwd: string): Promise<Map<string, ChangeType>> {
+  const { stdout } = await runGit("git", ["-c", "core.fsmonitor=false", "status", "--porcelain=v1", "-z", "--no-renames", "--untracked-files=all"], {
+    cwd, encoding: "utf8", timeout: 5000, maxBuffer: 2 * 1024 * 1024,
+    env: { ...process.env, GIT_OPTIONAL_LOCKS: "0" }, windowsHide: true,
+  })
+  const entries = new Map<string, ChangeType>()
+  for (const record of stdout.split("\0")) {
+    if (record[2] !== " ") continue
+    const status = record.slice(0, 2)
+    const kind = status.includes("D") ? "deleted" : status.includes("A") || status === "??" ? "added" : "modified"
+    entries.set(path.normalize(record.slice(3)), kind)
+  }
+  return entries
+}
+
 const changedFilesTool: ToolDefinition = tool({
   description:
-    "List files changed by agents in this session as a navigable tree. Shows added (+), modified (~), and deleted (-) indicators. Use filter to show only specific change types. Returns paths for git diff.",
+    "List current Git worktree changes as a navigable tree. Shows added (+), modified (~), and deleted (-) files and supports JSON output.",
   args: {
     filter: tool.schema
       .enum(["all", "added", "modified", "deleted"])
@@ -60,23 +80,34 @@ const changedFilesTool: ToolDefinition = tool({
       .describe("Output format: tree for terminal display, json for structured data (default: tree)"),
   },
   async execute(args, context) {
-    const { buildTree, getChangedPaths, hasChanges } = await loadChangedFilesStore()
+    const { buildTree, getChangedPaths, getChanges } = await loadChangedFilesStore()
     const filter = args.filter === "all" || !args.filter ? undefined : (args.filter as ChangeType)
     const format = args.format ?? "tree"
 
-    if (!hasChanges()) {
-      return JSON.stringify({ changed: false, message: "No files changed in this session" })
+    let entries = getChanges()
+    const reportSource = entries.size > 0 ? "session-tracking" : "git-worktree"
+    if (reportSource === "git-worktree") {
+      try {
+        entries = await readGitChanges(context.worktree || context.directory)
+      } catch {
+        return JSON.stringify({ changed: null, source: reportSource, message: "Git worktree status is unavailable" })
+      }
     }
 
-    const paths = getChangedPaths(filter)
+    if (!entries.size) {
+      return JSON.stringify({ changed: false, source: reportSource, message: "No changes found" })
+    }
+
+    const paths = getChangedPaths(filter, entries)
 
     if (format === "json") {
       return JSON.stringify(
         {
-          changed: true,
+          changed: paths.length > 0,
+          source: reportSource,
           filter: filter ?? "all",
           files: paths.map((p) => ({ path: p.path, changeType: p.changeType })),
-          diffCommands: paths
+          diffCommands: (reportSource === "session-tracking" ? paths : [])
             .filter((p) => p.changeType !== "added")
             .map((p) => `git diff ${p.path}`),
         },
@@ -85,15 +116,15 @@ const changedFilesTool: ToolDefinition = tool({
       )
     }
 
-    const tree = buildTree(filter)
+    const tree = buildTree(filter, entries)
     const treeStr = renderTree(tree, "")
-    const diffHint = paths
+    const diffHint = (reportSource === "session-tracking" ? paths : [])
       .filter((p) => p.changeType !== "added")
       .slice(0, 5)
       .map((p) => `  git diff ${p.path}`)
       .join("\n")
 
-    let output = `Changed files (${paths.length}):\n\n${treeStr}`
+    let output = `Changed files [${reportSource}] (${paths.length}):\n\n${treeStr}`
     if (diffHint) {
       output += `\n\nTo view diff for a file:\n${diffHint}`
     }

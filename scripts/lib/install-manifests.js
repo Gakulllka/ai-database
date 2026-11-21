@@ -50,7 +50,7 @@ const LEGACY_COMPAT_BASE_MODULE_IDS_BY_TARGET = Object.freeze({
     'rules-core',
     'agents-core',
     'commands-core',
-    'hooks-runtime',
+    'shared-runtime-libraries',
     'platform-configs',
     'workflow-quality',
   ],
@@ -58,7 +58,7 @@ const LEGACY_COMPAT_BASE_MODULE_IDS_BY_TARGET = Object.freeze({
     'rules-core',
     'agents-core',
     'commands-core',
-    'hooks-runtime',
+    'shared-runtime-libraries',
     'platform-configs',
     'workflow-quality',
   ],
@@ -66,7 +66,7 @@ const LEGACY_COMPAT_BASE_MODULE_IDS_BY_TARGET = Object.freeze({
     'rules-core',
     'agents-core',
     'commands-core',
-    'hooks-runtime',
+    'shared-runtime-libraries',
     'platform-configs',
     'workflow-quality',
   ],
@@ -81,7 +81,7 @@ const LEGACY_COMPAT_BASE_MODULE_IDS_BY_TARGET = Object.freeze({
     'rules-core',
     'agents-core',
     'commands-core',
-    'hooks-runtime',
+    'shared-runtime-libraries',
     'platform-configs',
     'workflow-quality',
   ],
@@ -169,15 +169,7 @@ const LEGACY_LANGUAGE_RULE_NAMESPACES = Object.freeze({
 const TARGET_DEFAULT_PROFILE_IDS = Object.freeze({
   opencode: 'opencode',
 });
-const TARGET_DEFAULT_EXCLUSIONS = Object.freeze({
-  opencode: [
-    {
-      moduleId: 'hooks-runtime',
-      reason: 'OpenCode defaults intentionally exclude hooks-runtime until users opt in.',
-      optInCommand: './install.sh --target opencode --modules hooks-runtime',
-    },
-  ],
-});
+const TARGET_DEFAULT_EXCLUSIONS = Object.freeze({});
 
 function readJson(filePath, label) {
   try {

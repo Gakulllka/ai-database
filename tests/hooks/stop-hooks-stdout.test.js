@@ -21,8 +21,6 @@ const { spawnSync } = require('child_process');
 
 const repoRoot = path.join(__dirname, '..', '..');
 const runner = path.join(repoRoot, 'scripts', 'hooks', 'run-with-flags.js');
-const { readHooksConfig } = require(path.join(repoRoot, 'scripts', 'lib', 'hooks-config.js'));
-const hooksConfig = readHooksConfig(path.join(repoRoot, 'hooks', 'hooks.json'));
 
 const MAX_STDIN = 1024 * 1024;
 const SUBPROCESS_TIMEOUT_MS = process.platform === 'darwin' && process.env.CI === 'true'
@@ -105,31 +103,12 @@ function runRegisteredStopHook(entry, input, envOverrides = {}) {
     ...envOverrides
   };
 
-  return spawnSync(entry.hooks[0].command, {
+  const bootstrap = path.join(repoRoot, 'scripts', 'hooks', 'lifecycle-hook-bootstrap.js');
+  return spawnSync(process.execPath, [bootstrap, entry.id, entry.script, 'minimal,standard,strict'], {
     input,
     encoding: 'utf8',
     cwd: workDir,
     env,
-    shell: true,
-    timeout: SUBPROCESS_TIMEOUT_MS,
-    maxBuffer: 16 * 1024 * 1024,
-    stdio: ['pipe', 'pipe', 'pipe']
-  });
-}
-
-function runRegisteredStopHookWithMissingRoot(entry, input) {
-  const missingRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'ecc-missing-root-'));
-  fs.rmSync(missingRoot, { recursive: true, force: true });
-  return spawnSync(entry.hooks[0].command, {
-    input,
-    encoding: 'utf8',
-    cwd: workDir,
-    env: {
-      ...hookEnv(),
-      CLAUDE_PLUGIN_ROOT: missingRoot,
-      ECC_PLUGIN_ROOT: missingRoot
-    },
-    shell: true,
     timeout: SUBPROCESS_TIMEOUT_MS,
     maxBuffer: 16 * 1024 * 1024,
     stdio: ['pipe', 'pipe', 'pipe']
@@ -162,7 +141,7 @@ function formatSpawnFailure(result, elapsedMs) {
   });
 }
 
-// All registered Stop hooks (hooks/hooks.json).
+// Standalone Stop scripts exercised through the retained runtime.
 const STOP_HOOKS = [
   ['stop:format-typecheck', 'scripts/hooks/stop-format-typecheck.js'],
   ['stop:check-console-log', 'scripts/hooks/check-console-log.js'],
@@ -175,6 +154,12 @@ const STOP_HOOKS = [
 ];
 
 // Direct-invocation legacy paths that echo stdin.
+const fixtureStopEntries = [
+  ...STOP_HOOKS,
+  ['stop:plan-canvas-pending', 'scripts/hooks/plan-canvas-pending.js'],
+  ['stop:desktop-notify', 'scripts/hooks/desktop-notify.js']
+].map(([id, script]) => ({ id, script }));
+
 const ECHOING_STOP_HOOKS = [
   'scripts/hooks/stop-format-typecheck.js',
   'scripts/hooks/cost-tracker.js',
@@ -191,9 +176,9 @@ let failed = 0;
 // runner path, making the harness report "JSON validation failed".
 const realisticPayload = stopPayload(100 * 1024);
 
-// Exercise the command users actually run from hooks.json. Disabled and
-// no-opinion registered hooks must not copy their Stop payload to stdout.
-for (const entry of hooksConfig.hooks.Stop) {
+// Exercise explicit invocations of the shared bootstrap. Disabled and
+// no-opinion hooks must not copy their Stop payload to stdout.
+for (const entry of fixtureStopEntries) {
   if (
     test(`${entry.id} disabled registered wrapper stays silent for a 100KB Stop payload`, () => {
       const startedAt = process.hrtime.bigint();
@@ -211,23 +196,10 @@ for (const entry of hooksConfig.hooks.Stop) {
   else failed++;
 }
 
-for (const entry of hooksConfig.hooks.Stop) {
-  if (
-    test(`${entry.id} unresolved-root fallback stays silent`, () => {
-      const result = runRegisteredStopHookWithMissingRoot(entry, realisticPayload);
-      assert.strictEqual(result.status, 0, `${entry.id}: expected exit 0, got ${result.status}: ${result.stderr}`);
-      assert.strictEqual(result.stdout, '', `${entry.id}: unresolved-root fallback must stay silent`);
-      assert.match(result.stderr, /lifecycle bootstrap unavailable/);
-    })
-  )
-    passed++;
-  else failed++;
-}
-
-const representativeStopEntry = hooksConfig.hooks.Stop.find(
+const representativeStopEntry = fixtureStopEntries.find(
   entry => entry.id === 'stop:cost-tracker'
 );
-const consoleLogStopEntry = hooksConfig.hooks.Stop.find(
+const consoleLogStopEntry = fixtureStopEntries.find(
   entry => entry.id === 'stop:check-console-log'
 );
 
@@ -279,7 +251,7 @@ if (
     };
     try {
       fs.writeFileSync(path.join(stateDir, 'sessions.json'), JSON.stringify(state));
-      const entry = hooksConfig.hooks.Stop.find(candidate => candidate.id === 'stop:plan-canvas-pending');
+      const entry = fixtureStopEntries.find(candidate => candidate.id === 'stop:plan-canvas-pending');
       const input = JSON.stringify({ cwd: workDir, hook_event_name: 'Stop', stop_hook_active: false });
       const result = runRegisteredStopHook(entry, input, {
         ECC_DISABLED_HOOKS: '',
@@ -296,23 +268,6 @@ if (
 )
   passed++;
 else failed++;
-if (
-  test('all registered lifecycle hooks use the bounded shared bootstrap', () => {
-    const lifecycleEntries = [
-      ...hooksConfig.hooks.Stop,
-      ...hooksConfig.hooks.SessionEnd
-    ];
-    for (const entry of lifecycleEntries) {
-      assert.ok(
-        entry.hooks[0].command.includes('scripts/hooks/lifecycle-hook-bootstrap.js'),
-        `${entry.id}: expected the shared lifecycle bootstrap`
-      );
-    }
-  })
-)
-  passed++;
-else failed++;
-
 if (
   test('registered Stop wrapper stays silent for a 100KB dry-run payload', () => {
     const result = runRegisteredStopHook(representativeStopEntry, realisticPayload, {
@@ -332,7 +287,7 @@ const multibytePayload = stopPayload(400 * 1024, '한');
 assert.ok(multibytePayload.length < MAX_STDIN, 'fixture must stay below the runner character cap');
 assert.ok(Buffer.byteLength(multibytePayload) > MAX_STDIN, 'fixture must exceed the runner byte cap');
 
-for (const entry of hooksConfig.hooks.Stop) {
+for (const entry of fixtureStopEntries) {
   if (
     test(`${entry.id} disabled registered wrapper stays silent for a multibyte payload`, () => {
       const result = runRegisteredStopHook(entry, multibytePayload);

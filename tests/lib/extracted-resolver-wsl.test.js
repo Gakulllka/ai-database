@@ -10,7 +10,6 @@ function test(name, run) {
   catch (error) { failed++; console.error(`FAIL ${name}: ${error.stack}`); }
 }
 // These tests execute extracted JavaScript with simulated POSIX path/OS/filesystem APIs.
-// Serialized Bash quoting is covered separately by serialized-hook-wsl.test.js.
 test('INLINE_RESOLVE extracted expression converts Windows CLAUDE_CONFIG_DIR on simulated WSL', () => {
   const { INLINE_RESOLVE } = require('../../scripts/lib/resolve-ecc-root');
   // INLINE_RESOLVE is backslash-free, so it embeds verbatim in bash double-quoted `node -e "..."` strings.

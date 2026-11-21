@@ -216,7 +216,7 @@ If you are new to command-line tools, use this copy-and-paste path:
    npx ecc-universal@2.2.3 setup
    ```
 
-5. For a typical personal setup, choose **Global user**, choose **Standard** hooks, and confirm.
+5. For a typical personal setup, choose **Global user**, review the plan, and confirm.
 6. Start a new Claude Code session and run `/plugin list` to verify that `ecc@ecc` is enabled.
 
 This path does not require cloning the repository. If any prerequisite command is not found, install or repair that prerequisite before rerunning ECC setup.
@@ -261,7 +261,7 @@ For automation, make every provider-specific choice explicit:
 ```bash
 npx ecc-universal@2.2.3 install --guided \
   --harness claude --harness codex --harness kimi \
-  --claude-scope local --claude-hooks standard \
+  --claude-scope local \
   --profile core --yes
 ```
 
@@ -311,7 +311,7 @@ Alternatively, run Claude Code's native plugin commands inside Claude Code:
 /plugin install ecc@ecc
 ```
 
-The native path installs ECC's skills, agents, commands, and plugin-managed hooks. If you choose it, stop there. Do not also run a full manual install into Claude Code.
+The native path installs ECC's skills, agents, and commands. If you choose it, stop there. Do not also run a full manual install into Claude Code.
 
 Claude Code owns these built-in commands, including their errors when a marketplace, plugin, or conflicting scope already exists. ECC cannot intercept that parser. If either native command reports an existing install or scope conflict, use the 2.2 guided setup or resolve the conflicting Claude plugin scope before retrying; do not layer a manual install on top.
 
@@ -444,10 +444,10 @@ cd ECC
 | Harness | Install or setup | Notes |
 |---|---|---|
 | Cursor | `./install.sh --profile minimal --target cursor` | Project-local `.cursor/` adapter |
-| OpenCode | `npm install && npm run build:opencode && ./install.sh --profile full --target opencode --enable-hooks` | Builds the plugin payload before the full install |
+| OpenCode | `npm install && npm run build:opencode && ./install.sh --profile full --target opencode` | Builds the plugin payload before the full install |
 | Gemini CLI | `./install.sh --profile minimal --target gemini` | Project-local `.gemini/` config |
 | Zed | `./install.sh --profile minimal --target zed` | Project-local `.zed/` adapter |
-| Antigravity (Global Plugin) | `./install.sh --target antigravity-home --profile core --enable-hooks` | Experimental global plugin (`~/.gemini/config/plugins/ecc/`) with lifecycle hooks · [Guide](docs/ANTIGRAVITY-GUIDE.md) |
+| Antigravity (Global Plugin) | `./install.sh --target antigravity-home --profile core` | Experimental global plugin (`~/.gemini/config/plugins/ecc/`) · [Guide](docs/ANTIGRAVITY-GUIDE.md) |
 | Antigravity (Project-Local) | `./install.sh --target antigravity --profile minimal` | Project-local `.agents/` adapter · [Guide](docs/ANTIGRAVITY-GUIDE.md) |
 | Qwen CLI | `./install.sh --profile minimal --target qwen` | See the [Qwen guide](docs/QWEN-GUIDE.md) |
 | Hermes | `./install.sh --profile minimal --target hermes` | See the [Hermes setup guide](docs/HERMES-SETUP.md) |
@@ -492,27 +492,9 @@ Windows:
 .\install.ps1 --profile minimal --target claude
 ```
 
-This profile intentionally excludes `hooks-runtime`.
-
 Claude manual installs place each skill directly under `~/.claude/skills/<skill-name>/` (or `.claude/skills/<skill-name>/` for `claude-project`) so Claude Code can discover it. When upgrading an older ECC manual install, the installer migrates only nested `skills/ecc/` files recorded in ECC install-state. If a flat skill directory is user-owned, ECC preserves it, prints a conflict warning, and keeps any older managed copy tracked for a safe uninstall instead of overwriting user files.
 
-For the normal core profile with hooks disabled:
-
-```bash
-./install.sh --profile core --without baseline:hooks --target claude
-./install.sh --profile core --no-hooks --target claude
-```
-
-Add the hook runtime later only if you want it:
-
-```bash
-./install.sh --target claude --modules hooks-runtime --enable-hooks
-```
-
-Any install whose profile or modules would materialize the hook runtime requires
-an explicit decision. Without `--enable-hooks` or `--no-hooks`, the installer
-prints what the hooks can do and stops before writing anything. The guided
-installer (`ecc install --guided`) asks for this choice interactively.
+Database lifecycle hooks have a separate [Codex installation](hooks/README.md).
 </details>
 
 <details>
@@ -584,7 +566,7 @@ Use this only when you are intentionally skipping the plugin path:
 ```bash
 git clone https://github.com/affaan-m/ECC.git
 cd ECC
-./install.sh --profile full --enable-hooks
+./install.sh --profile full
 ```
 
 Windows:
@@ -592,35 +574,16 @@ Windows:
 ```powershell
 git clone https://github.com/affaan-m/ECC.git
 cd ECC
-.\install.ps1 --profile full --enable-hooks
+.\install.ps1 --profile full
 ```
-
-These examples enable the automatic hook runtime. To install without hooks, replace `--enable-hooks` with `--no-hooks`.
 
 If you choose this path, stop there. Do not also run `/plugin install`.
 
 For hand-picked manual installs, Claude discovers skills as direct children of `~/.claude/skills/`; do not nest them under `~/.claude/skills/ecc/`.
 
-#### Install hooks
+#### Install Database hooks for Codex
 
-Do not copy the raw repo `hooks/hooks.json` into `~/.claude/settings.json` or `~/.claude/hooks/hooks.json`. That file is plugin/repo-oriented; use the installer so hook command paths are rewritten correctly:
-
-```bash
-bash ./install.sh --target claude --modules hooks-runtime --enable-hooks
-```
-
-That installs the hook scripts under `~/.claude/` and registers the resolved
-hook entries in `~/.claude/settings.json`. Existing user settings and hooks are
-preserved; ECC-owned entries are tracked by stable ID for idempotent updates
-and safe uninstall.
-
-If you installed ECC via `/plugin install`, do not copy those hooks into `settings.json`. Claude Code v2.1+ already auto-loads plugin `hooks/hooks.json`, and duplicating them in `settings.json` causes duplicate execution and cross-platform hook conflicts.
-
-On Windows, Claude's config root is `%USERPROFILE%\.claude`; install the hook runtime with:
-
-```powershell
-pwsh -File .\install.ps1 --target claude --modules hooks-runtime --enable-hooks
-```
+Use `node scripts/codex/install-database-hooks.js --dry-run` from the repository root before installing. See the [Codex hook guide](hooks/README.md) for the installation and trust steps.
 
 #### Configure MCPs
 
@@ -1054,8 +1017,8 @@ ECC/
 |
 |-- hooks/            # Trigger-based automations
 |   |-- README.md                 # Hook documentation, recipes, and customization guide
-|   |-- hooks.json                # All hooks config (PreToolUse, PostToolUse, Stop, etc.)
-|   |-- memory-persistence/       # Session lifecycle hooks (Longform Guide)
+|   |-- hooks.json                # Empty Claude compatibility configuration
+|   |-- memory-persistence/       # Historical lifecycle reference
 |   |-- strategic-compact/        # Compaction suggestions (Longform Guide)
 |
 |-- scripts/          # Cross-platform Node.js scripts
@@ -1462,7 +1425,7 @@ See [affaan-m/ECC#2065](https://github.com/affaan-m/ECC/issues/2065).
 <details>
 <summary><strong>Cursor IDE support in depth</strong></summary>
 
-ECC provides Cursor IDE support with hooks, rules, agents, skills, commands, and MCP configs adapted for Cursor's project layout.
+ECC provides Cursor IDE support with rules, agents, skills, commands, and MCP configs adapted for Cursor's project layout.
 
 ```bash
 # macOS/Linux
@@ -1480,8 +1443,6 @@ ECC provides Cursor IDE support with hooks, rules, agents, skills, commands, and
 
 | Component | Count | Details |
 |-----------|-------|---------|
-| Hook Events | 15 | sessionStart, beforeShellExecution, afterFileEdit, beforeMCPExecution, beforeSubmitPrompt, and 10 more |
-| Hook Entrypoints | 15 | Thin Node.js event dispatchers delegating to `scripts/hooks/` via shared adapter |
 | Rules | 34 | 9 common (alwaysApply) + 25 language-specific (TypeScript, Python, Go, Swift, PHP) |
 | Agents | 48 | `.cursor/agents/ecc-*.md` when installed; prefixed to avoid collisions with user or marketplace agents |
 | Skills | Shared + Bundled | `.cursor/skills/` for translated additions |
@@ -1496,38 +1457,10 @@ Cursor-native loading behavior can vary by Cursor build. ECC installs agents as 
 
 #### Memory and data isolation (Cursor + Claude Code)
 
-ECC memory hooks reuse the same `scripts/hooks/*.js` as Claude Code. For Cursor, ECC tries to keep memory **out of `~/.claude` automatically**:
 
-1. **Cursor `sessionStart` hook** (installed to `.cursor/hooks.json` on `--target cursor`) injects `ECC_AGENT_DATA_HOME` for the whole composer session.
-2. **Hook runtime default**: when `CURSOR_VERSION` or `CURSOR_PROJECT_DIR` is present, hooks default to `~/.cursor/ecc` if the env var is unset.
-3. **Project config**: `.cursor/ecc-agent-data.json` documents and overrides the path (`agentDataHome`).
-4. **Always-on rule**: `.cursor/rules/ecc-agent-data-home.mdc` reminds the agent where memory lives.
+#### Lifecycle hooks
 
-You can still override explicitly:
-
-```bash
-export ECC_AGENT_DATA_HOME="$HOME/.cursor/ecc"
-```
-
-To **share** memory with Claude Code on purpose, set `ECC_AGENT_DATA_HOME=~/.claude` in the shell or in `.cursor/ecc-agent-data.json`.
-
-Continuous learning v2 instincts remain separate under `CLV2_HOMUNCULUS_DIR` (default `~/.local/share/ecc-homunculus`).
-
-#### Hook architecture (DRY adapter pattern)
-
-Cursor has **more hook events than Claude Code** (20 vs 8). The `.cursor/hooks/adapter.js` module transforms Cursor's stdin JSON to Claude Code's format, allowing existing `scripts/hooks/*.js` to be reused without duplication. Each Cursor event is registered with one event-level dispatcher so enabled checks run in a deterministic order and remain compatible with Cursor versions that execute only the first matching entry. The adapter resolves the shared runtime from both the ECC checkout and an installed project's `.cursor/scripts/` tree.
-
-```
-Cursor stdin JSON -> adapter.js -> transforms -> scripts/hooks/*.js
-                                                (shared with Claude Code)
-```
-
-Key hooks:
-- **beforeShellExecution**: Blocks git hook bypasses and dev servers outside tmux (exit 2), then adds profile-gated shell reminders
-- **afterFileEdit / stop**: Accumulates edited JS/TS files and runs one profile-gated format/typecheck batch at Stop, alongside the console.log audit
-- **beforeSubmitPrompt**: Detects secrets (sk-, ghp_, AKIA patterns) in prompts
-- **beforeTabFileRead**: Blocks Tab from reading .env, .key, .pem files (exit 2)
-- **beforeMCPExecution / afterMCPExecution**: MCP audit logging
+Database lifecycle hooks use the [Codex installer](hooks/README.md).
 
 #### Rules format
 
@@ -1649,19 +1582,9 @@ For installation, use the [official OpenCode instructions](https://opencode.ai/d
 
 The configuration is automatically detected from `.opencode/opencode.json`.
 
-#### Hook support via plugins
+#### Plugin tools
 
-OpenCode's plugin system has 20+ event types:
-
-| Claude Code Hook | OpenCode Plugin Event |
-|-----------------|----------------------|
-| PreToolUse | `tool.execute.before` |
-| PostToolUse | `tool.execute.after` |
-| Stop | `session.idle` |
-| SessionStart | `session.created` |
-| SessionEnd | `session.deleted` |
-
-**Additional OpenCode events**: `file.edited`, `file.watcher.updated`, `message.updated`, `lsp.client.diagnostics`, `tui.toast.show`, and more.
+The OpenCode plugin provides on-demand tools. Use the [Codex hook installer](hooks/README.md) for Database lifecycle automation.
 
 #### Plugin installation
 
@@ -1683,7 +1606,7 @@ Then add to your `opencode.json`:
 }
 ```
 
-That npm plugin entry enables ECC's published OpenCode plugin module (hooks/events and plugin tools). It does **not** automatically add ECC's full command/agent/instruction catalog to your project config.
+That npm plugin entry enables ECC's published OpenCode plugin module (on-demand plugin tools). It does **not** automatically add ECC's full command/agent/instruction catalog to your project config.
 
 For the full ECC OpenCode setup, either:
 - run OpenCode inside this repository, or

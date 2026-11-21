@@ -55,9 +55,10 @@ function previewedIds(stderr) {
   return [...String(stderr).matchAll(/Hook "([^"]+)"/g)].map(match => match[1]);
 }
 
-function runConfiguredCommand(entry, raw, env = {}) {
-  return spawnSync(entry.hooks[0].command, {
-    shell: true,
+const dispatcherFixtures = ['sync', 'async'].map(mode => ({ mode, id: 'post:dispatcher:' + mode }));
+
+function runExplicitDispatcher(entry, raw, env = {}) {
+  return spawnSync(process.execPath, [dispatcherPath, entry.mode], {
     cwd: repoRoot,
     input: raw,
     encoding: 'utf8',
@@ -102,30 +103,8 @@ function runTests() {
   let failed = 0;
 
   if (
-    test('hooks.json exposes one sync and one async PostToolUse entry', () => {
-      const entries = readHooksConfig(hooksPath).hooks.PostToolUse;
-      assert.strictEqual(entries.length, 2, 'PostToolUse should launch at most two commands');
-      assert.deepStrictEqual(
-        entries.map(entry => entry.id),
-        ['post:dispatcher:sync', 'post:dispatcher:async']
-      );
-      assert.ok(entries.every(entry => entry.matcher === '.*'));
-      assert.strictEqual(entries[0].hooks[0].async, undefined);
-      assert.strictEqual(entries[1].hooks[0].async, true);
-      assert.ok(entries[0].hooks[0].command.includes('posttooluse-dispatcher.js'));
-      assert.ok(entries[0].hooks[0].command.endsWith('" sync'));
-      assert.ok(entries[1].hooks[0].command.includes('posttooluse-dispatcher.js'));
-      assert.ok(entries[1].hooks[0].command.endsWith('" async'));
-      assert.ok(entries.every(entry => entry.hooks[0].command.includes('resolve-ecc-root')));
-      assert.ok(
-        entries.every(entry => !entry.hooks[0].command.includes('plugin-hook-bootstrap.js')),
-        'PostToolUse dispatchers should not spawn a second Node bootstrap process'
-      );
-      assert.ok(
-        entries.every(entry => !entry.hooks[0].command.includes('ECC_POSTTOOLUSE_PASSTHROUGH')),
-        'PostToolUse commands must not opt back into raw stdin passthrough'
-      );
-      assert.ok(entries[1].hooks[0].timeout >= 30);
+    test('Claude has no active PostToolUse lifecycle registration', () => {
+      assert.strictEqual(readHooksConfig(hooksPath).hooks.PostToolUse, undefined);
     })
   )
     passed++;
@@ -191,15 +170,15 @@ function runTests() {
   else failed++;
 
   if (
-    test('actual hooks.json commands keep Edit dry-run silent and preserve IDs', () => {
-      const entries = readHooksConfig(hooksPath).hooks.PostToolUse;
+    test('explicit dispatcher commands keep Edit dry-run silent and preserve IDs', () => {
+      const entries = dispatcherFixtures;
       const raw = JSON.stringify({
         hook_event_name: 'PostToolUse',
         tool_name: 'Edit',
         tool_input: { file_path: path.join(os.tmpdir(), 'ecc-posttooluse-test.txt') },
         tool_response: {}
       });
-      const results = entries.map(entry => runConfiguredCommand(entry, raw, { ECC_DRY_RUN: '1' }));
+      const results = entries.map(entry => runExplicitDispatcher(entry, raw, { ECC_DRY_RUN: '1' }));
 
       for (const result of results) {
         assert.strictEqual(result.status, 0, result.stderr);
@@ -224,8 +203,8 @@ function runTests() {
   else failed++;
 
   if (
-    test('actual hooks.json commands never echo truncated oversized input', () => {
-      const entries = readHooksConfig(hooksPath).hooks.PostToolUse;
+    test('explicit dispatcher commands never echo truncated oversized input', () => {
+      const entries = dispatcherFixtures;
       const values = ['x'.repeat(1024 * 1024 + 1024), 'é'.repeat(600000), '\u{1F600}'.repeat(300000)];
 
       for (const value of values) {
@@ -238,7 +217,7 @@ function runTests() {
         assert.ok(Buffer.byteLength(raw, 'utf8') > 1024 * 1024);
 
         for (const entry of entries) {
-          const result = runConfiguredCommand(entry, raw, { ECC_DRY_RUN: '1' });
+          const result = runExplicitDispatcher(entry, raw, { ECC_DRY_RUN: '1' });
           assert.strictEqual(result.status, 0, result.stderr);
           assert.strictEqual(result.stdout, '', `${entry.id} should suppress truncated pass-through`);
           assert.ok(result.stderr.includes('stdin exceeded'), `${entry.id} should report truncation`);
@@ -389,7 +368,7 @@ function runTests() {
 
   if (
     test('public dispatcher IDs disable their complete phase', () => {
-      const entries = readHooksConfig(hooksPath).hooks.PostToolUse;
+      const entries = dispatcherFixtures;
       const raw = JSON.stringify({
         hook_event_name: 'PostToolUse',
         tool_name: 'Edit',
@@ -398,7 +377,7 @@ function runTests() {
       });
 
       for (const entry of entries) {
-        const result = runConfiguredCommand(entry, raw, {
+        const result = runExplicitDispatcher(entry, raw, {
           ECC_DRY_RUN: '1',
           ECC_DISABLED_HOOKS: entry.id
         });
@@ -638,7 +617,7 @@ function runTests() {
   else failed++;
 
   if (
-    test('requiring the dispatcher module never dispatches; hooks.json calls cli()', () => {
+    test('requiring the dispatcher module never dispatches', () => {
       const raw = JSON.stringify({
         hook_event_name: 'PostToolUse',
         tool_name: 'Read',
@@ -654,12 +633,6 @@ function runTests() {
       });
       assert.strictEqual(result.status, 0, result.stderr);
       assert.strictEqual(result.stdout, '', 'require() alone must not run main() or echo stdin');
-
-      const entries = readHooksConfig(hooksPath).hooks.PostToolUse;
-      assert.ok(
-        entries.every(entry => entry.hooks[0].command.includes('require(s).cli()')),
-        'hooks.json must invoke the explicit cli() entrypoint'
-      );
     })
   )
     passed++;

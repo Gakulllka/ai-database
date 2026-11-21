@@ -14,8 +14,8 @@ thin subdirectory copy drops parent-relative runtime files.
 ECC installs through the canonical installer and receipt lifecycle:
 
 ```bash
-node scripts/grok-install.js --dry-run --trust --consent-hooks --consent-mcp chrome-devtools
-node scripts/grok-install.js --trust --consent-hooks --consent-mcp chrome-devtools
+node scripts/grok-install.js --dry-run --trust --consent-mcp chrome-devtools
+node scripts/grok-install.js --trust --consent-mcp chrome-devtools
 node scripts/repair.js --target grok
 node scripts/uninstall.js --target grok
 ```
@@ -62,26 +62,9 @@ into the same Grok session. Pick one install path per harness.
 `./install.sh --target grok --profile full` does not copy hooks or root MCP
 without `--trust` and the matching consent flags.
 
-## Hooks
+## Lifecycle hooks
 
-Grok sets `GROK_PLUGIN_ROOT`. Shared hook code does not read that alias.
-The Grok target adapter maps it onto the shared root contract in the installed
-hook configuration when hooks are consented. Without hook consent, the installed copy has no
-`hooks/hooks.json`.
-
-The Grok-only hook projection maps shared `Bash` and `PowerShell` matchers to
-Grok's `run_terminal_command` tool. On Windows it starts hook commands with the
-Node executable used by the canonical installer, so hook startup does not rely
-on Grok's inherited `PATH`. Other harnesses continue to use the shared hook
-configuration unchanged.
-
-Grok does not honor Claude `userConfig`. Hook enablement and profile stay on
-environment variables after explicit hook consent:
-
-```bash
-export ECC_HOOKS_ENABLED=true
-export ECC_HOOK_PROFILE=standard   # minimal | standard | strict
-```
+Database lifecycle hook installation is [available for Codex](../hooks/README.md).
 
 ## MCP
 
@@ -100,7 +83,7 @@ node tests/ci/grok-native-lifecycle.js --report /tmp/grok-native-lifecycle.json
 ```
 
 It uses fresh temporary homes without inherited credentials and fails if Grok is
-missing. It verifies ECC discovery, trust refusal, independent hook/MCP consent,
+missing. It verifies ECC discovery, trust refusal, independent MCP consent,
 disabled and missing roots, Git update, rollback, immutable pins, and uninstall.
 Native Git transitions use a disposable full ECC archive with synthetic versions;
 canonical lifecycle tests also require real `grok inspect` readbacks. Temporary

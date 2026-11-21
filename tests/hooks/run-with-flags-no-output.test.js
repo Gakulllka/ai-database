@@ -13,8 +13,6 @@ const { spawnSync } = require('child_process');
 const repoRoot = path.join(__dirname, '..', '..');
 const runner = path.join(repoRoot, 'scripts', 'hooks', 'run-with-flags.js');
 const sessionStartBootstrap = path.join(repoRoot, 'scripts', 'hooks', 'session-start-bootstrap.js');
-const { readHooksConfig } = require(path.join(repoRoot, 'scripts', 'lib', 'hooks-config.js'));
-const hooksConfig = readHooksConfig(path.join(repoRoot, 'hooks', 'hooks.json'));
 const pluginRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'ecc-hook-no-output-'));
 const hooksDir = path.join(pluginRoot, 'hooks');
 fs.mkdirSync(hooksDir, { recursive: true });
@@ -69,7 +67,11 @@ function run(args, env = {}, input = payload) {
 }
 
 function runConfiguredHook(entry, env = {}, input = payload) {
-  return spawnSync(entry.hooks[0].command, {
+  const bootstrap = path.join(repoRoot, 'scripts', 'hooks', 'plugin-hook-bootstrap.js');
+  const args = entry.id === 'pre:bash:dispatcher'
+    ? ['node', entry.script]
+    : ['node', 'scripts/hooks/run-with-flags.js', entry.id, entry.script, 'minimal,standard,strict'];
+  return spawnSync(process.execPath, [bootstrap, ...args], {
     input,
     encoding: 'utf8',
     cwd: repoRoot,
@@ -81,7 +83,6 @@ function runConfiguredHook(entry, env = {}, input = payload) {
       ECC_HOOK_PROFILE: 'standard',
       ...env
     },
-    shell: true,
     timeout: 30000,
     maxBuffer: 4 * 1024 * 1024
   });
@@ -139,16 +140,6 @@ function runSessionStartBootstrapWithLargeOutput(channel, exitCode) {
   } finally {
     fs.rmSync(root, { recursive: true, force: true });
   }
-}
-
-function runConfiguredHookWithMissingRoot(entry, input = payload) {
-  const missingRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'ecc-hook-missing-root-'));
-  fs.rmSync(missingRoot, { recursive: true, force: true });
-  return runConfiguredHook(
-    entry,
-    { CLAUDE_PLUGIN_ROOT: missingRoot, ECC_PLUGIN_ROOT: missingRoot },
-    input
-  );
 }
 
 function test(name, fn) {
@@ -385,31 +376,13 @@ if (
   passed++;
 else failed++;
 
-for (const [eventName, entries] of Object.entries(hooksConfig.hooks)) {
-  if (eventName === 'Stop') continue;
-  for (const entry of entries) {
-    if (
-      test(`${eventName}/${entry.id} registered disabled path stays silent`, () => {
-        const result = runConfiguredHook(entry, { ECC_HOOKS_ENABLED: '0' });
-        assertSilent(result);
-      })
-    )
-      passed++;
-    else failed++;
-  }
-}
-
-const sessionEndEntry = hooksConfig.hooks.SessionEnd.find(entry => entry.id === 'session:end:marker');
-if (
-  test('SessionEnd unresolved-root fallback stays silent', () => {
-    const result = runConfiguredHookWithMissingRoot(sessionEndEntry);
-    assertSilent(result);
-    assert.match(result.stderr, /lifecycle bootstrap unavailable/);
-  })
-)
-  passed++;
-else failed++;
-
+const securityHookFixtures = [
+  { id: 'pre:bash:dispatcher', script: 'scripts/hooks/pre-bash-dispatcher.js' },
+  { id: 'pre:powershell:gateguard-fact-force', script: 'scripts/hooks/gateguard-fact-force.js' },
+  { id: 'pre:edit-write:gateguard-fact-force', script: 'scripts/hooks/gateguard-fact-force.js' },
+  { id: 'pre:config-protection', script: 'scripts/hooks/config-protection.js' },
+  { id: 'pre:mcp-health-check', script: 'scripts/hooks/mcp-health-check.js' }
+];
 for (const hookId of [
   'pre:bash:dispatcher',
   'pre:powershell:gateguard-fact-force',
@@ -418,8 +391,8 @@ for (const hookId of [
   'pre:mcp-health-check'
 ]) {
   if (
-    test(`${hookId} blocks registered PreToolUse input that was truncated`, () => {
-      const entry = hooksConfig.hooks.PreToolUse.find(candidate => candidate.id === hookId);
+    test(`${hookId} blocks truncated PreToolUse input through the explicit bootstrap`, () => {
+      const entry = securityHookFixtures.find(candidate => candidate.id === hookId);
       const toolInput = hookId === 'pre:powershell:gateguard-fact-force'
         ? { command: `Remove-Item -Recurse -Force C:\\important\\data # ${'x'.repeat(256)}` }
         : {
@@ -459,7 +432,7 @@ for (const hookId of [
   ]) {
   if (
     test(`${hookId} recovery controls allow truncated input without stdout`, () => {
-      const entry = hooksConfig.hooks.PreToolUse.find(
+      const entry = securityHookFixtures.find(
         candidate => candidate.id === hookId
       );
       const input = JSON.stringify({
@@ -484,7 +457,7 @@ for (const hookId of [
 
 if (
   test('MCP health recovery control allows truncated input without stdout', () => {
-    const entry = hooksConfig.hooks.PreToolUse.find(
+    const entry = securityHookFixtures.find(
       candidate => candidate.id === 'pre:mcp-health-check'
     );
     const input = JSON.stringify({

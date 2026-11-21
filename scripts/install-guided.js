@@ -9,14 +9,12 @@ const {
   normalizeHarnessSelection,
 } = require('./lib/harness-capabilities');
 const {
-  VALID_CLAUDE_HOOKS,
   VALID_CLAUDE_SCOPES,
   VALID_PROFILES,
   applyMultiHarnessPlan,
   createMultiHarnessPlan,
   normalizeGuidedInstallRequest,
 } = require('./lib/multi-harness-setup');
-const { formatHookCapabilityDisclosure } = require('./lib/install/hook-consent');
 const { startTerminalSpinner } = require('./lib/terminal-spinner');
 const { showTerminalWelcome } = require('./lib/terminal-welcome');
 const { stripAnsi } = require('./lib/utils');
@@ -32,7 +30,7 @@ Usage:
   ecc install --guided --harness claude --harness codex --harness kimi [options]
 
 Guided harnesses:
-  claude  Native Claude Code plugin; choose user, project, or local scope and an ECC hook profile.
+  claude  Native Claude Code plugin with hooks disabled; choose user, project, or local scope.
   codex   Native Codex plugin and Codex-owned hook review/trust.
   kimi    Managed project install under ./.kimi-code; ECC hooks are not configured.
 
@@ -40,7 +38,7 @@ Options:
   --harness <id[,id...]>  Repeatable; accepts Claude, Codex, Kimi, or all
   --all-harnesses         Select all three guided harnesses
   --claude-scope <user|project|local>
-  --claude-hooks <off|minimal|standard|strict>
+  --claude-hooks <mode>  Legacy option. Hooks stay off in Claude.
   --profile <minimal|core|developer|security|research|full>
                           Kimi managed-project content profile
   --yes, -y               Apply without confirmation
@@ -166,9 +164,6 @@ async function collectInteractiveOptions(options, dependencies = {}) {
   const claudeScope = includesClaude && !options.claudeScope
     ? await askChoice(terminal, output, 'Where should Claude enable ecc@ecc?', [...VALID_CLAUDE_SCOPES], 'user')
     : options.claudeScope;
-  const claudeHooks = includesClaude && !options.claudeHooks
-    ? await askChoice(terminal, output, 'How should ECC hooks run in Claude?', [...VALID_CLAUDE_HOOKS], 'standard')
-    : options.claudeHooks;
   const profile = includesKimi && !options.profile
     ? await askChoice(terminal, output, 'Which ECC content profile should Kimi receive?', [...VALID_PROFILES], 'core')
     : options.profile;
@@ -176,7 +171,7 @@ async function collectInteractiveOptions(options, dependencies = {}) {
     ...options,
     harnesses: normalizedHarnesses,
     claudeScope,
-    claudeHooks,
+    claudeHooks: includesClaude ? 'off' : undefined,
     profile,
   };
 }
@@ -193,8 +188,8 @@ function validateExecutionMode(options, interactive) {
     throw new Error('Non-interactive guided install requires at least one --harness.');
   }
   const requiresExplicit = !interactive || options.json;
-  if (requiresExplicit && harnesses.includes('claude') && (!options.claudeScope || !options.claudeHooks)) {
-    throw new Error('Claude requires explicit --claude-scope and --claude-hooks choices in this mode.');
+  if (requiresExplicit && harnesses.includes('claude') && !options.claudeScope) {
+    throw new Error('Claude requires explicit --claude-scope in this mode.');
   }
   if (requiresExplicit && harnesses.includes('kimi') && !options.profile) {
     throw new Error('Kimi requires an explicit --profile choice in this mode.');
@@ -214,12 +209,8 @@ function printPlan(plan, output) {
   if (plan.request.harnesses.includes('kimi')) {
     output.write('\nKimi note: ECC hooks are not configured; model, provider, and authentication settings are unchanged.\n');
   }
-  if (plan.request.harnesses.includes('claude') && plan.request.claudeHooks && plan.request.claudeHooks !== 'off') {
-    output.write(
-      `\nClaude hook profile '${plan.request.claudeHooks}' enables automation that can:\n`
-      + `${formatHookCapabilityDisclosure()}\n`
-      + "Choose '--claude-hooks off' to install without automatic hook behavior.\n"
-    );
+  if (plan.request.harnesses.includes('claude')) {
+    output.write('\nClaude note: ECC hooks are disabled.\n');
   }
 }
 
@@ -237,7 +228,7 @@ function buildRetryArguments(plan, retryHarnesses) {
   const harnesses = [...retryHarnesses];
   const harnessArguments = harnesses.flatMap(id => ['--harness', id]);
   const claudeArguments = harnesses.includes('claude')
-    ? ['--claude-scope', plan.request.claudeScope, '--claude-hooks', plan.request.claudeHooks]
+    ? ['--claude-scope', plan.request.claudeScope]
     : [];
   const kimiArguments = harnesses.includes('kimi')
     ? ['--profile', plan.request.profile]

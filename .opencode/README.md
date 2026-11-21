@@ -3,7 +3,7 @@
 > WARNING: This README is specific to OpenCode usage.
 > If you installed ECC via npm (e.g. `npm install opencode-ecc`), refer to the root README instead.
 
-ECC plugin for OpenCode - agents, commands, hooks, and skills.
+ECC plugin for OpenCode - agents, commands, tools, and skills.
 
 ## Installation
 
@@ -134,30 +134,9 @@ a pointer to this command if the build step is missing.
 | `/promote` | Promote project instincts |
 | `/projects` | List known projects |
 
-### Plugin Hooks
+### Lifecycle hooks
 
-| Hook | Event | Purpose |
-|------|-------|---------|
-| Prettier | `file.edited` | Auto-format JS/TS |
-| TypeScript | `tool.execute.after` | Check for type errors |
-| console.log | `file.edited` | Warn about debug statements |
-| Notification | `session.idle` | Desktop notification (cross-platform) |
-| Tool reminders | `tool.execute.before` | Track writes and suggest review before pushing |
-| Git Push Reminder | `tool.execute.before` | Remind to review before pushing |
-| Doc File Warning | `tool.execute.before` | Warn about unnecessary documentation |
-| Long Command Reminder | `tool.execute.before` | Remind about long-running commands |
-| Session Context | `session.created` | Load project context |
-| Console Log Audit | `session.idle` | Audit edited files for console.log |
-| File Watcher | `file.watcher.updated` | Track file system changes |
-| Todo Progress | `todo.updated` | Log task completion progress |
-| Shell Environment | `shell.env` | Inject environment variables |
-| Session Compacting | `experimental.session.compacting` | Preserve context across compaction |
-| Permission Auto-Approve | `permission.ask` | Auto-approve safe operations |
-
-The tool-before callbacks provide bookkeeping and advisory reminders. They do
-not run ECC's canonical Bash guards or reject commands such as
-`git commit --no-verify`. Native OpenCode permission rules remain the execution
-boundary; configured native denies take precedence over ECC read suggestions.
+Database lifecycle hook installation is [available for Codex](../hooks/README.md). Both the named OpenCode 1.x entry and the default 2.x entry expose the on-demand tools below.
 
 ### Custom Tools
 
@@ -171,32 +150,6 @@ boundary; configured native denies take precedence over ECC read suggestions.
 | git-summary | Generate git summary with branch, status, and diff |
 | changed-files | List files changed in session as a navigable tree |
 | dependency-analyzer | Analyze dependencies for outdated, vulnerable, and unused packages |
-
-## Hook Event Mapping
-
-OpenCode's plugin system maps to Claude Code hooks:
-
-| Claude Code | OpenCode |
-|-------------|----------|
-| PreToolUse | `tool.execute.before` |
-| PostToolUse | `tool.execute.after` |
-| Stop | `session.idle` |
-| SessionStart | `session.created` |
-| SessionEnd | `session.deleted` |
-
-OpenCode has 20+ additional events not available in Claude Code.
-
-### Hook Runtime Controls
-
-OpenCode plugin hooks honor the same runtime controls used by Claude Code/Cursor:
-
-```bash
-export ECC_HOOK_PROFILE=standard
-export ECC_DISABLED_HOOKS="pre:bash:tmux-reminder,post:edit:typecheck"
-```
-
-- `ECC_HOOK_PROFILE`: `minimal`, `standard` (default), `strict`
-- `ECC_DISABLED_HOOKS`: comma-separated hook IDs to disable
 
 ## Skills
 
@@ -241,20 +194,3 @@ selection, and its subagents inherit the invoking primary agent's model.
 ## License
 
 MIT
-
-Home-target installations keep `plugins/index.ts` inert even with hooks enabled.
-The default plugin entry targets OpenCode 2.x. OpenCode 1.x's function-only
-loader cannot load this entry; the retained named V1 factory is a migration
-surface, not automatic V1 package compatibility.
-
-OpenCode 2.x loads plugins by scanning every root-level file in a plugins
-directory; it does **not** accept configured file paths — an entry like
-`"./plugins/ecc-hooks.ts"` in the `plugin` array logs
-"configured plugin path must be a directory" and is skipped, so the config ships
-without any `plugin` entry and `plugins/ecc-hooks.ts` is discovered from the
-directory. The barrel stays a distinct-id stub (`ecc-hooks-entry`) because
-re-exporting the real definition from `index.ts` would register the id
-`ecc-hooks` twice — once per discovered entry — and OpenCode marks every entry
-after the first as failed (`Duplicate plugin ID`). The source and published
-package barrel remain available for module imports; the package `./plugins`
-subpath maps to the live `dist/plugins/ecc-hooks.js` entry point.

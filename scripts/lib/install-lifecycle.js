@@ -15,8 +15,10 @@ const { withOpenCodeInstallLocks } = require('./install/opencode-install-lock');
 const { isCodexUserConfig } = require('./install/codex-user-config');
 const {
   getRecordedHookConsent,
+  isHookRuntimeOperation,
   withHookConsent,
 } = require('./install/hook-consent');
+const { RETIRED_HOOK_MODULES } = require('./install/request');
 const {
   prepareClaudeSkillMigration,
 } = require('./install/claude-skill-migration');
@@ -1322,6 +1324,12 @@ function buildDoctorReport(options = {}) {
   };
 }
 
+function isDeferredProviderHook(target, operation) {
+  // OpenCode has its own verified in-place deactivation for legacy plugins.
+  return target !== 'codex' && target !== 'opencode'
+    && (RETIRED_HOOK_MODULES.has(operation.moduleId) || isHookRuntimeOperation(operation));
+}
+
 function createRepairPlanFromRecord(record, context, options = {}) {
   const state = record.state;
   if (!state) {
@@ -1334,7 +1342,7 @@ function createRepairPlanFromRecord(record, context, options = {}) {
   ) {
     const operations = hydrateRecordedOperations(
       context.repoRoot,
-      getManagedOperations(state),
+      getManagedOperations(state).filter(operation => !isDeferredProviderHook(record.adapter.target, operation)),
       record.targetRoot
     );
     const statePreview = buildRecordedStatePreview(state, context, operations);
@@ -1353,9 +1361,9 @@ function createRepairPlanFromRecord(record, context, options = {}) {
       operations,
       statePreview
     };
-    return record.adapter.target === 'opencode'
-      ? withHookConsent(recordedPlan, getRecordedHookConsent(state))
-      : recordedPlan;
+    return record.adapter.target === 'codex'
+      ? recordedPlan
+      : withHookConsent(recordedPlan, 'declined');
   }
 
   const desiredPlan = resolveRecordedManifestPlan(record, context, options);
@@ -1404,6 +1412,9 @@ function writeRefreshedInstallState(record, statePreview, writtenPaths = []) {
       if (!operation.destinationPath) {
         return { ...operation };
       }
+      // Leave retired provider registrations and their ownership evidence intact
+      // until the installer or uninstaller performs the guarded deactivation.
+      if (isDeferredProviderHook(record.adapter.target, operation)) return { ...operation };
       // Refreshing a ledger is not a file write. Keep the last installed digest
       // for untouched shared configs and OpenCode activations so a concurrent
       // user edit is never claimed, even by a partial repair checkpoint.
@@ -1458,15 +1469,20 @@ function prepareRepairMigration(plan, record) {
   const migration = trustedPlan.target === 'opencode'
     ? require('./install/apply').prepareHookConsentMigration(trustedPlan, guardedMigration)
     : guardedMigration;
+  const operations = migration.finalState.operations.filter(operation => !isDeferredProviderHook(trustedPlan.target, operation));
+  const hookWarnings = operations.length === migration.finalState.operations.length ? [] : [
+    'Repair skipped retired hook registrations. Install the selected content again or use uninstall to review and remove them.',
+  ];
   return {
     migration,
     plan: {
       ...trustedPlan,
-      operations: migration.finalState.operations,
+      operations,
       statePreview: migration.finalState,
       warnings: [
         ...(Array.isArray(plan.warnings) ? plan.warnings : []),
         ...migration.warnings,
+        ...hookWarnings,
       ],
     },
   };

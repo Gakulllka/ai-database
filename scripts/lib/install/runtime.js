@@ -7,13 +7,30 @@ const {
 } = require('../install-executor');
 const { resolveInvocationEnvironment } = require('../invocation-environment');
 const { withHookConsent } = require('./hook-consent');
+const { RETIRED_HOOK_COMPONENT, RETIRED_HOOK_MODULES } = require('./request');
 
 function createInstallPlanFromRequest(request, options = {}) {
   if (!request || typeof request !== 'object') {
     throw new Error('A normalized install request is required');
   }
 
-  return withHookConsent(createRawInstallPlan(request, options), request.hookConsent || null);
+  // Recorded requests from older installs predate the current CLI normalization.
+  const requestedModules = request.moduleIds || [];
+  const requestedComponents = request.includeComponentIds || [];
+  const moduleIds = requestedModules.filter(id => !RETIRED_HOOK_MODULES.has(id));
+  const includeComponentIds = requestedComponents.filter(id => id !== RETIRED_HOOK_COMPONENT);
+  const excludeComponentIds = (request.excludeComponentIds || []).filter(id => id !== RETIRED_HOOK_COMPONENT);
+  const lostSelection = moduleIds.length !== requestedModules.length
+    || includeComponentIds.length !== requestedComponents.length;
+  if (request.mode === 'manifest' && lostSelection && !request.profileId
+    && moduleIds.length === 0 && includeComponentIds.length === 0) {
+    throw new Error('The recorded install only selected retired hooks. Choose a content module or uninstall the recorded hooks.');
+  }
+  const hookConsent = request.target === 'codex' ? request.hookConsent || null : 'declined';
+  return withHookConsent(
+    createRawInstallPlan({ ...request, moduleIds, includeComponentIds, excludeComponentIds, hookConsent }, options),
+    hookConsent
+  );
 }
 
 function createRawInstallPlan(request, options = {}) {

@@ -11,14 +11,8 @@ const {
   planClaudeHooksOperations,
   convertWindowsPathToWSL,
 } = require('./helpers');
-const { getClaudeSettingsPath } = require('../install/claude-settings');
 
 const CLAUDE_ECC_NAMESPACE = 'ecc';
-// config-health ships its own SessionStart hook. It is a separate config from
-// hooks/hooks.json because installing the module without hooks-runtime must
-// not register every ECC hook, and installing hooks-runtime must not register
-// this one without the module that provides the script.
-const CONFIG_HEALTH_HOOKS_CONFIG_PATH = 'manifests/install-assets/config-health-hooks.json';
 
 function getClaudeManagedDestinationPath(adapter, sourceRelativePath, input) {
   const normalizedSourcePath = normalizeRelativePath(sourceRelativePath);
@@ -147,20 +141,7 @@ module.exports = createInstallTargetAdapter({
           return [adapter.createScaffoldOperation(module.id, sourceRelativePath, planningInput)];
         });
 
-      if (module.id !== 'config-health') {
-        return moduleOperations;
-      }
-      // The skill promises a SessionStart hook by default. Copying the skill
-      // and the script is not that promise: without this settings merge the
-      // installed monitor is never invoked by an ordinary session. PreToolUse
-      // stays opt-in and is deliberately absent from this config.
-      return [...moduleOperations, createRemappedOperation(
-        adapter,
-        module.id,
-        CONFIG_HEALTH_HOOKS_CONFIG_PATH,
-        getClaudeSettingsPath(adapter.resolveRoot(planningInput)),
-        { kind: 'update-claude-settings', strategy: 'merge-hook-ids' }
-      )];
+      return moduleOperations;
     });
     if (!operations.some(operation => operation.moduleId === 'commands-core'
       && normalizeRelativePath(operation.sourceRelativePath).startsWith('scripts/'))) return operations;

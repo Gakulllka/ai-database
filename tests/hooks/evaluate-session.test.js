@@ -692,22 +692,6 @@ function runTests() {
     }
   })) passed++; else failed++;
 
-  if (test('stop:evaluate-session registration is synchronous (no async flag)', () => {
-    const hooksConfig = JSON.parse(fs.readFileSync(
-      path.join(__dirname, '..', '..', 'hooks', 'hooks.json'), 'utf8'
-    ));
-    let entry = null;
-    for (const group of hooksConfig.hooks.Stop) {
-      for (const hook of group.hooks || []) {
-        if (typeof hook.command === 'string' && hook.command.includes('stop:evaluate-session')) {
-          entry = hook;
-        }
-      }
-    }
-    assert.ok(entry, 'stop:evaluate-session must be registered in hooks.json');
-    assert.notStrictEqual(entry.async, true, 'An async Stop registration cannot block, so delivery must stay synchronous');
-  })) passed++; else failed++;
-
   if (test('emits no stdout when stop_hook_active is true, even with opt-in + lease', () => {
     const testDir = createTestDir();
     const transcript = createTranscript(testDir, 12);

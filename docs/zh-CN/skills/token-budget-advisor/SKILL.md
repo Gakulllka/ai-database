@@ -23,7 +23,7 @@ origin: community
 
 使用仓库的标准上下文预算启发式方法，在脑海中估算提示词的token数量。
 
-使用与[context-budget](../context-budget/SKILL.md)相同的校准指南：
+使用以下方法粗略估算输入长度：
 
 * 散文：`words × 1.3`
 * 代码密集或混合/代码块：`chars / 4`

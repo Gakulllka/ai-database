@@ -268,10 +268,10 @@ function main() {
         "skills/learn-eval/agents/openai.yaml",
         ".agents/skills/learn-eval/SKILL.md",
         ".agents/skills/learn-eval/agents/openai.yaml",
-        "skills/verify-deliverables/SKILL.md",
-        "skills/verify-deliverables/agents/openai.yaml",
-        ".agents/skills/verify-deliverables/SKILL.md",
-        ".agents/skills/verify-deliverables/agents/openai.yaml",
+
+
+
+
         "skills/game-balance/assets/balance-report.html",
         "skills/game-balance/references/genre-methods.md",
         "skills/game-playtest/references/session-sheet.md",
@@ -377,7 +377,6 @@ function main() {
         "schemas/memory.schema.json",
         "skills/backend-patterns/SKILL.md",
         "skills/skill-comply/SKILL.md",
-        "skills/skill-host-compat/SKILL.md",
         "skills/unified-memory/SKILL.md",
         "scripts/agent-convert.js",
         "scripts/lib/agent-ir.js",

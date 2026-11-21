@@ -200,7 +200,7 @@ Copy-Item -Recurse rules/typescript "$HOME/.claude/rules/"
 /plugin list ecc@ecc
 ```
 
-**完成！** 你现在可以使用 77 个代理、374 个技能和 98 个命令。
+**完成！** 你现在可以使用 77 个代理、285 个技能和 98 个命令。
 
 ### multi-* 命令需要额外配置
 
@@ -306,7 +306,6 @@ ECC/
 |
 |-- skills/           # 工作流定义与领域知识库
 |   |-- coding-standards/           # 各语言最佳实践
-|   |-- clickhouse-io/              # ClickHouse 分析、查询与数据工程
 |   |-- backend-patterns/           # API、数据库、缓存设计模式
 |   |-- frontend-patterns/          # React、Next.js 开发模式
 |   |-- frontend-slides/            # HTML 幻灯片与 PPTX 转网页工作流（新增）
@@ -317,34 +316,24 @@ ECC/
 |   |-- iterative-retrieval/        # 为子智能体渐进式优化上下文
 |   |-- strategic-compact/          # 手动上下文精简建议（长文本指南）
 |   |-- tdd-workflow/               # 测试驱动开发方法论
-|   |-- security-review/            # 安全检查清单
 |   |-- eval-harness/               # 验证循环评估（长文本指南）
 |   |-- verification-loop/          # 持续验证机制（长文本指南）
-|   |-- videodb/                    # 音视频采集、检索、编辑、生成与推流（新增）
 |   |-- golang-patterns/            # Go 语言惯用写法与最佳实践
 |   |-- golang-testing/             # Go 测试模式、TDD 与基准测试
 |   |-- cpp-coding-standards/       # 遵循 C++ Core Guidelines 的编码规范（新增）
 |   |-- cpp-testing/                # 基于 GoogleTest、CMake/CTest 的 C++ 测试（新增）
-|   |-- django-patterns/            # Django 模式、模型与视图（新增）
-|   |-- django-security/            # Django 安全最佳实践（新增）
-|   |-- django-tdd/                 # Django TDD 工作流（新增）
-|   |-- django-verification/        # Django 验证循环（新增）
 |   |-- laravel-patterns/           # Laravel 架构模式（新增）
-|   |-- laravel-security/           # Laravel 安全最佳实践（新增）
 |   |-- laravel-tdd/                # Laravel TDD 工作流（新增）
 |   |-- laravel-verification/       # Laravel 验证循环（新增）
 |   |-- python-patterns/            # Python 惯用写法与最佳实践（新增）
 |   |-- python-testing/             # 基于 pytest 的 Python 测试（新增）
 |   |-- quarkus-patterns/            # Java Quarkus 模式（新增）
-|   |-- quarkus-security/            # Quarkus 安全（新增）
 |   |-- quarkus-tdd/                 # Quarkus TDD（新增）
 |   |-- quarkus-verification/        # Quarkus 验证（新增）
 |   |-- springboot-patterns/        # Java Spring Boot 模式（新增）
-|   |-- springboot-security/        # Spring Boot 安全（新增）
 |   |-- springboot-tdd/             # Spring Boot TDD（新增）
 |   |-- springboot-verification/    # Spring Boot 验证（新增）
 |   |-- configure-ecc/              # 交互式安装向导（新增）
-|   |-- security-scan/              # 集成 AgentShield 安全审计（新增）
 |   |-- java-coding-standards/      # Java 编码规范（新增）
 |   |-- jpa-patterns/               # JPA/Hibernate 模式（新增）
 |   |-- postgres-patterns/          # PostgreSQL 优化模式（新增）
@@ -362,8 +351,6 @@ ECC/
 |   |-- swift-protocol-di-testing/   # 基于协议的依赖注入，实现可测试 Swift 代码（新增）
 |   |-- search-first/               # 先调研再编码工作流（新增）
 |   |-- skill-stocktake/            # 技能与命令质量审计（新增）
-|   |-- liquid-glass-design/         # iOS 26 Liquid Glass 设计系统（新增）
-|   |-- foundation-models-on-device/ # 基于 Apple FoundationModels 的端侧大模型（新增）
 |   |-- swift-concurrency-6-2/       # Swift 6.2 简洁并发编程（新增）
 |   |-- perl-patterns/              # 现代 Perl 5.36+ 惯用写法与最佳实践（新增）
 |   |-- perl-security/              # Perl 安全模式、污点模式、安全 I/O（新增）
@@ -657,7 +644,7 @@ cp -r ECC/.agents/skills/* ~/.claude/skills/
 cp -r ECC/skills/search-first ~/.claude/skills/
 
 # 可选：仅在需要时添加细分领域/框架专属技能
-# for s in django-patterns django-tdd laravel-patterns springboot-patterns quarkus-patterns; do
+# for s in laravel-patterns laravel-tdd springboot-patterns quarkus-patterns; do
 # cp -r ECC/skills/$s ~/.claude/skills/
 # done
 

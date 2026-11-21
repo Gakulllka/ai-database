@@ -58,7 +58,7 @@
     },
     {
       "command": "cost-report",
-      "description": "Generate a local Claude Code cost report from the ECC cost-tracker metrics log. Use for a terminal summary or CSV export of tracked spend; the cost-tracking skill covers the same metrics log for on-demand cost/budget questions asked in conversation.",
+      "description": "Generate a local Claude Code cost report from the ECC cost-tracker metrics log. Use for a terminal summary or CSV export of tracked spend.",
       "type": "testing",
       "primaryAgents": [],
       "allAgents": [],
@@ -115,8 +115,7 @@
       "primaryAgents": [],
       "allAgents": [],
       "skills": [
-        "ecc-guide",
-        "security-scan"
+        "ecc-guide"
       ],
       "path": "commands/ecc-guide.md"
     },
@@ -953,7 +952,7 @@
     },
     {
       "command": "security-scan",
-      "description": "Run AgentShield against agent, hook, MCP, permission, and secret surfaces. This is the slash-command entrypoint for that audit; prefer the security-scan skill for the same AgentShield audit in conversation.",
+      "description": "Run AgentShield against agent, hook, MCP, permission, and secret surfaces. Requires an installed, reviewed AgentShield runner.",
       "type": "review",
       "primaryAgents": [
         "security-reviewer"
@@ -961,9 +960,7 @@
       "allAgents": [
         "security-reviewer"
       ],
-      "skills": [
-        "security-scan"
-      ],
+      "skills": [],
       "path": "commands/security-scan.md"
     },
     {
@@ -1008,9 +1005,7 @@
       "type": "general",
       "primaryAgents": [],
       "allAgents": [],
-      "skills": [
-        "skill-host-compat"
-      ],
+      "skills": [],
       "path": "commands/skill-host-compat.md"
     },
     {
@@ -1024,13 +1019,11 @@
     },
     {
       "command": "token-card",
-      "description": "Render a token-usage stat card from local agent session logs and commit it to the repo. Invokes the token-card skill.",
+      "description": "Explain the retired token usage card shortcut.",
       "type": "general",
       "primaryAgents": [],
       "allAgents": [],
-      "skills": [
-        "token-card"
-      ],
+      "skills": [],
       "path": "commands/token-card.md"
     },
     {

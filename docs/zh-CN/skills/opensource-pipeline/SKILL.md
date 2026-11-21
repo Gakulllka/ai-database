@@ -255,4 +255,4 @@ $HOME/opensource-staging/
 
 ## 相关技能
 
-参见 `security-review` 了解净化器使用的密钥检测模式。
+打包前运行清理流程中的密钥检测。

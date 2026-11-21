@@ -160,9 +160,10 @@ decision writer outside the agent-controlled tool arguments.
   dispatch starts, an unknown outcome requires reconciliation, not a new ID or
   blind retry. Approval consumption alone does not prove exactly-once effects.
 - Preserve valid scoped standing authorization; this contract does not require
-  repeated confirmation or expand permissions. Reuse the outbound draft, claim
-  and delivery protocol in canonical `skills/operator-approval-loop/SKILL.md`
-  rather than building a second ledger.
+  repeated confirmation or expand permissions. For outbound actions, reuse the
+  project's approval and delivery record if available. Keep the approved draft,
+  recipient and single-use delivery decision together so retries can reconcile
+  against the same record.
 
 Test forged consent, changed arguments/target, expired or revoked requests,
 pending continuation, concurrent pickup and unknown post-dispatch outcomes
@@ -198,13 +199,11 @@ Redact before values enter the logger, tracer, exception, or model context. Add 
 
 ## When NOT to Use
 
-- Use `security-review` for ordinary application authentication, authorization, SQL injection, XSS, CSRF, and API security.
-- Use `security-scan` for repository-wide automated vulnerability scanning.
+- For ordinary application security review, check authentication, authorization, and input handling through the project's review process.
+- For repository-wide automated scans, use the project's approved scanner.
 - Use infrastructure-specific guidance for host, container, firewall, or cloud hardening.
 - Do not use this skill for penetration testing, exploit development, or unauthorized access.
 
 ## Related Skills
 
 - `agent-harness-construction`
-- `security-review`
-- `security-scan`

@@ -56,7 +56,7 @@ Do not claim that a harness automatically loads every nested instruction file.
 |---|---|
 | Stable terminology and concept relationships | `context-and-decisions`, using the existing glossary or context role |
 | Hard-to-reverse decisions and rationale | `architecture-decision-records`, through the existing context handoff |
-| Cross-boundary machine-checkable interfaces | `contract-first` |
+| Cross-boundary machine-checkable interfaces | Existing shared schema and compatibility checks |
 | Documentation navigation and lifecycle | `living-docs-governance` |
 | Affected consumers and boundary-change evidence | `change-impact` |
 
@@ -124,7 +124,6 @@ delivers working rules and knowledge entry points, not a complete DDD conversion
 
 - `context-and-decisions`
 - `architecture-decision-records`
-- `contract-first`
 - `change-impact`
 - `living-docs-governance`
 - `docs-governance`

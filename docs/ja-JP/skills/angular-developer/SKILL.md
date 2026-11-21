@@ -150,5 +150,5 @@ Angular ツール作成で作業するときは、次のリファレンスを参
 ## 関連スキル
 
 - `tdd-workflow` — Angular コンポーネントおよびサービスに適用可能なテスト駆動開発ワークフロー。
-- `security-review` — Angular 固有の懸念を含む Web アプリケーションのセキュリティ チェックリスト。
+- Angular の変更は、プロジェクトのセキュリティ要件に照らして確認する。
 - `frontend-patterns` — React/Next.js アプローチのコンテキスト用の一般的なフロントエンド パターン。

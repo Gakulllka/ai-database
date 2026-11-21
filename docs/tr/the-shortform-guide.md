@@ -30,7 +30,6 @@ Command'lar, slash command'lar aracılığıyla yürütülen skill'lerdir. Ört�
   pmx-guidelines.md      # Projeye özel desenler
   coding-standards.md    # Dile özgü en iyi uygulamalar
   tdd-workflow/          # README.md ile çok dosyalı skill
-  security-review/       # Kontrol listesi tabanlı skill
 ```
 
 ---

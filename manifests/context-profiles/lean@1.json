@@ -4,8 +4,8 @@
   "description": "Proposed three-skill ECC discovery kernel. Remaining skills are routed; this profile does not activate or modify a harness.",
   "registryId": "skill-registry@1",
   "selection": {
-    "eager": ["skill:configure-ecc", "skill:context-budget", "skill:ecc-guide"],
-    "required": ["skill:configure-ecc", "skill:context-budget", "skill:ecc-guide"],
+    "eager": ["skill:configure-ecc", "skill:ecc-guide", "skill:skill-scout"],
+    "required": ["skill:configure-ecc", "skill:ecc-guide", "skill:skill-scout"],
     "remainder": "routed"
   },
   "budget": { "tokens": 8000, "mode": "blocking" }

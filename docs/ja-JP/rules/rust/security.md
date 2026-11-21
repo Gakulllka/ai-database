@@ -138,4 +138,3 @@ match order_service.find_by_id(id) {
 ## 参考
 
 アンセーフコードのガイドラインと所有権パターンについてはスキル: `rust-patterns` を参照。
-一般的なセキュリティチェックリストについてはスキル: `security-review` を参照。

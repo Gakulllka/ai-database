@@ -69,7 +69,6 @@ Skills are auto-loaded from `.agents/skills/`. Each skill contains:
 
 Available skills:
 - tdd-workflow — Test-driven development with 80%+ coverage
-- security-review — Comprehensive security checklist
 - coding-standards — Universal coding standards
 - frontend-patterns — React/Next.js patterns
 - frontend-slides — Viewport-safe HTML presentations and PPTX-to-web conversion
@@ -82,9 +81,7 @@ Available skills:
 - api-design — REST API design patterns
 - verification-loop — Build, test, lint, typecheck, security
 - deep-research — Multi-source research with firecrawl and exa MCPs
-- exa-search — Neural search via Exa MCP for web, code, and companies
 - claude-api — Anthropic Claude API patterns and SDKs
-- fal-ai-media — AI image/video/audio generation via fal.ai
 - dmux-workflows — Multi-agent orchestration with dmux
 
 ## MCP Servers

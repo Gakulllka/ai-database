@@ -46,7 +46,7 @@ Existing implementation anchors:
 - `scripts/lib/skill-evolution/` records skill runs, health, and provenance;
   `skills/continuous-learning-v2/` and `skills/eval-harness/` provide the
   learning and evaluation substrate.
-- `skills/security-scan/`, `schemas/provenance.schema.json`, and
+- `commands/security-scan.md`, `schemas/provenance.schema.json`, and
   `docs/architecture/agentshield-enterprise-research-roadmap.md` provide the
   current policy and supply-chain substrate.
 

@@ -34,7 +34,7 @@ function readFile(filename) {
 
 function extractSection(md, heading) {
   const re = new RegExp(`## ${heading}\\n([\\s\\S]*?)(?=\\n## |$)`);
-  const m = md.match(re);
+  const m = md.replace(/\r\n/g, '\n').match(re);
   return m ? m[1].trim() : null;
 }
 
@@ -91,19 +91,19 @@ if (pyproject) {
 }
 
 // ── .git/config (repo URL) ────────────────────────────────────────────────────
-const gitConfig = readFile('.git/config');
+const gitConfig = process.env.CK_HOME ? null : readFile('.git/config');
 if (gitConfig) {
   const repoMatch = gitConfig.match(/url\s*=\s*(.+)/);
   if (repoMatch) output.repo = repoMatch[1].trim();
 }
 
 // ── CLAUDE.md ─────────────────────────────────────────────────────────────────
-const claudeMd = readFile('CLAUDE.md');
-if (claudeMd) {
-  const goal = extractSection(claudeMd, 'Current Goal');
+const instructions = readFile(process.env.CK_HOME ? 'AGENTS.md' : 'CLAUDE.md');
+if (instructions) {
+  const goal = extractSection(instructions, 'Current Goal');
   if (goal && !output.goal) output.goal = goal.split('\n')[0].trim();
 
-  const doNot = extractSection(claudeMd, 'Do Not Do');
+  const doNot = extractSection(instructions, 'Do Not Do');
   if (doNot) {
     const bullets = doNot.split('\n')
       .filter(l => /^[-*]\s+/.test(l))
@@ -111,13 +111,13 @@ if (claudeMd) {
     output.constraints = bullets;
   }
 
-  const stack = extractSection(claudeMd, 'Tech Stack');
+  const stack = extractSection(instructions, 'Tech Stack');
   if (stack && output.stack.length === 0) {
     output.stack = stack.split(/[,\n]/).map(s => s.replace(/^[-*]\s+/, '').trim()).filter(Boolean);
   }
 
   // Description from first section or "What This Is"
-  const whatItIs = extractSection(claudeMd, 'What This Is') || extractSection(claudeMd, 'About');
+  const whatItIs = extractSection(instructions, 'What This Is') || extractSection(instructions, 'About');
   if (whatItIs && !output.description) output.description = whatItIs.split('\n')[0].trim();
 }
 

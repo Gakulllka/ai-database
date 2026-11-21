@@ -264,7 +264,7 @@ Copy-Item -Recurse rules/typescript "$HOME/.claude/rules/"
 /plugin list ecc@ecc
 ```
 
-**搞定！** 你现在可以使用 77 个智能体、374 项技能和 98 个命令了。
+**搞定！** 你现在可以使用 77 个智能体、285 项技能和 98 个命令了。
 
 ***
 
@@ -356,7 +356,6 @@ ECC/
 |
 |-- skills/           # 工作流定义与领域知识
 |   |-- coding-standards/           # 语言最佳实践
-|   |-- clickhouse-io/              # ClickHouse 分析、查询与数据工程
 |   |-- backend-patterns/           # API、数据库与缓存模式
 |   |-- frontend-patterns/          # React、Next.js 模式
 |   |-- frontend-slides/            # HTML 幻灯片与 PPTX 转 Web 演示工作流（新增）
@@ -367,34 +366,24 @@ ECC/
 |   |-- iterative-retrieval/        # 子代理渐进式上下文优化
 |   |-- strategic-compact/          # 手动压缩建议（长文指南）
 |   |-- tdd-workflow/               # TDD 方法论
-|   |-- security-review/            # 安全检查清单
 |   |-- eval-harness/               # 验证循环评估（长文指南）
 |   |-- verification-loop/          # 持续验证（长文指南）
-|   |-- videodb/                   # 视频与音频：导入、搜索、编辑、生成与流式处理（新增）
 |   |-- golang-patterns/            # Go 习惯用法与最佳实践
 |   |-- golang-testing/             # Go 测试模式、TDD 与基准测试
 |   |-- cpp-coding-standards/         # 基于 C++ Core Guidelines 的 C++ 编码规范（新增）
 |   |-- cpp-testing/                # 使用 GoogleTest 与 CMake/CTest 的 C++ 测试（新增）
-|   |-- django-patterns/            # Django 模式、模型与视图（新增）
-|   |-- django-security/            # Django 安全最佳实践（新增）
-|   |-- django-tdd/                 # Django TDD 工作流（新增）
-|   |-- django-verification/        # Django 验证循环（新增）
 |   |-- laravel-patterns/           # Laravel 架构模式（新增）
-|   |-- laravel-security/           # Laravel 安全最佳实践（新增）
 |   |-- laravel-tdd/                # Laravel TDD 工作流（新增）
 |   |-- laravel-verification/       # Laravel 验证循环（新增）
 |   |-- python-patterns/            # Python 习惯用法与最佳实践（新增）
 |   |-- python-testing/             # 使用 pytest 的 Python 测试（新增）
 |   |-- quarkus-patterns/            # Java Quarkus 模式（新增）
-|   |-- quarkus-security/            # Quarkus 安全（新增）
 |   |-- quarkus-tdd/                 # Quarkus TDD（新增）
 |   |-- quarkus-verification/        # Quarkus 验证（新增）
 |   |-- springboot-patterns/        # Java Spring Boot 模式（新增）
-|   |-- springboot-security/        # Spring Boot 安全（新增）
 |   |-- springboot-tdd/             # Spring Boot TDD（新增）
 |   |-- springboot-verification/    # Spring Boot 验证（新增）
 |   |-- configure-ecc/              # 交互式安装向导（新增）
-|   |-- security-scan/              # AgentShield 安全审计集成（新增）
 |   |-- java-coding-standards/     # Java 编码规范（新增）
 |   |-- jpa-patterns/              # JPA/Hibernate 模式（新增）
 |   |-- postgres-patterns/         # PostgreSQL 优化模式（新增）
@@ -412,8 +401,6 @@ ECC/
 |   |-- swift-protocol-di-testing/   # 基于 Protocol 的依赖注入用于可测试 Swift 代码（新增）
 |   |-- search-first/               # 先调研后编码的工作流（新增）
 |   |-- skill-stocktake/            # 审计技能与命令质量（新增）
-|   |-- liquid-glass-design/         # iOS 26 Liquid Glass 设计系统（新增）
-|   |-- foundation-models-on-device/ # Apple 设备端 LLM（FoundationModels）（新增）
 |   |-- swift-concurrency-6-2/       # Swift 6.2 易用并发（新增）
 |   |-- perl-patterns/             # 现代 Perl 5.36+ 习惯用法与最佳实践（新增）
 |   |-- perl-security/             # Perl 安全模式、taint 模式与安全 I/O（新增）
@@ -718,7 +705,7 @@ cp -r ECC/.agents/skills/* ~/.claude/skills/
 cp -r ECC/skills/search-first ~/.claude/skills/
 
 # Optional: add niche/framework-specific skills only when needed
-# for s in django-patterns django-tdd laravel-patterns springboot-patterns quarkus-patterns; do
+# for s in laravel-patterns laravel-tdd springboot-patterns quarkus-patterns; do
 # cp -r ECC/skills/$s ~/.claude/skills/
 # done
 ```
@@ -1111,18 +1098,14 @@ Codex macOS 应用：
 | e2e-testing | Playwright 端到端测试 |
 | eval-harness | 评估驱动的开发 |
 | ecc-conventions | ECC 项目的开发约定和模式 |
-| exa-search | 通过 Exa MCP 进行网络、代码和公司研究 |
-| fal-ai-media | 图像、视频和音频的统一媒体生成 |
 | frontend-patterns | React/Next.js 模式 |
 | frontend-slides | HTML 演示文稿、PPTX 转换、视觉风格探索 |
 | mcp-server-patterns | 使用 Node/TypeScript SDK 构建 MCP 服务器 |
 | nextjs-turbopack | Next.js 16+ 和 Turbopack 增量打包 |
 | product-capability | 将产品目标转化为有范围的能力图 |
-| security-review | 全面的安全检查清单 |
 | strategic-compact | 上下文管理 |
 | tdd-workflow | 测试驱动开发，覆盖率 80%+ |
 | verification-loop | 构建、测试、代码检查、类型检查、安全 |
-| video-editing | 使用 FFmpeg 和 Remotion 的 AI 辅助视频编辑工作流 |
 
 ### 关键限制
 
@@ -1169,7 +1152,7 @@ opencode
 |---------|---------------|----------|--------|
 | 智能体 | PASS: 77 个    | PASS: 12 个 | **Claude Code 领先** |
 | 命令 | PASS: 98 个    | PASS: 35 个 | **Claude Code 领先** |
-| 技能 | PASS: 374 项   | PASS: 37 项 | **Claude Code 领先** |
+| 技能 | PASS: 285 项   | PASS: 37 项 | **Claude Code 领先** |
 | 钩子 | PASS: 8 种事件类型 | PASS: 11 种事件 | **OpenCode 更多！** |
 | 规则 | PASS: 29 条    | PASS: 13 条指令 | **Claude Code 领先** |
 | MCP 服务器 | PASS: 14 个    | PASS: 完整 | **完全对等** |
@@ -1277,7 +1260,7 @@ ECC 是**第一个最大化利用每个主要 AI 编码工具的插件**。以�
 |---------|-----------------------|------------|-----------|----------|
 | **智能体** | 77                    | 共享 (AGENTS.md) | 共享 (AGENTS.md) | 12 |
 | **命令** | 98                    | 共享 | 基于指令 | 35 |
-| **技能** | 374                   | 共享 | 10 (原生格式) | 37 |
+| **技能** | 285                   | 共享 | 10 (原生格式) | 37 |
 | **钩子事件** | 8 种类型                 | 15 种类型 | SessionStart（1 种类型） | 11 种类型 |
 | **钩子脚本** | 20+ 个脚本               | 16 个脚本 (DRY 适配器) | 1 个 SessionStart 引导脚本 | 插件钩子 |
 | **规则** | 34 (通用 + 语言)          | 34 (YAML 前页) | 基于指令 | 13 条指令 |

@@ -1,11 +1,19 @@
 ---
 name: config-gc
-description: Garbage collection for your Claude Code configuration. Periodically scans ~/.claude (skills, memory, hooks, permissions, MCP servers, caches) for redundant, stale, orphaned, or low-value items, then walks the user through a confirm-each-deletion cleanup. Use when the user says "clean up my config", "config GC", "too many skills", "audit my setup", "my .claude is bloated", or asks for a periodic config review.
+description: "Audit Codex or Claude Code settings, skills, agents, hooks and MCP entries for stale or redundant items. Use before an approved configuration cleanup."
 metadata:
   origin: ECC
 ---
 
 # Config GC — Garbage Collection for Claude Code Setups
+
+## Codex workflow
+
+Inventory the selected Codex user or project scope. Use the actual config.toml, instruction files and skill roots. Find the owner, current path and active references before calling an item stale. Search for consumers at the levels that can load the entry and assign one clear reason per proposed change.
+
+Show the proposed cleanup in groups such as duplicates, broken references and optional candidates. Keep a recoverable copy before an authorized cleanup. Remove only the specific approved entries and recheck the effective configuration afterward. Report active discovery separately from configuration syntax. Do not inspect or expose values of credential fields.
+
+## Claude Code and prior integrations
 
 Borrowed from runtime garbage collection: periodically scan for objects that are no longer referenced, redundant, expired, or low-value, and reclaim the space. The critical difference: **here, collection requires a human in the loop. Never delete autonomously.**
 

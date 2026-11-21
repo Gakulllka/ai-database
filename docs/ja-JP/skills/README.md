@@ -16,24 +16,15 @@
 - `cpp-testing/` - C++ テスト
 
 ### フレームワーク
-- `django-patterns/` - Django ベストプラクティス
-- `django-tdd/` - Django テスト駆動開発
-- `django-security/` - Django セキュリティ
 - `quarkus-patterns/` - Quarkus アーキテクチャ、Camel、CDI、Panache パターン
-- `quarkus-security/` - Quarkus セキュリティ: JWT/OIDC、RBAC、バリデーション
 - `quarkus-tdd/` - Quarkus テスト駆動開発
 - `quarkus-verification/` - Quarkus 検証ループ
 - `springboot-patterns/` - Spring Boot パターン
 - `springboot-tdd/` - Spring Boot テスト
-- `springboot-security/` - Spring Boot セキュリティ
 
 ### データベース
 - `postgres-patterns/` - PostgreSQL パターン
 - `jpa-patterns/` - JPA/Hibernate パターン
-
-### セキュリティ
-- `security-review/` - セキュリティチェックリスト
-- `security-scan/` - セキュリティスキャン
 
 ### ワークフロー
 - `tdd-workflow/` - テスト駆動開発ワークフロー
@@ -53,7 +44,7 @@ skills/
 │   └── SKILL.md          # 実装パターン、例、ベストプラクティス
 ├── golang-testing/
 │   └── SKILL.md
-├── django-patterns/
+├── fastapi-patterns/
 │   └── SKILL.md
 ...
 ```
@@ -63,7 +54,7 @@ skills/
 Claude Code はコンテキストに基づいてスキルを自動的に読み込みます。例：
 
 - Python ファイルを編集している場合 → `python-patterns` と `python-testing` が読み込まれる
-- Django プロジェクトの場合 → `django-*` スキルが読み込まれる
+- FastAPI の場合 → `fastapi-patterns` を利用する
 - テスト駆動開発をしている場合 → `tdd-workflow` が読み込まれる
 
 ## スキルの作成

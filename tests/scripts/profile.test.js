@@ -97,12 +97,12 @@ const tests = [
     assert.ok(success(run(['preview', 'full@1', '--target', 'claude', '--selection', 'manual', '--json'])).plan);
   })],
   ['explicit includes and exclusions remain inspection only', () => withFixture(run => {
-    success(run(['preview', '--target', 'codex', '--include', 'skill:security-review',
+    success(run(['preview', '--target', 'codex', '--include', 'skill:agent-security-hardening',
       '--exclude', 'skill:python-patterns', '--json']));
   })],
   ['exact-ID explanation includes an entry and never invokes the skill', () => withFixture(run => {
-    const payload = success(run(['explain', 'skill:security-review', '--target', 'codex', '--json']));
-    assert.strictEqual(payload.entry.id, 'skill:security-review');
+    const payload = success(run(['explain', 'skill:agent-security-hardening', '--target', 'codex', '--json']));
+    assert.strictEqual(payload.entry.id, 'skill:agent-security-hardening');
     assert.strictEqual(payload.activation, 'unobserved');
   })],
   ['text output identifies estimates and unobserved runtime state', () => withFixture(run => {
@@ -126,7 +126,7 @@ const tests = [
     for (const args of [
       ['show', 'lean@1', '--json'],
       ['preview', 'lean@1', '--target', 'codex', '--selection', 'auto',
-        '--include', 'skill:security-review', '--exclude', 'skill:python-patterns', '--json'],
+        '--include', 'skill:agent-security-hardening', '--exclude', 'skill:python-patterns', '--json'],
       ['explain', 'skill:ecc-guide', '--target', 'codex', '--json'],
     ]) {
       const expected = parseArgs(args);
@@ -175,7 +175,7 @@ for (const args of [
   ['preview', '--include', '../../outside'],
   ['preview', '--hooks', 'strict'],
   ['--dry-run', 'preview', '--hooks', 'strict'],
-  ['show', '--include', 'skill:security-review'],
+  ['show', '--include', 'skill:agent-security-hardening'],
   ['explain'],
   ['explain', 'skill:missing-workflow'],
   ['explain', 'skill:ecc-guide', 'extra'],

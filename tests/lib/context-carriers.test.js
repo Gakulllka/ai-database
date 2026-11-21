@@ -322,11 +322,7 @@ test('published carrier schema validates outputs and rejects extra or capability
 test('real canonical inventory projects every selected bundled resource without relying on mirrors', () => {
   const registry = registryLibrary.loadContextRegistry({ repoRoot: REPO_ROOT });
   const renamed = [
-    ['scientific-db-pubmed-database', 'pubmed-database'],
-    ['scientific-db-uspto-database', 'uspto-database'],
-    ['scientific-pkg-gget', 'gget'],
     ['scientific-thinking-literature-review', 'literature-review'],
-    ['scientific-thinking-scholar-evaluation', 'scholar-evaluation'],
   ];
   for (const target of Object.keys(LAYOUTS)) {
     const carrier = plan({ repoRoot: REPO_ROOT, profileId: 'full@1', target });

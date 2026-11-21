@@ -47,10 +47,9 @@ inform them, but CSS extraction, competitor-site research and HTML previews are
 not mandatory native outputs. Character identity/style rules stay with the art
 contract, not a web token generator.
 
-For video, find the existing video workflow by its description. `taste` is a
-particular art direction, not a universal palette. For another design medium,
-inspect the available specialist before inventing a pipeline. A missing tool or
-skill is not an available capability.
+For video, choose a workflow supported by the available editing tools and honor
+any approved visual direction. For other media, check which specialists and
+production tools are available before choosing an approach.
 
 For a mixed request, assign owners to parts: a game cover can prioritize appeal,
 its HUD must remain readable, and its inventory tool must support operations.

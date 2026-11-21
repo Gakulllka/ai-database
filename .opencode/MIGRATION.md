@@ -199,7 +199,7 @@ Create a detailed implementation plan for: $ARGUMENTS
 {
   "instructions": [
     "skills/tdd-workflow/SKILL.md",
-    "skills/security-review/SKILL.md",
+    "skills/coding-standards/SKILL.md",
     "skills/coding-standards/SKILL.md"
   ]
 }

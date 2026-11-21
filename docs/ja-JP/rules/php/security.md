@@ -31,7 +31,3 @@ paths:
 - パスワード保存には `password_hash()` / `password_verify()` を使用する。
 - 認証と権限変更後にセッション識別子を再生成する。
 - 状態変更を伴う Web リクエストに CSRF 保護を強制する。
-
-## リファレンス
-
-スキル: `laravel-security` で Laravel 固有のセキュリティガイダンスを参照してください。

@@ -1,7 +1,7 @@
 {
   "coverage": {
-    "skills": 374,
-    "withTriggers": 48
+    "skills": 285,
+    "withTriggers": 42
   },
   "generatedAt": "2026-11-21T08:06:00.337Z",
   "id": "skill-triggers@1",
@@ -10,7 +10,7 @@
     "id": "hand-seeded",
     "source": "manual-curation-pending-regeneration"
   },
-  "registryDigest": "1ca0a254d82ec51023c8bba027d5639d62a62bdbbcaf4b3ffd55735dbb0d8da5",
+  "registryDigest": "879ec00a95a22f3e5e154e3522d4222ebb911d475013fac70d0a7f2e129785f2",
   "schemaVersion": 1,
   "triggers": {
     "skill:agent-runtime-gateway-smoke-test": [
@@ -128,24 +128,6 @@
       "ui audit",
       "design system bootstrap"
     ],
-    "skill:django-patterns": [
-      "django orm",
-      "drf api",
-      "django rest framework",
-      "django caching",
-      "django signals",
-      "django middleware"
-    ],
-    "skill:django-security": [
-      "django authentication",
-      "csrf protection",
-      "sql injection prevention",
-      "xss prevention",
-      "django deployment security",
-      "role based access control",
-      "authorization middleware",
-      "permissions checks"
-    ],
     "skill:docker-patterns": [
       "dockerfile review",
       "docker compose setup",
@@ -176,12 +158,6 @@
       "compare independent sources",
       "trace claims to evidence",
       "verify findings against original sources"
-    ],
-    "skill:evm-token-decimals": [
-      "token decimals",
-      "wei conversion",
-      "erc20 balance off",
-      "bridge token precision"
     ],
     "skill:frontend-a11y": [
       "aria attributes",
@@ -348,28 +324,6 @@
       "evaluate existing tools",
       "add dependency research"
     ],
-    "skill:security-review": [
-      "security audit",
-      "authentication review",
-      "sanitize user input",
-      "secrets handling",
-      "payment security checklist",
-      "prevent injection attacks",
-      "secure api endpoints",
-      "authn authz review",
-      "vulnerability checklist",
-      "input validation security",
-      "parameterized queries",
-      "sql injection"
-    ],
-    "skill:security-scan": [
-      "audit claude config",
-      "claudemd security",
-      "mcp server audit",
-      "agentshield scan",
-      "hook configuration audit",
-      "settings json security"
-    ],
     "skill:tdd-workflow": [
       "write test first",
       "failing test",
@@ -399,12 +353,6 @@
       "build lint test coverage",
       "before creating a pr"
     ],
-    "skill:verify-deliverables": [
-      "check deliverables against acceptance criteria",
-      "verify a fix through the normal workflow",
-      "check an integration outcome",
-      "verify a generated artifact"
-    ],
     "skill:yoruba-localization-testing": [
       "yoruba localization testing",
       "yoruba english bilingual interface",
@@ -418,5 +366,5 @@
       "yoruba accents not rendering"
     ]
   },
-  "triggersDigest": "5b1e5df206c66858571be6c43538ceff48e56dbfc98e5e065f2c2ace2a04ae96"
+  "triggersDigest": "9e8599c05c791dbd10fdab3acc0b41131a2bf42f541f80489eb13ebc9fc0b617"
 }

@@ -81,4 +81,4 @@ Capture the unresolved decisions blocking implementation.
 - **Ready for implementation?**
 - **Needs architecture review?**
 - **Needs product clarification?**
-- **Next ECC lane:** `project-flow-ops` / `tdd-workflow` / `verification-loop` / other
+- **Next ECC lane:** `tdd-workflow` / `verification-loop` / other

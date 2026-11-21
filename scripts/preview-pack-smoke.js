@@ -12,7 +12,6 @@ const SCHEMA_VERSION = 'ecc.preview-pack-smoke.v1';
 const REQUIRED_ARTIFACTS = [
   'README.md',
   'docs/HERMES-SETUP.md',
-  'skills/hermes-imports/SKILL.md',
   'docs/architecture/cross-harness.md',
   'docs/architecture/harness-adapter-compliance.md',
   'docs/architecture/observability-readiness.md',
@@ -214,13 +213,12 @@ function buildReport(options = {}) {
   const manifestPath = `${RELEASE_DIR}/preview-pack-manifest.md`;
   const manifest = readText(rootDir, manifestPath);
   const hermesSetup = readText(rootDir, 'docs/HERMES-SETUP.md');
-  const hermesSkill = readText(rootDir, 'skills/hermes-imports/SKILL.md');
 
   const missingArtifacts = REQUIRED_ARTIFACTS.filter(relativePath => !fileExists(rootDir, relativePath));
   const unlistedArtifacts = REQUIRED_ARTIFACTS.filter(relativePath => !manifest.includes(`\`${relativePath}\``));
   const missingCommands = REQUIRED_VERIFICATION_COMMANDS.filter(command => !manifest.includes(command));
   const missingBlockers = REQUIRED_PUBLICATION_BLOCKERS.filter(blocker => !manifest.includes(blocker));
-  const missingHermesMarkers = HERMES_BOUNDARY_MARKERS.filter(marker => !`${hermesSetup}\n${hermesSkill}`.includes(marker));
+  const missingHermesMarkers = HERMES_BOUNDARY_MARKERS.filter(marker => !hermesSetup.includes(marker));
   const forbiddenContent = findForbiddenContent(rootDir, [
     ...REQUIRED_ARTIFACTS,
     manifestPath,
@@ -258,7 +256,7 @@ function buildReport(options = {}) {
       'hermes-boundary-sanitized',
       missingHermesMarkers.length === 0 && forbiddenContent.length === 0 ? 'pass' : 'fail',
       missingHermesMarkers.length === 0 && forbiddenContent.length === 0
-        ? 'Hermes setup and import skill preserve the public sanitization boundary'
+        ? 'Hermes setup guide preserves the public sanitization boundary'
         : `missing markers: ${missingHermesMarkers.join(', ') || 'none'}; forbidden content: ${forbiddenContent.map(item => `${item.path}:${item.line}`).join(', ') || 'none'}`,
       'Restore Hermes sanitization language and remove private local paths from preview-pack docs.'
     ),

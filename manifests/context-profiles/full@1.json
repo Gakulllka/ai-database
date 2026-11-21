@@ -5,7 +5,7 @@
   "registryId": "skill-registry@1",
   "selection": {
     "eager": "all",
-    "required": ["skill:configure-ecc", "skill:context-budget", "skill:ecc-guide"],
+    "required": ["skill:configure-ecc", "skill:ecc-guide", "skill:skill-scout"],
     "remainder": "routed"
   },
   "budget": { "tokens": 8000, "mode": "report-only" }

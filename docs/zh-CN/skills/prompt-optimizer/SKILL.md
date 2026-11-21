@@ -104,21 +104,21 @@ metadata:
 | 重构 | /refactor-clean, /code-review, /verify | verification-loop | refactor-cleaner, code-reviewer |
 | 研究 | /plan | search-first, iterative-retrieval | — |
 | 测试 | /tdd, /e2e, /test-coverage | tdd-workflow, e2e-testing | tdd-guide, e2e-runner |
-| 审查 | /code-review | security-review | code-reviewer, security-reviewer |
+| 审查 | /code-review | — | code-reviewer, security-reviewer |
 | 文档 | /update-docs, /update-codemaps | — | doc-updater |
 | 基础设施 | /plan, /verify | docker-patterns, deployment-patterns, database-migrations | architect |
 | 设计 (中-高) | /plan | — | planner, architect |
-| 设计 (史诗级) | — | blueprint (作为技能调用) | planner, architect |
+| 设计 (史诗级) | /plan | 验收标准不明确时使用 intent-driven-development | planner, architect |
 
 #### 按技术栈
 
 | 技术栈 | 要添加的技能 | 代理 |
 |------------|--------------|-------|
-| Python / Django | django-patterns, django-tdd, django-security, django-verification, python-patterns, python-testing | python-reviewer |
+| Python / Django | python-patterns, python-testing | python-reviewer |
 | Go | golang-patterns, golang-testing | go-reviewer, go-build-resolver |
-| Spring Boot / Java | springboot-patterns, springboot-tdd, springboot-security, springboot-verification, java-coding-standards, jpa-patterns | java-reviewer |
-| Quarkus / Java | quarkus-patterns, quarkus-tdd, quarkus-security, quarkus-verification, java-coding-standards, jpa-patterns | java-reviewer |
-| Kotlin / Android | kotlin-coroutines-flows, compose-multiplatform-patterns, android-clean-architecture | kotlin-reviewer |
+| Spring Boot / Java | springboot-patterns, springboot-tdd, springboot-verification, java-coding-standards, jpa-patterns | java-reviewer |
+| Quarkus / Java | quarkus-patterns, quarkus-tdd, quarkus-verification, java-coding-standards, jpa-patterns | java-reviewer |
+| Kotlin / Android | kotlin-coroutines-flows, android-clean-architecture | kotlin-reviewer |
 | TypeScript / React | frontend-patterns, backend-patterns, coding-standards | code-reviewer |
 | Swift / iOS | swiftui-patterns, swift-concurrency-6-2, swift-actor-persistence, swift-protocol-di-testing | code-reviewer |
 | PostgreSQL | postgres-patterns, database-migrations | database-reviewer |
@@ -210,7 +210,7 @@ Research → Plan → Implement (TDD) → Review → Verify → Commit
 * 验证步骤
 * 范围边界（什么**不要**做）
 
-对于引用蓝图的项目，写成：“使用蓝图技能来...”（而不是 `/blueprint`，因为蓝图是技能，不是命令）。
+跨会话计划应明确范围、各阶段、验证步骤和交接。
 
 ### 第 4 部分：优化提示 —— 快速版本
 
@@ -225,7 +225,7 @@ Research → Plan → Implement (TDD) → Review → Verify → Commit
 | 测试 | `/tdd [module]. /e2e for critical flows. /test-coverage.` |
 | 审查 | `/code-review. Then use security-reviewer agent.` |
 | 文档 | `/update-docs. /update-codemaps.` |
-| 史诗级 | `Use blueprint skill for "[objective]". Execute phases with /verify gates.` |
+| 史诗级 | `Plan phased delivery for "[objective]". Run /verify after each phase.` |
 
 ### 第 5 部分：改进理由
 
@@ -375,6 +375,5 @@ Research → Plan → Implement (TDD) → Review → Verify → Commit
 | `configure-ecc` | 用户尚未设置 ECC |
 | `skill-stocktake` | 审计安装了哪些组件（使用它而不是硬编码的目录） |
 | `search-first` | 优化提示中的研究阶段 |
-| `blueprint` | 史诗级范围的优化提示（作为技能调用，而非命令） |
 | `strategic-compact` | 长会话上下文管理 |
 | `cost-aware-llm-pipeline` | Token 优化推荐 |

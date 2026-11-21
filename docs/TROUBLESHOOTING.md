@@ -90,7 +90,7 @@ exit 2
 - This is an upstream Anthropic model-level safeguard, not GateGuard and not an ECC block. No ECC configuration can bypass it.
 - Apply to Anthropic's [Cyber Verification Program](https://claude.com/form/cyber-use-case) — the error message includes a tokenized link for your account. Approved accounts get legitimate security workflows unblocked.
 - Until approved, structure prompts defensively: state up front that you own the code and the goal is remediation ("review this module I own for vulnerabilities and propose fixes"), keep scope to one module at a time, and avoid exploit-generation phrasing ("write a PoC", "craft a payload").
-- Prefer remediation-oriented skills (`security-review`, `security-scan`) over offensive framing, and run static tooling (semgrep, bandit, `npm audit`) yourself, then ask the model to interpret results.
+- Prefer remediation-oriented reviews with the `security-reviewer` agent or `/security-scan` for harness configuration over offensive framing, and run static tooling (semgrep, bandit, `npm audit`) yourself, then ask the model to interpret results.
 
 ## Related ECC Docs
 

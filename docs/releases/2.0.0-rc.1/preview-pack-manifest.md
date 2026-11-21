@@ -11,7 +11,6 @@ tagging plugin surfaces, uploading video, or posting announcements.
 | --- | --- | --- |
 | `README.md` | Public onramp and install surface | Links Hermes setup, rc.1 notes, plugin install, manual install, reset, and uninstall guidance |
 | `docs/HERMES-SETUP.md` | Public Hermes operator topology | No raw workspace export, credentials, private account names, or local-only operator state |
-| `skills/hermes-imports/SKILL.md` | Sanitized Hermes-to-ECC import workflow | Includes import rules, sanitization checklist, conversion pattern, and output contract |
 | `docs/architecture/cross-harness.md` | Shared substrate model for Claude Code, Codex, OpenCode, Cursor, Gemini, Hermes, and terminal-only use | Names portability boundaries and does not claim unsupported native parity |
 | `docs/architecture/harness-adapter-compliance.md` | Adapter matrix and scorecard | Verified by `npm run harness:adapters -- --check` |
 | `docs/architecture/platform-value-loop.md` | Product integration and full-stack platform thesis | Keeps external product skill packs, gated APIs, case studies, sponsorship, Pro, and consulting loops separate from unsupported GA/control-pane claims |
@@ -67,15 +66,9 @@ place trades, do not provide investment advice, and do not merge ECC Tools with
 Itô. Any Itô-backed data call requires explicit gated API access through
 `ITO_API_KEY`.
 
-## Hermes Skill Boundary
+## Hermes Import Boundary
 
-The preview pack includes one public Hermes-specialized skill:
-
-- `skills/hermes-imports/SKILL.md`
-
-That is intentional for rc.1. The skill is a sanitization and conversion
-workflow, not a dump of private Hermes automations. Additional Hermes-generated
-skills should enter ECC only after they pass the same rules:
+The Hermes setup guide defines the import boundary. Reusable workflows must meet these requirements:
 
 - no raw workspace exports;
 - no live account names, client data, finance data, CRM data, health data, or

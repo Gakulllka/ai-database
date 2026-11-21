@@ -38,12 +38,11 @@ const guardrails = [
     ],
   },
   {
-    path: 'skills/defi-amm-security/SKILL.md',
-    heading: '## Execution Safety',
+    path: 'skills/agent-security-hardening/SKILL.md',
+    heading: '## Verification Gate',
     requiredPatterns: [
-      /local audit examples/i,
-      /trusted checkout or disposable sandbox/i,
-      /private keys, seed phrases/i,
+      /operation-and-resource authorization plus confirmation or scoped pre-approval/i,
+      /forced failures leave no credential-bearing temp files or logs/i,
     ],
   },
   {

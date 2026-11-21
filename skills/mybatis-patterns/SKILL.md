@@ -11,8 +11,8 @@ Use MyBatis when SQL control and explicit mappings matter. Keep SQL readable,
 make mapper contracts small, and put business transactions in the service layer.
 Pair this skill with `springboot-patterns` for application structure,
 `database-migrations` for schema changes, `postgres-patterns` or
-`mysql-patterns` for engine-specific SQL, and `security-review` for untrusted
-input and access-control concerns.
+`mysql-patterns` for engine-specific SQL. Review parameter binding and access
+control against the project's requirements.
 
 ## When to Activate
 
@@ -403,7 +403,6 @@ adding indexes without a measured query plan.
 - `springboot-patterns` - Spring application and service-layer structure
 - `database-migrations` - Safe schema changes and rollback planning
 - `postgres-patterns` / `mysql-patterns` - Engine-specific query and index behavior
-- `security-review` - Injection, authorization, and sensitive-data review
 
 Official references:
 

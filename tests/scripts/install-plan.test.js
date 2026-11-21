@@ -184,7 +184,7 @@ function runTests() {
     const configDir = fs.mkdtempSync(path.join(os.tmpdir(), 'install-plan-config-'));
     const configPath = path.join(configDir, 'selections.json');
     const include = ['agent:planner', 'skill:continuous-learning-v2', 'locale:ja'];
-    const exclude = ['skill:security-review'];
+    const exclude = ['skill:agent-security-hardening'];
 
     try {
       fs.writeFileSync(configPath, JSON.stringify({

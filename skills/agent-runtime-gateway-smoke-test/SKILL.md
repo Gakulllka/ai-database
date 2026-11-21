@@ -78,6 +78,6 @@ Keep account details, credential values, personal paths, public tunnel URLs, and
 
 ## Related Skills
 
-- `hermes-imports` for sanitizing a local workflow before sharing it.
+- Before sharing a local workflow, remove secrets, private paths, and unrelated project data.
 - `agent-introspection-debugging` when an agent run fails repeatedly.
 - `verification-loop` after changing runtime code.

@@ -4,7 +4,7 @@ const fs = require('fs');
 const os = require('os');
 const path = require('path');
 
-const KERNEL = ['configure-ecc', 'context-budget', 'ecc-guide'];
+const KERNEL = ['configure-ecc', 'ecc-guide', 'skill-scout'];
 
 function write(root, relativePath, content) {
   const destination = path.join(root, relativePath);

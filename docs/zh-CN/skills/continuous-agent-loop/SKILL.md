@@ -29,7 +29,7 @@ Start
 1. RFC 分解 (`ralphinho-rfc-pipeline`)
 2. 质量门 (`plankton-code-quality` + `/quality-gate`)
 3. 评估循环 (`eval-harness`)
-4. 会话持久化 (`nanoclaw-repl`)
+4. 使用当前环境的检查点和恢复机制保存会话
 
 ## 故障模式
 

@@ -113,7 +113,7 @@ and real multi-client/reconnect checks. Existing tests remain the executable fac
 
 ## Related Skills
 
-- `contract-first` (canonical `skills/contract-first/SKILL.md` in Database): define observable sync messages.
+- Define observable sync messages and failure cases in the project’s shared interface contract.
 - [backend-patterns](../backend-patterns/SKILL.md): provider implementation.
-- [security-review](../security-review/SKILL.md): authorization boundaries.
+- Check authorization boundaries against the project’s requirements.
 - [test-collaboration](../test-collaboration/SKILL.md): durable behavioral evidence.

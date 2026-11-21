@@ -479,5 +479,4 @@ Before opening a PR:
 - `kubernetes-patterns` - cluster workloads once the infrastructure exists
 - `docker-patterns` - container images that Terraform-managed infrastructure runs
 - `deployment-patterns` - release and rollout strategies
-- `security-review` - broader security checklist
 - `database-migrations` - schema changes, distinct from infrastructure changes

@@ -1,5 +1,5 @@
 {
-  "description": "Routing prompts from community PR #2945 (Jeffrey Montoya). Paraphrased prompts avoid the target skill vocabulary. Auto admission may load nothing, but anything it loads must be in expected. The dedicated SEO prompt was retired when its skill was removed and no supported replacement remained.",
+  "description": "Routing prompts from community PR #2945 (Jeffrey Montoya), with replacement cases for retired skills. Paraphrased prompts avoid the target skill vocabulary. Auto admission may load nothing, but anything it loads must be in expected.",
   "direct": [
     {
       "query": "apply react patterns when refactoring this component",
@@ -82,16 +82,15 @@
       ]
     },
     {
-      "query": "set up celery tasks in my django project",
+      "query": "use FastAPI patterns for reliable background tasks",
       "expected": [
-        "skill:django-celery",
-        "skill:django-patterns"
+        "skill:fastapi-patterns"
       ]
     },
     {
-      "query": "harden this django app against common security issues",
+      "query": "apply agent security hardening to this coding agent",
       "expected": [
-        "skill:django-security"
+        "skill:agent-security-hardening"
       ]
     },
     {
@@ -152,9 +151,9 @@
       ]
     },
     {
-      "query": "review this laravel app for security problems",
+      "query": "verify a Laravel change before release using our Laravel verification workflow",
       "expected": [
-        "skill:laravel-security"
+        "skill:laravel-verification"
       ]
     },
     {
@@ -182,16 +181,15 @@
       ]
     },
     {
-      "query": "run a security review of the auth flow",
+      "query": "add authentication and rate limiting to this API design",
       "expected": [
-        "skill:security-review",
-        "skill:security-scan"
+        "skill:api-design"
       ]
     },
     {
-      "query": "scan the repo for secrets and vulnerable dependencies",
+      "query": "review the dependencies of a new MCP server before installing it",
       "expected": [
-        "skill:security-scan"
+        "skill:mcp-dependency-review"
       ]
     },
     {
@@ -291,21 +289,19 @@
     {
       "query": "track token costs of this session and reduce them",
       "expected": [
-        "skill:context-budget",
-        "skill:cost-tracking",
         "skill:token-budget-advisor"
       ]
     },
     {
-      "query": "record a manim video explaining the algorithm",
+      "query": "inspect the active camera and animation state in Blender",
       "expected": [
-        "skill:manim-video"
+        "skill:blender-motion-state-inspection"
       ]
     },
     {
-      "query": "make a remotion video for the product demo",
+      "query": "make an interactive UI demo of this component",
       "expected": [
-        "skill:remotion-video-creation"
+        "skill:ui-demo"
       ]
     },
     {
@@ -316,10 +312,9 @@
       ]
     },
     {
-      "query": "audit hipaa compliance for the patient data pipeline",
+      "query": "review safety guard defaults before allowing shell commands",
       "expected": [
-        "skill:healthcare-phi-compliance",
-        "skill:hipaa-compliance"
+        "skill:safety-guard"
       ]
     }
   ],
@@ -346,10 +341,9 @@
       ]
     },
     {
-      "query": "the numbers in the dashboard disagree with what finance has",
+      "query": "compare this CSV import to the source table and reconcile unmatched rows and totals",
       "expected": [
-        "skill:benchmark-methodology",
-        "skill:production-audit"
+        "skill:tabular-import-reconciliation"
       ]
     },
     {
@@ -381,17 +375,15 @@
       ]
     },
     {
-      "query": "our secrets ended up in the repo again",
+      "query": "we want to publish a clean copy of this private repo and leave our credentials out",
       "expected": [
-        "skill:security-review",
-        "skill:security-scan"
+        "skill:opensource-pipeline"
       ]
     },
     {
       "query": "someone deleted production data and we could not get it back",
       "expected": [
-        "skill:database-migrations",
-        "skill:production-audit"
+        "skill:database-migrations"
       ]
     },
     {
@@ -410,8 +402,7 @@
     {
       "query": "the thing is technically correct but nobody wants to use it",
       "expected": [
-        "skill:make-interfaces-feel-better",
-        "skill:product-lens"
+        "skill:make-interfaces-feel-better"
       ]
     },
     {
@@ -436,8 +427,7 @@
     {
       "query": "two services both think they own the same record",
       "expected": [
-        "skill:api-design",
-        "skill:contract-first"
+        "skill:api-design"
       ]
     },
     {
@@ -448,9 +438,9 @@
       ]
     },
     {
-      "query": "customers notice problems before our alerts do",
+      "query": "watch the production URL for errors immediately after deployment",
       "expected": [
-        "skill:production-audit"
+        "skill:canary-watch"
       ]
     },
     {
@@ -467,10 +457,10 @@
       ]
     },
     {
-      "query": "we cannot tell which change caused the slowdown",
+      "query": "since the last merge the API feels slower, check endpoint latency before and after",
       "expected": [
-        "skill:benchmark-methodology",
-        "skill:production-audit"
+        "skill:benchmark",
+        "skill:benchmark-optimization-loop"
       ]
     },
     {

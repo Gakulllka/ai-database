@@ -70,7 +70,6 @@
 | `/multi-frontend` | フロントエンド重視のマルチモデル開発 |
 | `/multi-execute` | マルチモデル協調実行 |
 | `/orchestrate` | tmux/ワークツリーによるマルチエージェントオーケストレーションのガイド |
-| `/devfleet` | DevFleet経由での並列Claude Codeエージェントのオーケストレーション |
 
 ---
 
@@ -83,7 +82,7 @@
 | `/sessions` | `~/.claude/session-data/` のセッション履歴を閲覧、検索、管理（`~/.claude/sessions/` からのレガシー読み取りも対応） |
 | `/checkpoint` | 現在のセッションにチェックポイントを設定 |
 | `/aside` | 現在のタスクコンテキストを失わずにサイドの質問に回答 |
-| `/context-budget` | コンテキストウィンドウ使用量を分析 — トークンオーバーヘッドの発見、最適化 |
+| ホストのコンテキスト表示 | Codex の `/status` または Claude Code の `/context` で現在の使用量を確認 |
 
 ---
 
@@ -155,7 +154,7 @@
 最新ドキュメントが必要？      → /docs <ライブラリ>
 セッション終了間近？          → /save-session または /learn-eval
 翌日再開？                   → /resume-session
-コンテキストが重い？          → /context-budget → /checkpoint
+コンテキストが重い？          → ホストのコンテキスト表示 → /checkpoint
 学んだことを抽出したい？      → /learn-eval → /evolve
 繰り返しタスクを実行？        → /loop-start
 ```

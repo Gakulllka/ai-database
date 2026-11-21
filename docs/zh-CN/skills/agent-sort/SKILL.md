@@ -118,7 +118,7 @@ cat go.mod
 
 ```text
 skills/frontend-patterns | skill | DAILY | 84 个 .tsx 文件，存在 next.config.ts | 核心前端技术栈
-skills/django-patterns   | skill | LIBRARY | 无 .py 文件，无 pyproject.toml       | 此仓库中未激活
+skills/python-patterns   | skill | LIBRARY | 无 .py 文件，无 pyproject.toml       | 此仓库中未激活
 rules/typescript/*       | rules | DAILY | 存在 package.json + tsconfig.json            | 活跃的 TS 仓库
 rules/python/*           | rules | LIBRARY | 零个 Python 源文件             | 仅保持可访问
 ```

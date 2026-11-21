@@ -153,6 +153,4 @@ references below link to ECC's canonical sources.
   evals and grader methods; reuse an appropriate existing evaluator.
 - [loop-design-check](https://github.com/affaan-m/ECC/blob/main/skills/loop-design-check/SKILL.md) designs or reviews feedback
   loops and runaway prevention; this skill conducts the measured search.
-- [benchmark-methodology](https://github.com/affaan-m/ECC/blob/main/skills/benchmark-methodology/SKILL.md) scores competitors
-  for competitive analysis, rather than implementation variants.
 - [Sources and scope](references/sources.md) records this extension's provenance.

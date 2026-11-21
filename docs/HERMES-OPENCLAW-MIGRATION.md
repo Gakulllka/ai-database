@@ -135,8 +135,6 @@ Recent examples already salvaged this way:
 - `github-ops`
 - `hookify-rules`
 - `automation-audit-ops`
-- `email-ops`
-- `finance-billing-ops`
 - `messages-ops`
 - `research-ops`
 - `terminal-ops`

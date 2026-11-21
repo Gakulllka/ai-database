@@ -10,7 +10,7 @@ const { createManifestInstallPlan } = require('../../scripts/lib/install-executo
 const ROOT = path.resolve(__dirname, '../..');
 const OWNERS = [
   'module-governance', 'context-and-decisions', 'architecture-decision-records',
-  'contract-first', 'change-impact', 'living-docs-governance', 'docs-governance',
+  'change-impact', 'living-docs-governance', 'docs-governance',
 ];
 let passed = 0;
 let failed = 0;

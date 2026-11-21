@@ -1,11 +1,21 @@
 ---
 name: config-health
-description: Runtime configuration integrity monitoring for Claude Code. Detects config drift, rule staleness, and hook wiring gaps at startup, with an optional per-tool mode. Complements delivery-gate with startup soft monitoring.
+description: "Diagnose configuration drift, stale rules, and missing hook or MCP wiring in Codex or Claude Code. Use when an expected integration stops loading or a setup differs across workspaces."
 metadata:
   origin: ECC
 ---
 
 # Config Health
+
+## Codex workflow
+
+Start with the effective workspace and host version. Identify the user and project config layers, applicable AGENTS.md files and the expected source of each entry. For a config entry, validate its syntax and resolve referenced paths. Check local and shared configuration without printing credentials.
+
+1. For skills, verify the current client discovers the intended ID and root. For MCP, verify a read-only call if authorized. For hooks, locate the event and script and verify a harmless trigger when permitted.
+2. Compare actual observations to the expected setup. Report missing config, invalid config, configured-but-unobserved behavior and verified behavior by layer.
+3. Before a repair, identify which file owns the drift. Apply the smallest authorized change and repeat the same check under the intended workspace and permissions.
+
+## Claude Code and prior integrations
 
 A real-time monitoring layer. delivery-gate blocks at session end; config-health catches problems during the session — when cheap to fix.
 

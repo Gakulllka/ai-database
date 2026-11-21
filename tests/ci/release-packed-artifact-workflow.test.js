@@ -727,22 +727,21 @@ test('packed lifecycle validates canonical Antigravity and OpenCode installs', (
   assert.match(lifecycleRunnerSource, /!fs\.existsSync\(installedSkillPath\)/);
 });
 
-test('packed lifecycle installs and verifies the opt-in Ito distribution surface', () => {
+test('packed lifecycle installs and verifies the opt-in skill distribution and Itô bridge', () => {
   assert.match(
     lifecycleRunnerSource,
-    /'--profile', 'core'[\s\S]*'--with', 'capability:ito-compute'[\s\S]*'--with', 'capability:prediction-markets'/
+    /'--profile', 'core'[\s\S]*'--with', 'capability:security'[\s\S]*'--with', 'capability:research'/
   );
-  for (const moduleId of ['ito-compute', 'prediction-market-skills']) {
+  for (const moduleId of ['security', 'research-apis']) {
     assert.match(lifecycleRunnerSource, new RegExp(`moduleId === '${moduleId}'`));
   }
   for (const installedPath of [
-    'skills/ito-baskets/SKILL.md',
-    'skills/ito-baskets/agents/openai.yaml',
-    'skills/ito-baskets/scripts/ito-baskets.js',
-    'skills/ito-compute/SKILL.md',
-    'skills/ito-compute/agents/openai.yaml',
-    'skills/ito-inference/SKILL.md',
-    'skills/ito-training/SKILL.md',
+    'skills/agent-security-hardening/SKILL.md',
+    'skills/agent-security-hardening/agents/openai.yaml',
+    'skills/mcp-dependency-review/SKILL.md',
+    'skills/deep-research/SKILL.md',
+    'skills/scientific-db-openalex-database/SKILL.md',
+    'skills/scientific-thinking-literature-review/SKILL.md',
   ]) {
     assert.match(lifecycleRunnerSource, new RegExp(installedPath.replaceAll('.', '\\.')));
   }

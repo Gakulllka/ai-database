@@ -101,7 +101,6 @@ CRITICAL bir güvenlik açığı bulursanız:
 
 ## Referans
 
-Detaylı güvenlik açığı kalıpları, kod örnekleri, rapor şablonları ve PR inceleme şablonları için skill: `security-review`'a bakın.
 
 ---
 

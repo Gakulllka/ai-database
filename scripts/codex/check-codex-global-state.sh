@@ -148,7 +148,7 @@ declare -a required_skills=(
   eval-harness
   frontend-patterns
   frontend-slides
-  security-review
+  agent-security-hardening
   strategic-compact
   tdd-workflow
   verification-loop

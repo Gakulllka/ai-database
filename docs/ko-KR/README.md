@@ -233,7 +233,6 @@ ECC/
 |   |-- continuous-learning/        # 세션에서 패턴 자동 추출
 |   |-- continuous-learning-v2/     # 신뢰도 점수가 있는 직관 기반 학습
 |   |-- tdd-workflow/               # TDD 방법론
-|   |-- security-review/            # 보안 체크리스트
 |   |-- 그 외 다수...
 |
 |-- commands/         # 빠른 실행을 위한 슬래시 커맨드

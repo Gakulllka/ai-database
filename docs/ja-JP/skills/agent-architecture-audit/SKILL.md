@@ -28,7 +28,7 @@ tools: Read, Write, Edit, Bash, Grep, Glob
 **使用しない場合:**
 - 一般的なコードデバッグ — `agent-introspection-debugging` を使用
 - コードレビュー — 言語固有のレビューエージェントを使用
-- セキュリティスキャン — `security-review` または `security-review/scan` を使用
+- セキュリティチェック — プロジェクトで承認済みのスキャナーを使い、アクセス権とシークレットの扱いを確認する。
 - エージェントパフォーマンスのベンチマーク — `agent-eval` を使用
 - 新機能の作成 — 適切なワークフロースキルを使用
 
@@ -251,6 +251,5 @@ rg "mutate|rewrite.*response|transform.*output|shap" --type py --type ts
 
 - `agent-introspection-debugging` — エージェントランタイムの失敗（ループ、タイムアウト、状態エラー）のデバッグ
 - `agent-eval` — エージェントパフォーマンスの対決ベンチマーク
-- `security-review` — コードと設定のセキュリティ監査
 - `autonomous-agent-harness` — 自律エージェント操作のセットアップ
 - `agent-harness-construction` — エージェントハーネスをゼロから構築

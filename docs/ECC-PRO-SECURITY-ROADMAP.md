@@ -262,7 +262,7 @@ Across SAST/SCA tools (Snyk, CodeQL, Semgrep, SonarQube, Dependabot) the dominan
 
 Notable gaps vs us (missing today):
 
-- **IDE/editor integration — findings and fixes where agents actually write code** — Ship a VS Code/Cursor extension (and a Claude Code skill already exists via ecc:security-scan) that lints agent configs on save, shows findings inline, and offers fixes — gated behind Pro for org policy sync. Builds on existing harness-adapters; meets developers in the editor where Snyk Agent Scan (CLI/MDM) does not.
+- **IDE/editor integration — findings and fixes where agents actually write code** — Ship a VS Code/Cursor extension (and Claude Code has a `/security-scan` command) that lints agent configs on save, shows findings inline, and offers fixes — gated behind Pro for org policy sync. Builds on existing harness-adapters; meets developers in the editor where Snyk Agent Scan (CLI/MDM) does not.
 
 > Note: a fourth research thread (recent agentic/MCP CVEs) was blocked by an automated
 > usage-policy classifier on the raw "find vulnerabilities" prompt. The CVE-database refresh

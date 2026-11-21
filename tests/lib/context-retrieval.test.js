@@ -94,7 +94,7 @@ const registry = loadContextRegistry({ repoRoot: DEFAULT_REPO_ROOT });
 const registryIndex = buildRetrievalIndex(registry.entries);
 
 const TOP1_PROBES = [
-  ['security review this code', 'skill:security-review'],
+  ['apply agent security hardening to this tool gateway', 'skill:agent-security-hardening'],
   ['make keyboard navigation work in our React settings form', 'skill:frontend-a11y'],
   ['add a column to a huge table without downtime', 'skill:database-migrations'],
   ['set up CI/CD and docker deployment with health checks', 'skill:deployment-patterns'],

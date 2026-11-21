@@ -27,7 +27,7 @@ never canonical ECC execution state — see [Authority](#authority) and
 | Condition | Use Instead |
 | --- | --- |
 | Work is coordinated through GitHub issues | the `epic-*` commands (`/epic-decompose`, `/epic-claim`, `/epic-sync`, …) |
-| Team already uses Jira, Linear, or Taiga | `project-flow-ops` or the matching MCP integration |
+| Team already uses Jira, Linear, or Taiga | Use the matching project tracker or its configured connector |
 | One-off task with no breakdown needed | just do it |
 | Architecture design first | the `architect` agent, then return here |
 | PRD creation first | the `/plan-prd` command, then return here |
@@ -52,7 +52,7 @@ synchronization. Never run both systems as parallel authorities for the same wor
 
 Handoff path: if an initiative outgrows `.stories/` (multiple contributors, external
 visibility, dependency tracking across repos), export it once — create GitHub issues
-from the epic and its remaining stories (manually or via `project-flow-ops`), note
+from the epic and its remaining stories (manually or in the configured tracker), note
 `Exported to: <issue-url>` in the epic file, set the epic's status to `done`, and stop
 updating `.stories/` for that initiative.
 
@@ -381,5 +381,5 @@ Show sprint assignment when relevant.
 - `tdd-workflow` — the test-first lane used inside `implement`
 - `verification-loop` — the verification gate used before a story reaches `review`
 - `council` — use when stories surface a genuine design tradeoff before implementation
-- `project-flow-ops` / `epic-*` commands — issue-backed coordination; use for the handoff
+- `epic-*` commands — issue-backed coordination for the handoff
   described above instead of syncing `.stories/`

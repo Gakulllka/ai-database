@@ -27,7 +27,6 @@ model: sonnet
 - `network-config-validation` — 変更前の設定レビューと危険なコマンドの検出。
 - `network-bgp-diagnostics` — BGPネイバー、ルートポリシー、プレフィックスのエビデンス。
 - `network-interface-health` — リンク、カウンター、CRC、ドロップ、フラップ分析。
-- `cisco-ios-patterns` — IOS/IOS-XE構文と安全なshowコマンドワークフロー。
 - `netmiko-ssh-automation` — 範囲限定のリードオンリーネットワーク自動化パターン。
 
 ## ワークフロー

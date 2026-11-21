@@ -90,8 +90,8 @@ The compatibility archive currently contains 12 retired command shims:
 | --- | --- |
 | `agent-sort.md` | Use maintained command or skill routing where available. |
 | `claw.md` | Use maintained `scripts/claw.js` / `npm run claw` surfaces. |
-| `context-budget.md` | Use maintained token/context budgeting skills. |
-| `devfleet.md` | Use maintained agent/harness orchestration docs and skills. |
+| `context-budget.md` | Use the harness’s native context meter. |
+| `devfleet.md` | Use the project’s separately managed orchestration setup. |
 | `docs.md` | Use current documentation and release checklist workflows. |
 | `e2e.md` | Use maintained E2E testing skills and test scripts. |
 | `eval.md` | Use eval-harness and verification-loop skills. |

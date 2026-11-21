@@ -25,7 +25,7 @@ npx ecc-universal@<released-version> install --target mistral-vibe --skills tdd-
 Install multiple skills with a comma-separated list:
 
 ```bash
-"$ECC_ROOT/install.sh" --target mistral-vibe --skills tdd-workflow,security-review
+"$ECC_ROOT/install.sh" --target mistral-vibe --skills tdd-workflow,coding-standards
 ```
 
 ECC writes each selected skill to `.vibe/skills/<name>/`. Vibe discovers this

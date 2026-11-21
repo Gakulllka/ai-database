@@ -134,11 +134,11 @@ Do not ship:
 
 ## Worked Example
 
-Use `skills/hermes-imports/SKILL.md` as the same skill source across harnesses.
+Use `skills/verification-loop/SKILL.md` as the same skill source across harnesses.
 
 The workflow is:
 
-1. Author the durable behavior once in `skills/hermes-imports/SKILL.md`.
+1. Author the durable behavior once in `skills/verification-loop/SKILL.md`.
 2. Keep secrets, local paths, and raw operator memory out of the skill.
 3. Let each harness adapt how the skill is loaded.
 4. Test the source skill and the harness-facing metadata separately.

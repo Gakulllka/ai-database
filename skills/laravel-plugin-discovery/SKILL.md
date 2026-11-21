@@ -226,5 +226,4 @@ The detailed response includes:
 
 - `laravel-patterns` — Laravel architecture and patterns
 - `laravel-tdd` — Test-driven development for Laravel
-- `laravel-security` — Laravel security best practices
 - `documentation-lookup` — General library documentation lookup (Context7)

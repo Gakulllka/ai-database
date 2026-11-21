@@ -188,7 +188,7 @@ jobs:
           if [ "$RUNNER_OS" = "Windows" ]; then
             # These suites assert real elapsed-time limits without the literal
             # "time budget" marker. Retain them in the serial tail, not SKIP.
-            ECC_TEST_SERIAL="$ECC_TEST_SERIAL,hooks/hookify-runtime.test.js,integration/hooks.test.js,hooks/hooks.test.js,ci/agent-payment-x402-seller-guard.test.js,lib/context-profile-sandbox.test.js,hooks/gateguard-fact-force.test.js"
+            ECC_TEST_SERIAL="$ECC_TEST_SERIAL,hooks/hookify-runtime.test.js,integration/hooks.test.js,hooks/hooks.test.js,lib/context-profile-sandbox.test.js,hooks/gateguard-fact-force.test.js"
           fi
           export ECC_TEST_SERIAL
           echo "serial after the pool: $ECC_TEST_SERIAL"

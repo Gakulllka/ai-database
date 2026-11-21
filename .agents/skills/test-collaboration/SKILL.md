@@ -20,7 +20,7 @@ description: "Inventory and govern a project's test assets. Connect requirements
 ## Related Skills
 
 - `ai-regression-testing`: turn important defects into executable regression tests.
-- `contract-first`: establish the shared machine-readable contract for consumers and providers.
+- Check consumer and provider tests against the shared machine-readable contract.
 - `module-regression`: run regression commands for changed modules and downstream consumers.
 - `living-docs-governance`: synchronize stage outcomes and append history.
 

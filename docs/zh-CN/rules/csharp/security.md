@@ -53,7 +53,3 @@ await connection.QueryAsync<Order>(sql, new { customerId });
 * 返回面向客户端的、安全的错误信息
 * 在服务器端记录包含结构化上下文的详细异常信息
 * 切勿在 API 响应中暴露堆栈跟踪、SQL 语句或文件系统路径
-
-## 参考资料
-
-有关更广泛的应用安全审查清单，请参阅技能：`security-review`。

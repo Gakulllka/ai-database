@@ -30,7 +30,6 @@ ECCは依然として`commands/`レイヤーを提供していますが、マイ
   pmx-guidelines.md      # プロジェクト固有パターン
   coding-standards.md    # 言語のベストプラクティス
   tdd-workflow/          # SKILL.md付きマルチファイルスキル
-  security-review/       # チェックリストベースのスキル
 ```
 
 ---

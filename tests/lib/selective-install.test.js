@@ -88,11 +88,11 @@ function runTests() {
   if (test('parses --skills as skill component selections', () => {
     const parsed = parseInstallArgs([
       'node', 'install-apply.js',
-      '--skills', 'continuous-learning-v2,security-review',
+      '--skills', 'continuous-learning-v2,agent-security-hardening',
     ]);
     assert.deepStrictEqual(parsed.includeComponentIds, [
       'skill:continuous-learning-v2',
-      'skill:security-review',
+      'skill:agent-security-hardening',
     ]);
   })) passed++; else failed++;
 
@@ -247,7 +247,7 @@ function runTests() {
     const components = listInstallComponents({ family: 'framework' });
     assert.ok(components.some(c => c.id === 'framework:react'), 'Should have framework:react');
     assert.ok(components.some(c => c.id === 'framework:nextjs'), 'Should have framework:nextjs');
-    assert.ok(components.some(c => c.id === 'framework:django'), 'Should have framework:django');
+    assert.ok(!components.some(c => c.id === 'framework:django'), 'Retired Django skill component should not be offered');
     assert.ok(components.some(c => c.id === 'framework:springboot'), 'Should have framework:springboot');
     assert.ok(components.some(c => c.id === 'framework:rails'), 'Should have framework:rails');
   })) passed++; else failed++;
@@ -333,15 +333,15 @@ function runTests() {
   if (test('multiple --without flags exclude multiple modules', () => {
     const plan = resolveInstallPlan({
       profileId: 'full',
-      excludeComponentIds: ['capability:media', 'capability:documents', 'capability:supply-chain'],
+      excludeComponentIds: ['capability:media', 'capability:documents', 'capability:operator-desk-patterns'],
       target: 'claude',
     });
     assert.ok(!plan.selectedModuleIds.includes('media-generation'));
     assert.ok(!plan.selectedModuleIds.includes('document-processing'));
-    assert.ok(!plan.selectedModuleIds.includes('supply-chain-domain'));
+    assert.ok(!plan.selectedModuleIds.includes('operator-desk-patterns'));
     assert.ok(plan.excludedModuleIds.includes('media-generation'));
     assert.ok(plan.excludedModuleIds.includes('document-processing'));
-    assert.ok(plan.excludedModuleIds.includes('supply-chain-domain'));
+    assert.ok(plan.excludedModuleIds.includes('operator-desk-patterns'));
   })) passed++; else failed++;
 
   // ─── Combined --with + --without ───
@@ -537,6 +537,7 @@ function runTests() {
         cwd: projectDir,
         env: { ...process.env, HOME: homeDir },
         encoding: 'utf8',
+        maxBuffer: 8 * 1024 * 1024,
         stdio: ['pipe', 'pipe', 'pipe'],
       });
       const parsed = JSON.parse(result);
@@ -659,8 +660,8 @@ function runTests() {
 
       const claudeRoot = path.join(homeDir, '.claude');
       // Security skill should be installed (from --with)
-      assert.ok(fs.existsSync(path.join(claudeRoot, 'skills', 'security-review', 'SKILL.md')),
-        'Should install security-review skill from --with');
+      assert.ok(fs.existsSync(path.join(claudeRoot, 'skills', 'agent-security-hardening', 'SKILL.md')),
+        'Should install agent-security-hardening skill from --with');
       // Core profile modules should be installed
       assert.ok(fs.existsSync(path.join(claudeRoot, 'rules', 'ecc', 'common', 'coding-style.md')),
         'Should install core rules');

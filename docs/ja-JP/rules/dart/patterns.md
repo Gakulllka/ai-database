@@ -258,4 +258,3 @@ final router = GoRouter(
 ## 参考資料
 
 スキル `flutter-dart-code-review` で包括的なレビューチェックリストを参照。
-スキル `compose-multiplatform-patterns` で Kotlin Multiplatform/Flutter 相互運用パターンを参照。

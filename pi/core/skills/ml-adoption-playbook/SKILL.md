@@ -31,7 +31,7 @@ ML is useless without clean, accessible data.
 ## Phase 3: Architectural Integration & Decoupling
 
 Do not tightly couple model inference to core business logic.
-- **API Boundary:** Suggest placing the model behind an API endpoint (e.g., using `fastapi-patterns` or `django-patterns`) or a dedicated service class.
+- **API Boundary:** Suggest placing the model behind an API endpoint (e.g., using `fastapi-patterns`) or a dedicated service class.
 - **Fallback Mechanisms:** Design a default state. If the model takes too long to respond or throws an error, the system must gracefully fall back to a hardcoded rule.
 - **Feature Flags:** Wrap the new ML inference call in a feature flag so it can be rolled out (or rolled back) safely.
 

@@ -134,7 +134,6 @@ function example() {
 | `coding-standards/` | TypeScript/JavaScriptパターン |
 | `frontend-patterns/` | ReactとNext.jsのベストプラクティス |
 | `backend-patterns/` | APIとデータベースのパターン |
-| `security-review/` | セキュリティチェックリスト |
 
 ---
 

@@ -160,9 +160,6 @@ Fix: What to change and why
 
 ## Reference
 
-For Django architecture patterns and ORM examples, see `skill: django-patterns`.
-For security configuration checklists, see `skill: django-security`.
-For testing patterns and fixtures, see `skill: django-tdd`.
 
 ---
 

@@ -9,14 +9,12 @@ metadata:
 
 Use this when the task is live-message retrieval: iMessage, DMs, recent one-time codes, or thread inspection before a follow-up.
 
-This is not email work. If the dominant surface is a mailbox, use `email-ops`.
+Use this workflow for message threads. For mailbox work, follow the connected mail tool's workflow.
 
 ## Skill Stack
 
 Pull these ECC-native skills into the workflow when relevant:
 
-- `email-ops` when the message task is really mailbox work
-- `connections-optimizer` when the DM thread belongs to outbound network work
 - `knowledge-ops` when the thread contents need to be captured into durable context
 
 ## When to Use

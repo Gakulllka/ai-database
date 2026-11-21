@@ -442,45 +442,8 @@ async function main() {
         assert.ok(fs.readdirSync(installRoot).some(name => name.includes('.remove-')));
       } finally { fs.rmSync(installRoot, { recursive: true, force: true }); }
     }],
-    ['ships a canonical opt-in skill without silently bundling Nasiko', () => {
-      const skill = read('skills/nasiko-control-plane/SKILL.md');
-      assert.match(skill, /^name: nasiko-control-plane$/m);
-      assert.match(skill, /ecc nasiko status/i);
-      assert.match(skill, /explicit.*consent|explicit.*--yes/i);
-      assert.match(skill, /pinned.*v0\.1\.0/i);
-      assert.match(skill, /telemetry.*opt-in/i);
-      assert.match(skill, /never.*secrets|never.*credentials/i);
-      assert.match(skill, /install.*does not prove/i);
-      assert.match(skill, /ecc nasiko uninstall/i);
-      assert.doesNotMatch(skill, /curl[^\n]*\|[^\n]*bash|irm[^\n]*\|[^\n]*iex/i);
-
-      const modules = readJson('manifests/install-modules.json').modules;
-      const module = modules.find(candidate => candidate.id === 'nasiko-control-plane');
-      assert.ok(module, 'nasiko-control-plane module is missing');
-      assert.deepStrictEqual(module.paths, ['skills/nasiko-control-plane']);
-      assert.deepStrictEqual(module.dependencies, ['platform-configs']);
-      assert.strictEqual(module.defaultInstall, false);
-      assert.strictEqual(module.stability, 'experimental');
-
-      const components = readJson('manifests/install-components.json').components;
-      assert.deepStrictEqual(
-        components.find(candidate => candidate.id === 'capability:nasiko-control-plane'),
-        {
-          id: 'capability:nasiko-control-plane',
-          family: 'capability',
-          description: 'Experimental Nasiko CLI lifecycle bridge guidance for pinned installation, read-only status, qualified uninstall, and opt-in telemetry boundaries.',
-          modules: ['nasiko-control-plane'],
-        }
-      );
-
-      const profiles = readJson('manifests/install-profiles.json').profiles;
-      assert.ok(profiles.full.modules.includes('nasiko-control-plane'));
-      for (const [profileId, profile] of Object.entries(profiles)) {
-        if (profileId !== 'full') assert.ok(!profile.modules.includes('nasiko-control-plane'));
-      }
-
+    ['publishes the Nasiko bridge without bundling Nasiko itself', () => {
       const packageJson = readJson('package.json');
-      assert.ok(packageJson.files.includes('skills/nasiko-control-plane/'));
       assert.ok(packageJson.files.includes('scripts/nasiko.js'));
       assert.ok(packageJson.files.includes('scripts/lib/'));
       assert.ok(!packageJson.dependencies?.nasiko);

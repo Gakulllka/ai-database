@@ -1612,7 +1612,7 @@ function runTests() {
       const result = run(['--config', configPath, '--enable-hooks'], { cwd: projectDir, homeDir });
       assert.strictEqual(result.code, 0, result.stderr);
 
-      assert.ok(fs.existsSync(path.join(homeDir, '.claude', 'skills', 'security-review', 'SKILL.md')));
+      assert.ok(fs.existsSync(path.join(homeDir, '.claude', 'skills', 'agent-security-hardening', 'SKILL.md')));
       assert.ok(!fs.existsSync(path.join(homeDir, '.claude', 'skills', 'dmux-workflows', 'SKILL.md')));
 
       const state = readJson(path.join(homeDir, '.claude', 'ecc', 'install-state.json'));
@@ -1644,7 +1644,7 @@ function runTests() {
       const result = run(['--enable-hooks'], { cwd: projectDir, homeDir });
       assert.strictEqual(result.code, 0, result.stderr);
 
-      assert.ok(fs.existsSync(path.join(homeDir, '.claude', 'skills', 'security-review', 'SKILL.md')));
+      assert.ok(fs.existsSync(path.join(homeDir, '.claude', 'skills', 'agent-security-hardening', 'SKILL.md')));
       assert.ok(!fs.existsSync(path.join(homeDir, '.claude', 'skills', 'dmux-workflows', 'SKILL.md')));
 
       const state = readJson(path.join(homeDir, '.claude', 'ecc', 'install-state.json'));

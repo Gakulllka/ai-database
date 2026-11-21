@@ -91,7 +91,7 @@ TypeScript、Python、Go、Java、Kotlin、Rust、C++、C#、Swift、Perl、PHP�
 ### 即座に価値を得られるもの（coreインストール）
 `ecc install --profile core` を実行して以下を取得：
 - コアエージェント（code-reviewer、planner、tdd-guide、security-reviewer）
-- 必須スキル（tdd-workflow、coding-standards、security-review）
+- 必須スキル（tdd-workflow、coding-standards、verification-loop）
 - 主要コマンド（/tdd、/plan、/code-review、/build-fix）
 
 ### フルインストール

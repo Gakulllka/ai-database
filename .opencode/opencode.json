@@ -6,7 +6,7 @@
     "CONTRIBUTING.md",
     "instructions/INSTRUCTIONS.md",
     "skills/tdd-workflow/SKILL.md",
-    "skills/security-review/SKILL.md",
+    "rules/common/security.md",
     "skills/coding-standards/SKILL.md",
     "skills/frontend-patterns/SKILL.md",
     "skills/frontend-slides/SKILL.md",

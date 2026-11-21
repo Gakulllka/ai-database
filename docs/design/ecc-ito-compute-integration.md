@@ -112,8 +112,7 @@ model endpoint, deployed a workload, reserved capacity, or moved funds.
 
 ### Inference-serving contract
 
-`skills/ito-inference` is the only canonical serving skill; `ito-serve` is
-trigger language, not a second installed skill. The current ECC bridge has no
+The current ECC bridge has no
 `serve` verb and rejects it before resolving or spawning the canonical client.
 The canonical runtime documents `inference` only as an unsupported compatibility
 probe, and MCP remains limited to auth, find, and status. Serving requests
@@ -138,16 +137,9 @@ After an ambiguous transport failure, callers reconcile by idempotency key
 before retrying. ECC must never replace that control plane with root SSH, local
 serving scripts, browser automation, or an unreviewed purchase endpoint.
 
-## Skill and install shape
+## Installation
 
-`skills/ito-compute/SKILL.md` is an opt-in workflow installed through:
-
-- module: `ito-compute`
-- component: `capability:ito-compute`
-- profile: `full`
-
-The skill documents the exact CLI and MCP names and the approval boundary. It
-does not bundle the unpublished CLI.
+The ECC bridge requires the separately built Itô CLI described above.
 
 ## Publication blocker
 

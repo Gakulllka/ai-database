@@ -266,10 +266,8 @@ ECC/
 |   |-- coding-standards/           # Dil en iyi uygulamaları
 |   |-- backend-patterns/           # API, veritabanı, caching pattern'leri
 |   |-- frontend-patterns/          # React, Next.js pattern'leri
-|   |-- security-review/            # Güvenlik kontrol listesi
 |   |-- tdd-workflow/               # TDD metodolojisi
 |   |-- continuous-learning/        # Oturumlardan otomatik pattern çıkarma
-|   |-- django-patterns/            # Django pattern'leri
 |   |-- golang-patterns/            # Go deyimleri ve en iyi uygulamalar
 |   |-- ve 100+ daha fazla skill...
 |

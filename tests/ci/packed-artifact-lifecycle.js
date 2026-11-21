@@ -685,44 +685,43 @@ function runLifecycle(options) {
       'guided Kimi uninstall must preserve user-owned files'
     );
 
-    const itoInstallArgs = [
+    const optInInstallArgs = [
       'install',
       '--profile', 'core',
-      '--with', 'capability:ito-compute',
-      '--with', 'capability:prediction-markets',
+      '--with', 'capability:security',
+      '--with', 'capability:research',
       '--target', 'cursor',
       '--enable-hooks',
       '--json',
     ];
     parseJsonOutput(
-      runCli(itoInstallArgs),
-      'initial Itô install'
+      runCli(optInInstallArgs),
+      'initial opt-in install'
     );
     assert.ok(fs.existsSync(statePath), 'initial install must write Cursor install-state');
     const initialState = JSON.parse(fs.readFileSync(statePath, 'utf8'));
     const initialLedger = getOperationLedger(initialState);
     assert.ok(
-      initialState.operations.some(operation => operation.moduleId === 'ito-compute'),
-      'installed ledger must include the Itô compute module'
+      initialState.operations.some(operation => operation.moduleId === 'security'),
+      'installed ledger must include the security module'
     );
     assert.ok(
-      initialState.operations.some(operation => operation.moduleId === 'prediction-market-skills'),
-      'installed ledger must include the Itô baskets module'
+      initialState.operations.some(operation => operation.moduleId === 'research-apis'),
+      'installed ledger must include the research module'
     );
     for (const relativePath of [
-      'skills/ito-baskets/SKILL.md',
-      'skills/ito-baskets/agents/openai.yaml',
-      'skills/ito-baskets/scripts/ito-baskets.js',
-      'skills/ito-compute/SKILL.md',
-      'skills/ito-compute/agents/openai.yaml',
-      'skills/ito-inference/SKILL.md',
-      'skills/ito-training/SKILL.md',
+      'skills/agent-security-hardening/SKILL.md',
+      'skills/agent-security-hardening/agents/openai.yaml',
+      'skills/mcp-dependency-review/SKILL.md',
+      'skills/deep-research/SKILL.md',
+      'skills/scientific-db-openalex-database/SKILL.md',
+      'skills/scientific-thinking-literature-review/SKILL.md',
     ]) {
       const installedPath = path.join(cursorRoot, relativePath);
       const installedStat = fs.lstatSync(installedPath);
-      assert.ok(installedStat.isFile(), `packed Itô asset is not a file: ${relativePath}`);
-      assert.ok(!installedStat.isSymbolicLink(), `packed Itô asset is a symlink: ${relativePath}`);
-      assert.ok(installedStat.size > 0, `packed Itô asset is empty: ${relativePath}`);
+      assert.ok(installedStat.isFile(), `packed skill asset is not a file: ${relativePath}`);
+      assert.ok(!installedStat.isSymbolicLink(), `packed skill asset is a symlink: ${relativePath}`);
+      assert.ok(installedStat.size > 0, `packed skill asset is empty: ${relativePath}`);
     }
     const hostileBin = path.join(tempRoot, 'hostile-bin');
     const hostileItoSentinel = path.join(tempRoot, 'hostile-ito-spawned');
@@ -749,7 +748,7 @@ function runLifecycle(options) {
     assert.ok(managedSnapshot.length > 0, 'initial install must create managed Cursor files');
 
     parseJsonOutput(
-      runCli(itoInstallArgs),
+      runCli(optInInstallArgs),
       'repeat install'
     );
     const repeatState = JSON.parse(fs.readFileSync(statePath, 'utf8'));

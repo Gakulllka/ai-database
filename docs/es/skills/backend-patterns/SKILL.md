@@ -432,7 +432,7 @@ export const DELETE = requirePermission('delete')(
 
 El rate limiting debe usar un almacén compartido como Redis, un gateway, o el limitador nativo de la plataforma. No usar contadores en memoria por proceso para APIs de producción: se reinician al desplegarse, se dividen entre réplicas y fallan abiertamente en entornos serverless o multi-instancia.
 
-Mantener la capa backend responsable de elegir el punto de integración y la forma del error; usar `api-design` para el contrato HTTP y `security-review` para la revisión de casos de abuso.
+Mantener la capa backend responsable de elegir el punto de integración y la forma del error; usar `api-design` para el contrato HTTP y aplicar las comprobaciones de seguridad del proyecto para revisar casos de abuso.
 
 ## Trabajos en Segundo Plano y Colas
 

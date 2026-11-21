@@ -106,8 +106,7 @@ provider calls or rendered files. Each establishes a different part of the path.
 
 ## Related Skills
 
-- `contract-first` (canonical `skills/contract-first/SKILL.md` in Database): shared protocol design.
-- [security-review](../security-review/SKILL.md): trust boundaries and execution.
+- Reuse the project’s shared protocol schema, trust boundaries, and execution rules.
 - [test-collaboration](../test-collaboration/SKILL.md): contract/regression evidence.
 - `cost-aware-llm-pipeline` (canonical `skills/cost-aware-llm-pipeline/SKILL.md` in Database): budgets and routing.
 

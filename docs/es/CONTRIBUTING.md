@@ -139,9 +139,9 @@ Enlaza a skills complementarias (por ejemplo, `skill-relacionada-1`, `skill-rela
 | Categoría | Propósito | Ejemplos |
 |-----------|---------|----------|
 | **Estándares de Lenguaje** | Modismos, convenciones, mejores prácticas | `python-patterns`, `golang-patterns` |
-| **Patrones de Framework** | Orientación específica del framework | `django-patterns`, `nextjs-patterns` |
+| **Patrones de Framework** | Orientación específica del framework | `fastapi-patterns`, `nextjs-patterns` |
 | **Flujo de Trabajo** | Procesos paso a paso | `tdd-workflow`, `refactoring-workflow` |
-| **Conocimiento de Dominio** | Dominios especializados | `security-review`, `api-design` |
+| **Conocimiento de Dominio** | Dominios especializados | `api-design` |
 | **Integración de Herramientas** | Uso de herramientas/bibliotecas | `docker-patterns`, `supabase-patterns` |
 | **Plantilla** | Plantillas de skills específicas del proyecto | `docs/examples/project-guidelines-template.md` |
 
@@ -177,7 +177,6 @@ Versión corta:
 | `coding-standards/` | Estándares de Lenguaje | Patrones de TypeScript/JavaScript |
 | `frontend-patterns/` | Patrones de Framework | Mejores prácticas de React y Next.js |
 | `backend-patterns/` | Patrones de Framework | Patrones de API y base de datos |
-| `security-review/` | Conocimiento de Dominio | Lista de verificación de seguridad |
 | `tdd-workflow/` | Flujo de Trabajo | Proceso de desarrollo guiado por pruebas |
 | `docs/examples/project-guidelines-template.md` | Plantilla | Plantilla de skill específica del proyecto |
 

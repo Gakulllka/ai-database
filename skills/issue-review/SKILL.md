@@ -310,4 +310,4 @@ When the decision is NEEDS-INFO, the draft reply lists exactly which template it
 
 - `/code-review`: the pull request counterpart with the same phase structure
 - `skills/github-ops/SKILL.md`: bulk triage, stale handling, and label conventions
-- `skills/project-flow-ops/SKILL.md`: moving a validated issue into an execution lane
+- Use the project's issue tracker to assign an owner and next step to a validated issue.

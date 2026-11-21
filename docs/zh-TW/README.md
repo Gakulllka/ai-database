@@ -169,7 +169,6 @@ ECC/
 |   |-- iterative-retrieval/        # 子代理程式的漸進式上下文精煉
 |   |-- strategic-compact/          # 手動壓縮建議（完整指南）
 |   |-- tdd-workflow/               # TDD 方法論
-|   |-- security-review/            # 安全性檢查清單
 |   |-- eval-harness/               # 驗證迴圈評估（完整指南）
 |   |-- verification-loop/          # 持續驗證（完整指南）
 |   |-- golang-patterns/            # Go 慣用語法和最佳實務（新增）

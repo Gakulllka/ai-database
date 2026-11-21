@@ -182,7 +182,6 @@ origin: ECC
 ## 相关 ECC 技能
 
 * `frontend-patterns` 用于围绕文稿的组件和交互模式
-* `liquid-glass-design` 当演示文稿有意借鉴苹果玻璃美学时
 * `e2e-testing` 如果您需要为最终文稿进行自动化浏览器验证
 
 ## 交付清单

@@ -24,7 +24,7 @@ metadata:
 
 - `test-collaboration`: TEST-IDs, test assets, and defect-regression evidence.
 - `ai-regression-testing`: executable regression tests derived from important defects.
-- `contract-first`: cross-service or cross-client contract verification.
+- Compare cross-service and cross-client interfaces against the project’s shared contract.
 - `change-impact`: pre- and post-implementation blast-radius analysis.
 
 ## Problem
@@ -88,7 +88,7 @@ Invoke `module-regression` through the host's skill entry point, such as `$modul
 
 | Method | Owns | Artifact | Verification time |
 |---|---|---|---|
-| `contract-first` | Cross-client/service field contracts | `CONTRACT.md` or existing equivalent | Integration reconciliation |
+| Interface verification | Cross-client/service field contracts | `CONTRACT.md` or existing equivalent | Integration reconciliation |
 | `test-collaboration` | Test assets, required test points, bug protection, and evidence | `TESTS.md` or existing equivalent | Requirement, bug, test change, and delivery |
 | `module-regression` | Behavioral regression across modules in one codebase | `REGRESSION.md` or existing equivalent | After each relevant change |
 

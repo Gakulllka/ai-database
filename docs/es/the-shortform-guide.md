@@ -30,7 +30,6 @@ ECC sigue enviando una capa `commands/`, pero es mejor pensarla como compatibili
   pmx-guidelines.md      # Patrones específicos del proyecto
   coding-standards.md    # Mejores prácticas por lenguaje
   tdd-workflow/          # Skill multi-archivo con SKILL.md
-  security-review/       # Skill basada en lista de verificación
 ```
 
 ---

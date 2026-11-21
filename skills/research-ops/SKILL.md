@@ -15,7 +15,7 @@ This workflow selects the research approach that fits the decision and records w
 
 Pull these ECC-native skills into the workflow when relevant:
 
-- `exa-search` for fast current-web discovery
+- Use available web-search tools for initial discovery.
 - `deep-research` for multi-source synthesis with citations
 - `knowledge-ops` when the result should be stored in durable context afterward
 
@@ -59,7 +59,7 @@ Choose the right lane before searching:
 
 ### 3. Take the lightest useful evidence path first
 
-- use `exa-search` for fast discovery
+- use available web-search tools for fast discovery
 - escalate to `deep-research` when synthesis or multiple sources matter
 - for a recommendation, compare the options against explicit criteria and note gaps in the evidence
 - for target ranking or warm paths, verify relevant roles and ties through public evidence or information supplied by the user

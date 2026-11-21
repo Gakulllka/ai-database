@@ -100,10 +100,8 @@ origin: ECC
 
 如有帮助，可指向下一个ECC原生通道：
 
-* `project-flow-ops`
 * `workspace-surface-audit`
 * `api-connector-builder`
-* `dashboard-builder`
 * `tdd-workflow`
 * `verification-loop`
 

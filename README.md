@@ -161,12 +161,12 @@ ECC is MIT-licensed open source. It works best with Claude Code today, has nativ
 
 Browse [Database skill packs](docs/database-skill-packs.md) by task, and fetch the selected pack with its complete skill folders.
 
-Access to 77 agents, 374 skills, and 98 legacy command shims, plus hooks, rules, memory, continuous learning, and AgentShield security scanning. The agents are specialized for planning, review, build repair, security, architecture, and domain work.
+Access to 77 agents, 285 skills, and 98 legacy command shims, plus hooks, rules, memory, continuous learning, and AgentShield security scanning. The agents are specialized for planning, review, build repair, security, architecture, and domain work.
 
 | Included         |       Count | What it gives you                                                                    |
 | ---------------- | ----------: | ------------------------------------------------------------------------------------ |
 | Agents           |   77 agents | Planning, review, build repair, security, architecture, and domain work              |
-| Skills           |  374 skills | TDD, research, security, docs, frontend, data, ML, operations, and more              |
+| Skills           |  285 skills | TDD, research, security, docs, frontend, data, ML, operations, and more              |
 | Commands         | 98 commands | Convenient entry points while ECC moves to a skills-first surface                    |
 | Hooks and memory |     Runtime | Enforcement, session summaries, continuous learning, instincts, and context controls |
 | Rules            |   Selective | Always-loaded standards you choose by language or project                            |
@@ -531,7 +531,7 @@ It returns matching components, related profiles, and preview/install commands. 
 You can also install explicit skills or capabilities:
 
 ```bash
-./install.sh --target claude --skills tdd-workflow,security-review
+./install.sh --target claude --skills tdd-workflow,coding-standards
 node scripts/ecc.js install --profile minimal --target claude --with capability:machine-learning
 ```
 
@@ -718,7 +718,7 @@ Start with the workflow you need, not the full catalog.
 | Triaging a GitHub issue | `/ecc:issue-review <number>` (plugin) or `/issue-review <number>` (manual install) to verify it against the code and draft a reply |
 | Repairing a build | `/build-fix` |
 | Cleaning a codebase | `/refactor-clean` |
-| Checking context pressure | `/context-budget` |
+| Checking context pressure | Native meter: `/status` in Codex or `/context` in Claude Code |
 | Ending a long session | `/save-session` or `/learn-eval` |
 | Resuming later | `/resume-session` |
 | Auditing agent config | `/security-scan` with a reviewed scanner, or installed `agentshield scan --path .` |
@@ -759,7 +759,7 @@ Skills are the canonical workflow surface; maintained slash entries stay availab
 | Review a GitHub issue | `/ecc:issue-review` (plugin), `/issue-review` (manual install) | — (issue-review skill) |
 | Fix a failing build | `/build-fix` | build-error-resolver |
 | Run end-to-end tests | `e2e-testing` skill | e2e-runner |
-| Find security vulnerabilities | `/security-scan` | security-reviewer |
+| Audit harness configuration | `/security-scan` | Reviewed AgentShield runner |
 | Remove dead code | `/refactor-clean` | refactor-cleaner |
 | Update documentation | `/update-docs` | doc-updater |
 | Review Go code | `/go-review` | go-reviewer |
@@ -794,7 +794,7 @@ tdd-workflow skill                            -> tdd-guide: write a failing test
 
 **Preparing for production:**
 ```
-/security-scan                                -> security-reviewer: OWASP Top 10 audit
+/security-scan                                -> AgentShield: audit harness configuration
 e2e-testing skill                             -> e2e-runner: critical user flow tests
 /test-coverage                                -> verify 80%+ coverage
 ```
@@ -860,7 +860,7 @@ Kimi Code discovers the installed `.kimi-code/AGENTS.md` instructions and `.kimi
 
 `ecc ito` delegates to the separately installed canonical Itô client; ECC does not maintain a second API client. `ecc ito login [--no-browser]` performs device authorization, opens the Itô verification page by default, and persists a device token in macOS Keychain; `--no-browser` suppresses the page handoff. ECC itself does no browser automation. `ecc ito auth` is validation-only and rejects `--no-browser`. The available operations are `ecc ito login`, `ecc ito auth`, `ecc ito find`, `ecc ito status`, and the separately gated `ecc ito evals`. The matching MCP tools remain `ito_auth`, `ito_find`, and `ito_status`; `ito_auth` validates existing credentials and node qualification is CLI-only.
 
-The `ito-compute-cli` package is currently unpublished. Build it locally from the Itô runtime repo (private while the desk hardens; design partners get access) under `cli/ito-compute-cli`, run `npm ci` and `npm run check`, then set `ECC_ITO_CLI_EXECUTABLE` to that build's absolute `dist/bin/ito.js` path. Login never inherits `ITO_API_KEY`; auth, find, and status forward `ITO_API_KEY` directly when configured, and `ITO_AUTH_MODE=legacy` is not required. `ecc ito logout` revokes the current device credential and retains its local copy if remote revocation cannot be confirmed. Device tokens use macOS Keychain by default; explicit file fallback must retain owner-only directory/file permissions. ECC does not discover this credential-bearing client through `PATH`. See the [`ito-compute` skill](skills/ito-compute/SKILL.md) for the full RFQ authority and MCP setup contract.
+The `ito-compute-cli` package is currently unpublished. Build it locally from the Itô runtime repo (private while the desk hardens; design partners get access) under `cli/ito-compute-cli`, run `npm ci` and `npm run check`, then set `ECC_ITO_CLI_EXECUTABLE` to that build's absolute `dist/bin/ito.js` path. Login never inherits `ITO_API_KEY`; auth, find, and status forward `ITO_API_KEY` directly when configured, and `ITO_AUTH_MODE=legacy` is not required. `ecc ito logout` revokes the current device credential and retains its local copy if remote revocation cannot be confirmed. Device tokens use macOS Keychain by default; explicit file fallback must retain owner-only directory/file permissions. ECC does not discover this credential-bearing client through `PATH`. See the [Itô integration notes](docs/design/ecc-ito-compute-integration.md) for the CLI and MCP setup contract.
 
 `find` submits a live authenticated RFQ. It does not reserve capacity. `evals` requires both `ITO_ENABLE_SIXTYTWO_LIVE=1` and `--live-sixtytwo`, a separately installed `sixtytwo-cli==0.3.33`, an explicit node list, and an existing absolute configuration directory. It cannot rent, launch, recover, repair, or purchase. ECC exposes no quote lock, purchase, workload, or inference path, and it never replaces a missing client or failed live call with a local result.
 
@@ -883,7 +883,7 @@ Stable graduation of the 2.0 line: control-pane substrate, worktree lifecycle se
 ```text
 ECC/
 |-- agents/           # 77 specialized subagents for delegation
-|-- skills/           # 374 reusable workflows loaded on demand
+|-- skills/           # 285 reusable workflows loaded on demand
 |-- commands/         # 98 maintained slash-command shims
 |-- rules/            # opt-in common and language standards
 |-- hooks/            # runtime automation and enforcement
@@ -941,7 +941,6 @@ ECC/
 |
 |-- skills/           # Workflow definitions and domain knowledge
 |   |-- coding-standards/           # Language best practices
-|   |-- clickhouse-io/              # ClickHouse analytics, queries, data engineering
 |   |-- backend-patterns/           # API, database, caching patterns
 |   |-- frontend-patterns/          # React, Next.js patterns
 |   |-- frontend-slides/            # HTML slide decks and PPTX-to-web presentation workflows
@@ -953,36 +952,25 @@ ECC/
 |   |-- iterative-retrieval/        # Progressive context refinement for subagents
 |   |-- strategic-compact/          # Manual compaction suggestions (Longform Guide)
 |   |-- tdd-workflow/               # TDD methodology
-|   |-- security-review/            # Security checklist
 |   |-- eval-harness/               # Verification loop evaluation (Longform Guide)
 |   |-- verification-loop/          # Continuous verification (Longform Guide)
-|   |-- videodb/                    # Video and audio: ingest, search, edit, generate, stream
 |   |-- golang-patterns/            # Go idioms and best practices
 |   |-- golang-testing/             # Go testing patterns, TDD, benchmarks
 |   |-- cpp-coding-standards/       # C++ coding standards from C++ Core Guidelines
 |   |-- cpp-testing/                # C++ testing with GoogleTest, CMake/CTest
-|   |-- django-patterns/            # Django patterns, models, views
-|   |-- django-security/            # Django security best practices
-|   |-- django-tdd/                 # Django TDD workflow
-|   |-- django-verification/        # Django verification loops
 |   |-- laravel-patterns/           # Laravel architecture patterns
-|   |-- laravel-security/           # Laravel security best practices
 |   |-- laravel-tdd/                # Laravel TDD workflow
 |   |-- laravel-verification/       # Laravel verification loops
 |   |-- python-patterns/            # Python idioms and best practices
 |   |-- python-testing/             # Python testing with pytest
 |   |-- quarkus-patterns/           # Java Quarkus patterns
-|   |-- quarkus-security/           # Quarkus security
 |   |-- quarkus-tdd/                # Quarkus TDD
 |   |-- quarkus-verification/       # Quarkus verification
 |   |-- rails-patterns/             # Rails architecture patterns
-|   |-- rails-security/             # Rails security practices
 |   |-- springboot-patterns/        # Java Spring Boot patterns
-|   |-- springboot-security/        # Spring Boot security
 |   |-- springboot-tdd/             # Spring Boot TDD
 |   |-- springboot-verification/    # Spring Boot verification
 |   |-- configure-ecc/              # Interactive installation wizard
-|   |-- security-scan/              # AgentShield security auditor integration
 |   |-- issue-review/               # GitHub issue review: verify, dedupe, severity, draft reply
 |   |-- java-coding-standards/      # Java coding standards
 |   |-- jpa-patterns/               # JPA/Hibernate patterns
@@ -1000,8 +988,6 @@ ECC/
 |   |-- swift-protocol-di-testing/  # Protocol-based DI for testable Swift code
 |   |-- search-first/               # Research-before-coding workflow
 |   |-- skill-stocktake/            # Audit skills and commands for quality
-|   |-- liquid-glass-design/        # iOS 26 Liquid Glass design system
-|   |-- foundation-models-on-device/ # Apple on-device LLM with FoundationModels
 |   |-- swift-concurrency-6-2/      # Swift 6.2 Approachable Concurrency
 |   |-- mle-workflow/               # Production ML data contracts, evals, deployment, monitoring
 |   |-- perl-patterns/              # Modern Perl 5.36+ idioms and best practices
@@ -1009,7 +995,6 @@ ECC/
 |   |-- perl-testing/               # Perl TDD with Test2::V0, prove, Devel::Cover
 |   |-- autonomous-loops/           # Autonomous loop patterns: sequential pipelines, PR loops, DAG orchestration
 |   |-- plankton-code-quality/      # Write-time code quality enforcement with Plankton hooks
-|   |-- codehealth-mcp/             # Optional CodeScene Code Health MCP skill (opt-in)
 |   |-- docs/examples/project-guidelines-template.md  # Template for project-specific skills
 |
 |-- commands/         # Maintained slash-entry compatibility; prefer skills/
@@ -1788,10 +1773,7 @@ name. Counts depend on the checkout and CLI version. The file redirection also
 avoids truncated large JSON output observed with Copilot CLI 1.0.82 on macOS.
 
 Copilot registers a skill under the `name` in its `SKILL.md` frontmatter, not
-its directory name, so catalog folders whose names differ from their frontmatter
-(for example `scientific-db-pubmed-database`, which declares
-`name: pubmed-database`) still load — they are just listed under the frontmatter
-name.
+its directory name. When they differ, use the frontmatter name in Copilot.
 
 Agents work the same way:
 
@@ -1955,7 +1937,7 @@ The `strategic-compact` skill suggests `/compact` at logical breakpoints instead
 - Keep under 80 tools active
 - Use `/mcp` to disable unused Claude Code MCP servers; those runtime choices persist in `~/.claude.json`
 - Use `ECC_DISABLED_MCPS` only to filter ECC-generated MCP configs during install/sync flows
-- If context is getting heavy, run `/context-budget` and remove rules you do not need
+- If context is getting heavy, check your harness’s native context meter and remove rules you do not need
 
 **Agent teams cost warning:** Agent Teams spawns multiple context windows. Each teammate consumes tokens independently. Only use for tasks where parallelism provides clear value (multi-module work, parallel reviews). For simple sequential tasks, subagents are more token-efficient.
 </details>
@@ -2017,7 +1999,7 @@ Use `/mcp` for Claude Code runtime disables; Claude Code persists those choices 
 
 `ECC_DISABLED_MCPS` is an ECC install/sync filter, not a live Claude Code toggle.
 
-If context is getting heavy, run `/context-budget`, remove rules you do not need, and disable unused MCP servers. See the [token optimization guide](docs/token-optimization.md).
+If context is getting heavy, check your harness’s native context meter, remove rules you do not need, and disable unused MCP servers. See the [token optimization guide](docs/token-optimization.md).
 </details>
 
 Security references:

@@ -118,7 +118,7 @@ cat go.mod
 
 ```text
 skills/frontend-patterns | skill | DAILY | 84 .tsx files, next.config.ts present | コアフロントエンドスタック
-skills/django-patterns   | skill | LIBRARY | no .py files, no pyproject.toml       | このリポジトリではアクティブでない
+skills/python-patterns   | skill | LIBRARY | no .py files, no pyproject.toml       | このリポジトリではアクティブでない
 rules/typescript/*       | rules | DAILY | package.json + tsconfig.json            | アクティブな TS リポジトリ
 rules/python/*           | rules | LIBRARY | zero Python source files             | アクセス可能に保つのみ
 ```

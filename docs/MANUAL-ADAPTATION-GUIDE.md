@@ -55,7 +55,6 @@ Good minimal examples:
   - `skills/verification-loop/SKILL.md`
 - TypeScript API work:
   - `skills/backend-patterns/SKILL.md`
-  - `skills/security-review/SKILL.md`
   - `skills/tdd-workflow/SKILL.md`
 - Content work:
   - `skills/content-engine/SKILL.md`
@@ -77,7 +76,7 @@ sed -n '1,220p' skills/tdd-workflow/SKILL.md > /tmp/ecc-context.md
 printf '\n\n---\n\n' >> /tmp/ecc-context.md
 sed -n '1,220p' skills/backend-patterns/SKILL.md >> /tmp/ecc-context.md
 printf '\n\n---\n\n' >> /tmp/ecc-context.md
-sed -n '1,220p' skills/security-review/SKILL.md >> /tmp/ecc-context.md
+sed -n '1,220p' skills/verification-loop/SKILL.md >> /tmp/ecc-context.md
 ```
 
 You can also use `rg` to identify the right skills before packing:
@@ -176,7 +175,7 @@ You are operating with a manually adapted ECC bundle.
 Active skills:
 - backend-patterns
 - tdd-workflow
-- security-review
+- verification-loop
 
 Command registry:
 - /plan

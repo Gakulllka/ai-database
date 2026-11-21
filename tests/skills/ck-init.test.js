@@ -125,6 +125,31 @@ test('initializing a registered v1 project points to migrate until nothing is le
   assert.ok(fs.existsSync(path.join(contextDir, 'context.json')), 'init did not register the project');
 });
 
+test('Codex reads CRLF instructions and saves to its chosen state directory', home => {
+  const project = path.join(home, 'app');
+  const state = path.join(home, 'selected-state');
+  fs.mkdirSync(project);
+  fs.writeFileSync(path.join(project, 'AGENTS.md'),
+    '## Current Goal\r\n\r\nShip a reproducible sample\r\n\r\n## Do Not Do\r\n\r\n- Use external services\r\n');
+  function invoke(script, args = [], input) {
+    const result = spawnSync(process.execPath, [path.join(commandsDir, script), ...args], {
+      cwd: project, encoding: 'utf8', input,
+      env: { ...process.env, CK_HOME: state, PWD: project },
+    });
+    assert.strictEqual(result.status, 0, result.stdout + result.stderr);
+    return result.stdout;
+  }
+  const info = JSON.parse(invoke('init.mjs'));
+  assert.strictEqual(info.goal, 'Ship a reproducible sample');
+  assert.deepStrictEqual(info.constraints, ['Use external services']);
+  assert.strictEqual(fs.existsSync(state), false);
+  invoke('save.mjs', ['--init'], JSON.stringify({ ...info, name: 'app' }));
+  invoke('save.mjs', [], JSON.stringify({ summary: 'Validated handoff', leftOff: 'Start test' }));
+  assert.match(invoke('resume.mjs'), /Start test/);
+  const context = JSON.parse(fs.readFileSync(path.join(state, 'contexts', 'app', 'context.json'), 'utf8'));
+  assert.strictEqual(context.sessions[0].summary, 'Validated handoff');
+});
+
 console.log(`\nPassed: ${passed}`);
 console.log(`Failed: ${failed}`);
 process.exit(failed > 0 ? 1 : 0);

@@ -36,4 +36,4 @@ Fix: 実施すべき具体的な変更。
 - エージェント: `fastapi-reviewer`
 - スキル: `fastapi-patterns`
 - コマンド: `/python-review`
-- スキル: `security-scan`
+- コマンド: `/security-scan`

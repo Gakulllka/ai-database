@@ -15,10 +15,10 @@ This is a focused operator workflow for the sibling [ECC-Tools](https://github.c
 Pull these ECC-native skills into the workflow when relevant:
 
 - `autonomous-loops` for bounded multi-step audits that cross webhooks, queues, billing, and retries
-- `agentic-engineering` for tracing the request path into discrete, provable units
-- `customer-billing-ops` when repo behavior and customer-impact math must be separated cleanly
+- Trace the request path through individually verifiable steps.
+- Separate implementation behavior from customer billing impact.
 - `search-first` before inventing helpers or re-implementing repo-local utilities
-- `security-review` when auth, usage gates, entitlements, or secrets are touched
+- Use the project's security review when auth, usage limits, entitlements, or secrets are affected.
 - `verification-loop` for proving rerun safety and exact post-fix state
 - `tdd-workflow` when the fix needs regression coverage in the worker, router, or billing paths
 

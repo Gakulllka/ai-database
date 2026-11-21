@@ -533,7 +533,6 @@ ECC/
 |
 |-- skills/           # Workflow-Definitionen und Domänenwissen
 |   |-- coding-standards/           # Sprach-Best-Practices
-|   |-- clickhouse-io/              # ClickHouse-Analytics, Queries, Data Engineering
 |   |-- backend-patterns/           # API-, Datenbank-, Caching-Patterns
 |   |-- frontend-patterns/          # React-, Next.js-Patterns
 |   |-- frontend-slides/            # HTML-Foliendecks und PPTX-zu-Web-Präsentations-Workflows (NEU)
@@ -544,34 +543,24 @@ ECC/
 |   |-- iterative-retrieval/        # Progressive Kontextverfeinerung für Subagents
 |   |-- strategic-compact/          # Manuelle Compaction-Vorschläge (Langleitfaden)
 |   |-- tdd-workflow/               # TDD-Methodik
-|   |-- security-review/            # Sicherheits-Checkliste
 |   |-- eval-harness/               # Evaluation der Verifikationsschleife (Langleitfaden)
 |   |-- verification-loop/          # Kontinuierliche Verifikation (Langleitfaden)
-|   |-- videodb/                   # Video und Audio: Ingest, Suche, Bearbeitung, Generierung, Streaming (NEU)
 |   |-- golang-patterns/            # Go-Idiome und Best Practices
 |   |-- golang-testing/             # Go-Test-Patterns, TDD, Benchmarks
 |   |-- cpp-coding-standards/         # C++-Coding-Standards aus den C++ Core Guidelines (NEU)
 |   |-- cpp-testing/                # C++-Tests mit GoogleTest, CMake/CTest (NEU)
-|   |-- django-patterns/            # Django-Patterns, Models, Views (NEU)
-|   |-- django-security/            # Django-Sicherheits-Best-Practices (NEU)
-|   |-- django-tdd/                 # Django-TDD-Workflow (NEU)
-|   |-- django-verification/        # Django-Verifikationsschleifen (NEU)
 |   |-- laravel-patterns/           # Laravel-Architektur-Patterns (NEU)
-|   |-- laravel-security/           # Laravel-Sicherheits-Best-Practices (NEU)
 |   |-- laravel-tdd/                # Laravel-TDD-Workflow (NEU)
 |   |-- laravel-verification/       # Laravel-Verifikationsschleifen (NEU)
 |   |-- python-patterns/            # Python-Idiome und Best Practices (NEU)
 |   |-- python-testing/             # Python-Tests mit pytest (NEU)
 |   |-- quarkus-patterns/            # Java-Quarkus-Patterns (NEU)
-|   |-- quarkus-security/            # Quarkus-Sicherheit (NEU)
 |   |-- quarkus-tdd/                 # Quarkus-TDD (NEU)
 |   |-- quarkus-verification/        # Quarkus-Verifikation (NEU)
 |   |-- springboot-patterns/        # Java-Spring-Boot-Patterns (NEU)
-|   |-- springboot-security/        # Spring-Boot-Sicherheit (NEU)
 |   |-- springboot-tdd/             # Spring-Boot-TDD (NEU)
 |   |-- springboot-verification/    # Spring-Boot-Verifikation (NEU)
 |   |-- configure-ecc/              # Interaktiver Installationsassistent (NEU)
-|   |-- security-scan/              # Integration des AgentShield-Security-Auditors (NEU)
 |   |-- java-coding-standards/     # Java-Coding-Standards (NEU)
 |   |-- jpa-patterns/              # JPA-/Hibernate-Patterns (NEU)
 |   |-- postgres-patterns/         # PostgreSQL-Optimierungs-Patterns (NEU)
@@ -589,8 +578,6 @@ ECC/
 |   |-- swift-protocol-di-testing/   # Protokollbasierte DI für testbaren Swift-Code (NEU)
 |   |-- search-first/               # Research-vor-Coding-Workflow (NEU)
 |   |-- skill-stocktake/            # Auditieren von Skills und Commands auf Qualität (NEU)
-|   |-- liquid-glass-design/         # iOS-26-Liquid-Glass-Designsystem (NEU)
-|   |-- foundation-models-on-device/ # Apple-On-Device-LLM mit FoundationModels (NEU)
 |   |-- swift-concurrency-6-2/       # Swift 6.2 Approachable Concurrency (NEU)
 |   |-- mle-workflow/               # Produktive ML-Datenverträge, Evals, Deployment, Monitoring (NEU)
 |   |-- perl-patterns/             # Moderne Perl-5.36+-Idiome und Best Practices (NEU)
@@ -900,7 +887,7 @@ cp -r skills/search-first ~/.claude/skills/
 # Manuelle Installationen nicht unter ~/.claude/skills/ecc/ verschachteln.
 
 # Optional: nischen-/framework-spezifische Skills nur bei Bedarf hinzufügen
-# for s in django-patterns django-tdd laravel-patterns springboot-patterns quarkus-patterns; do
+# for s in laravel-patterns laravel-tdd springboot-patterns quarkus-patterns; do
 # cp -r skills/$s ~/.claude/skills/
 # done
 
@@ -1344,18 +1331,14 @@ Kanonische Anthropic-Skills wie `claude-api`, `frontend-design` und `skill-creat
 | e2e-testing | Playwright-E2E-Tests |
 | eval-harness | Eval-getriebene Entwicklung |
 | ecc-conventions | Entwicklungskonventionen und -Patterns für das Projekt |
-| exa-search | Neural Search über Exa MCP für Web-, Code-, Unternehmensrecherche |
-| fal-ai-media | Vereinheitlichte Mediengenerierung für Bilder, Video und Audio |
 | frontend-patterns | React-/Next.js-Patterns |
 | frontend-slides | HTML-Präsentationen, PPTX-Konvertierung, Erkundung visueller Stile |
 | mcp-server-patterns | MCP-Server mit Node-/TypeScript-SDK bauen |
 | nextjs-turbopack | Next.js 16+ und inkrementelles Turbopack-Bundling |
 | product-capability | Produktziele in abgegrenzte Capability-Maps übersetzen |
-| security-review | Umfassende Sicherheits-Checkliste |
 | strategic-compact | Kontextverwaltung |
 | tdd-workflow | Testgetriebene Entwicklung mit 80 %+ Coverage |
 | verification-loop | Build, Test, Lint, Typecheck, Sicherheit |
-| video-editing | KI-unterstützte Videobearbeitungs-Workflows mit FFmpeg und Remotion |
 
 ### Wesentliche Einschränkung
 

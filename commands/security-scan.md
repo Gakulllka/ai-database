@@ -1,5 +1,5 @@
 ---
-description: Run AgentShield against agent, hook, MCP, permission, and secret surfaces. This is the slash-command entrypoint for that audit; prefer the security-scan skill for the same AgentShield audit in conversation.
+description: Run AgentShield against agent, hook, MCP, permission, and secret surfaces. Requires an installed, reviewed AgentShield runner.
 agent: ecc:security-reviewer
 subtask: true
 ---
@@ -81,7 +81,6 @@ Use AgentShield in GitHub Actions for enforced gates:
 
 ## Links
 
-- Skill: `skills/security-scan/SKILL.md`
 - Agent: `agents/security-reviewer.md`
 - Scanner: <https://github.com/affaan-m/agentshield>
 

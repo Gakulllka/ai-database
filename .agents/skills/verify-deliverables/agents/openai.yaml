@@ -1,4 +1,0 @@
-interface:
-  display_name: "Verify Deliverables"
-  short_description: "Verify task outcomes through observable evidence"
-  default_prompt: "Use $verify-deliverables to verify the requested deliverables against observable acceptance criteria."

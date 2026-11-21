@@ -169,8 +169,6 @@ Exact direct dependency pins do not prove full transitive reproducibility, safe 
 ## Related Skills
 
 - `mcp-server-patterns` — MCP server design, tools, resources, prompts, and transports.
-- `security-review` — broader application-security checklist.
-- `security-scan` — broader security scanning workflow.
 
 ## Further Reading
 

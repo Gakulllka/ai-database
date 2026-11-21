@@ -133,7 +133,7 @@ const tests = [
     const additions = assignment[1].split(',');
     const expected = [
       'hooks/hookify-runtime.test.js', 'integration/hooks.test.js', 'hooks/hooks.test.js',
-      'ci/agent-payment-x402-seller-guard.test.js', 'lib/context-profile-sandbox.test.js',
+      'lib/context-profile-sandbox.test.js',
       'hooks/gateguard-fact-force.test.js',
     ];
     assert.deepStrictEqual(additions.slice().sort(), expected.slice().sort());

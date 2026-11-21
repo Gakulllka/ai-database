@@ -231,5 +231,4 @@ SearchPluginTool({
 
 * `laravel-patterns`——Laravel 架构与模式
 * `laravel-tdd`——Laravel 测试驱动开发
-* `laravel-security`——Laravel 安全最佳实践
 * `documentation-lookup`——通用库文档查询（Context7）

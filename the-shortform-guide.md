@@ -30,7 +30,6 @@ ECC still ships a `commands/` layer, but it is best thought of as legacy slash-e
   pmx-guidelines.md      # Project-specific patterns
   coding-standards.md    # Language best practices
   tdd-workflow/          # Multi-file skill with SKILL.md
-  security-review/       # Checklist-based skill
 ```
 
 ---

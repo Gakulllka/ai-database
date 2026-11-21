@@ -99,7 +99,6 @@ const COMPONENT_ALIASES = Object.freeze({
   ],
   'framework:nextjs': ['next', 'next.js', 'nextjs'],
   'framework:react': ['react', 'tsx'],
-  'framework:django': ['django'],
   'framework:springboot': ['spring', 'springboot'],
   'lang:typescript': ['javascript', 'js', 'node', 'nodejs', 'ts'],
   'lang:python': ['py'],

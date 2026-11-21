@@ -33,7 +33,6 @@ Use these focused skills when the request needs detail:
   detection.
 - `network-bgp-diagnostics` for BGP neighbor, route-policy, and prefix evidence.
 - `network-interface-health` for link, counter, CRC, drop, and flap analysis.
-- `cisco-ios-patterns` for IOS/IOS-XE syntax and safe show-command workflows.
 - `netmiko-ssh-automation` for bounded read-only network automation patterns.
 
 ## Workflow

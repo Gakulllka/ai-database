@@ -1,11 +1,22 @@
 ---
 name: autonomous-agent-harness
-description: Transform Claude Code into a fully autonomous agent system with persistent memory, scheduled operations, computer use, and task queuing. Replaces standalone agent frameworks (Hermes, AutoGPT) by leveraging Claude Code's native crons, dispatch, MCP tools, and memory. Use when the user wants continuous autonomous operation, scheduled tasks, or a self-directing agent loop.
+description: "Set up a bounded, durable agent workflow in Codex or Claude Code. Use for approved scheduled work, task queues, checkpoints, or unattended execution with clear limits."
 metadata:
   origin: ECC
 ---
 
 # Autonomous Agent Harness
+
+## Codex workflow
+
+Define one authorized task type, target workspace, allowed tools and writes, evidence of completion, retry limit and what moves a run to blocked. Let the host enforce permissions. Record additional approvals where they are actually required.
+
+1. Run one task in the current chat first. Save a compact task ID, input revision, observed result and next step in the chosen durable location when authorized.
+2. For parallel work, use independent subagents for bounded parts and keep the parent responsible for integration. For periodic work, use the Codex automation control available in the client. For programmatic orchestration, verify which Codex runtime and interfaces are installed before designing around them.
+3. Key repeated operations to the same task and input version so retries cannot create duplicate effects. Re-read the destination after an approved write before marking it done. Bound retries and record a concrete blocker if they are exhausted.
+4. Test a successful run, one blocked run and a retry of the same input before unattended use. Verify the schedule or trigger separately if it was enabled.
+
+## Claude Code and prior integrations
 
 Combine Claude Code's session tools with separately configured scheduling, memory, and computer-use integrations. This is a setup pattern, not a bundled always-on runtime.
 

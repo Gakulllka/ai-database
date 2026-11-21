@@ -125,6 +125,5 @@ a count of imported rows alone is insufficient evidence.
 ## Related Skills
 
 - [local-first-sync](../local-first-sync/SKILL.md): propagate accepted changes.
-- `contract-first` (canonical `skills/contract-first/SKILL.md` in Database): shared payload and error contracts.
-- [security-review](../security-review/SKILL.md): upload and rendering boundaries.
+- Use the project’s shared payload and error contract. Check upload and rendering boundaries against its security requirements.
 - [test-collaboration](../test-collaboration/SKILL.md): invariant-based evidence.

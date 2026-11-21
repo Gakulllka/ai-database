@@ -458,7 +458,7 @@ node scripts/ecc.js consult "security reviews" --target claude
 明示的に skills や capability を指定してインストールすることもできます。
 
 ```bash
-./install.sh --target claude --skills tdd-workflow,security-review
+./install.sh --target claude --skills tdd-workflow,coding-standards
 node scripts/ecc.js install --profile minimal --target claude --with capability:machine-learning
 ```
 
@@ -776,7 +776,7 @@ Kimi Code はインストールされた `.kimi-code/AGENTS.md` の指示と `.k
 
 `ecc ito` は別途インストールされた正規の Itô クライアントに委譲します。ECC は 2 つ目の API クライアントを保守しません。`ecc ito login [--no-browser]` はデバイス認可を実行し、デフォルトで Itô の検証ページを開き、デバイストークンを macOS Keychain に保存します。`--no-browser` はページの引き渡しを抑制します。ECC 自体はブラウザ自動化を行いません。`ecc ito auth` は検証専用で、`--no-browser` を拒否します。利用可能な操作は `ecc ito login`、`ecc ito auth`、`ecc ito find`、`ecc ito status`、および別途ゲートされた `ecc ito evals` です。対応する MCP ツールは引き続き `ito_auth`、`ito_find`、`ito_status` です。`ito_auth` は既存の認証情報を検証し、ノード資格の確認は CLI 専用です。
 
-`ito-compute-cli` パッケージは現在未公開です。Itô ランタイムリポジトリ（デスクの堅牢化が進むまで非公開。デザインパートナーにはアクセス権が提供されます）の `cli/ito-compute-cli` からローカルでビルドし、`npm ci` と `npm run check` を実行してから、`ECC_ITO_CLI_EXECUTABLE` にそのビルドの `dist/bin/ito.js` の絶対パスを設定してください。login は `ITO_API_KEY` を決して継承しません。auth、find、status は設定されていれば `ITO_API_KEY` を直接転送し、`ITO_AUTH_MODE=legacy` は不要です。`ecc ito logout` は現在のデバイス認証情報を失効させ、リモートでの失効が確認できない場合はローカルコピーを保持します。デバイストークンはデフォルトで macOS Keychain を使用します。明示的なファイルフォールバックでは、所有者のみがアクセスできるディレクトリ/ファイルのパーミッションを維持する必要があります。ECC はこの認証情報を持つクライアントを `PATH` 経由で検出しません。RFQ の権限と MCP セットアップの契約の全容については [`ito-compute` skill](../../skills/ito-compute/SKILL.md) を参照してください。
+`ito-compute-cli` パッケージは現在未公開です。Itô ランタイムリポジトリ（デスクの堅牢化が進むまで非公開。デザインパートナーにはアクセス権が提供されます）の `cli/ito-compute-cli` からローカルでビルドし、`npm ci` と `npm run check` を実行してから、`ECC_ITO_CLI_EXECUTABLE` にそのビルドの `dist/bin/ito.js` の絶対パスを設定してください。login は `ITO_API_KEY` を決して継承しません。auth、find、status は設定されていれば `ITO_API_KEY` を直接転送し、`ITO_AUTH_MODE=legacy` は不要です。`ecc ito logout` は現在のデバイス認証情報を失効させ、リモートでの失効が確認できない場合はローカルコピーを保持します。デバイストークンはデフォルトで macOS Keychain を使用します。明示的なファイルフォールバックでは、所有者のみがアクセスできるディレクトリ/ファイルのパーミッションを維持する必要があります。ECC はこの認証情報を持つクライアントを `PATH` 経由で検出しません。CLI と MCP の設定は [Itô 統合ノート](../design/ecc-ito-compute-integration.md) を参照してください。
 
 `find` は認証済みのライブ RFQ を送信します。容量の予約は行いません。`evals` には `ITO_ENABLE_SIXTYTWO_LIVE=1` と `--live-sixtytwo` の両方、別途インストールされた `sixtytwo-cli==0.3.33`、明示的なノードリスト、および既存の絶対パスの設定ディレクトリが必要です。レンタル、起動、復旧、修復、購入はできません。ECC は見積もりロック、購入、ワークロード、推論のいずれの経路も公開せず、クライアントの欠如やライブ呼び出しの失敗をローカルの結果で置き換えることも決してありません。
 
@@ -857,7 +857,6 @@ ECC/
 |
 |-- skills/           # ワークフロー定義とドメイン知識
 |   |-- coding-standards/           # 言語別ベストプラクティス
-|   |-- clickhouse-io/              # ClickHouse 分析、クエリ、データエンジニアリング
 |   |-- backend-patterns/           # API、データベース、キャッシュのパターン
 |   |-- frontend-patterns/          # React、Next.js のパターン
 |   |-- frontend-slides/            # HTML スライドデッキと PPTX から Web へのプレゼンテーションワークフロー
@@ -868,35 +867,25 @@ ECC/
 |   |-- iterative-retrieval/        # サブエージェント向けの段階的なコンテキスト精緻化
 |   |-- strategic-compact/          # 手動コンパクション提案（長文ガイド）
 |   |-- tdd-workflow/               # TDD 方法論
-|   |-- security-review/            # セキュリティチェックリスト
 |   |-- eval-harness/               # 検証ループ評価（長文ガイド）
 |   |-- verification-loop/          # 継続的検証（長文ガイド）
-|   |-- videodb/                    # 動画と音声：取り込み、検索、編集、生成、ストリーミング
 |   |-- golang-patterns/            # Go のイディオムとベストプラクティス
 |   |-- golang-testing/             # Go のテストパターン、TDD、ベンチマーク
 |   |-- cpp-coding-standards/       # C++ Core Guidelines に基づく C++ コーディング標準
 |   |-- cpp-testing/                # GoogleTest、CMake/CTest による C++ テスト
-|   |-- django-patterns/            # Django のパターン、モデル、ビュー
-|   |-- django-security/            # Django セキュリティベストプラクティス
-|   |-- django-tdd/                 # Django TDD ワークフロー
-|   |-- django-verification/        # Django 検証ループ
 |   |-- laravel-patterns/           # Laravel アーキテクチャパターン
-|   |-- laravel-security/           # Laravel セキュリティベストプラクティス
 |   |-- laravel-tdd/                # Laravel TDD ワークフロー
 |   |-- laravel-verification/       # Laravel 検証ループ
 |   |-- python-patterns/            # Python のイディオムとベストプラクティス
 |   |-- python-testing/             # pytest による Python テスト
 |   |-- quarkus-patterns/           # Java Quarkus パターン
-|   |-- quarkus-security/           # Quarkus セキュリティ
 |   |-- quarkus-tdd/                # Quarkus TDD
 |   |-- quarkus-verification/       # Quarkus 検証
 |   |-- rails-patterns/             # Rails アーキテクチャパターン
 |   |-- springboot-patterns/        # Java Spring Boot パターン
-|   |-- springboot-security/        # Spring Boot セキュリティ
 |   |-- springboot-tdd/             # Spring Boot TDD
 |   |-- springboot-verification/    # Spring Boot 検証
 |   |-- configure-ecc/              # インタラクティブインストールウィザード
-|   |-- security-scan/              # AgentShield セキュリティ監査ツールの統合
 |   |-- java-coding-standards/      # Java コーディング標準
 |   |-- jpa-patterns/               # JPA/Hibernate パターン
 |   |-- postgres-patterns/          # PostgreSQL 最適化パターン
@@ -913,8 +902,6 @@ ECC/
 |   |-- swift-protocol-di-testing/  # テスト可能な Swift コードのためのプロトコルベース DI
 |   |-- search-first/               # コーディング前にリサーチするワークフロー
 |   |-- skill-stocktake/            # skills とコマンドの品質監査
-|   |-- liquid-glass-design/        # iOS 26 Liquid Glass デザインシステム
-|   |-- foundation-models-on-device/ # FoundationModels による Apple オンデバイス LLM
 |   |-- swift-concurrency-6-2/      # Swift 6.2 Approachable Concurrency
 |   |-- mle-workflow/               # 本番 ML のデータ契約、評価、デプロイ、監視
 |   |-- perl-patterns/              # モダン Perl 5.36+ のイディオムとベストプラクティス
@@ -922,7 +909,6 @@ ECC/
 |   |-- perl-testing/               # Test2::V0、prove、Devel::Cover による Perl TDD
 |   |-- autonomous-loops/           # 自律ループパターン：逐次パイプライン、PR ループ、DAG オーケストレーション
 |   |-- plankton-code-quality/      # Plankton hooks による書き込み時のコード品質強制
-|   |-- codehealth-mcp/             # オプションの CodeScene Code Health MCP skill（オプトイン）
 |   |-- docs/examples/project-guidelines-template.md  # プロジェクト固有 skills のテンプレート
 |
 |-- commands/         # メンテナンスされているスラッシュエントリーの互換層。skills/ を優先
@@ -1743,7 +1729,7 @@ ECC v2.0.0 は、公開された Hermes オペレーターストーリー、281 
 - アクティブなツールは 80 未満に抑える
 - 使っていない Claude Code の MCP サーバーは `/mcp` で無効化する。これらのランタイムでの選択は `~/.claude.json` に永続化される
 - `ECC_DISABLED_MCPS` は、インストール/sync フロー中に ECC が生成する MCP 設定をフィルタリングする場合にのみ使用する
-- コンテキストが重くなってきたら、`/context-budget` を実行して不要な rules を削除する
+- コンテキストが重くなってきたら、ホストのコンテキスト使用量を確認して不要な rules を削除する
 
 **Agent teams のコスト警告：**Agent Teams は複数のコンテキストウィンドウを生成します。各チームメイトは独立してトークンを消費します。並列化が明確な価値をもたらすタスク（複数モジュールの作業、並列レビュー）にのみ使用してください。単純な逐次タスクでは、サブエージェントの方がトークン効率に優れています。
 </details>
@@ -1805,7 +1791,7 @@ Claude Code のランタイムでの無効化には `/mcp` を使用してくだ
 
 `ECC_DISABLED_MCPS` は ECC のインストール/sync フィルターであり、Claude Code のライブなトグルではありません。
 
-コンテキストが重くなってきたら、`/context-budget` を実行し、不要な rules を削除し、使っていない MCP サーバーを無効化してください。[トークン最適化ガイド](../token-optimization.md)を参照してください。
+コンテキストが重くなってきたら、ホストのコンテキスト使用量を確認し、不要な rules を削除し、使っていない MCP サーバーを無効化してください。[トークン最適化ガイド](../token-optimization.md)を参照してください。
 </details>
 
 セキュリティ関連の参考資料：

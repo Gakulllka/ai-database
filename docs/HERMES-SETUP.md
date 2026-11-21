@@ -13,6 +13,16 @@ This guide is the public, sanitized version of the Hermes stack used to run cont
 
 This guide does not include private secrets, live tokens, personal data, or a raw `~/.hermes` export.
 
+## Sanitization Checklist
+
+- Do not ship raw workspace exports, credentials, real account names, or user data.
+- Describe provider needs by capability and use repository-relative examples.
+- Verify that a reusable workflow runs against synthetic inputs before publishing it.
+
+### Output Contract
+
+Keep only the reusable workflow, its prerequisites, and a synthetic validation example.
+
 ## Architecture
 
 Use Hermes as the front door and ECC as the reusable workflow substrate.

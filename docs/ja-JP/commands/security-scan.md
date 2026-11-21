@@ -81,7 +81,6 @@ npm run scan -- --path "${TARGET_PATH:-.}" --format text
 
 ## リンク
 
-- スキル: `skills/security-scan/SKILL.md`
 - エージェント: `agents/security-reviewer.md`
 - スキャナー: <https://github.com/affaan-m/agentshield>
 

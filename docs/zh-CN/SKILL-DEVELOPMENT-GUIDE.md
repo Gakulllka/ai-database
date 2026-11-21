@@ -231,11 +231,11 @@ with open('file.txt') as f:
 
 聚焦于框架特定约定、常见模式和反模式。
 
-**示例：** `django-patterns`、`nextjs-patterns`、`springboot-patterns`
+**示例：** `fastapi-patterns`、`nextjs-patterns`、`springboot-patterns`
 
 ```markdown
 ---
-name: django-patterns
+name: django-feature-example
 description: Django 模型、视图、URL 和模板的最佳实践。
 ---
 
@@ -275,7 +275,7 @@ description: 确保质量和安全的系统化代码审查流程。
 
 特定领域的专业知识（安全、性能等）。
 
-**示例：** `security-review`、`performance-optimization`、`api-design`
+**示例：** `performance-optimization`、`api-design`
 
 ```markdown
 ---
@@ -912,7 +912,7 @@ npm run test:e2e
 - [project-guidelines-template](../examples/project-guidelines-template.md) - 项目专属 Skill 模板
 - [coding-standards](../../skills/coding-standards/SKILL.md) - 标准 Skill 示例
 - [tdd-workflow](../../skills/tdd-workflow/SKILL.md) - 工作流 Skill 示例
-- [security-review](../../skills/security-review/SKILL.md) - 领域知识 Skill 示例
+- [api-design](../../skills/api-design/SKILL.md) - 领域知识 Skill 示例
 
 ---
 

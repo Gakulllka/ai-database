@@ -110,7 +110,7 @@ origin: ECC
 | 触发词 | 技能 | 加载时机 |
 |---------|-------|-----------|
 | "test", "tdd", "coverage" | tdd-workflow | 用户提及测试时 |
-| "security", "auth", "xss" | security-review | 涉及安全相关工作时 |
+| "security", "auth", "xss" | 项目安全审查 | 涉及安全相关工作时 |
 | "deploy", "ci/cd" | deployment-patterns | 涉及部署上下文时 |
 
 ### 上下文组合感知

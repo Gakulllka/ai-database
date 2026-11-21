@@ -24,7 +24,3 @@ api_key = os.environ["OPENAI_API_KEY"]  # Lanza KeyError si falta
   ```bash
   bandit -r src/
   ```
-
-## Referencia
-
-Ver skill: `django-security` para directrices de seguridad específicas de Django (si aplica).

@@ -280,5 +280,5 @@ class FakeItemRepository : ItemRepository {
 
 ## 参考
 
-关于 Flow 在 UI 层的消费，请参阅技能：`compose-multiplatform-patterns`。
+在界面层消费 Flow 时遵循项目的 Compose 约定。
 关于协程在各层中的适用位置，请参阅技能：`android-clean-architecture`。

@@ -15,10 +15,10 @@ origin: ECC
 在相关情况下，将这些 ECC 原生技能拉入工作流：
 
 * `autonomous-loops` 用于跨 webhook、队列、计费和重试的有界多步骤审计
-* `agentic-engineering` 用于将请求路径追踪为离散的、可证明的单元
-* `customer-billing-ops` 当需要清晰分离仓库行为和客户影响计算时
+* 把请求路径拆成可独立验证的步骤。
+* 分开说明实现行为和对客户账单的影响。
 * `search-first` 在发明辅助函数或重新实现仓库本地工具之前
-* `security-review` 当涉及认证、使用限制、授权或密钥时
+* 涉及认证、使用限制、授权或密钥时，遵循项目的安全审查流程。
 * `verification-loop` 用于证明重试安全性和精确的修复后状态
 * `tdd-workflow` 当修复需要在 worker、路由器或计费路径中添加回归测试覆盖时
 

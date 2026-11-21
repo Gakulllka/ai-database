@@ -478,7 +478,6 @@ ECC/
 |
 |-- skills/           # Определения рабочих процессов и предметные знания
 |   |-- coding-standards/           # Лучшие практики языков
-|   |-- clickhouse-io/              # ClickHouse analytics, queries, data engineering
 |   |-- backend-patterns/           # Паттерны API, БД, кеширования
 |   |-- frontend-patterns/          # Паттерны React, Next.js
 |   |-- frontend-slides/            # HTML-слайды и PPTX-to-web workflow презентаций (НОВОЕ)
@@ -489,30 +488,21 @@ ECC/
 |   |-- iterative-retrieval/        # Прогрессивное уточнение контекста для субагентов
 |   |-- strategic-compact/          # Рекомендации по ручной компактификации (Longform Guide)
 |   |-- tdd-workflow/               # Методология TDD
-|   |-- security-review/            # Чеклист безопасности
 |   |-- eval-harness/               # Оценка verification loop (Longform Guide)
 |   |-- verification-loop/          # Непрерывная верификация (Longform Guide)
-|   |-- videodb/                   # Видео и аудио: ingest, search, edit, generate, stream (НОВОЕ)
 |   |-- golang-patterns/            # Go idioms и лучшие практики
 |   |-- golang-testing/             # Паттерны тестирования Go, TDD, benchmarks
 |   |-- cpp-coding-standards/         # C++ coding standards из C++ Core Guidelines (НОВОЕ)
 |   |-- cpp-testing/                # C++ тестирование с GoogleTest, CMake/CTest (НОВОЕ)
-|   |-- django-patterns/            # Django patterns, models, views (НОВОЕ)
-|   |-- django-security/            # Лучшие практики безопасности Django (НОВОЕ)
-|   |-- django-tdd/                 # Django TDD workflow (НОВОЕ)
-|   |-- django-verification/        # Django verification loops (НОВОЕ)
 |   |-- laravel-patterns/           # Архитектурные паттерны Laravel (НОВОЕ)
-|   |-- laravel-security/           # Лучшие практики безопасности Laravel (НОВОЕ)
 |   |-- laravel-tdd/                # Laravel TDD workflow (НОВОЕ)
 |   |-- laravel-verification/       # Laravel verification loops (НОВОЕ)
 |   |-- python-patterns/            # Python idioms и лучшие практики (НОВОЕ)
 |   |-- python-testing/             # Тестирование Python с pytest (НОВОЕ)
 |   |-- springboot-patterns/        # Паттерны Java Spring Boot (НОВОЕ)
-|   |-- springboot-security/        # Безопасность Spring Boot (НОВОЕ)
 |   |-- springboot-tdd/             # Spring Boot TDD (НОВОЕ)
 |   |-- springboot-verification/    # Spring Boot verification (НОВОЕ)
 |   |-- configure-ecc/              # Интерактивный мастер установки (НОВОЕ)
-|   |-- security-scan/              # Интеграция аудитора безопасности AgentShield (НОВОЕ)
 |   |-- java-coding-standards/     # Стандарты кодирования Java (НОВОЕ)
 |   |-- jpa-patterns/              # Паттерны JPA/Hibernate (НОВОЕ)
 |   |-- postgres-patterns/         # Паттерны оптимизации PostgreSQL (НОВОЕ)
@@ -530,8 +520,6 @@ ECC/
 |   |-- swift-protocol-di-testing/   # Protocol-based DI для тестируемого Swift-кода (НОВОЕ)
 |   |-- search-first/               # Workflow research-before-coding (НОВОЕ)
 |   |-- skill-stocktake/            # Аудит навыков и команд на качество (НОВОЕ)
-|   |-- liquid-glass-design/         # iOS 26 Liquid Glass design system (НОВОЕ)
-|   |-- foundation-models-on-device/ # Apple on-device LLM с FoundationModels (НОВОЕ)
 |   |-- swift-concurrency-6-2/       # Swift 6.2 Approachable Concurrency (НОВОЕ)
 |   |-- perl-patterns/             # Современные Perl 5.36+ idioms и лучшие практики (НОВОЕ)
 |   |-- perl-security/             # Perl security patterns, taint mode, safe I/O (НОВОЕ)
@@ -1272,18 +1260,14 @@ Skills в `.agents/skills/` автоматически загружаются Co
 | e2e-testing | Playwright E2E tests |
 | eval-harness | Eval-driven development |
 | ecc-conventions | Development conventions и patterns для проекта |
-| exa-search | Neural search через Exa MCP для web, code, company research |
-| fal-ai-media | Unified media generation для images, video и audio |
 | frontend-patterns | React/Next.js patterns |
 | frontend-slides | HTML presentations, PPTX conversion, visual style exploration |
 | mcp-server-patterns | Build MCP servers with Node/TypeScript SDK |
 | nextjs-turbopack | Next.js 16+ и Turbopack incremental bundling |
 | product-capability | Перевод product goals в scoped capability maps |
-| security-review | Комплексный чеклист безопасности |
 | strategic-compact | Управление контекстом |
 | tdd-workflow | Test-driven development с 80%+ coverage |
 | verification-loop | Build, test, lint, typecheck, security |
-| video-editing | AI-assisted video editing workflows с FFmpeg и Remotion |
 
 ### Ключевое ограничение
 

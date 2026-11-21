@@ -206,7 +206,6 @@ The default OpenCode config loads 11 curated ECC skills via the `instructions` a
 - backend-patterns
 - frontend-patterns
 - frontend-slides
-- security-review
 - tdd-workflow
 - strategic-compact
 - eval-harness
@@ -228,7 +227,7 @@ Full configuration in `opencode.json`:
   "$schema": "https://opencode.ai/config.json",
   "instructions": [
     "skills/tdd-workflow/SKILL.md",
-    "skills/security-review/SKILL.md"
+    "skills/coding-standards/SKILL.md"
   ],
   "agent": { /* 12 agents */ },
   "command": { /* 24 commands */ }

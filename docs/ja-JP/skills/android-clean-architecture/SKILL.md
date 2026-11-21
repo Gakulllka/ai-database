@@ -335,5 +335,5 @@ plugins { id("kmp-library") }
 
 ## 参考資料
 
-スキル参照: UI パターンは `compose-multiplatform-patterns` を参照。
+共有 UI では、プロジェクトの Compose Multiplatform の規約に従う。
 非同期パターンは `kotlin-coroutines-flows` を参照。

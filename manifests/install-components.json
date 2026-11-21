@@ -60,7 +60,7 @@
     {
       "id": "lang:python",
       "family": "language",
-      "description": "Python and Django-oriented engineering guidance. Currently resolves through the shared framework-language module.",
+      "description": "Python coding, testing, packaging, and FastAPI guidance. Resolves through the shared framework-language module.",
       "modules": [
         "framework-language"
       ]
@@ -114,14 +114,6 @@
       ]
     },
     {
-      "id": "framework:django",
-      "family": "framework",
-      "description": "Django-focused engineering guidance. Currently resolves through the shared framework-language module.",
-      "modules": [
-        "framework-language"
-      ]
-    },
-    {
       "id": "framework:springboot",
       "family": "framework",
       "description": "Spring Boot-focused engineering guidance. Currently resolves through the shared framework-language module.",
@@ -132,10 +124,9 @@
     {
       "id": "framework:quarkus",
       "family": "framework",
-      "description": "Quarkus-focused engineering guidance for REST, Panache, security, testing, and verification.",
+      "description": "Quarkus-focused engineering guidance for REST, Panache, testing, and verification.",
       "modules": [
-        "framework-language",
-        "security"
+        "framework-language"
       ]
     },
     {
@@ -149,7 +140,7 @@
     {
       "id": "capability:security",
       "family": "capability",
-      "description": "Security review and security-focused framework guidance.",
+      "description": "Agent hardening, MCP dependency review, defensive cryptography, and safety guidance.",
       "modules": [
         "security"
       ]
@@ -157,7 +148,7 @@
     {
       "id": "capability:research",
       "family": "capability",
-      "description": "Research and API-integration skills for deep investigations and external tooling.",
+      "description": "Research, technical documentation lookup, and literature search workflows.",
       "modules": [
         "research-apis"
       ]
@@ -173,7 +164,7 @@
     {
       "id": "capability:operators",
       "family": "capability",
-      "description": "Connected-app operator workflows for setup audits, billing operations, program tracking, Google Workspace, and network optimization.",
+      "description": "Workflows for connected services, access audits, task tracking, and workplace communications.",
       "modules": [
         "operator-workflows"
       ]
@@ -195,41 +186,17 @@
       ]
     },
     {
-      "id": "capability:prediction-markets",
-      "family": "capability",
-      "description": "Public, non-advisory prediction-market and Ito basket research workflows with gated Ito API access.",
-      "modules": [
-        "prediction-market-skills"
-      ]
-    },
-    {
       "id": "capability:operator-desk-patterns",
       "family": "capability",
-      "description": "Operator desk patterns for agents that draft, gate, and paper external counterparty interactions.",
+      "description": "Counterparty communication through a designated operator.",
       "modules": [
         "operator-desk-patterns"
       ]
     },
     {
-      "id": "capability:ito-compute",
-      "family": "capability",
-      "description": "Authenticated Itô GPU inventory, RFQ, status, device revocation, and explicitly gated node-qualification workflows through the separately installed canonical CLI.",
-      "modules": [
-        "ito-compute"
-      ]
-    },
-    {
-      "id": "capability:nasiko-control-plane",
-      "family": "capability",
-      "description": "Experimental Nasiko CLI lifecycle bridge guidance for pinned installation, read-only status, qualified uninstall, and opt-in telemetry boundaries.",
-      "modules": [
-        "nasiko-control-plane"
-      ]
-    },
-    {
       "id": "capability:media",
       "family": "capability",
-      "description": "Media generation, technical explainers, and AI-assisted editing skills.",
+      "description": "Blender motion-state inspection and interactive UI demonstrations.",
       "modules": [
         "media-generation"
       ]
@@ -269,7 +236,7 @@
     {
       "id": "lang:kotlin",
       "family": "language",
-      "description": "Kotlin, Ktor, Exposed, Coroutines, and Compose Multiplatform guidance. Currently resolves through the shared framework-language module.",
+      "description": "Kotlin, Ktor, Exposed, and Coroutines guidance. Resolves through the shared framework-language module.",
       "modules": [
         "framework-language"
       ]
@@ -294,19 +261,17 @@
     {
       "id": "lang:ruby",
       "family": "language",
-      "description": "Ruby and Rails coding, testing, and security guidance. Resolves through framework-language and security modules.",
+      "description": "Ruby and Rails application guidance. Resolves through the shared framework-language module.",
       "modules": [
-        "framework-language",
-        "security"
+        "framework-language"
       ]
     },
     {
       "id": "framework:rails",
       "family": "framework",
-      "description": "Rails 8 application guidance for MVC, Hotwire, Solid Queue/Cache/Cable, authentication, testing, and security.",
+      "description": "Rails 8 application guidance for MVC, Hotwire, and Solid Queue/Cache/Cable.",
       "modules": [
-        "framework-language",
-        "security"
+        "framework-language"
       ]
     },
     {
@@ -336,10 +301,9 @@
     {
       "id": "framework:laravel",
       "family": "framework",
-      "description": "Laravel patterns, TDD, verification, and security guidance. Resolves through framework-language and security modules.",
+      "description": "Laravel patterns, plugin discovery, TDD, and verification guidance.",
       "modules": [
-        "framework-language",
-        "security"
+        "framework-language"
       ]
     },
     {
@@ -364,14 +328,6 @@
       "description": "Production machine-learning engineering workflows for data contracts, reproducible training, evaluation, deployment, monitoring, and rollback.",
       "modules": [
         "machine-learning"
-      ]
-    },
-    {
-      "id": "capability:supply-chain",
-      "family": "capability",
-      "description": "Supply chain, logistics, procurement, and manufacturing domain skills.",
-      "modules": [
-        "supply-chain-domain"
       ]
     },
     {

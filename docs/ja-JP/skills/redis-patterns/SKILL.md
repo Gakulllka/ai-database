@@ -399,5 +399,4 @@ def get_with_lock(key: str, fetch_fn, ttl: int = 300):
 - Skill: `postgres-patterns` — リレーショナルデータパターン
 - Skill: `backend-patterns` — APIおよびサービスレイヤーパターン
 - Skill: `database-migrations` — スキーマバージョニング
-- Skill: `django-patterns` — Djangoキャッシュフレームワーク統合
 - Agent: `database-reviewer` — 全データベースレビューワークフロー

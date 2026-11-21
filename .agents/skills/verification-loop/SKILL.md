@@ -1,10 +1,18 @@
 ---
 name: verification-loop
-description: "A comprehensive verification system for Claude Code sessions. Use when verifying a Claude Code session's work before claiming it is complete."
+description: "Verify completed Codex or Claude Code changes with applicable build, type, lint, test, defensive security, diff, and target acceptance checks. Use before declaring delivery complete."
 license: MIT
 ---
 
 # Verification Loop Skill
+
+## Codex workflow
+
+Start with the user's observable success condition and the normal entry point. Choose the project commands that actually validate it. Run build, type, lint and tests when the project provides them and they cover the change. For a generated artifact, open it and exercise its main interaction. Review the diff and perform a scoped defensive check for exposed secrets or unsafe handling when relevant.
+
+Record the exact result of each meaningful check. Distinguish executed success, failure, missing access and inapplicable checks. When reporting that a change is deployed, installed or live, read back the target and exercise the relevant entry point if authorized. Keep local evidence and target evidence separate. If an unrelated failure already exists, reproduce it on the comparison revision when feasible and report its impact.
+
+## Claude Code and prior integrations
 
 A comprehensive verification system for Claude Code sessions.
 

@@ -232,7 +232,6 @@ through deliberate falsification and visual verification.
 | `/setup-pm` | Configure package manager (npm / pnpm / yarn / bun) |
 | `/auto-update` | Pull the latest ECC repo changes and reinstall the current managed targets |
 | `/cost-report` | Generate a local Claude Code cost report from a cost-tracker SQLite database |
-| `/token-card` | Render a token-usage stat card from local agent session logs and commit it to the repo |
 | `/security-scan` | Run AgentShield against agent, hook, MCP, permission, and secret surfaces |
 | `/jira` | Retrieve a Jira ticket, analyze requirements, update status, or add comments |
 | `/pr` | Create a GitHub PR from current branch with unpushed commits |
@@ -253,18 +252,17 @@ through deliberate falsification and visual verification.
 
 ## Retired Commands
 
-These slash commands were retired in favor of skills. The command files still exist under `legacy-command-shims/commands/` for backward compatibility (not part of the default installed surface), but the maintained workflow now lives in the listed skill — invoke the skill directly instead:
+These aliases are outside the default install. Use the current entry points listed below. See the compatibility notes in `legacy-command-shims/commands/` for older installations.
 
-| Retired command | Use this skill instead |
+| Retired command | Current entry point |
 |---|---|
 | `/tdd` | `tdd-workflow` |
 | `/eval` | `eval-harness` |
 | `/verify` | `verification-loop` |
 | `/e2e` | `e2e-testing` |
 | `/docs` | `documentation-lookup` |
-| `/claw` | `nanoclaw-repl` |
-| `/context-budget` | `context-budget` |
-| `/devfleet` | `devfleet` |
+| `/claw` | `node scripts/claw.js` |
+| `/context-budget` | In Codex, `/status`. In Claude Code, `/context`. |
 | `/orchestrate` | `dmux-workflows` and `autonomous-agent-harness` |
 | `/prompt-optimize` | `prompt-optimizer` |
 | `/rules-distill` | `rules-distill` |
@@ -282,7 +280,7 @@ Build broken?                   → /build-fix
 Need live docs?                 → the documentation-lookup skill
 Session about to end?           → /save-session or /learn-eval
 Resuming next day?              → /resume-session
-Context getting heavy?          → the context-budget skill
+Context getting heavy?          → your harness’s native context meter
 Want to extract what you learned? → /learn-eval then /evolve
 Running repeated tasks?         → /loop-start
 ```

@@ -128,7 +128,6 @@ function runTests() {
       'skills/tdd-workflow/SKILL.md',
       'skills/verification-loop/SKILL.md',
       'skills/council/SKILL.md',
-      'skills/project-flow-ops/SKILL.md',
       'commands/plan-prd.md',
       'commands/epic-decompose.md',
       'agents/architect.md',

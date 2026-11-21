@@ -280,5 +280,5 @@ class FakeItemRepository : ItemRepository {
 
 ## 参考
 
-スキル: `compose-multiplatform-patterns` で Flow の UI 消費を参照。
+UI で Flow を受け取る際は、プロジェクトの Compose の規約に従う。
 スキル: `android-clean-architecture` でレイヤーにおけるコルーチンの役割を参照。

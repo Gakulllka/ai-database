@@ -1,12 +1,20 @@
 ---
 name: delivery-gate
-description: Stop hook that blocks Claude from finishing until quality checks pass. Detects rationalization patterns (surface text heuristics), stale learning logs (filesystem mtime), and low disk space. Complements self-audit by mechanically enforcing learning capture habits. Use when Claude should be mechanically blocked from declaring work finished before quality checks and learning capture actually pass.
+description: "Prevent premature completion in Codex or Claude Code. Use to define machine-checkable delivery requirements and to diagnose finish-time quality gates."
 metadata:
   version: 1.1.1
   origin: ECC
 ---
 
 # Delivery Gate — Mechanical Quality Gate for Claude Code
+
+## Codex workflow
+
+For Codex, make the pass condition explicit in the project workflow. Choose the smallest checks that prove the requested result, such as a process exit status, item count, validated artifact or read-back of the actual destination. Use the repository's existing verification commands and keep the gate output actionable.
+
+Ensure a normal fixture passes and a deliberately missing deliverable fails for the expected reason. Record failed, blocked and unobserved checks separately. If a mechanical Stop hook is explicitly requested, verify the installed Codex hook contract with an isolated harmless fixture first. The Claude Code hook below has a separate integration and protocol.
+
+## Claude Code and prior integrations
 
 A **Stop hook** that checks three things before Claude can finish a session, using only **deterministic checks** — file modification timestamps, disk usage, and regex patterns on the transcript text. No AI inference.
 

@@ -25,8 +25,8 @@ node scripts/ecc.js profile show --json
 node scripts/ecc.js profile show lean@1 --json
 node scripts/ecc.js profile preview lean@1 --target codex --selection auto --json
 node scripts/ecc.js profile preview full@1 --target claude --selection manual --json
-node scripts/ecc.js profile preview lean@1 --target codex --include skill:security-review --exclude skill:python-patterns --json
-node scripts/ecc.js profile explain skill:security-review --target codex --json
+node scripts/ecc.js profile preview lean@1 --target codex --include skill:tdd-workflow --exclude skill:python-patterns --json
+node scripts/ecc.js profile explain skill:tdd-workflow --target codex --json
 ```
 
 The packaged CLI uses the same `ecc profile ...` arguments. `show` reads profile definitions; `preview` compiles a proposal; `explain` looks up one exact canonical skill ID and reports its source, resources, ownership, and target declarations. These commands neither invoke skills nor write installed settings. The CLI reads its own package sources, independently of the caller's working directory.
@@ -54,14 +54,14 @@ Contributor entry points are:
 
 ```js
 loadContextRegistry({ repoRoot });
-explainContextEntry({ repoRoot, id: 'skill:security-review', target: 'codex' });
+explainContextEntry({ repoRoot, id: 'skill:tdd-workflow', target: 'codex' });
 loadContextProfile('lean@1', { repoRoot });
 compileContextProfile({
   repoRoot,
   profileId: 'lean@1',
   target: 'codex',
   selectionMode: 'auto',
-  include: ['skill:security-review'],
+  include: ['skill:tdd-workflow'],
   exclude: ['skill:python-patterns'],
 });
 ```
@@ -72,7 +72,7 @@ The first two functions are exported by the registry library; the profile librar
 
 Each canonical `skills/<directory>/SKILL.md` becomes `skill:<directory>`. Its skill directory must have exactly one owner in [install modules](../../manifests/install-modules.json). The owning module supplies `ownerModuleId`, the initial `packId`, and `declaredInstallTargets`. This reuses existing ownership without treating installer module dependencies as skill workflow dependencies.
 
-Lean currently selects three required candidate entries: `skill:configure-ecc`, `skill:context-budget`, and `skill:ecc-guide`. Other canonical skills remain labeled `routed` unless explicitly included or excluded. Here, `routed` means available in the catalog for future discovery integration; it does not mean a router has run or a native host can already retrieve the skill.
+Lean currently selects three required candidate entries: `skill:configure-ecc`, `skill:ecc-guide`, and `skill:skill-scout`. Other canonical skills remain labeled `routed` unless explicitly included or excluded. Here, `routed` means available in the catalog for future discovery integration; it does not mean a router has run or a native host can already retrieve the skill.
 
 Full derives `all` from the current canonical inventory. The September 8 baseline contains 286 skills, but 286 is a snapshot, not a hardcoded profile limit. Explicit exclusions can narrow a Full proposal, except for required entries and dependencies needed by retained selections.
 

@@ -93,9 +93,3 @@ try {
     return ApiResponse.error("Internal server error");  // ex.getMessage() を公開しない
 }
 ```
-
-## リファレンス
-
-スキル: `springboot-security` で Spring Security の認証・認可パターンを参照してください。
-スキル: `quarkus-security` で JWT/OIDC、RBAC、CDI を含む Quarkus セキュリティを参照してください。
-スキル: `security-review` で一般的なセキュリティチェックリストを参照してください。

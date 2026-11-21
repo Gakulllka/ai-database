@@ -139,7 +139,6 @@ SELECT pg_reload_conf();
 ## Relacionado
 
 - Agente: `database-reviewer` - Flujo de trabajo completo de revisión de base de datos
-- Skill: `clickhouse-io` - Patrones de analítica en ClickHouse
 - Skill: `backend-patterns` - Patrones de API y backend
 
 ---

@@ -176,51 +176,53 @@ projects[projectEntry.path].lastUpdated = today();
 writeProjects(projects);
 
 // ── Write to native memory ────────────────────────────────────────────────────
-try {
-  const memDir = nativeMemoryDir(cwd);
-  mkdirSync(memDir, { recursive: true });
+if (!process.env.CK_HOME) {
+  try {
+    const memDir = nativeMemoryDir(cwd);
+    mkdirSync(memDir, { recursive: true });
 
-  const memFile = resolve(memDir, `ck_${today()}_${sessionId.slice(0, 8)}.md`);
-  const decisionsBlock = session.decisions.length
-    ? session.decisions.map(d => `- **${d.what}**: ${d.why || ''}`).join('\n')
-    : '- None this session';
-  const nextBlock = session.nextSteps.length
-    ? session.nextSteps.map((s, i) => `${i + 1}. ${s}`).join('\n')
-    : '- None recorded';
-  const blockersBlock = session.blockers.length
-    ? session.blockers.map(b => `- ${b}`).join('\n')
-    : '- None';
+    const memFile = resolve(memDir, `ck_${today()}_${sessionId.slice(0, 8)}.md`);
+    const decisionsBlock = session.decisions.length
+      ? session.decisions.map(d => `- **${d.what}**: ${d.why || ''}`).join('\n')
+      : '- None this session';
+    const nextBlock = session.nextSteps.length
+      ? session.nextSteps.map((s, i) => `${i + 1}. ${s}`).join('\n')
+      : '- None recorded';
+    const blockersBlock = session.blockers.length
+      ? session.blockers.map(b => `- ${b}`).join('\n')
+      : '- None';
 
-  const memContent = [
-    `---`,
-    `name: Session ${today()} — ${session.summary}`,
-    `description: Key decisions and outcomes from ck session ${sessionId.slice(0, 8)}`,
-    `type: project`,
-    `source: ck`,
-    `sessionId: ${sessionId}`,
-    `---`,
-    ``,
-    `# Session: ${session.summary}`,
-    ``,
-    `## Decisions`,
-    decisionsBlock,
-    ``,
-    `## Left Off`,
-    session.leftOff || '—',
-    ``,
-    `## Next Steps`,
-    nextBlock,
-    ``,
-    `## Blockers`,
-    blockersBlock,
-    ``,
-    ...(gitActivity ? [`## Git Activity`, gitActivity, ``] : []),
-  ].join('\n');
+    const memContent = [
+      `---`,
+      `name: Session ${today()} — ${session.summary}`,
+      `description: Key decisions and outcomes from ck session ${sessionId.slice(0, 8)}`,
+      `type: project`,
+      `source: ck`,
+      `sessionId: ${sessionId}`,
+      `---`,
+      ``,
+      `# Session: ${session.summary}`,
+      ``,
+      `## Decisions`,
+      decisionsBlock,
+      ``,
+      `## Left Off`,
+      session.leftOff || '—',
+      ``,
+      `## Next Steps`,
+      nextBlock,
+      ``,
+      `## Blockers`,
+      blockersBlock,
+      ``,
+      ...(gitActivity ? [`## Git Activity`, gitActivity, ``] : []),
+    ].join('\n');
 
-  writeFileSync(memFile, memContent, 'utf8');
-} catch (e) {
-  // Non-fatal — native memory write failure should not block the save
-  process.stderr.write(`ck: warning — could not write native memory entry: ${e.message}\n`);
+    writeFileSync(memFile, memContent, 'utf8');
+  } catch (e) {
+    // Non-fatal — native memory write failure should not block the save
+    process.stderr.write(`ck: warning — could not write native memory entry: ${e.message}\n`);
+  }
 }
 
 console.log(`✓ Saved. Session: ${sessionId.slice(0, 8)}`);

@@ -163,6 +163,5 @@ supported by the platform and document exactly why it is safe.
 
 ## See Also
 
-- Skill: `cisco-ios-patterns`
 - Skill: `network-config-validation`
 - Skill: `network-interface-health`

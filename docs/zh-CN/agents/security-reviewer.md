@@ -105,7 +105,6 @@ npx eslint . --plugin security
 
 ## 参考
 
-有关详细的漏洞模式、代码示例、报告模板和 PR 审查模板，请参阅技能：`security-review`。
 
 ***
 

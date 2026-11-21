@@ -1,11 +1,22 @@
 ---
 name: agentic-os
-description: Build persistent multi-agent operating systems on Claude Code. Covers kernel architecture, specialist agents, slash commands, file-based memory, scheduled automation, and state management without external databases. Use when building a persistent multi-agent system on Claude Code with its own memory, commands, and scheduling.
+description: "Design a persistent multi-agent workflow in Codex or Claude Code. Use for projects that need role routing, durable handoffs, and recurring operations across sessions."
 metadata:
   origin: ECC
 ---
 
 # Agentic OS
+
+## Codex workflow
+
+Use each Codex layer for the kind of instruction it owns. Put stable project rules, build commands and role routing in AGENTS.md. Give recurring tasks a skill. Keep specialist role definitions in the project agent configuration when the client exposes them. Keep volatile decisions, the current goal and the next step in an explicitly chosen project handoff.
+
+1. Start from one recurring workflow. Identify its trigger, authorized inputs, owner, expected artifact and stopping rule.
+2. Give independent agents non-overlapping paths and deliverables. Record the revision both read. Let the coordinator resolve mismatches and verify the final result from the normal entry point.
+3. Use an approved Codex automation for a recurring trigger when the client supports one. Test a single run before enabling the schedule. Use a durable task board or reviewed project file only when native chat state alone cannot serve the handoff.
+4. Reopen the workflow in a fresh task. Verify that routing, scope and the next action can be recovered from the selected project files. Keep personal chat history and credentials out of shared state.
+
+## Claude Code and prior integrations
 
 Treat Claude Code as a persistent runtime / operating system rather than a chat session. This skill codifies the architecture used by production agentic setups: a kernel config that routes tasks to specialist agents, persistent file-based memory, scheduled automation, and a JSON/markdown data layer.
 

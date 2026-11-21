@@ -23,7 +23,7 @@ datasets, preprints and dissertations with their authors, sources and citations.
 - Running repeatable search passes for a literature review alongside PubMed or
   arXiv.
 
-For MeSH-driven biomedical searches, prefer `scientific-db-pubmed-database`.
+For MeSH-driven biomedical searches, use PubMed when that source is accessible.
 
 ## Access
 
@@ -179,5 +179,4 @@ For each search pass, record:
 
 ## Related Skills
 
-- `scientific-db-pubmed-database`
 - `scientific-thinking-literature-review`

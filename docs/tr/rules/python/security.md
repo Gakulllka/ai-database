@@ -24,7 +24,3 @@ api_key = os.environ["OPENAI_API_KEY"]  # Eksikse KeyError hatası verir
   ```bash
   bandit -r src/
   ```
-
-## Referans
-
-Django'ya özgü güvenlik kuralları için (eğer uygulanabilirse) skill: `django-security` dosyasına bakın.

@@ -30,7 +30,6 @@
   pmx-guidelines.md      # Project-specific patterns
   coding-standards.md    # Language best practices
   tdd-workflow/          # Multi-file skill with README.md
-  security-review/       # Checklist-based skill
 ```
 
 ***

@@ -231,11 +231,11 @@ with open('file.txt') as f:
 
 Focus on framework-specific conventions, common patterns, and anti-patterns.
 
-**Examples:** `django-patterns`, `nextjs-patterns`, `springboot-patterns`
+**Examples:** `fastapi-patterns`, `nextjs-patterns`, `springboot-patterns`
 
 ```markdown
 ---
-name: django-patterns
+name: django-feature-example
 description: Django best practices for models, views, URLs, and templates.
 ---
 
@@ -275,7 +275,7 @@ description: Systematic code review process for quality and security.
 
 Specialized knowledge for specific domains (security, performance, etc.).
 
-**Examples:** `security-review`, `performance-optimization`, `api-design`
+**Examples:** `performance-optimization`, `api-design`
 
 ```markdown
 ---
@@ -913,7 +913,7 @@ npm run test:e2e
 - [project-guidelines-template](./examples/project-guidelines-template.md) - Project-specific skill template
 - [coding-standards](../skills/coding-standards/SKILL.md) - Example of standards skill
 - [tdd-workflow](../skills/tdd-workflow/SKILL.md) - Example of workflow skill
-- [security-review](../skills/security-review/SKILL.md) - Example of domain knowledge skill
+- [api-design](../skills/api-design/SKILL.md) - Example of domain knowledge skill
 
 ---
 

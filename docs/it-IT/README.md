@@ -511,7 +511,7 @@ Restituisce i componenti corrispondenti, i profili correlati e i comandi di ante
 Puoi anche installare skill o capability in modo esplicito:
 
 ```bash
-./install.sh --target claude --skills tdd-workflow,security-review
+./install.sh --target claude --skills tdd-workflow,coding-standards
 node scripts/ecc.js install --profile minimal --target claude --with capability:machine-learning
 ```
 
@@ -839,7 +839,7 @@ Kimi Code individua in modo nativo le istruzioni installate in `.kimi-code/AGENT
 
 `ecc ito` delega al client canonico di Itô installato separatamente; ECC non mantiene un secondo client API. `ecc ito login [--no-browser]` esegue l'autorizzazione del dispositivo, apre per impostazione predefinita la pagina di verifica di Itô e rende persistente un token del dispositivo nel Portachiavi di macOS (Keychain); `--no-browser` sopprime il passaggio alla pagina. ECC stesso non effettua alcuna automazione del browser. `ecc ito auth` serve solo per la validazione e rifiuta `--no-browser`. Le operazioni disponibili sono `ecc ito login`, `ecc ito auth`, `ecc ito find`, `ecc ito status` e `ecc ito evals`, quest'ultima è soggetta a un controllo di accesso separato. I tool MCP corrispondenti restano `ito_auth`, `ito_find` e `ito_status`; `ito_auth` convalida le credenziali esistenti e la qualificazione dei nodi è disponibile solo da CLI.
 
-Il pacchetto `ito-compute-cli` al momento non è pubblicato. Compilalo in locale dal repo del runtime di Itô (privato mentre il desk viene consolidato; i design partner ottengono l'accesso) in `cli/ito-compute-cli`, esegui `npm ci` e `npm run check`, poi imposta `ECC_ITO_CLI_EXECUTABLE` sul percorso assoluto di `dist/bin/ito.js` di quella build. Il login non eredita mai `ITO_API_KEY`; auth, find e status inoltrano `ITO_API_KEY` direttamente quando è configurata, e `ITO_AUTH_MODE=legacy` non è richiesto. `ecc ito logout` revoca la credenziale corrente del dispositivo e ne conserva la copia locale se la revoca remota non può essere confermata. I token del dispositivo usano per impostazione predefinita il Keychain di macOS; il fallback esplicito su file deve mantenere permessi di directory/file riservati al solo proprietario. ECC non individua questo client, che custodisce credenziali, tramite `PATH`. Consulta la [skill `ito-compute`](../../skills/ito-compute/SKILL.md) per il contratto completo su autorità RFQ e configurazione MCP.
+Il pacchetto `ito-compute-cli` al momento non è pubblicato. Compilalo in locale dal repo del runtime di Itô (privato mentre il desk viene consolidato; i design partner ottengono l'accesso) in `cli/ito-compute-cli`, esegui `npm ci` e `npm run check`, poi imposta `ECC_ITO_CLI_EXECUTABLE` sul percorso assoluto di `dist/bin/ito.js` di quella build. Il login non eredita mai `ITO_API_KEY`; auth, find e status inoltrano `ITO_API_KEY` direttamente quando è configurata, e `ITO_AUTH_MODE=legacy` non è richiesto. `ecc ito logout` revoca la credenziale corrente del dispositivo e ne conserva la copia locale se la revoca remota non può essere confermata. I token del dispositivo usano per impostazione predefinita il Keychain di macOS; il fallback esplicito su file deve mantenere permessi di directory/file riservati al solo proprietario. ECC non individua questo client, che custodisce credenziali, tramite `PATH`. Consulta le [note di integrazione Itô](../design/ecc-ito-compute-integration.md) per la configurazione di CLI e MCP.
 
 `find` invia una RFQ autenticata reale. Non riserva capacità. `evals` richiede sia `ITO_ENABLE_SIXTYTWO_LIVE=1` sia `--live-sixtytwo`, un `sixtytwo-cli==0.3.33` installato separatamente, un elenco esplicito di nodi e una directory di configurazione assoluta già esistente. Non può noleggiare, avviare, recuperare, riparare né acquistare. ECC non espone alcun percorso per bloccare preventivi, acquistare, eseguire workload o fare inferenza, e non sostituisce mai un client mancante o una chiamata reale fallita con un risultato locale.
 
@@ -920,7 +920,6 @@ ECC/
 |
 |-- skills/           # Definizioni di workflow e conoscenza di dominio
 |   |-- coding-standards/           # Best practice dei linguaggi
-|   |-- clickhouse-io/              # Analytics, query e data engineering con ClickHouse
 |   |-- backend-patterns/           # Pattern per API, database e caching
 |   |-- frontend-patterns/          # Pattern per React e Next.js
 |   |-- frontend-slides/            # Slide deck in HTML e workflow di conversione da PPTX a presentazioni web
@@ -932,35 +931,25 @@ ECC/
 |   |-- iterative-retrieval/        # Raffinamento progressivo del contesto per i subagent
 |   |-- strategic-compact/          # Suggerimenti di compattazione manuale (Guida Estesa)
 |   |-- tdd-workflow/               # Metodologia TDD
-|   |-- security-review/            # Checklist di sicurezza
 |   |-- eval-harness/               # Valutazione del verification loop (Guida Estesa)
 |   |-- verification-loop/          # Verifica continua (Guida Estesa)
-|   |-- videodb/                    # Video e audio: acquisizione, ricerca, editing, generazione, streaming
 |   |-- golang-patterns/            # Idiomi e best practice di Go
 |   |-- golang-testing/             # Pattern di testing in Go, TDD, benchmark
 |   |-- cpp-coding-standards/       # Standard di codifica C++ dalle C++ Core Guidelines
 |   |-- cpp-testing/                # Testing C++ con GoogleTest, CMake/CTest
-|   |-- django-patterns/            # Pattern, modelli e viste di Django
-|   |-- django-security/            # Best practice di sicurezza per Django
-|   |-- django-tdd/                 # Workflow TDD per Django
-|   |-- django-verification/        # Verification loop per Django
 |   |-- laravel-patterns/           # Pattern architetturali di Laravel
-|   |-- laravel-security/           # Best practice di sicurezza per Laravel
 |   |-- laravel-tdd/                # Workflow TDD per Laravel
 |   |-- laravel-verification/       # Verification loop per Laravel
 |   |-- python-patterns/            # Idiomi e best practice di Python
 |   |-- python-testing/             # Testing in Python con pytest
 |   |-- quarkus-patterns/           # Pattern di Java Quarkus
-|   |-- quarkus-security/           # Sicurezza in Quarkus
 |   |-- quarkus-tdd/                # TDD in Quarkus
 |   |-- quarkus-verification/       # Verifica in Quarkus
 |   |-- rails-patterns/             # Pattern architetturali di Rails
 |   |-- springboot-patterns/        # Pattern di Java Spring Boot
-|   |-- springboot-security/        # Sicurezza in Spring Boot
 |   |-- springboot-tdd/             # TDD in Spring Boot
 |   |-- springboot-verification/    # Verifica in Spring Boot
 |   |-- configure-ecc/              # Procedura guidata di installazione interattiva
-|   |-- security-scan/              # Integrazione dell'auditor di sicurezza AgentShield
 |   |-- java-coding-standards/      # Standard di codifica Java
 |   |-- jpa-patterns/               # Pattern JPA/Hibernate
 |   |-- postgres-patterns/          # Pattern di ottimizzazione per PostgreSQL
@@ -977,8 +966,6 @@ ECC/
 |   |-- swift-protocol-di-testing/  # DI basata su protocolli per codice Swift testabile
 |   |-- search-first/               # Workflow che privilegia la ricerca prima del codice
 |   |-- skill-stocktake/            # Audit di qualità di skill e comandi
-|   |-- liquid-glass-design/        # Design system Liquid Glass di iOS 26
-|   |-- foundation-models-on-device/ # LLM on-device di Apple con FoundationModels
 |   |-- swift-concurrency-6-2/      # Approachable Concurrency di Swift 6.2
 |   |-- mle-workflow/               # Data contract, eval, deployment e monitoraggio di ML in produzione
 |   |-- perl-patterns/              # Idiomi e best practice del Perl moderno 5.36+
@@ -986,7 +973,6 @@ ECC/
 |   |-- perl-testing/               # TDD in Perl con Test2::V0, prove, Devel::Cover
 |   |-- autonomous-loops/           # Pattern di loop autonomi: pipeline sequenziali, loop di PR, orchestrazione DAG
 |   |-- plankton-code-quality/      # Controllo della qualità del codice in fase di scrittura con gli hook Plankton
-|   |-- codehealth-mcp/             # Skill MCP opzionale CodeScene Code Health (opt-in)
 |   |-- docs/examples/project-guidelines-template.md  # Template per skill specifiche del progetto
 |
 |-- commands/         # Compatibilità degli slash-entry mantenuti; preferisci skills/
@@ -1761,11 +1747,7 @@ posizioni del progetto e rimuove i duplicati delle voci con lo stesso nome di sk
 dal checkout e dalla versione della CLI. La redirezione su file evita inoltre l'output JSON
 troncato, se grande, osservato con Copilot CLI 1.0.82 su macOS.
 
-Copilot registra una skill con il `name` indicato nel frontmatter del suo `SKILL.md`, non
-con il nome della directory, quindi le cartelle del catalogo i cui nomi differiscono dal frontmatter
-(per esempio `scientific-db-pubmed-database`, che dichiara
-`name: pubmed-database`) vengono comunque caricate: semplicemente compaiono con il nome del
-frontmatter.
+Copilot registra una skill con il campo `name` del frontmatter di `SKILL.md`, indipendentemente dal nome della directory.
 
 Gli agent funzionano allo stesso modo:
 
@@ -1928,7 +1910,7 @@ La skill `strategic-compact` suggerisce `/compact` nei punti di interruzione log
 - Tieni attivi meno di 80 tool
 - Usa `/mcp` per disabilitare i server MCP di Claude Code inutilizzati; queste scelte di runtime persistono in `~/.claude.json`
 - Usa `ECC_DISABLED_MCPS` solo per filtrare le configurazioni MCP generate da ECC durante i flussi di installazione/sync
-- Se il contesto si sta appesantendo, esegui `/context-budget` e rimuovi le regole che non ti servono
+- Se il contesto si sta appesantendo, controlla il misuratore di contesto dell’ambiente e rimuovi le regole che non ti servono
 
 **Avviso sui costi degli agent team:** Agent Teams genera più finestre di contesto. Ogni membro del team consuma token in modo indipendente. Usalo solo per compiti in cui il parallelismo offre un chiaro valore (lavoro multi-modulo, review in parallelo). Per semplici compiti sequenziali, i subagent sono più efficienti in termini di token.
 </details>
@@ -1990,7 +1972,7 @@ Usa `/mcp` per le disabilitazioni a runtime in Claude Code; Claude Code rende pe
 
 `ECC_DISABLED_MCPS` è un filtro di installazione/sync di ECC, non un interruttore in tempo reale di Claude Code.
 
-Se il contesto si sta appesantendo, esegui `/context-budget`, rimuovi le regole che non ti servono e disabilita i server MCP inutilizzati. Consulta la [guida all'ottimizzazione dei token](../../docs/token-optimization.md).
+Se il contesto si sta appesantendo, controlla il misuratore di contesto dell’ambiente, rimuovi le regole che non ti servono e disabilita i server MCP inutilizzati. Consulta la [guida all'ottimizzazione dei token](../../docs/token-optimization.md).
 </details>
 
 Riferimenti sulla sicurezza:

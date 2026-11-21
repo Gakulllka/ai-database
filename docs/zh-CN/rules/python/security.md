@@ -25,7 +25,3 @@ api_key = os.environ["OPENAI_API_KEY"]  # Raises KeyError if missing
   ```bash
   bandit -r src/
   ```
-
-## 参考
-
-查看技能：`django-security` 以获取 Django 特定的安全指南（如适用）。

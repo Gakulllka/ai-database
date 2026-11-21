@@ -13,7 +13,7 @@ Create a safe, reviewable ECC onboarding plan for the current project. This comm
 /project-init --dry-run
 /project-init --target claude
 /project-init --target cursor
-/project-init --skills continuous-learning-v2,security-review
+/project-init --skills continuous-learning-v2,coding-standards
 /project-init --config ecc-install.json
 ```
 

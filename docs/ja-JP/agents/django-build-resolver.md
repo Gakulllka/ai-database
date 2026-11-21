@@ -247,6 +247,3 @@ Remaining errors: 0
 ```
 
 最終: `Django Status: OK/FAILED | Errors Fixed: N | Files Modified: list`
-
-DjangoアーキテクチャとORMパターンについては、`skill: django-patterns`を参照してください。
-Djangoセキュリティ設定については、`skill: django-security`を参照してください。

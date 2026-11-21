@@ -89,4 +89,4 @@ npm install left-pad && pf project freeze && pf build && pf verify .platform-fac
 - `docker-patterns` - container conventions when a Dockerfile is still involved
 - `deployment-patterns` - rollout and release strategies
 - `kubernetes-patterns` - running the produced image on a cluster
-- `security-review` - reviewing supply-chain and secret handling
+- Check the project's supply-chain and secret-handling requirements before release.

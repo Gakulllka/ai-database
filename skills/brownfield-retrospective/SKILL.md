@@ -24,8 +24,8 @@ The workflow is slice-first: no whole-repo onboarding is required before it is u
 
 - Greenfield work with no existing code — use `planner` and `tdd-workflow` directly
 - Onboarding to spec-driven development without the redesign loop — the `spec-miner` agent does that on its own
-- A launch go/no-go production-readiness pass — use `production-audit`
-- Security-only sweeps — use `security-review`
+- A launch go/no-go decision — use the project's release-readiness review.
+- Security-only sweeps — use the project's security review process.
 - Team process retrospectives (sprint ceremonies) — this audits a codebase, not people
 
 ## The Working Set
@@ -173,5 +173,3 @@ Any session can start in the middle. Read `docs/retro/<slice>/gap-register.md` f
 - `architecture-decision-records` — retro-ADR backfill in Phase 4
 - `tdd-workflow` — Phase 5 execution discipline
 - `verification-loop` — Phase 6 closure
-- `production-audit` — launch-readiness lens (complementary, later)
-- `security-review` — security-only requests

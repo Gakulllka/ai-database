@@ -8,7 +8,7 @@ and trivial edits) is in [change-profile.md](change-profile.md).
 
 ## Index
 
-- Structure: [Module layout](#module-layout), [Fail to deny](#fail-to-deny).
+- Structure: [Hook configuration](#hook-configuration), [Module layout](#module-layout), [Fail to deny](#fail-to-deny).
 - Which targets are gated and how strictly:
   [Exempt globs](#exempt-globs), [NotebookEdit](#notebookedit),
   [MultiEdit paths](#multiedit-paths), [Sensitive targets](#sensitive-targets),
@@ -42,6 +42,21 @@ and trivial edits) is in [change-profile.md](change-profile.md).
   [Idle window](#idle-window), [Subagents](#subagents).
 - State and measurement: [State file is untrusted](#state-file-is-untrusted),
   [Metrics](#metrics).
+
+## Hook configuration
+
+| Setting | Default | Effect |
+| --- | --- | --- |
+| `ECC_GATEGUARD` | active | The legacy `off` value disables GateGuard. |
+| `GATEGUARD_DISABLED` | unset | The legacy value `1` disables GateGuard. |
+| `GATEGUARD_BASH_ROUTINE_DISABLED` | unset | Turns off only routine shell checks. Destructive shell checks stay active. |
+| `GATEGUARD_EXEMPT_GLOBS` | unset | Comma-separated project-relative edit-path exemptions. Keep sensitive paths covered. See [Exempt globs](#exempt-globs). |
+| `GATEGUARD_FACT_FORCE_FULL_DENIALS` | `3` | Number of full denial messages per session before messages are shortened. It has no effect on blocking. |
+| `GATEGUARD_FACT_FORCE_MAX_DENIALS` | unset | Optional limit for ordinary first-touch denials. See [Denial cap](#denial-cap) for exclusions. |
+| `GATEGUARD_BASH_EXTRA_DESTRUCTIVE` | unset | Adds regex patterns to the built-in destructive shell checks. |
+| `GATEGUARD_STATE_DIR` | `~/.gateguard` | Directory for per-session state. |
+| `GATEGUARD_METRICS` | unset | Records decision metrics without changing the decision. See [Metrics](#metrics). |
+| `GATEGUARD_EXTERNAL_CONTRACT_QUESTION` | unset | Adds a question about the external contract without changing the decision. |
 
 ## Module layout
 

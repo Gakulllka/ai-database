@@ -138,7 +138,6 @@ SELECT pg_reload_conf();
 ## 関連
 
 - Agent: `database-reviewer` - 完全なデータベースレビューワークフロー
-- Skill: `clickhouse-io` - ClickHouse分析パターン
 - Skill: `backend-patterns` - APIとバックエンドパターン
 
 ---

@@ -247,6 +247,3 @@ Remaining errors: 0
 ```
 
 Final: `Django Status: OK/FAILED | Errors Fixed: N | Files Modified: list`
-
-For Django architecture and ORM patterns, see `skill: django-patterns`.
-For Django security settings, see `skill: django-security`.

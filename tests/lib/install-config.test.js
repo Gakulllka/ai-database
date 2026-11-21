@@ -114,13 +114,13 @@ function runTests() {
         version: 1,
         target: 'mistral-vibe',
         include: ['skill:tdd-workflow'],
-        exclude: ['skill:security-review'],
+        exclude: ['skill:agent-security-hardening'],
       });
 
       const config = loadInstallConfig(configPath);
       assert.strictEqual(config.target, 'mistral-vibe');
       assert.deepStrictEqual(config.includeComponentIds, ['skill:tdd-workflow']);
-      assert.deepStrictEqual(config.excludeComponentIds, ['skill:security-review']);
+      assert.deepStrictEqual(config.excludeComponentIds, ['skill:agent-security-hardening']);
     } finally {
       cleanup(cwd);
     }
@@ -129,7 +129,7 @@ function runTests() {
   for (const field of ['include', 'exclude']) {
     if (test(`loads agent, skill, and locale selections from ${field}`, () => {
       const cwd = createTempDir('install-config-');
-      const ids = ['agent:planner', 'skill:security-review', 'locale:ja'];
+      const ids = ['agent:planner', 'skill:agent-security-hardening', 'locale:ja'];
 
       try {
         const configPath = path.join(cwd, 'ecc-install.json');
@@ -146,7 +146,7 @@ function runTests() {
 
       try {
         const configPath = path.join(cwd, 'ecc-install.json');
-        for (const id of ['unknown:planner', 'skill:', 'skill:../security-review', 'skill:SecurityReview']) {
+        for (const id of ['unknown:planner', 'skill:', 'skill:../agent-security-hardening', 'skill:SecurityReview']) {
           writeJson(configPath, { version: 1, [field]: [id] });
           assert.throws(() => loadInstallConfig(configPath), /Invalid install config/);
         }

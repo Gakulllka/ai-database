@@ -110,7 +110,6 @@ Si se encuentra una vulnerabilidad CRÍTICA:
 
 ## Referencia
 
-Para patrones detallados de vulnerabilidades, ejemplos de código, plantillas de informes y plantillas de revisión de PR, ver skill: `security-review`.
 
 ---
 

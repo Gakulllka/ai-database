@@ -533,8 +533,9 @@ function assessReadiness(rootDir, docs) {
       'hermes-boundary-sanitized',
       'publication-blockers-preserved'
     ]);
-  const hermesArtifactsReady = fileExists(rootDir, 'docs/HERMES-SETUP.md')
-    && fileExists(rootDir, 'skills/hermes-imports/SKILL.md');
+  const hermesArtifactsReady = includesAll(readText(rootDir, 'docs/HERMES-SETUP.md'), [
+    'Sanitization Checklist', 'Do not ship raw workspace exports', 'Output Contract',
+  ]);
   const hypergrowthCommandCenterReady = includesAll(docs.hypergrowthCommandCenter, [
     'harness-native operator system',
     '$1,728/mo',
@@ -702,13 +703,13 @@ function releasePackRequirements(rootDir, docs, readiness) {
     ),
     buildRequirement(
       'hermes-specialized-skills',
-      'Include Hermes specialized skills safely',
-      'docs/HERMES-SETUP.md and skills/hermes-imports/SKILL.md',
+      'Verify the Hermes import boundary',
+      'docs/HERMES-SETUP.md',
       tiered(hermesReady, hermesArtifactsReady, TIERED_STATUS),
       tiered(hermesReady, hermesArtifactsReady, [
-        'Hermes setup/import artifacts are covered by preview-pack smoke',
-        'Hermes setup and import skill are present',
-        'Hermes setup/import artifacts missing',
+        'Hermes setup guide is covered by preview-pack smoke',
+        'Hermes setup guide documents the import boundary',
+        'Hermes import boundary documentation missing',
       ]),
       hermesReady
         ? 'repeat preview-pack smoke before release review'

@@ -16,7 +16,7 @@ origin: ECC
 
 * `verification-loop` 用于更改后的精确验证步骤
 * `tdd-workflow` 当正确的修复需要回归覆盖时
-* `security-review` 当涉及密钥、认证或外部输入时
+* 涉及密钥、认证或外部输入时，遵循项目的安全审查流程。
 * `github-ops` 当任务依赖于 CI 运行、PR 状态或发布状态时
 * `knowledge-ops` 当需要将验证结果捕获到持久的项目上下文中时
 

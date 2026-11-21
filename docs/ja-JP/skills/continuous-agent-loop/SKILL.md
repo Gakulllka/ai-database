@@ -28,7 +28,7 @@ Start
 1. RFC分解（`ralphinho-rfc-pipeline`）
 2. 品質ゲート（`plankton-code-quality` + `/quality-gate`）
 3. 評価ループ（`eval-harness`）
-4. セッション永続化（`nanoclaw-repl`）
+4. 実行環境のチェックポイントと再開機能でセッションを保存する
 
 ## 失敗モード
 

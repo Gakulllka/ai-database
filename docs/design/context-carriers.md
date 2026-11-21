@@ -20,7 +20,7 @@ The generated registry/plan v1 shapes gain an additive `requiredResources` field
 
 ```sh
 node scripts/ecc.js profile carrier lean@1 --target codex --json
-node scripts/ecc.js profile carrier lean@1 --target claude --include skill:security-review --json
+node scripts/ecc.js profile carrier lean@1 --target claude --include skill:tdd-workflow --json
 node scripts/ecc.js profile carrier full@1 --target pi --exclude skill:python-patterns --selection manual --json
 ```
 

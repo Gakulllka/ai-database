@@ -1,11 +1,19 @@
 ---
 name: skill-stocktake
-description: "Use when auditing Claude skills and commands for quality. Supports Quick Scan (changed skills only) and Full Stocktake modes with sequential subagent batch evaluation."
+description: "Audit Codex or Claude Code skills for scope, overlap, dependency health and usefulness. Use for a quick review of changed skills or a complete skill catalog review."
 metadata:
   origin: ECC
 ---
 
 # skill-stocktake
+
+## Codex workflow
+
+For Codex, inventory advertised user and project skills plus any pinned shared catalog. Resolve canonical IDs, source files, copies and current routing descriptions. Use Git changes for a quick scan or partition a complete inventory by theme for review.
+
+For each candidate, check when it should trigger, which real task proves value, whether its dependencies exist, and what another active skill already covers. Review a small positive and negative routing example before proposing a replacement. Mark proposed keep, improve, combine after confirmation, or remove with a short reason. Trace install metadata, active links and mirrored copies before carrying out an approved cleanup. Do not infer deletion from missing usage data.
+
+## Claude Code and prior integrations
 
 Slash command (`/skill-stocktake`) that audits all Claude skills and commands using a quality checklist + AI holistic judgment. Supports two modes: Quick Scan for recently changed skills, and Full Stocktake for a complete review.
 

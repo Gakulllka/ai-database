@@ -24,7 +24,3 @@ api_key = os.environ["OPENAI_API_KEY"]  # 未設定の場合 KeyError を発生
   ```bash
   bandit -r src/
   ```
-
-## リファレンス
-
-スキル: `django-security` で Django 固有のセキュリティガイドラインを参照してください（該当する場合）。

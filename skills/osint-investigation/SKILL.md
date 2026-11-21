@@ -358,8 +358,7 @@ original inventory → geometric falsifier → independent object/viewpoint chec
 
 - [research-ops](../research-ops/SKILL.md): route broader research requests.
 - [deep-research](../deep-research/SKILL.md): discover and synthesize background sources.
-- [exa-search](../exa-search/SKILL.md): optional discovery when configured.
-- [security-review](../security-review/SKILL.md): application security review, separate from passive OSINT.
+- [evidence-research](../evidence-research/SKILL.md): source discovery and citation checks when available.
 
 Adapted from [THE HUNTER by shoyann](https://github.com/shoyann/RZK-The-Hunter/tree/2ef02bcfd7f021b4b5287d0ff52f03aafa79e448)
 (source v1.4.0). Its investigation methods are consolidated here without its

@@ -77,9 +77,9 @@ test('cross-harness architecture doc exists and names core harnesses', () => {
   }
 });
 
-test('Hermes import skill exists and declares sanitization rules', () => {
-  const source = read('skills/hermes-imports/SKILL.md');
-  assert.ok(source.includes('name: hermes-imports'));
+test('Hermes setup guide declares import sanitization rules', () => {
+  const source = read('docs/HERMES-SETUP.md');
+  assert.ok(source.includes('Output Contract'));
   assert.ok(source.includes('Sanitization Checklist'));
   assert.ok(source.includes('Do not ship raw workspace exports'));
 });
@@ -156,7 +156,6 @@ test('preview pack manifest assembles release, Hermes, and publication gates', (
 
   for (const artifact of [
     'docs/HERMES-SETUP.md',
-    'skills/hermes-imports/SKILL.md',
     'docs/architecture/harness-adapter-compliance.md',
     'scripts/preview-pack-smoke.js',
     'scripts/release-approval-gate.js',
@@ -266,7 +265,7 @@ test('rc.1 quickstart gives a clone-to-cross-harness path', () => {
   assert.ok(quickstart.includes('git clone https://github.com/affaan-m/ECC.git'));
   assert.ok(quickstart.includes('cd ECC'));
   assert.ok(quickstart.includes('node tests/run-all.js'));
-  assert.ok(quickstart.includes('skills/hermes-imports/SKILL.md'));
+  assert.ok(quickstart.includes('../../HERMES-SETUP.md#sanitization-checklist'));
 });
 
 test('cross-harness doc includes a worked skill portability example', () => {

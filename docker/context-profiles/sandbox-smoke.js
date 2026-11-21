@@ -89,7 +89,7 @@ function smoke(packageRoot, workspace) {
 
   // Independent layout oracle: do not import the carrier generator or its tests.
   const allSkills = discoverPublishedSkills(packageRoot);
-  const kernel = new Set(['skill:configure-ecc', 'skill:context-budget', 'skill:ecc-guide']);
+  const kernel = new Set(['skill:configure-ecc', 'skill:ecc-guide', 'skill:skill-scout']);
   const layouts = { claude: 'skills', codex: 'skills', pi: 'skills',
     opencode: '.opencode/skills', cursor: '.cursor/skills' };
   const manifests = { claude: ['.claude-plugin/plugin.json', { name: 'ecc-context-carrier', skills: ['./skills/'] }],

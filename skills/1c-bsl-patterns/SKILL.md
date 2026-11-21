@@ -149,5 +149,5 @@ metadata:
 
 - [1c-development](../1c-development/SKILL.md) — выбор операции и жизненный цикл исходников.
 - [1c-testing](../1c-testing/SKILL.md) — уровни проверки и доказательства результата.
-- [security-review](../security-review/SKILL.md) — проверка границ доступа и внешнего ввода.
+- Проверяй права доступа и обработку внешнего ввода по правилам проекта.
 - [change-impact](../change-impact/SKILL.md) — влияние на связанные модули и контракты.

@@ -183,5 +183,5 @@ prefixes can also turn expected savings into higher cost.
 ## Relationship to Other Skills
 
 - **prompt-optimizer** improves prompt quality before optimizing reuse.
-- **context-budget** identifies unnecessary context; caching still consumes it.
+- Trim context that the task does not need. Cached context still consumes window capacity.
 - **cost-aware-llm-pipeline** compares caching with routing, retries and other costs.

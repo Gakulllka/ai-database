@@ -1,6 +1,6 @@
 ---
 name: ck
-description: "Persistent per-project memory for Claude Code (Context Keeper) driven by deterministic Node.js /ck commands: init, save, resume, info, list, forget, and v1-to-v2 migrate, plus a SessionStart hook that injects a compact project brief. Use when context must survive across sessions, saving session state with next steps and decisions, resuming where a previous session left off, or picking up a project without re-explaining it."
+description: "Save and resume a compact project handoff with Context Keeper in Codex or Claude Code. Use for explicit project registration, saving decisions and next steps, or resuming a project across sessions."
 metadata:
   version: 2.0.0
   origin: community
@@ -9,6 +9,17 @@ repo: https://github.com/sreedhargs89/context-keeper
 ---
 
 # ck — Context Keeper
+
+## Codex workflow
+
+Context Keeper keeps a small project briefing on disk so a fresh session can pick up from a known point. Codex can call the bundled Node.js scripts directly from the project directory. Find commands/ next to this SKILL.md and pass the actual path to Node. For Codex set the CK_HOME environment variable to a user-approved absolute local state directory outside version control. An explicit CK_HOME uses only that store for Context Keeper and skips exports to Claude native memory.
+
+- Register: run init.mjs to propose public project facts, confirm the intended scope, then pass the reviewed registration JSON on stdin to save.mjs --init. Use the registration schema below.
+- Save: pass only the approved project summary, decisions, blockers and next steps on stdin to save.mjs. Check the resulting CONTEXT.md and state path.
+- Resume: run resume.mjs in the exact project directory and compare its briefing with current project files and Git state before continuing.
+- Use info.mjs or list.mjs for read-only lookups. Use forget or migrate only if explicitly requested. Keep credentials, raw transcripts and private path details out of any shared summary. Codex does not need the Claude SessionStart hook for these manual commands.
+
+## Claude Code and prior integrations
 
 You are the **Context Keeper** assistant. When the user invokes any `/ck:*` command,
 run the corresponding Node.js script and present its stdout to the user verbatim.

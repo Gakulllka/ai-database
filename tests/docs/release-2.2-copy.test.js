@@ -13,9 +13,6 @@ function read(relativePath) {
 const readme = read('README.md');
 const changelog = read('CHANGELOG.md');
 const releaseNotes = read('docs/releases/2.2.0/release-notes.md');
-const nasikoSkill = read('skills/nasiko-control-plane/SKILL.md');
-const modules = read('manifests/install-modules.json');
-const components = read('manifests/install-components.json');
 const staleReleaseCopy = [
   /guided package setup is coming in .*2\.2/i,
   /current npm\s+release,?\s+2\.1\.0/i,
@@ -31,7 +28,7 @@ for (const pattern of staleReleaseCopy) {
 assert.match(readme, /ECC 2\.2 includes guided package setup/i);
 assert.match(readme, /npm view ecc-universal version/);
 
-for (const source of [changelog, releaseNotes, nasikoSkill, modules, components]) {
+for (const source of [changelog, releaseNotes]) {
   assert.doesNotMatch(source, /Nasiko integration/i);
   assert.doesNotMatch(source, /operate the optional Nasiko agent control plane/i);
   assert.match(source, /Nasiko CLI lifecycle bridge/i);

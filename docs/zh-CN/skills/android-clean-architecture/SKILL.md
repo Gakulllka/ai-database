@@ -335,5 +335,5 @@ plugins { id("kmp-library") }
 
 ## 参考
 
-查看技能：`compose-multiplatform-patterns` 了解 UI 模式。
+共用界面遵循项目的 Compose Multiplatform 约定。
 查看技能：`kotlin-coroutines-flows` 了解异步模式。

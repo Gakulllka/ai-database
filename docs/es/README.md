@@ -535,7 +535,6 @@ ECC/
 |
 |-- skills/           # Definiciones de flujos de trabajo y conocimiento de dominio
 |   |-- coding-standards/           # Mejores prácticas por lenguaje
-|   |-- clickhouse-io/              # Analytics en ClickHouse, consultas, ingeniería de datos
 |   |-- backend-patterns/           # Patrones de API, base de datos, caché
 |   |-- frontend-patterns/          # Patrones de React, Next.js
 |   |-- frontend-slides/            # Presentaciones HTML y flujos de trabajo de conversión PPTX a web (NUEVO)
@@ -546,10 +545,8 @@ ECC/
 |   |-- iterative-retrieval/        # Refinamiento progresivo de contexto para subagentes
 |   |-- strategic-compact/          # Sugerencias de compactación manual (Guía Extensa)
 |   |-- tdd-workflow/               # Metodología TDD
-|   |-- security-review/            # Lista de verificación de seguridad
 |   |-- eval-harness/               # Evaluación de bucle de verificación (Guía Extensa)
 |   |-- verification-loop/          # Verificación continua (Guía Extensa)
-|   |-- videodb/                   # Video y audio: ingestión, búsqueda, edición, generación, streaming (NUEVO)
 |   |-- golang-patterns/            # Modismos y mejores prácticas de Go
 |   |-- golang-testing/             # Patrones de pruebas en Go, TDD, benchmarks
 |   ...
@@ -760,7 +757,7 @@ node scripts/install-apply.js --target claude --modules workflow-quality
 
 # Opcional: instalar skills concretas solo cuando las necesites.
 node scripts/install-apply.js --target claude --skills search-first
-# node scripts/install-apply.js --target claude --skills django-patterns,django-tdd
+# node scripts/install-apply.js --target claude --skills laravel-patterns,laravel-tdd
 
 # Opcional: mantener compatibilidad con entradas slash durante la migración
 mkdir -p ~/.claude/commands

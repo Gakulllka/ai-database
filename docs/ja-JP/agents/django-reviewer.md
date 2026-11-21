@@ -160,9 +160,6 @@ Fix: 何をなぜ変更するか
 
 ## 参照
 
-DjangoアーキテクチャパターンとORM例については、`skill: django-patterns`を参照してください。
-セキュリティ設定チェックリストについては、`skill: django-security`を参照してください。
-テストパターンとフィクスチャについては、`skill: django-tdd`を参照してください。
 
 ---
 

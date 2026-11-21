@@ -47,7 +47,7 @@ This document lists each slash command and the primary agent(s) or skills it inv
 | `/setup-pm` | — | Package manager setup script |
 | `/claw` | — | NanoClaw CLI (scripts/claw.js) |
 | `/pm2` | — | PM2 service lifecycle |
-| `/security-scan` | security-reviewer (skill) | AgentShield via security-scan skill |
+| `/security-scan` | — | AgentShield using a separately installed and reviewed scanner |
 
 ## Non-Slash CLI Surfaces
 

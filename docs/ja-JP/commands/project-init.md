@@ -13,7 +13,7 @@ description: プロジェクトのスタックを検出し、リポジトリの�
 /project-init --dry-run
 /project-init --target claude
 /project-init --target cursor
-/project-init --skills continuous-learning-v2,security-review
+/project-init --skills continuous-learning-v2,coding-standards
 /project-init --config ecc-install.json
 ```
 

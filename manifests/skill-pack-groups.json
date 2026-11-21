@@ -22,7 +22,6 @@
             "React",
             "Next.js",
             "Vue",
-            "Django",
             "Python",
             "TypeScript",
             "keyboard navigation",
@@ -37,7 +36,6 @@
           ],
           "anchors": [
             "react",
-            "django",
             "typescript",
             "vue"
           ]
@@ -50,7 +48,6 @@
             "PostgreSQL",
             "MySQL",
             "Redis",
-            "ClickHouse",
             "Prisma",
             "database migration",
             "schema update",
@@ -68,7 +65,6 @@
             "SwiftUI",
             "Apple",
             "iPhone",
-            "Liquid Glass",
             "разработка под айфон",
             "интерфейс iOS"
           ],
@@ -257,7 +253,7 @@
     {
       "id": "ai-harness",
       "title": "ИИ-агенты и рабочая среда",
-      "description": "Проектирование агентов, память, запуск, вычисления и обслуживание Database.",
+      "description": "Проектирование агентов, память, запуск рабочих сессий и обслуживание Database.",
       "keywords": [
         "AI agents",
         "agent workflows",
@@ -305,26 +301,6 @@
           ]
         },
         {
-          "id": "ito-compute",
-          "title": "Вычисления и модели на Itô",
-          "keywords": [
-            "Ito compute",
-            "Ito inference",
-            "Ito training",
-            "запуск модели на Ито",
-            "вычисления ИИ"
-          ]
-        },
-        {
-          "id": "nasiko-control-plane",
-          "title": "Управление Nasiko",
-          "keywords": [
-            "Nasiko",
-            "Nasiko control plane",
-            "управление агентами Nasiko"
-          ]
-        },
-        {
           "id": "database-evolution",
           "title": "Обслуживание репозитория Database",
           "keywords": [
@@ -365,9 +341,7 @@
           "keywords": [
             "literature review",
             "deep research",
-            "Exa",
             "OpenAlex",
-            "PubMed",
             "documentation lookup",
             "обзор литературы",
             "научные источники",
@@ -389,7 +363,6 @@
             "учебная лаборатория",
             "проверить перенос вывода",
             "улучшить скилл",
-            "проверить результат",
             "ответ простыми словами"
           ]
         },
@@ -410,11 +383,10 @@
     },
     {
       "id": "security-compliance",
-      "title": "Безопасность и соответствие требованиям",
-      "description": "Проверки безопасности, конфиденциальность и профильные требования.",
+      "title": "Безопасность и защита данных",
+      "description": "Защита агентов, зависимостей и данных.",
       "keywords": [
         "software security",
-        "compliance",
         "защита данных",
         "информационная безопасность"
       ],
@@ -426,7 +398,6 @@
             "security review",
             "security hardening",
             "supply chain security",
-            "HIPAA",
             "secrets handling",
             "проверить безопасность",
             "конфиденциальность",
@@ -439,7 +410,7 @@
     {
       "id": "games-design-media",
       "title": "Игры, дизайн и медиа",
-      "description": "Godot, игровые правила, плейтесты, визуальные материалы, дизайн и видео.",
+      "description": "Godot, игровой баланс, плейтесты, визуальные материалы и анимация.",
       "keywords": [
         "game development",
         "creative production",
@@ -527,16 +498,13 @@
         },
         {
           "id": "media-generation",
-          "title": "Видео, анимация и генерация медиа",
+          "title": "Анимация Blender и демо интерфейсов",
           "keywords": [
-            "video editing",
-            "Remotion",
-            "Manim",
             "Blender",
-            "motion graphics",
-            "генерация видео",
-            "видеомонтаж",
-            "создать анимацию",
+            "motion state",
+            "UI demo",
+            "Blender animation",
+            "проверка анимации",
             "демо интерфейса"
           ]
         }
@@ -584,8 +552,8 @@
     },
     {
       "id": "operations",
-      "title": "Операции и отраслевые задачи",
-      "description": "Рабочие сервисы, согласования, логистика и аналитика рынков прогнозов.",
+      "title": "Рабочие сервисы и операции",
+      "description": "Интеграции, рабочие задачи и общение с контрагентами.",
       "keywords": [
         "business operations",
         "operational workflows",
@@ -600,54 +568,21 @@
             "GitHub operations",
             "Jira",
             "Google Workspace",
-            "email ops",
             "API connector",
             "рабочие сервисы",
             "интеграция API",
-            "корпоративная почта",
             "задачи в Jira",
             "учёт расходов"
           ]
         },
         {
           "id": "operator-desk-patterns",
-          "title": "Согласования и договоры",
+          "title": "Общение с контрагентами",
           "keywords": [
-            "operator approval",
-            "master agreement",
-            "e-sign",
             "counterparty communication",
-            "согласование",
-            "договор",
-            "электронная подпись",
-            "работа с контрагентом"
-          ]
-        },
-        {
-          "id": "supply-chain-domain",
-          "title": "Склад, закупки и логистика",
-          "keywords": [
-            "supply chain",
-            "warehouse inventory",
-            "demand planning",
-            "procurement",
-            "настрой складские остатки",
-            "складской учёт",
-            "логистика",
-            "закупки",
-            "планирование спроса",
-            "возвраты"
-          ]
-        },
-        {
-          "id": "prediction-market-skills",
-          "title": "Рынки прогнозов",
-          "keywords": [
-            "prediction markets",
-            "oracle research",
-            "market risk review",
-            "анализ рынков прогнозов",
-            "оценка риска рынков прогнозов"
+            "designated operator",
+            "работа с контрагентом",
+            "общение с контрагентом"
           ]
         }
       ]

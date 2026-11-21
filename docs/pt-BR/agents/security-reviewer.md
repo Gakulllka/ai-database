@@ -101,7 +101,6 @@ Se você encontrar uma vulnerabilidade CRÍTICA:
 
 ## Referência
 
-Para obter padrões de vulnerabilidade detalhados, exemplos de código, modelos de relatório e modelos de revisão de pull requests, consulte a habilidade: `security-review`.
 
 ---
 

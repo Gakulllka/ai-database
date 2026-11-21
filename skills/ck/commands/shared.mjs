@@ -6,7 +6,7 @@
  */
 
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'fs';
-import { resolve, dirname } from 'path';
+import { resolve, dirname, isAbsolute } from 'path';
 import { homedir } from 'os';
 import { fileURLToPath } from 'url';
 import { spawnSync } from 'child_process';
@@ -14,7 +14,9 @@ import { randomBytes } from 'crypto';
 
 // ─── Paths ────────────────────────────────────────────────────────────────────
 
-export const CK_HOME          = resolve(homedir(), '.claude', 'ck');
+const customHome = process.env.CK_HOME;
+if (customHome && !isAbsolute(customHome)) throw new Error('CK_HOME must be an absolute path');
+export const CK_HOME          = customHome ? resolve(customHome) : resolve(homedir(), '.claude', 'ck');
 export const CONTEXTS_DIR     = resolve(CK_HOME, 'contexts');
 export const PROJECTS_FILE    = resolve(CK_HOME, 'projects.json');
 export const CURRENT_SESSION  = resolve(CK_HOME, 'current-session.json');

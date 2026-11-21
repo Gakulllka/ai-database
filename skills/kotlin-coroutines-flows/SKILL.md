@@ -281,5 +281,5 @@ class FakeItemRepository : ItemRepository {
 
 ## References
 
-See skill: `compose-multiplatform-patterns` for UI consumption of Flows.
+Follow the project's Compose conventions for collecting Flows in the UI.
 See skill: `android-clean-architecture` for where coroutines fit in layers.

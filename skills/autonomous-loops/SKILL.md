@@ -1,11 +1,19 @@
 ---
 name: autonomous-loops
-description: "Patterns and architectures for autonomous Claude Code loops — from simple sequential pipelines to RFC-driven multi-agent DAG systems. Retained for compatibility only: when new autonomous loop guidance is needed, use continuous-agent-loop instead."
+description: "Select and bound an autonomous task loop for Codex or Claude Code. Use for repeated implement-check-fix cycles or handing larger loops to continuous-agent-loop."
 metadata:
   origin: ECC
 ---
 
 # Autonomous Loops Skill
+
+## Codex workflow
+
+Use the continuous-agent-loop skill when designing a new loop. In a single Codex task, define the acceptance check, allowed files, effort limit and exit conditions first. Run one scoped change, inspect the result, then choose the smallest permitted retry. If progress can survive a fresh session, store the last verified revision, check results and next action in the approved project handoff.
+
+Use separate agents only for independent work with non-overlapping ownership. Use an approved Codex automation for a genuine recurrence. End when the acceptance check passes, the user pauses the work, the budget is exhausted, or an external dependency blocks meaningful progress.
+
+## Claude Code and prior integrations
 
 > Compatibility note (v1.8.0): `autonomous-loops` is retained for one release.
 > The canonical skill name is now `continuous-agent-loop`. New loop guidance

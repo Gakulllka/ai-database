@@ -325,7 +325,7 @@ test('actual registry: the routing corpus clears every quality gate with no wron
   assert.deepEqual(result.wrongLoads, []);
   assert.deepEqual(result.breaches, []);
   assert.equal(result.status, 'pass');
-  assert.equal(result.sets.direct.prompts + result.sets.paraphrased.prompts, 77);
+  assert.equal(result.sets.direct.prompts + result.sets.paraphrased.prompts, 76);
 });
 
 test('actual registry: a simple factual question needs no context', () => {
@@ -764,7 +764,14 @@ test('benchmark optimization is discoverable and loads through task context rout
   assert.equal(explicit.nativeInvocation, 'unobserved');
   const named = resolveTaskContext({ task: task({ query: 'Use the benchmark-optimization-loop skill.' }) });
   assert.ok(named.candidates.some(value => value.id === id));
-  assert.equal(named.reason, 'agent-selection-required', 'Overlapping benchmark names still require selection');
+  assert.deepEqual(named.selectedIds, [id]);
+  assert.equal(named.reason, 'auto-selection');
+
+  const ambiguous = resolveTaskContext({ task: task({ query: 'benchmark' }), load: false });
+  assert.ok(ambiguous.candidates.some(value => value.id === id));
+  assert.ok(ambiguous.candidates.some(value => value.id === 'skill:benchmark'));
+  assert.deepEqual(ambiguous.selectedIds, []);
+  assert.equal(ambiguous.reason, 'agent-selection-required');
 });
 
 for (const [query, automatic] of [

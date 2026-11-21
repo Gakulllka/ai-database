@@ -96,7 +96,7 @@
         },
         {
           "id": "1c-development",
-          "title": "1С и BSL",
+          "title": "1С, BSL и сопровождение",
           "keywords": [
             "1C",
             "1С",
@@ -109,13 +109,25 @@
             "запросы 1С",
             "расширения 1С",
             "регистры 1С",
-            "обработка 1С"
+            "обработка 1С",
+            "Planfix tasks and time",
+            "Planfix tracker",
+            "планфикс",
+            "задачи и время в Planfix",
+            "1C user documentation",
+            "1C release article",
+            "1C interface demo",
+            "статья о доработке 1С",
+            "инструкция пользователя 1С",
+            "демо интерфейса 1С"
           ],
           "anchors": [
             "1с",
             "1c",
             "bsl",
-            "бсл"
+            "бсл",
+            "planfix",
+            "планфикс"
           ]
         },
         {
@@ -498,14 +510,14 @@
         },
         {
           "id": "media-generation",
-          "title": "Анимация Blender и демо интерфейсов",
+          "title": "Проверка анимации Blender",
           "keywords": [
             "Blender",
             "motion state",
-            "UI demo",
             "Blender animation",
+            "camera inspection",
             "проверка анимации",
-            "демо интерфейса"
+            "камера Blender"
           ]
         }
       ]
@@ -513,7 +525,7 @@
     {
       "id": "content-publishing",
       "title": "Контент и документы",
-      "description": "Длинные тексты, адаптация контента, продуктовые возможности и обработка документов.",
+      "description": "Продуктовые возможности и обработка документов.",
       "keywords": [
         "content production",
         "document processing",
@@ -523,16 +535,13 @@
       "packs": [
         {
           "id": "business-content",
-          "title": "Тексты и продуктовые возможности",
+          "title": "Продуктовые возможности",
           "keywords": [
-            "article writing",
-            "newsletter writing",
-            "content adaptation",
             "product capability",
-            "написать статью",
-            "адаптация контента",
-            "рассылка",
-            "продуктовые возможности"
+            "capability mapping",
+            "product prioritization",
+            "карта продуктовых возможностей",
+            "приоритеты продукта"
           ]
         },
         {
@@ -566,12 +575,10 @@
           "title": "Рабочие сервисы и интеграции",
           "keywords": [
             "GitHub operations",
-            "Jira",
             "Google Workspace",
             "API connector",
             "рабочие сервисы",
             "интеграция API",
-            "задачи в Jira",
             "учёт расходов"
           ]
         },

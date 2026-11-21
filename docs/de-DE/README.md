@@ -584,7 +584,6 @@ ECC/
 |   |-- perl-security/             # Perl-Sicherheits-Patterns, Taint-Mode, sicheres I/O (NEU)
 |   |-- perl-testing/              # Perl-TDD mit Test2::V0, prove, Devel::Cover (NEU)
 |   |-- autonomous-loops/           # Patterns für autonome Loops: sequentielle Pipelines, PR-Loops, DAG-Orchestrierung (NEU)
-|   |-- plankton-code-quality/      # Durchsetzung der Code-Qualität zur Schreibzeit mit Plankton-Hooks (NEU)
 |
 |-- commands/         # Gepflegte Slash-Entry-Kompatibilität; skills/ bevorzugen
 |   |-- plan.md             # /plan - Implementierungsplanung

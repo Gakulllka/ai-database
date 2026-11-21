@@ -156,7 +156,7 @@
     {
       "id": "capability:content",
       "family": "capability",
-      "description": "Product capability modeling, long-form writing, and content adaptation.",
+      "description": "Product capability mapping and prioritization.",
       "modules": [
         "business-content"
       ]
@@ -196,7 +196,7 @@
     {
       "id": "capability:media",
       "family": "capability",
-      "description": "Blender motion-state inspection and interactive UI demonstrations.",
+      "description": "Motion-state and camera inspection in Blender.",
       "modules": [
         "media-generation"
       ]
@@ -725,7 +725,7 @@
     {
       "id": "lang:1c",
       "family": "language",
-      "description": "1C:Enterprise / BSL language rules, development workflows and optional local platform tooling.",
+      "description": "1C:Enterprise and BSL development, platform tooling, user documentation and demos, and Planfix work tracking.",
       "modules": [
         "1c-development"
       ]

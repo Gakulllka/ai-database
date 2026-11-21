@@ -50,6 +50,10 @@ existing `AGENTS.md`; avoid creating a second project-knowledge system.
 | Web client and publication inspection | [1c-web-client](../1c-web-client/SKILL.md) |
 | Test evidence and business acceptance | [1c-testing](../1c-testing/SKILL.md) |
 
+When the user gives a Planfix task, use `planfix-tracker` to read its requirements and
+acceptance criteria. Apply the matching 1C workflow to the implementation and
+verification. Update the task or log time when the user requests that operation.
+
 ## Implement and Diagnose
 
 Separate the general business rule from illustrative dates, amounts and identifiers.

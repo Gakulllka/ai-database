@@ -44,7 +44,7 @@ The recommended `minimal --with capability:machine-learning` install keeps the c
 | SWE surface | MLE use |
 |-------------|---------|
 | `product-capability` / `architecture-decision-records` | Turn model work into explicit product contracts and record irreversible data, model, and rollout choices |
-| `repo-scan` / `codebase-onboarding` / `code-tour` | Find existing training, feature, serving, eval, and monitoring paths before introducing a parallel ML stack |
+| `codebase-onboarding` / `code-tour` | Find existing training, feature, serving, eval, and monitoring paths before introducing a parallel ML stack |
 | `plan` / `feature-dev` | Scope model changes as product capabilities with data, eval, serving, and rollback phases |
 | `tdd-workflow` / `python-testing` | Test feature transforms, split logic, metric calculations, artifact loading, and inference schemas before implementation |
 | `code-reviewer` / `mle-reviewer` | Review code quality plus ML-specific leakage, reproducibility, promotion, and monitoring risks |
@@ -71,7 +71,7 @@ Use these simulations as coverage checks when planning or reviewing MLE work. A 
 | ID | Common MLE task | Streamlined ECC path | Required output | Pipeline lanes covered |
 |----|-----------------|----------------------|-----------------|------------------------|
 | MLE-01 | Frame an ambiguous prediction, ranking, recommender, classifier, embedding, or forecast capability | `product-capability`, `plan`, `architecture-decision-records`, `mle-workflow` | Iteration Compact naming who cares, decision owner, success metric, unacceptable mistakes, assumptions, constraints, and first experiment | product contract, stakeholder loss, risk, rollout |
-| MLE-02 | Define metric goals, labels, data sources, and the mistake budget | `repo-scan`, `database-reviewer`, `database-migrations`, `postgres-patterns` | Data and metric contract with entity grain, label timing, label confidence, feature timing, point-in-time joins, split policy, and dataset snapshot | data contract, metric design, leakage, reproducibility |
+| MLE-02 | Define metric goals, labels, data sources, and the mistake budget | `codebase-onboarding`, `database-reviewer`, `database-migrations`, `postgres-patterns` | Data and metric contract with entity grain, label timing, label confidence, feature timing, point-in-time joins, split policy, and dataset snapshot | data contract, metric design, leakage, reproducibility |
 | MLE-03 | Build a baseline model and scoring path before adding complexity | `tdd-workflow`, `python-testing`, `python-patterns`, `code-reviewer` | Baseline scorer with confusion matrix, calibration notes, latency/cost estimate, known weaknesses, and tests for score shape and determinism | baseline, scoring, testing, serving parity |
 | MLE-04 | Generate features from hypotheses about what separates outcomes | `python-patterns`, `pytorch-patterns`, `docker-patterns`, `deployment-patterns` | Feature plan and transform module covering signal source, missing values, outliers, correlations, leakage checks, and train/serve equivalence | feature pipeline, leakage, training, artifacts |
 | MLE-05 | Tune thresholds, configs, and model complexity under tradeoffs | `eval-harness`, `ai-regression-testing`, `quality-gate`, `test-coverage` | Threshold/config report comparing precision, recall, F1, AUC, calibration, group slices, latency, cost, complexity, and acceptable error classes | evaluation, threshold, promotion, regression |

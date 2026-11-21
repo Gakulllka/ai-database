@@ -264,7 +264,7 @@ Copy-Item -Recurse rules/typescript "$HOME/.claude/rules/"
 /plugin list ecc@ecc
 ```
 
-**搞定！** 你现在可以使用 77 个智能体、285 项技能和 98 个命令了。
+**搞定！** 你现在可以使用 77 个智能体、283 项技能和 98 个命令了。
 
 ***
 
@@ -406,7 +406,6 @@ ECC/
 |   |-- perl-security/             # Perl 安全模式、taint 模式与安全 I/O（新增）
 |   |-- perl-testing/              # 使用 Test2::V0、prove、Devel::Cover 的 Perl TDD（新增）
 |   |-- autonomous-loops/           # 自主循环模式：顺序流水线、PR 循环与 DAG 编排（新增）
-|   |-- plankton-code-quality/      # 使用 Plankton hooks 的编写期代码质量控制（新增）
 |
 |-- commands/         # 维护中的斜杠命令兼容层；优先使用 skills/
 |   |-- plan.md             # /plan - 实现规划
@@ -574,7 +573,7 @@ npx ecc-agentshield init
 
 ### Plankton — 编写时代码质量强制执行
 
-Plankton（致谢：@alxfazio）是用于编写时代码质量强制执行的推荐伴侣。它通过 PostToolUse 钩子在每次文件编辑时运行格式化程序和 20 多个代码检查器，然后生成 Claude 子进程（根据违规复杂度路由到 Haiku/Sonnet/Opus）来修复主智能体遗漏的问题。采用三阶段架构：静默自动格式化（解决 40-50% 的问题），将剩余的违规收集为结构化 JSON，委托给子进程修复。包含配置保护钩子，防止智能体修改检查器配置以通过检查而非修复代码。支持 Python、TypeScript、Shell、YAML、JSON、TOML、Markdown 和 Dockerfile。与 AgentShield 结合使用，实现安全 + 质量覆盖。完整集成指南请参阅 `skills/plankton-code-quality/`。
+Plankton（致谢：@alxfazio）是用于编写时代码质量检查的独立工具。它通过 PostToolUse 钩子在每次文件编辑时运行格式化程序和 20 多个代码检查器，然后生成 Claude 子进程（根据违规复杂度路由到 Haiku/Sonnet/Opus）来修复主智能体遗漏的问题。采用三阶段架构：静默自动格式化（解决 40-50% 的问题），将剩余的违规收集为结构化 JSON，委托给子进程修复。包含配置保护钩子，防止智能体修改检查器配置以通过检查而非修复代码。支持 Python、TypeScript、Shell、YAML、JSON、TOML、Markdown 和 Dockerfile。与 AgentShield 结合使用，实现安全 + 质量覆盖。
 
 ### 持续学习 v2
 
@@ -1152,7 +1151,7 @@ opencode
 |---------|---------------|----------|--------|
 | 智能体 | PASS: 77 个    | PASS: 12 个 | **Claude Code 领先** |
 | 命令 | PASS: 98 个    | PASS: 35 个 | **Claude Code 领先** |
-| 技能 | PASS: 285 项   | PASS: 37 项 | **Claude Code 领先** |
+| 技能 | PASS: 283 项   | PASS: 37 项 | **Claude Code 领先** |
 | 钩子 | PASS: 8 种事件类型 | PASS: 11 种事件 | **OpenCode 更多！** |
 | 规则 | PASS: 29 条    | PASS: 13 条指令 | **Claude Code 领先** |
 | MCP 服务器 | PASS: 14 个    | PASS: 完整 | **完全对等** |
@@ -1260,7 +1259,7 @@ ECC 是**第一个最大化利用每个主要 AI 编码工具的插件**。以�
 |---------|-----------------------|------------|-----------|----------|
 | **智能体** | 77                    | 共享 (AGENTS.md) | 共享 (AGENTS.md) | 12 |
 | **命令** | 98                    | 共享 | 基于指令 | 35 |
-| **技能** | 285                   | 共享 | 10 (原生格式) | 37 |
+| **技能** | 283                   | 共享 | 10 (原生格式) | 37 |
 | **钩子事件** | 8 种类型                 | 15 种类型 | SessionStart（1 种类型） | 11 种类型 |
 | **钩子脚本** | 20+ 个脚本               | 16 个脚本 (DRY 适配器) | 1 个 SessionStart 引导脚本 | 插件钩子 |
 | **规则** | 34 (通用 + 语言)          | 34 (YAML 前页) | 基于指令 | 13 条指令 |

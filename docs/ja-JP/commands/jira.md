@@ -1,5 +1,5 @@
 ---
-description: Jiraチケットを取得し、要件を分析し、ステータスを更新し、コメントを追加します。jira-integrationスキルとMCPまたはREST APIを使用します。
+description: Jiraチケットを取得し、要件を分析し、ステータスを更新し、コメントを追加します。設定済みの Jira MCP コネクターまたは REST API を使用します。
 ---
 
 # Jiraコマンド
@@ -102,5 +102,4 @@ export JIRA_API_TOKEN="your-api-token"
 
 ## 関連
 
-- **スキル:** `skills/jira-integration/`
 - **MCP設定:** `mcp-configs/mcp-servers.json` → `jira`

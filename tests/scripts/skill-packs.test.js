@@ -29,6 +29,7 @@ test('find returns the relevant complete pack on Russian and English task querie
     ['плейтест игры', 'game-playtest'],
     ['баланс урона в игре', 'game-balance'],
     ['1С управляемые формы', '1c-development'],
+    ['найди задачу в Планфикс', '1c-development'],
     ['настрой складские остатки в 1С', '1c-development'],
     ['учебная лаборатория по исследованиям', 'learning-workflows'],
     ['keyboard navigation in a React settings form', 'framework-language'],
@@ -38,6 +39,11 @@ test('find returns the relevant complete pack on Russian and English task querie
 });
 
 test('group plans include declared dependencies and complete module paths once', () => {
+  const oneCPlan = planPack(catalog, '1c-development');
+  for (const skill of ['article-writing', 'content-engine', 'ui-demo', 'planfix-tracker']) {
+    assert.equal(catalog.owners.get(skill), '1c-development');
+    assert.ok(oneCPlan.paths.includes('skills/' + skill));
+  }
   const plan = planPack(catalog, 'games-design-media');
   assert.ok(plan.requestedModules.includes('game-balance'));
   assert.ok(plan.requestedModules.includes('godot-development'));

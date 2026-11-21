@@ -27,7 +27,7 @@ Start
 推荐的生产栈：
 
 1. RFC 分解 (`ralphinho-rfc-pipeline`)
-2. 质量门 (`plankton-code-quality` + `/quality-gate`)
+2. 质量门（`delivery-gate` + `/quality-gate`）
 3. 评估循环 (`eval-harness`)
 4. 使用当前环境的检查点和恢复机制保存会话
 

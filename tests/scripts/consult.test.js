@@ -81,6 +81,16 @@ function runTests() {
     assert.ok(payload.profiles.find(profile => profile.id === 'security').installCommand.includes('--profile security'));
   })) passed++; else failed++;
 
+  if (test('recommends the standalone writing and UI demo skill from non-1C requests', () => {
+    for (const [query, id] of [['write a blog article', 'article-writing'], ['record a UI demo', 'ui-demo']]) {
+      const result = run([query, '--target', 'codex', '--json']);
+      assert.strictEqual(result.status, 0, result.stderr);
+      const match = parseJson(result.stdout).matches[0];
+      assert.strictEqual(match.componentId, 'skill:' + id);
+      assert.ok(match.installCommand.includes('--with skill:' + id));
+    }
+  })) passed++; else failed++;
+
   if (test('prints text recommendations with install and plan commands', () => {
     const result = run(['I', 'want', 'a', 'skill', 'for', 'security', 'reviews']);
 

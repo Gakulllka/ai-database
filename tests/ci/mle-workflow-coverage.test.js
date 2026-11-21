@@ -53,7 +53,7 @@ const PIPELINE_LANES = [
 const SWE_SURFACES = [
   'product-capability',
   'architecture-decision-records',
-  'repo-scan',
+  'codebase-onboarding',
   'database-reviewer',
   'tdd-workflow',
   'python-testing',

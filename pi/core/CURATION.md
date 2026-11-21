@@ -1,6 +1,6 @@
 # Curation
 
-pi/core includes 118 of 285 skills and 24 of 98 commands from the root of ECC.
+pi/core includes 118 of 283 skills and 24 of 98 commands from the root of ECC.
 Everything excluded is listed here with its reason.
 
 ## Rules
@@ -70,6 +70,7 @@ Exclude anything that:
 | `local-first-sync` | Optional Database cross-product and data workflows. |
 | `model-texture-restyle` | Optional Visual project pack with separate reference artwork. |
 | `paper-dream-theatre` | Optional Visual project pack with separate reference artwork. |
+| `planfix-tracker` | requires a separately configured Planfix API connection |
 | `pop-animation` | Optional Visual project pack with separate reference artwork. |
 | `tabular-import-reconciliation` | Optional Database cross-product and data workflows. |
 | `visual-design-base` | Optional Visual project pack with separate reference artwork. |
@@ -125,7 +126,6 @@ Exclude anything that:
 | `i18n-sync` | built around a third-party npm CLI (locakit) with external source links; not self-contained |
 | `ios-icon-gen` | Iconify API network calls at runtime |
 | `iterative-retrieval` | multi-agent subagent context mechanics; links to external social post |
-| `jira-integration` | wraps Jira SaaS API |
 | `knowledge-ops` | ops skill over MCP memory and vector stores |
 | `laravel-plugin-discovery` | wraps LaraPlugins.io SaaS MCP |
 | `loop-design-check` | agent loop design mechanics |
@@ -145,12 +145,10 @@ Exclude anything that:
 | `orch-refine-code` | Claude-Code-only orch-* orchestration |
 | `plan-canvas` | Claude-Code-only plan canvas server |
 | `plan-orchestrate` | ECC orchestration prompt generator over the full catalog |
-| `plankton-code-quality` | Claude-Code-only write-time hooks |
 | `prompt-optimizer` | ECC command/agent catalog self-reference |
 | `ralphinho-rfc-pipeline` | multi-agent DAG orchestration |
 | `recsys-pipeline-architect` | installs upstream package via npx skills add |
 | `recursive-decision-ledger` | recursive prompting loops |
-| `repo-scan` | downloads an external skill at runtime |
 | `research-ops` | ECC ops research workflow with network enrichment |
 | `roundhouse-x402` | hosted x402 service discovery and settlement integration |
 | `rules-distill` | Claude-Code-only rules distillation mechanics |

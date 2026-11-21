@@ -972,7 +972,6 @@ ECC/
 |   |-- perl-security/              # Pattern di sicurezza Perl, taint mode, I/O sicuro
 |   |-- perl-testing/               # TDD in Perl con Test2::V0, prove, Devel::Cover
 |   |-- autonomous-loops/           # Pattern di loop autonomi: pipeline sequenziali, loop di PR, orchestrazione DAG
-|   |-- plankton-code-quality/      # Controllo della qualità del codice in fase di scrittura con gli hook Plankton
 |   |-- docs/examples/project-guidelines-template.md  # Template per skill specifiche del progetto
 |
 |-- commands/         # Compatibilità degli slash-entry mantenuti; preferisci skills/

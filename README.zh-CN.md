@@ -200,7 +200,7 @@ Copy-Item -Recurse rules/typescript "$HOME/.claude/rules/"
 /plugin list ecc@ecc
 ```
 
-**完成！** 你现在可以使用 77 个代理、285 个技能和 98 个命令。
+**完成！** 你现在可以使用 77 个代理、283 个技能和 98 个命令。
 
 ### multi-* 命令需要额外配置
 
@@ -356,7 +356,6 @@ ECC/
 |   |-- perl-security/              # Perl 安全模式、污点模式、安全 I/O（新增）
 |   |-- perl-testing/               # 基于 Test2::V0、prove、Devel::Cover 的 Perl TDD（新增）
 |   |-- autonomous-loops/           # 自主循环模式：顺序流水线、PR 循环、DAG 编排（新增）
-|   |-- plankton-code-quality/      # 基于 Plankton 钩子的实时代码质量管控（新增）
 |
 |-- commands/         # 维护中的斜杠命令兼容层；优先使用 skills/
 |   |-- plan.md             # /plan - 实现规划

@@ -26,7 +26,7 @@ Start
 
 推奨される本番スタック：
 1. RFC分解（`ralphinho-rfc-pipeline`）
-2. 品質ゲート（`plankton-code-quality` + `/quality-gate`）
+2. 品質ゲート（`delivery-gate` + `/quality-gate`）
 3. 評価ループ（`eval-harness`）
 4. 実行環境のチェックポイントと再開機能でセッションを保存する
 

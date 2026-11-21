@@ -1,5 +1,5 @@
 ---
-description: 检索Jira工单，分析需求，更新状态或添加评论。使用jira-integration技能和MCP或REST API。
+description: 检索Jira工单，分析需求，更新状态或添加评论。使用已配置的 Jira MCP 连接或 REST API。
 ---
 
 # Jira 命令
@@ -104,5 +104,4 @@ export JIRA_API_TOKEN="your-api-token"
 
 ## 相关
 
-* **技能：** `skills/jira-integration/`
 * **MCP 配置：** `mcp-configs/mcp-servers.json` → `jira`

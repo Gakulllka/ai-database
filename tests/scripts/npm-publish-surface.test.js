@@ -246,6 +246,10 @@ function main() {
       const packagedPaths = new Set(packEntry?.files?.map((file) => file.path) ?? [])
 
       for (const requiredPath of [
+        "skills/planfix-tracker/SKILL.md",
+        "skills/planfix-tracker/references/rest-workflow.md",
+        ".agents/skills/planfix-tracker/SKILL.md",
+        ".agents/skills/planfix-tracker/references/rest-workflow.md",
         "skills/learning-lab/SKILL.md",
         "skills/learning-lab/agents/openai.yaml",
         ".agents/skills/learning-lab/SKILL.md",

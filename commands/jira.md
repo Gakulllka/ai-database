@@ -1,5 +1,5 @@
 ---
-description: Retrieve a Jira ticket, analyze requirements, update status, or add comments. Uses the jira-integration skill and MCP or REST API.
+description: Retrieve a Jira ticket, analyze requirements, update status, or add comments. Uses a configured Jira MCP connector or REST API.
 ---
 
 # Jira Command
@@ -102,5 +102,4 @@ After analyzing a ticket:
 
 ## Related
 
-- **Skill:** `skills/jira-integration/`
 - **MCP config:** `mcp-configs/mcp-servers.json` → `jira`

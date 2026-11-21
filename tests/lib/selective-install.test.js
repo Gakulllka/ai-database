@@ -312,6 +312,22 @@ function runTests() {
       'Should include database from capability:database');
   })) passed++; else failed++;
 
+  if (test('moved content and demo skills can be selected without the 1C pack', () => {
+    const ids = ['article-writing', 'content-engine', 'ui-demo'];
+    for (const target of ['claude', 'codex']) {
+      const plan = resolveInstallPlan({
+        profileId: 'research',
+        includeComponentIds: ['capability:media', ...ids.map(id => 'skill:' + id)],
+        target,
+      });
+      assert.ok(!plan.selectedModuleIds.includes('1c-development'));
+      for (const id of ids) {
+        const module = plan.selectedModules.find(entry => entry.id === 'skill-' + id);
+        assert.deepStrictEqual(module?.paths, ['skills/' + id]);
+      }
+    }
+  })) passed++; else failed++;
+
   // ─── Install Plan Resolution with --without ───
 
   if (test('--without excludes modules from a profile', () => {

@@ -908,7 +908,6 @@ ECC/
 |   |-- perl-security/              # Perl セキュリティパターン、taint モード、安全な I/O
 |   |-- perl-testing/               # Test2::V0、prove、Devel::Cover による Perl TDD
 |   |-- autonomous-loops/           # 自律ループパターン：逐次パイプライン、PR ループ、DAG オーケストレーション
-|   |-- plankton-code-quality/      # Plankton hooks による書き込み時のコード品質強制
 |   |-- docs/examples/project-guidelines-template.md  # プロジェクト固有 skills のテンプレート
 |
 |-- commands/         # メンテナンスされているスラッシュエントリーの互換層。skills/ を優先

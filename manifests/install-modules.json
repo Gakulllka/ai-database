@@ -409,7 +409,6 @@
         "skills/hookify-rules",
         "skills/iterative-retrieval",
         "skills/plan-canvas",
-        "skills/plankton-code-quality",
         "skills/skill-comply",
         "skills/skill-scout",
         "skills/skill-stocktake",
@@ -434,7 +433,6 @@
         "skills/intent-driven-development",
         "skills/living-docs-governance",
         "skills/loop-design-check",
-        "skills/repo-scan",
         "skills/rules-distill",
         "skills/santa-method",
         "skills/git-workflow",
@@ -600,10 +598,8 @@
     {
       "id": "business-content",
       "kind": "skills",
-      "description": "Product capability modeling, long-form writing, and content adaptation.",
+      "description": "Product capability mapping and prioritization.",
       "paths": [
-        "skills/article-writing",
-        "skills/content-engine",
         "skills/product-capability"
       ],
       "targets": [
@@ -638,7 +634,6 @@
         "skills/github-ops",
         "skills/issue-review",
         "skills/google-workspace-ops",
-        "skills/jira-integration",
         "skills/knowledge-ops",
         "skills/messages-ops",
         "skills/terminal-ops",
@@ -693,10 +688,9 @@
     {
       "id": "media-generation",
       "kind": "skills",
-      "description": "Blender motion-state inspection and interactive UI demonstrations.",
+      "description": "Motion-state and camera inspection in Blender.",
       "paths": [
-        "skills/blender-motion-state-inspection",
-        "skills/ui-demo"
+        "skills/blender-motion-state-inspection"
       ],
       "targets": [
         "claude",
@@ -1329,7 +1323,7 @@
     {
       "id": "1c-development",
       "kind": "skills",
-      "description": "Optional 1C/BSL workflows, shared XML/platform helpers, and source-to-infobase evidence boundaries.",
+      "description": "1C/BSL development, platform tooling, user documentation, interface demos, and Planfix work tracking.",
       "paths": [
         "skills/1c-bsl-patterns",
         "skills/1c-data-composition",
@@ -1343,7 +1337,11 @@
         "skills/1c-platform-tools",
         "skills/1c-testing",
         "skills/1c-web-client",
-        "skills/1c-xdto"
+        "skills/1c-xdto",
+        "skills/article-writing",
+        "skills/content-engine",
+        "skills/ui-demo",
+        "skills/planfix-tracker"
       ],
       "targets": [
         "claude",

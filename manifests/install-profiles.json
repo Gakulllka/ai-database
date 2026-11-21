@@ -57,7 +57,7 @@
       ]
     },
     "research": {
-      "description": "Research and content-oriented setup for investigation, synthesis, and content planning.",
+      "description": "Research and product capability modeling setup for investigation and synthesis.",
       "modules": [
         "rules-core",
         "agents-core",

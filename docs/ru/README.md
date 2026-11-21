@@ -525,7 +525,6 @@ ECC/
 |   |-- perl-security/             # Perl security patterns, taint mode, safe I/O (НОВОЕ)
 |   |-- perl-testing/              # Perl TDD с Test2::V0, prove, Devel::Cover (НОВОЕ)
 |   |-- autonomous-loops/           # Паттерны автономных циклов: sequential pipelines, PR loops, DAG orchestration (НОВОЕ)
-|   |-- plankton-code-quality/      # Write-time code quality enforcement через Plankton hooks (НОВОЕ)
 |
 |-- commands/         # Поддерживаемая совместимость slash entries; предпочитайте skills/
 |   |-- plan.md             # /plan - Планирование реализации

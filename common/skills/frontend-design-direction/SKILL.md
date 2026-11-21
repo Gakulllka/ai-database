@@ -162,6 +162,20 @@ This portable distinction was informed by the MIT-licensed
 
 ### Rendered finish gate
 
+For a new screen or a substantial layout change, review the first viewport at
+the widths in the contract. Scroll through the content relevant to the main task
+when it extends beyond the first screen. A full-page image alone can hide that
+someone must scroll past unrelated material to find an action. Follow the main
+task to its visible result and check that it describes what changed where the
+user expects to see it. For example, on mobile a workshop's session, price, and
+booking action can share a section, followed by an illustrative print. If the
+image is needed to decide, keep it in that path.
+
+When reviewing a revision, compare matching widths, content and starting
+states. Use the observed issue to decide what to change, then recheck that
+state and nearby layout. Record what can be seen or measured in the render.
+Claims about search time or comprehension need observation of users.
+
 Inspect the rendered interface at the contract's target viewports. Check keyboard
 navigation, visible focus, labels, contrast, reduced motion and touch targets;
 check narrow/wide layouts with long content; exercise each applicable content

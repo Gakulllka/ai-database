@@ -1,6 +1,6 @@
 # Curation
 
-pi/core includes 138 of 389 skills and 24 of 98 commands from the root of ECC.
+pi/core includes 138 of 390 skills and 24 of 98 commands from the root of ECC.
 Everything excluded is listed here with its reason.
 
 ## Rules
@@ -68,6 +68,7 @@ Exclude anything that:
 | `indie-grotesque` | Optional Visual project pack with separate reference artwork. |
 | `ink-punk` | Optional Visual project pack with separate reference artwork. |
 | `learn-eval` | Optional Database learning workflows for Codex. |
+| `learning-lab` | Optional Database learning workflows for Codex. |
 | `lisa-character` | Optional Visual project pack with separate reference artwork. |
 | `local-first-sync` | Optional Database cross-product and data workflows. |
 | `model-texture-restyle` | Optional Visual project pack with separate reference artwork. |

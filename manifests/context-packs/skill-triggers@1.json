@@ -1,16 +1,16 @@
 {
   "coverage": {
-    "skills": 389,
-    "withTriggers": 48
+    "skills": 390,
+    "withTriggers": 49
   },
-  "generatedAt": "2026-11-20T13:45:29.190Z",
+  "generatedAt": "2026-11-21T08:06:00.337Z",
   "id": "skill-triggers@1",
   "model": {
     "effort": null,
     "id": "hand-seeded",
     "source": "manual-curation-pending-regeneration"
   },
-  "registryDigest": "37868e88b4cb59de2ef175e143a0d7e9a39c8402944549403d24d000990e6560",
+  "registryDigest": "3f142a37abd80acb367fb564afb1424e0b7cb9c8d85f383429e16384aa02fec2",
   "schemaVersion": 1,
   "triggers": {
     "skill:agent-runtime-gateway-smoke-test": [
@@ -258,6 +258,12 @@
       "improve a skill after a failure",
       "evaluate a skill update"
     ],
+    "skill:learning-lab": [
+      "test a research finding on a simple example",
+      "check whether a principle transfers to another task",
+      "run a short learning exercise",
+      "find where a research conclusion stops working"
+    ],
     "skill:orch-fix-defect": [
       "fix a bug",
       "broken behavior",
@@ -419,5 +425,5 @@
       "yoruba accents not rendering"
     ]
   },
-  "triggersDigest": "bc3ad00c8ff852f3d4be0cdc4efebc93ff4d71a831ac34a5cdf08aa73c94114b"
+  "triggersDigest": "1f32ccef9ef4a44c4f7a743fa2343f2432ca1c9a32511fc9b8f396b3dea98e26"
 }

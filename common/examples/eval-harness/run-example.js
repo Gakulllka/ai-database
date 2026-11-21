@@ -19,7 +19,7 @@ const harness = require('../../scripts/lib/eval-harness');
 
 const here = __dirname;
 const keep = process.argv.includes('--keep');
-const work = fs.mkdtempSync(path.join(os.tmpdir(), 'ecc-eval-harness-example-'));
+const work = fs.mkdtempSync(path.join(os.tmpdir(), 'database-eval-harness-example-'));
 const failures = [];
 
 function step(title, fn) {
@@ -44,7 +44,7 @@ const resolve = (relative) => path.join(here, relative);
 
 const capsuleDir = path.join(work, 'capsule');
 const capsule = harness.capsule.Capsule.create(capsuleDir, {
-  harness_version: 'ecc-example/1',
+  harness_version: 'database-example/1',
   task_family: 'slugify',
 });
 

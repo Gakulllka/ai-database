@@ -11,7 +11,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 S = importlib.util.spec_from_file_location(
-    "ecc_proof", ROOT / "scripts/compile_contribution_review.py"
+    "database_proof", ROOT / "scripts/compile_contribution_review.py"
 )
 M = importlib.util.module_from_spec(S)
 assert S.loader is not None

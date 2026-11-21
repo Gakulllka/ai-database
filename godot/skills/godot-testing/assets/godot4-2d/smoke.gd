@@ -60,5 +60,5 @@ func _physics_process(_delta: float) -> void:
 		if _body.position.x <= 0.0:
 			_fail("Character body did not move in physics steps")
 			return
-		print("ECC_GODOT_SMOKE:" + JSON.stringify({"dimension": "2D", "checks": 4, "physics_ticks": _ticks}))
+		print("DATABASE_GODOT_SMOKE:" + JSON.stringify({"dimension": "2D", "checks": 4, "physics_ticks": _ticks}))
 		get_tree().quit(0)

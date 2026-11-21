@@ -244,6 +244,10 @@ function main() {
       const packagedPaths = new Set(packEntry?.files?.map((file) => file.path) ?? [])
 
       for (const requiredPath of [
+        "skills/learning-lab/SKILL.md",
+        "skills/learning-lab/agents/openai.yaml",
+        ".agents/skills/learning-lab/SKILL.md",
+        ".agents/skills/learning-lab/agents/openai.yaml",
         "skills/clear-replies/SKILL.md",
         "skills/clear-replies/agents/openai.yaml",
         ".agents/skills/clear-replies/SKILL.md",

@@ -599,7 +599,8 @@
     "skills/game-balance/",
     "skills/game-playtest/",
     "skills/learn-eval/",
-    "skills/verify-deliverables/"
+    "skills/verify-deliverables/",
+    "skills/learning-lab/"
   ],
   "bin": {
     "ecc": "scripts/ecc.js",

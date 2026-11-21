@@ -1,0 +1,4 @@
+interface:
+  display_name: "Learning Lab"
+  short_description: "Test a finding and check transfer to another task"
+  default_prompt: "Use $learning-lab to test one research finding and check whether it transfers to a different task."

@@ -1789,11 +1789,12 @@
     {
       "id": "learning-workflows",
       "kind": "skills",
-      "description": "Evidence research, skill evaluation, deliverable verification and clear reporting.",
+      "description": "Evidence research, findings practice, skill evaluation, deliverable verification and clear reporting.",
       "paths": [
         "skills/clear-replies",
         "skills/evidence-research",
         "skills/learn-eval",
+        "skills/learning-lab",
         "skills/verify-deliverables"
       ],
       "targets": [

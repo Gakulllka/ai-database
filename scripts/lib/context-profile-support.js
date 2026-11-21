@@ -7,7 +7,7 @@ const { SUPPORTED_INSTALL_TARGETS } = require('./install-manifests');
 
 const DEFAULT_REPO_ROOT = path.resolve(__dirname, '../..');
 const MAX_FILE_BYTES = 4 * 1024 * 1024;
-const MAX_TOTAL_BYTES = 16 * 1024 * 1024;
+const MAX_TOTAL_BYTES = 32 * 1024 * 1024;
 const MAX_SOURCE_FILES = 10000;
 const MAX_DIRECTORY_ENTRIES = 10000;
 const MAX_TRAVERSAL_OPERATIONS = 20000;

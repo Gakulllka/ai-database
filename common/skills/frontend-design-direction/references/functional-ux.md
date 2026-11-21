@@ -78,6 +78,12 @@ For each relevant state, identify its trigger, visible explanation and next acti
 - Unsaved or destructive transitions: use the platform's established protection,
   confirmation or undo when the consequence warrants it, not on every click.
 
+If successive successful operations can display the same value, put a durable
+completion marker beside it, such as a record ID or a timestamp that
+distinguishes the completions in this view. If the interface keeps a value
+visible during a repeat, identify which attempt produced it. Check the
+identical-result case after feedback settles and with reduced motion.
+
 Mark a genuinely irrelevant state with a reason. Missing access to test it means
 untested, not irrelevant. Reuse existing state contracts rather than maintaining
 another copy.

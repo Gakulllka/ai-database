@@ -33,8 +33,11 @@ function setupFixture(checkout) {
   const packs = names.map(id => ({ id, title: id, description: id }));
   const skills = names.map(pack => ({ id: pack + '-example', pack, topic: 'example', description: 'An example' }));
   for (const { id, pack } of skills) {
-    const mounts = [{ from: 'skills', to: 'skills' }];
-    if (pack === 'common' || pack === 'development') mounts.push({ from: 'codex-agents', to: 'codex-agents' });
+    const mounts = [{ from: 'skills', to: 'skills' }, { from: 'codex-agents', to: 'codex-agents' }];
+    if (pack !== 'development') {
+      mounts.push({ from: 'agents', to: 'agents' });
+      write(checkout, `${pack}/agents/${pack}-guidance.md`, `# ${pack} role guidance\r\n`);
+    }
     if (pack === 'development') mounts.push({ from: 'docs', to: 'docs' });
     write(checkout, `${pack}/pack.json`, JSON.stringify({
       schemaVersion: 1, id: pack, dependsOn: pack === 'common' ? [] : ['common'],
@@ -46,7 +49,12 @@ function setupFixture(checkout) {
   }
   write(checkout, 'common/codex-agents/example-planner.toml',
     'name = "example-planner"\ndescription = "Plan changes"\nsandbox_mode = "read-only"\n'
-    + 'developer_instructions = "List the steps."\n');
+    + 'developer_instructions = "Read .database/library/common/agents/common-guidance.md first."\n');
+  for (const pack of ['godot', '1c']) {
+    write(checkout, `${pack}/codex-agents/${pack}-reviewer.toml`,
+      `name = "${pack}-reviewer"\ndescription = "Review ${pack} changes"\n`
+      + `developer_instructions = "Read .database/library/${pack}/agents/${pack}-guidance.md first."\n`);
+  }
   write(checkout, 'development/codex-agents/example-reviewer.toml',
     'name = "example-reviewer"\ndescription = "Review changes"\nsandbox_mode = "read-only"\n'
     + 'developer_instructions = "Read .database/library/development/docs/review-guide.md first."\n');
@@ -77,6 +85,18 @@ test('setup preserves project guidance and retains installed packs when the goal
     const selected = JSON.parse(cli('setup', '--project', project, '--pack', 'godot'));
     assert.deepEqual(selected.installed, ['common', 'godot']);
     assert.deepEqual(selected.keptLocal, ['.agents/skills/common-example/SKILL.md']);
+    const sourceGuidance = new Map(['common', 'godot', '1c'].map(pack => {
+      const relative = `${pack}/agents/${pack}-guidance.md`;
+      return [`.database/library/${relative}`, fs.readFileSync(path.join(checkout, relative))];
+    }));
+    for (const [pack, agent] of [['common', 'example-planner'], ['godot', 'godot-reviewer']]) {
+      const guidance = `.database/library/${pack}/agents/${pack}-guidance.md`;
+      const nativeRole = fs.readFileSync(path.join(project, `.codex/agents/${agent}.toml`), 'utf8');
+      assert.ok(nativeRole.includes(guidance));
+      assert.deepEqual(fs.readFileSync(path.join(project, guidance)), sourceGuidance.get(guidance));
+    }
+    assert.deepEqual(fs.readdirSync(path.join(project, '.codex/agents')).sort(),
+      ['example-planner.toml', 'godot-reviewer.toml']);
     const original = fs.readFileSync(path.join(project, 'AGENTS.md'));
     const originalState = fs.readFileSync(path.join(project, '.database/state.json'));
     assert.match(original.toString(), /^# Existing instructions\r\n/);
@@ -90,6 +110,13 @@ test('setup preserves project guidance and retains installed packs when the goal
     command('git', ['sparse-checkout', 'set', 'common', '1c'], checkout);
     cli('setup', '--project', project, '--pack', '1c');
     assert.deepEqual(Object.keys(JSON.parse(cli('check', '--project', project)).packs), ['common', 'godot', '1c']);
+    const oneCReviewer = fs.readFileSync(path.join(project, '.codex/agents/1c-reviewer.toml'), 'utf8');
+    assert.ok(oneCReviewer.includes('.database/library/1c/agents/1c-guidance.md'));
+    for (const [guidance, source] of sourceGuidance) {
+      assert.deepEqual(fs.readFileSync(path.join(project, guidance)), source);
+    }
+    assert.deepEqual(fs.readdirSync(path.join(project, '.codex/agents')).sort(),
+      ['1c-reviewer.toml', 'example-planner.toml', 'godot-reviewer.toml']);
     assert.equal(fs.readFileSync(path.join(project, 'source.txt'), 'utf8'), 'Project source\n');
     const oldRoute = path.join(project, '.agents', 'skills', 'godot-example');
     const target = path.resolve(oldRoute, '../../../.database/library/godot/skills/godot-example/SKILL.md');

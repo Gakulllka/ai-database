@@ -73,6 +73,10 @@
   ],
   "mounts": [
     {
+      "from": "agents",
+      "to": "agents"
+    },
+    {
       "from": "codex-agents",
       "to": "codex-agents"
     },

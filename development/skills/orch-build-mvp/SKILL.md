@@ -28,9 +28,14 @@ engine in [`orch-pipeline`](../orch-pipeline/SKILL.md).
 
 1. Run the `orch-pipeline` engine with the settings above.
 2. Give `implementation-worker` one slice at a time with a bounded write
-   scope and observable acceptance checks. Verify each runnable slice against
-   the spec before moving on. An existing local generator-evaluator harness
-   is optional if its availability and execution contract are verified.
+   scope and observable acceptance checks. Have an independent reviewer check
+   the runnable slice against the spec and test evidence. Send failures to the
+   worker to revise the slice and rerun the affected checks. Have the reviewer
+   reassess the revised slice against the spec and updated test evidence. The
+   parent sets an attempt or time limit for each slice. Stop when the checks
+   pass, progress stalls, or the limit is reached. Report unresolved checks
+   and why the loop stopped. An existing local generator-evaluator harness is
+   optional if its availability and execution contract are verified.
 3. Stop at **Gate 1** (slice plan) and **Gate 2** (pre-commit). Commit the
    scaffold and each slice as separate `feat:` commits.
 4. Add `security-reviewer` for any slice touching a security trigger.

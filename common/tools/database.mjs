@@ -11,7 +11,7 @@ const begin = '<!-- database:begin -->';
 const end = '<!-- database:end -->';
 const idPattern = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 const rootPack = 'common';
-const installAreas = new Set(['skills', 'rules', 'codex-agents', 'docs', 'scripts',
+const installAreas = new Set(['skills', 'rules', 'agents', 'codex-agents', 'docs', 'scripts',
   'schemas', 'assets', 'references', 'templates', 'examples', 'hooks', 'licenses',
   'commands', 'config', 'guides', 'mcp-configs', 'tests', 'manifests', 'tools']);
 

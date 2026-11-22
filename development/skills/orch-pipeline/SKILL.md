@@ -7,9 +7,10 @@ metadata:
 
 # Orchestrator Pipeline (shared engine)
 
-The `orch-*` skills are thin wrappers. They do not re-implement any work — they
-classify the request, choose which phases of *this* pipeline run, and delegate
-each phase to an existing Database agent or command. This file is that pipeline.
+The `orch-*` skills classify the request and choose phases from this shared
+pipeline. Follow the [Database orchestration guide](../../../common/docs/agents/orchestration.md)
+and [execution profiles](../../docs/agents/execution-profiles.md) for role selection
+and scoped assignments.
 
 > Invoke an operation skill (`orch-add-feature`, `orch-fix-defect`, …) rather
 > than this engine directly. This file is the reference they point at.
@@ -30,12 +31,6 @@ each phase to an existing Database agent or command. This file is that pipeline.
 | `orch-refine-code` | refactor | behavior stays, structure improves | restructure while keeping tests green |
 | `orch-build-mvp` | mvp | bootstrap from a design/spec doc | ingest doc → vertical slices |
 
-> These wrappers **compose** existing Database commands rather than replace them:
-> `/feature-dev`, `/plan`, `/code-review`, `/build-fix`, `/refactor-clean`, and
-> `/gan-build`, plus the `tdd-workflow` skill. The orch-* family adds the shared
-> size classifier and the two gates
-> on top of them, so one umbrella covers all five operations consistently.
-
 ## Step 0 — Classify size (right-sizing)
 
 Ceremony scales to blast radius. Score the request on three signals, take the
@@ -55,21 +50,23 @@ contract is **at least** standard, regardless of file count.
 
 ## The phases
 
-Each phase delegates — it does not do the work inline.
-
 - **0. Intake** — restate the request. For `orch-build-mvp`, read the spec/design
   doc and extract scope, locked decisions, and a feature list.
-- **1. Research & Reuse** — per `common/rules/common/development-workflow.md`: `gh search repos` /
-  `gh search code`, then Context7 / vendor docs, then package registries, then
-  Exa. Prefer adopting a proven implementation over net-new code.
-- **2. Plan** — delegate to the `planner` agent (or `architect` /
-  `code-architect` for structural decisions). Output a `task_list` ordered as
-  thin vertical slices. → **GATE 1.**
-- **3. Scaffold** — `orch-build-mvp` only: stand up the first end-to-end slice.
-- **4. Implement (TDD)** — drive each task through the `tdd-guide` agent (or the `tdd-workflow` skill):
-  red → green → refactor. Honor the operation's first-move rule.
-- **5. Review** — `code-reviewer` agent / `/code-review`. Add `security-reviewer`
-  whenever the diff touches a security trigger (below).
+- **1. Research & Reuse** — inspect the repository and installed dependencies
+  first. For non-trivial additions, compare maintained implementations and
+  current primary documentation with relevant, available connectors or CLIs.
+  Follow the [development workflow](../../../common/rules/common/development-workflow.md)
+  and record any limits that affect the decision.
+- **2. Plan** — use `architect` for structural choices and `planner` for
+  the resulting plan. Output a `task_list` of thin vertical slices with acceptance
+  checks. → **GATE 1.**
+- **3. Scaffold** — for `orch-build-mvp`, assign the first end-to-end slice to
+  `implementation-worker` with its acceptance checks.
+- **4. Implement (TDD)** — give `implementation-worker` the stack, relevant
+  skills, write scope and checks. Apply [tdd-workflow](../tdd-workflow/SKILL.md)
+  according to the operation's first move.
+- **5. Review** — give the final diff and check results to an independent
+  `reviewer` or `language-reviewer`. Add `security-reviewer` for the triggers below.
 - **6. Commit** — conventional commits (`feat:` / `fix:` / `refactor:` / …), one
   per logical chunk. → **GATE 2.**
 
@@ -84,18 +81,21 @@ This family is **gated, not autonomous**:
 
 Everything between the gates flows without stopping.
 
-## Agent / command map
+## Role and tool availability
 
-| Phase | Primary | Fallback / escalation |
-|-------|---------|----------------------|
-| Intake / understand | `code-explorer` | trace existing paths before a tweak, fix, or refactor |
-| Plan | `planner` | `architect`, `code-architect` for structural calls |
-| Implement | `tdd-guide` (or `tdd-workflow` skill) | `build-error-resolver` / `/build-fix` on build breaks |
-| Review | `code-reviewer` / `/code-review` | language reviewer (`python-reviewer`, `typescript-reviewer`, …) |
-| Security | `security-reviewer` | — |
-| MVP inner loop | `/gan-build "<brief>" --skip-planner` | drives `gan-generator` → `gan-evaluator`; tune `--max-iterations` / `--pass-threshold` |
-
-Match the language reviewer to the repo (see the repo's own `CLAUDE.md`).
+- `common` supplies `explorer` for tracing, `architect` and `planner` for
+  design and planning, and `reviewer` for general review.
+- `development` supplies `implementation-worker`, `language-reviewer` for
+  the actual stack, `security-reviewer` for security triggers, and
+  `build-error-resolver` when a build fails. Prefer the installed 1C or Godot
+  reviewer and build resolver for their respective domains.
+- Verify role availability in the current host. If an installed named role
+  cannot be launched but delegation is available, give a scoped generic
+  subagent the relevant role instructions and skills and report that fallback.
+  If delegation is unavailable, perform the work within the parent's scope
+  and record independent review as unavailable and incomplete.
+- Use a project command only after confirming that it exists and its contract
+  fits the assignment and permissions.
 
 ## Security-review trigger
 
@@ -116,6 +116,7 @@ The pipeline carries no hidden state — the planning docs *are* the handoff:
 
 - size tier was stated and matched the work
 - Gate 1 (plan) and Gate 2 (commit) were both honored
-- `security-reviewer` ran iff a security trigger was touched
+- security triggers received independent review or the report records that
+  it was unavailable
 - commits are conventional and scoped to one logical change
 - new / changed behavior has tests; coverage ≥ 80% per `common/rules/common/testing.md`

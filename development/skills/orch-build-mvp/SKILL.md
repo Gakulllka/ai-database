@@ -27,14 +27,10 @@ engine in [`orch-pipeline`](../orch-pipeline/SKILL.md).
 ## How It Works
 
 1. Run the `orch-pipeline` engine with the settings above.
-2. **Reuse the existing GAN harness** instead of hand-rolling an iterate loop:
-   - Translate the SDD into `gan-harness/spec.md` + `gan-harness/eval-rubric.md`
-     (this stands in for what `gan-planner` would generate — you already have the spec).
-   - Drive the build with `/gan-build "<one-line brief>" --skip-planner`
-     (defaults: `--max-iterations 15`, `--pass-threshold 7.0`,
-     `--eval-mode playwright`; use `--eval-mode code-only` for non-UI slices).
-   - That command runs the `gan-generator` → `gan-evaluator` loop and writes
-     `gan-harness/feedback/feedback-NNN.md` until the score passes or plateaus.
+2. Give `implementation-worker` one slice at a time with a bounded write
+   scope and observable acceptance checks. Verify each runnable slice against
+   the spec before moving on. An existing local generator-evaluator harness
+   is optional if its availability and execution contract are verified.
 3. Stop at **Gate 1** (slice plan) and **Gate 2** (pre-commit). Commit the
    scaffold and each slice as separate `feat:` commits.
 4. Add `security-reviewer` for any slice touching a security trigger.
@@ -43,7 +39,7 @@ engine in [`orch-pipeline`](../orch-pipeline/SKILL.md).
 
 ```
 orch-build-mvp: civicpulse/docs/SDD-v0.6.md
-→ read SDD → slice list (vertical) → scaffold slice 1  [GATE 1: approve]
-→ /gan-build --skip-planner (generator → evaluator loop) scores vs spec → review
+→ read SDD → plan vertical slices  [GATE 1: approve]
+→ scaffold slice 1 → implement and check against spec → independent review
 → commit feat:  [GATE 2: confirm] → next slice
 ```

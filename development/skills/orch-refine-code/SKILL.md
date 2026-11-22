@@ -29,8 +29,8 @@ engine in [`orch-pipeline`](../orch-pipeline/SKILL.md).
 ## How It Works
 
 1. Run the `orch-pipeline` engine with the settings above.
-2. For dead-code / duplication sweeps, delegate to the `refactor-cleaner` agent
-   (it runs knip / depcheck / ts-prune and removes safely).
+2. For dead code or duplication, trace usage with `explorer` and assign
+   confirmed changes to `implementation-worker`.
 3. Stop at **Gate 1** (restructure plan) and **Gate 2** (pre-commit).
 4. Commit as `refactor:` — the diff must be behavior-neutral.
 
@@ -39,6 +39,6 @@ engine in [`orch-pipeline`](../orch-pipeline/SKILL.md).
 ```
 orch-refine-code: extract the NWS HTTP client out of poller.py
 → confirm tests green → plan extraction  [GATE 1: approve]
-→ move in small steps, tests green throughout → code-review
+→ move in small steps, tests green throughout → independent review
 → commit refactor:  [GATE 2: confirm]
 ```

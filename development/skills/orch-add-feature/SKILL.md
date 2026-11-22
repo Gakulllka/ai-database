@@ -31,15 +31,11 @@ engine in [`orch-pipeline`](../orch-pipeline/SKILL.md).
 3. Stop at **Gate 1** (plan approval) and **Gate 2** (pre-commit).
 4. Add `security-reviewer` if the feature touches a security trigger.
 
-> Related: `/feature-dev` is a standalone version of this flow. `orch-add-feature`
-> differs by sharing the `orch-pipeline` engine — the size classifier and the two
-> gates — with the rest of the family, so it right-sizes trivial features to 4 → 5 → 6.
-
 ## Example
 
 ```
 orch-add-feature: add OAuth2 login to nws-poller
 → research existing auth libs → plan task_list  [GATE 1: approve]
-→ TDD each task → code-review (+ security-reviewer: auth path)
+→ implement with TDD → independent review (+ security-reviewer for the auth path)
 → commit  [GATE 2: confirm]
 ```

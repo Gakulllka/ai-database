@@ -39,5 +39,5 @@ shared engine in [`orch-pipeline`](../orch-pipeline/SKILL.md).
 ```
 orch-change-feature: make nws-poller alert at 2 warnings instead of 3
 → update threshold tests to new spec → change impl to green
-→ code-review → commit  [GATE 2: confirm]
+→ independent review → commit  [GATE 2: confirm]
 ```

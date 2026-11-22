@@ -29,8 +29,8 @@ engine in [`orch-pipeline`](../orch-pipeline/SKILL.md).
 ## How It Works
 
 1. Run the `orch-pipeline` engine with the settings above.
-2. If the root cause is unclear, scope it with `code-explorer` before the red
-   test; escalate build breaks to `build-error-resolver` / `/build-fix`.
+2. If the root cause is unclear, scope it with `explorer` before writing the
+   failing test. Route build failures through the shared pipeline.
 3. Stop at **Gate 1** (only if a plan was produced) and **Gate 2** (pre-commit).
 4. Add `security-reviewer` if the defect sits in a security-sensitive path.
 
@@ -39,5 +39,5 @@ engine in [`orch-pipeline`](../orch-pipeline/SKILL.md).
 ```
 orch-fix-defect: poller crashes on empty NWS response
 → write failing test reproducing the crash → fix to green
-→ code-review → commit  [GATE 2: confirm]   (commit: fix:)
+→ independent review → commit  [GATE 2: confirm]   (commit: fix:)
 ```

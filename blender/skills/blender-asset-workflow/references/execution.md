@@ -22,8 +22,10 @@ blender --background --factory-startup --disable-autoexec "<input.blend>" --pyth
 
 22 ноября 2026 года на Windows в Blender 4.5.13 LTS проверены импорт GLB, чтение триангуляции
 и координат UV, замена узла цвета, Cycles-рендеры при общей камере, упаковка
-PNG и повторное открытие `.blend` с проверкой геометрии и UV. Экспорт GLB
-и подключение живого MCP описаны по документации.
+PNG и повторное открытие `.blend` с проверкой геометрии и UV. В том прогоне
+экспорт GLB и подключение живого MCP описывались по документации. Отдельная
+проверка Geometry Nodes → GLB на Blender 5.3.0 описана в
+[руководстве по процедурным экземплярам](geometry-nodes-export.md).
 
 - [Blender 4.5. Аргументы командной строки](https://docs.blender.org/manual/en/4.5/advanced/command_line/arguments.html)
 - [Blender 4.5. Python API сетки](https://docs.blender.org/api/4.5/bpy.types.Mesh.html)

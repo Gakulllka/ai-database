@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "id": "blender",
+  "title": "Blender",
+  "dependsOn": [
+    "common"
+  ],
+  "skills": [
+    "blender-asset-workflow"
+  ],
+  "mounts": [
+    {
+      "from": "skills",
+      "to": "skills"
+    }
+  ]
+}

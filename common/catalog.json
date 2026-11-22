@@ -178,6 +178,17 @@
       ]
     },
     {
+      "id": "blender",
+      "title": "Blender",
+      "description": "Управление Blender, проверка статичных моделей и UV, настройка материалов, рендер и игровая передача.",
+      "topics": [
+        {
+          "id": "asset-workflow",
+          "title": "Работа с моделями и материалами"
+        }
+      ]
+    },
+    {
       "id": "design",
       "title": "Дизайн",
       "description": "Визуальные стили, методы дизайна, игровые механики и производство материалов.",
@@ -482,6 +493,12 @@
       "pack": "development",
       "topic": "localization",
       "description": "Bengali (Bangla) text processing patterns including Unicode normalization, script detection, tokenization, conjunct handling, and Bangla-specific NLP best practices for AI applications."
+    },
+    {
+      "id": "blender-asset-workflow",
+      "pack": "blender",
+      "topic": "asset-workflow",
+      "description": "Работа со статичными моделями в Blender: прочитать сетку, UV и материалы, назначить текстуру, сохранить рабочую копию, проверить рендер и игровой экспорт. Используй CLI и bpy для воспроизводимого прогона или доступный MCP для живой сцены."
     },
     {
       "id": "blender-motion-state-inspection",

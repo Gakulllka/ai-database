@@ -35,6 +35,7 @@ git -C "<новый каталог снимка>" checkout --detach "<найде
 | [common](common/README.md) | Общие инструкции Codex и подключение Database |
 | [1c](1c/README.md) | Разработка и сопровождение 1С |
 | [godot](godot/README.md) | Godot, игровые механики, баланс и плейтесты |
+| [blender](blender/README.md) | Blender, проверка моделей, настройка материалов и рендеры |
 | [development](development/README.md) | Разработка, тестирование и выпуск ПО |
 | [design](design/README.md) | Интерфейсы, визуальный дизайн и игровые материалы |
 | [learning](learning/README.md) | Поиск источников, практическое обучение и создание скиллов |

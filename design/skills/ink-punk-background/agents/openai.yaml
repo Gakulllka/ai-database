@@ -1,0 +1,4 @@
+interface:
+  display_name: "Фоны для Ink Punk"
+  short_description: "Матовые аниме-фоны для сцен Ink Punk"
+  default_prompt: "Используй $ink-punk-background, чтобы нарисовать матовый аниме-фон по утверждённой локации."

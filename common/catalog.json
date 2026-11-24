@@ -549,6 +549,12 @@
       "description": "Design or refine a character's visual identity and appeal for illustration, concept art, reference sheets or 2D/3D production. Use for character concepts, consistent views, expressions and scoped visual edits; not for business forms or game mechanics."
     },
     {
+      "id": "character-map",
+      "pack": "design",
+      "topic": "assets",
+      "description": "Создавай карту персонажа по одному изображению в заданном стиле: четыре ракурса, карта эмоций, крупные планы характерных деталей, сводная иллюстрация PNG и карточка образа в Markdown."
+    },
+    {
       "id": "ck",
       "pack": "common",
       "topic": "self-learning",
@@ -1119,7 +1125,13 @@
       "id": "ink-punk",
       "pack": "design",
       "topic": "styles",
-      "description": "Draw Ink Punk character assets and visual-novel CGs: bold ink, cel shadows, a youthful 18–25 adult cast and expressive fashion allure. Use for illustrated assets and scenes, not business forms, technical diagrams or software implementation."
+      "description": "Draw boldly sensual adult pin-ups and restyle character references in Ink Punk, with clean anime line art, graphic ink shadows, and five approved illustration anchors."
+    },
+    {
+      "id": "ink-punk-background",
+      "pack": "design",
+      "topic": "styles",
+      "description": "Рисуй матовые аниме-фоны и локации для сцен Ink Punk по утверждённому примеру «Сноски». Применяй для отдельных задников, серии ракурсов одной локации и сцен с персонажами Ink Punk."
     },
     {
       "id": "intent-driven-development",

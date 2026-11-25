@@ -12,6 +12,12 @@ Start with the user's observable success condition and the normal entry point. C
 
 Record the exact result of each meaningful check. Distinguish executed success, failure, missing access and inapplicable checks. When reporting that a change is deployed, installed or live, read back the target and exercise the relevant entry point if authorized. Keep local evidence and target evidence separate. If an unrelated failure already exists, reproduce it on the comparison revision when feasible and report its impact.
 
+Capture the verification command's own exit status immediately after direct
+execution (`$?` in Bash, `$LASTEXITCODE` for native commands in PowerShell).
+If output needs trimming, collect the full log and shorten it after saving the
+status. A live pipeline can mask a failure or interrupt a command when the
+output filter exits early.
+
 ## Claude Code and prior integrations
 
 A comprehensive verification system for Claude Code sessions.
@@ -29,9 +35,9 @@ Invoke this skill:
 ### Phase 1: Build Verification
 ```bash
 # Check if project builds
-npm run build 2>&1 | tail -20
+npm run build
 # OR
-pnpm build 2>&1 | tail -20
+pnpm build
 ```
 
 If build fails, STOP and fix before continuing.
@@ -39,10 +45,10 @@ If build fails, STOP and fix before continuing.
 ### Phase 2: Type Check
 ```bash
 # TypeScript projects
-npx tsc --noEmit 2>&1 | head -30
+npx tsc --noEmit
 
 # Python projects
-pyright . 2>&1 | head -30
+pyright .
 ```
 
 Report all type errors. Fix critical ones before continuing.
@@ -50,16 +56,16 @@ Report all type errors. Fix critical ones before continuing.
 ### Phase 3: Lint Check
 ```bash
 # JavaScript/TypeScript
-npm run lint 2>&1 | head -30
+npm run lint
 
 # Python
-ruff check . 2>&1 | head -30
+ruff check .
 ```
 
 ### Phase 4: Test Suite
 ```bash
 # Run tests with coverage
-npm run test -- --coverage 2>&1 | tail -50
+npm run test -- --coverage
 
 # Check coverage threshold
 # Target: 80% minimum

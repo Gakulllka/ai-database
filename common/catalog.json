@@ -911,6 +911,12 @@
       "description": "GAN-inspired Generator-Evaluator agent harness for building high-quality applications autonomously. Based on Anthropic's March 2026 harness design paper. Use when a feature should be built autonomously through generator and evaluator iteration until it clears a quality bar."
     },
     {
+      "id": "game-room-design",
+      "pack": "design",
+      "topic": "assets",
+      "description": "Проектируй обжитые игровые комнаты по описанию или референсу. Создавай согласованные 2D-ракурсы, план, крупные детали и места для персонажа. Применяй для комнат целиком, новых сторон существующей комнаты и сверки серии ракурсов."
+    },
+    {
       "id": "gdscript-patterns",
       "pack": "godot",
       "topic": "foundations",

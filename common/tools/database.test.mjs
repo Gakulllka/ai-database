@@ -130,6 +130,76 @@ test('setup preserves project guidance and retains installed packs when the goal
   }
 });
 
+test('check requires one ordered marker pair in the active guidance file', t => {
+  const directory = fs.mkdtempSync(path.join(temp, 'database-onboarding-test-'));
+  t.after(() => removeFixture(directory));
+  const checkout = path.join(directory, 'source');
+  const project = path.join(directory, 'existing project');
+  setupFixture(checkout);
+
+  const primary = 'AGENTS.md';
+  const override = 'AGENTS.override.md';
+  const begin = '<!-- database:begin -->';
+  const end = '<!-- database:end -->';
+  const prefix = '# Local guidance\r\nKeep this instruction.';
+  const suffix = '\r\n# Local notes\r\n';
+  const block = `${begin}\r\nUse the catalog.\r\n${end}`;
+  const cli = (operation, expected = 0) => command(process.execPath,
+    ['common/tools/database.mjs', operation, '--project', project], checkout, expected);
+  const readProject = relative => fs.readFileSync(path.join(project, relative), 'utf8');
+  const check = (expected = 0) => JSON.parse(cli('check', expected));
+
+  write(project, primary, prefix);
+  cli('setup');
+  const appended = `${prefix}\r\n\r\n${block}\r\n`;
+  assert.equal(readProject(primary), appended);
+  assert.equal(check().guidance, true);
+  const originalState = readProject('.database/state.json');
+
+  const invalid = {
+    'reversed markers': `${end}\n${begin}`,
+    'repeated begin marker': `${begin}\n${block}`,
+    'repeated end marker': `${block}\n${end}`,
+    'two marker pairs': `${block}\n${block}`,
+    'missing end marker': begin,
+    'missing begin marker': end,
+    'no markers': prefix,
+    'empty file': '',
+  };
+  for (const relative of [primary, override]) {
+    for (const [description, contents] of Object.entries(invalid)) {
+      write(project, relative, contents);
+      const result = check(1);
+      assert.equal(result.guidance, false, `${relative} with ${description}`);
+      assert.deepEqual(result.changed, []);
+      assert.equal(readProject(relative), contents);
+      assert.equal(readProject('.database/state.json'), originalState);
+    }
+    if (relative === primary) write(project, primary, appended);
+  }
+
+  const malformed = invalid['reversed markers'];
+  write(project, override, malformed);
+  assert.match(cli('setup', 1), /Broken Database markers in AGENTS\.override\.md/);
+  assert.equal(readProject(override), malformed);
+  assert.equal(readProject(primary), appended);
+
+  const updated = `${prefix}\r\n${block}${suffix}`;
+  write(project, override, `${prefix}\r\n${begin}\r\nOld block.\r\n${end}${suffix}`);
+  assert.equal(check().guidance, true);
+  cli('setup');
+  assert.equal(readProject(override), updated);
+  write(project, primary, malformed);
+  assert.equal(check().guidance, true);
+  assert.equal(readProject(primary), malformed);
+  assert.equal(readProject(override), updated);
+
+  fs.unlinkSync(path.join(project, override));
+  fs.unlinkSync(path.join(project, primary));
+  assert.equal(check(1).guidance, false);
+  assert.ok(!fs.existsSync(path.join(project, primary)));
+});
+
 test('setup installs Codex agents, preserves local agents and tracks retained agents', t => {
   const directory = fs.mkdtempSync(path.join(temp, 'database-onboarding-test-'));
   t.after(() => removeFixture(directory));

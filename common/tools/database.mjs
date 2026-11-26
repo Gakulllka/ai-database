@@ -236,19 +236,25 @@ function state(project) {
   return data;
 }
 
+function guidanceMarkers(content) {
+  const start = content.indexOf(begin);
+  const stop = content.indexOf(end);
+  const hasPair = start >= 0 && stop > start
+    && content.lastIndexOf(begin) === start && content.lastIndexOf(end) === stop;
+  return { start, stop, hasPair };
+}
+
 function instructions(project, needsOverride) {
   const template = read(source, 'common/templates/AGENTS.md').toString('utf8').replace(/\r\n/g, '\n').trimEnd();
   const result = new Map();
   for (const relative of needsOverride ? ['AGENTS.md', 'AGENTS.override.md'] : ['AGENTS.md']) {
     const before = read(project, relative);
     const previous = before?.toString('utf8') ?? '';
-    const start = previous.indexOf(begin);
-    const stop = previous.indexOf(end);
+    const { start, stop, hasPair } = guidanceMarkers(previous);
     const newline = previous.includes('\r\n') ? '\r\n' : '\n';
-    assert((start < 0 && stop < 0) || (start >= 0 && stop > start && previous.indexOf(begin, start + 1) < 0
-      && previous.indexOf(end, stop + 1) < 0), `Broken Database markers in ${relative}`);
+    assert(hasPair || (start < 0 && stop < 0), `Broken Database markers in ${relative}`);
     const block = `${begin}\n${template}\n${end}`.replaceAll('\n', newline);
-    const desired = start >= 0
+    const desired = hasPair
       ? previous.slice(0, start) + block + previous.slice(stop + end.length)
       : previous + (previous ? newline + newline : '') + block + newline;
     result.set(relative, { bytes: Buffer.from(desired), expected: before && hash(before) });
@@ -328,7 +334,7 @@ function verifyProject(project) {
     return !current || hash(current) !== entry.hash;
   }).map(([relative]) => relative);
   const active = read(project, 'AGENTS.override.md') ?? read(project, 'AGENTS.md');
-  const guidance = Boolean(active?.includes(begin) && active.includes(end));
+  const guidance = guidanceMarkers(active?.toString('utf8') ?? '').hasPair;
   console.log(JSON.stringify({ project, packs: data.packs, trackedFiles: Object.keys(data.files).length, guidance, changed, keptLocal: data.keptLocal ?? [] }, null, 2));
   if (changed.length || !guidance) process.exitCode = 1;
 }

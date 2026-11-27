@@ -52,6 +52,7 @@ native-роль.
 | development | implementation-worker, language-reviewer, e2e-runner, security-reviewer, test-reviewer, build-error-resolver |
 | 1c | 1c-reviewer, 1c-build-resolver |
 | godot | godot-reviewer, godot-build-resolver |
+| blender | blender-3d-artist |
 
 Определения устанавливаются в `.codex/agents/*.toml`. Текущий Codex обнаруживает
 standalone-файлы с `name`, `description` и `developer_instructions`; имя роли

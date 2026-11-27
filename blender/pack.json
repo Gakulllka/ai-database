@@ -6,9 +6,14 @@
     "common"
   ],
   "skills": [
-    "blender-asset-workflow"
+    "blender-asset-workflow",
+    "blender-hard-soft-modeling"
   ],
   "mounts": [
+    {
+      "from": "codex-agents",
+      "to": "codex-agents"
+    },
     {
       "from": "skills",
       "to": "skills"

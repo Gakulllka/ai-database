@@ -13,6 +13,23 @@ cd "<каталог Database>"
 node common/tools/database.mjs catalog
 ```
 
+Если Git for Windows сообщает `Filename too long` при создании файлов,
+повтори клонирование в новый каталог с коротким путём и настройкой для этой копии.
+Если сбой возник на `sparse-checkout add`, задай настройку локально в уже созданной
+копии командой `git -C "<каталог Database>" config --local core.longpaths true`
+и повтори добавление папок.
+
+```text
+git clone --config core.longpaths=true --filter=blob:none --sparse --branch database https://github.com/Gakulllka/ai-database.git "<новый каталог Database>"
+git -C "<новый каталог Database>" sparse-checkout add common
+cd "<новый каталог Database>"
+node common/tools/database.mjs catalog
+```
+
+Добавь нужный пакет по следующему примеру. Затем проверь ревизию и открой файл из
+этого пакета. Поддержка длинных путей зависит от программы, которая читает файлы
+после Git. [Git for Windows](https://gitforwindows.org/git-cannot-create-a-file-or-directory-with-a-long-path.html) · [git clone](https://git-scm.com/docs/git-clone#Documentation/git-clone.txt---configltkeygtltvaluegt)
+
 Выбери пакет из каталога и скачай его папку целиком. Здесь пример для `learning`.
 
 ```text

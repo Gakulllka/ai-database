@@ -341,6 +341,30 @@ const handleRemove = async (id: string) => {
 };
 ```
 
+## Versioned files with concurrent readers
+
+Use this regression when a reader opens several files from one immutable version
+while another task publishes a new version and removes the old one. Select and
+retain the version together, with cleanup observing the same synchronization
+protocol. For an in-process lock, keep version selection and reader registration
+in one critical section and check reader counts under that same lock before cleanup.
+Read every file from the retained version. Release it when the read ends, including
+on error. A counter or equivalent lifetime guard must cover every active reader.
+
+Use events or barriers to run both schedules. A timeout can stop a stuck test.
+
+| Pause the old reader | What the test must prove |
+| --- | --- |
+| After selecting `v1`, before registering it | Try publishing `v2` and cleaning up during the pause. The attempt must wait or otherwise preserve `v1` for the reader. A control that separates selection from registration should expose a missing old file. |
+| After registering `v1`, before opening its files | Publish `v2` and try cleaning up. Check that the old reader gets a complete `v1` pair and a new reader gets a complete `v2` pair. With two old readers, check that `v1` survives the first release and is removed after the last release and the next cleanup pass. |
+
+Use distinguishable payloads in both versions and assert file contents and cleanup.
+A control that disables cleanup should fail the final assertion. The same test design
+applies to a document and its index or a list of items and its totals. A forced
+thread schedule covers the selected race. Separate processes and crash recovery
+require checks at their own coordination boundary. The general lifetime invariant
+is illustrated in the [Linux kernel reference-counting rules](https://docs.kernel.org/core-api/kref.html#kref-rules).
+
 ## Strategy: Test Where Bugs Were Found
 
 Don't aim for 100% coverage. Instead:

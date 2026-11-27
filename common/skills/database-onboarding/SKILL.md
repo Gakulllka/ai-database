@@ -17,6 +17,11 @@ license: MIT
 
 Setup requires Node.js 22 or newer and Git. See the repository's START HERE for the complete commands. For a first checkout use a blob-filtered sparse clone of `database`, then add `common` and the selected topic with `git sparse-checkout add`. Record `git rev-parse HEAD`.
 
+If Git for Windows reports `Filename too long` during checkout, follow the
+[long-path recovery in START HERE](https://github.com/Gakulllka/ai-database/tree/database#получить-database-и-выбрать-пакет).
+For an automated onboarding run, verify both the checkout and the first downstream read
+of the selected pack before reporting that the snapshot is usable.
+
 For an existing checkout, run `git fetch origin database` and read `git rev-parse FETCH_HEAD`. Use a new clean detached worktree at that commit, include `common` and the selected topic in sparse checkout, and leave the original branch and working files in place.
 
 ## Connect and check the project
